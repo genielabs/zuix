@@ -1,6 +1,0 @@
-[submodule "examples/todomvc"]
-	path = examples/todomvc
-	url = https://genielabs@github.com/g-labs-sw/zuix-todomvc.git
-[submodule "examples/hackernews"]
-	path = examples/hackernews
-	url = https://genielabs@github.com/g-labs-sw/zuix-hackernews.git
