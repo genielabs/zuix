@@ -1,3 +1,5 @@
+// TODO: this should be moved/promoted to "ui/controls" folder
+
 zuix.controller(function (cp) {
 
     cp.init = function () {

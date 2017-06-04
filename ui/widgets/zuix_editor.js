@@ -13,6 +13,9 @@ zuix.controller(function (cp) {
         componentListFragment = cp.field('fragment-list');
         cp.field('component-list').on('component:ready', function () {
             componentListView = zuix.context(this);
+            componentListView.config({
+                htmlMode: false
+            });
             update();
             showComponents();
         });

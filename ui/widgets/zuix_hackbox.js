@@ -69,6 +69,9 @@ zuix.controller(function (cp) {
         });
         logListContainer = cp.field('log-list').on('component:ready', function () {
             logListView = zuix.context(this);
+            logListView.config({
+                htmlMode: false
+            });
         });
         // the components fragment
         componentsBox = cp.field('fragment-components').hide();
@@ -232,7 +235,7 @@ zuix.controller(function (cp) {
                 args[0].toString().indexOf('componentize:count') == 0 ||
                 args[0].toString().indexOf('componentize:begin') == 0 ||
                 args[0].toString().indexOf('componentize:end') == 0 ||
-                args[0].toString().indexOf('ui/layout/list_view') == 0 ||
+                args[0].toString().indexOf('ui/controls/list_view') == 0 ||
                 args[0].toString().indexOf('/zuix_') > 0) // args[0] == 'load:end' || args[0].toString().indexOf('componentize:') == 0 || args[0].toString().indexOf('/zuix_hackbox/') > 0)
                 return;
 
