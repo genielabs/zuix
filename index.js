@@ -375,6 +375,10 @@ function changePage(e, i, effectIn, effectOut, dirIn, dirOut) {
     if (i.page == 2)
         setTimeout(function () {
             docsTitlePath.update();
+            if (typeof window.__CPEmbed === 'function') {
+                window.__CPEmbed();
+                window.__CPEmbed = null;
+            }
         }, 1000);
     else if (i.page == 3)
         setTimeout(function () {
