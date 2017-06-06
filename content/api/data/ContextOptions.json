@@ -32,7 +32,13 @@
     "isEvent": false,
     "ignore": false,
     "line": 18,
-    "codeStart": 25
+    "codeStart": 26,
+    "code": "require('./ContextErrorCallback');\nrequire('./ContextReadyCallback');\nrequire('./EventCallback');\nrequire('./EventMapping');",
+    "ctx": {
+      "type": "method",
+      "name": "require",
+      "string": "require()"
+    }
   },
   {
     "tags": [
@@ -259,7 +265,29 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 26,
-    "codeStart": 44
+    "line": 31,
+    "codeStart": 49
+  },
+  {
+    "tags": [],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 50,
+    "codeStart": 51,
+    "code": "module.exports = function (root) {\n    // dummy module for JsDocs/Closure Compiler\n    return null;\n};",
+    "ctx": {
+      "type": "method",
+      "receiver": "module",
+      "name": "exports",
+      "string": "module.exports()"
+    }
   }
 ]
