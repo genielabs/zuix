@@ -160,7 +160,7 @@ zuix.controller(function (cp) {
 
     function setPage(number) {
         if (!isNaN(number) && number >= 0 && number < pageCount()) {
-            if (listMode === MODE_PAGED)
+            if (listMode == MODE_PAGED)
                 clearPage(statusInfo.page.current);
             statusInfo.page.current = parseInt(number);
             cp.update();
