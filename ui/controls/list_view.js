@@ -1,7 +1,7 @@
 /**
  * ZUIX - ListView Component
  *
- * @version 1.0.0 (2017-06-04)
+ * @version 1.0.1 (2017-06-07)
  * @author Gene
  *
  */
@@ -39,7 +39,6 @@ zuix.controller(function (cp) {
     cp.init = function () {
         cp.options().html = false;
         cp.options().css = false;
-        // custom component options
     };
 
     // TODO: describe the model and options used by this component
@@ -47,7 +46,7 @@ zuix.controller(function (cp) {
         // exposed methods through this component context
         cp.expose('config', configure);
         cp.expose('page', setPage);
-        cp.expose('status', getStatus);
+        cp.expose('status', triggerStatus);
         cp.expose('more', function () {
             statusInfo.page.current++;
             cp.update();
@@ -70,8 +69,12 @@ zuix.controller(function (cp) {
         statusInfo.items.count = modelList.length;
 
         var startItem = statusInfo.page.current*itemsPerPage;
+        var i = 0;
+        if (listMode === MODE_PAGED && startItem > 0) {
+            i = startItem - itemsPerPage;
+        }
 
-        for (var i = 0; i < modelList.length; i++) {
+        for ( ; i < modelList.length; i++) {
 
             var dataItem = cp.model().getItem(i, modelList[i]);
             var id = dataItem.itemId;
@@ -110,15 +113,13 @@ zuix.controller(function (cp) {
                         // set a temporary height for the container (for lazy load to work properly)
                         container.style['min-height'] = dataItem.options.height || '48px';
                     }
-                    // add item container to the list-view, the component will be lazy-loaded later as needed
-                    cp.view().insert(i, container);
                     // register a callback to know when the component is actually loaded
                     var listener = function (itemIndex, el) {
                         var l = function () {
                             el.removeEventListener('component:ready', l);
                             // trigger status update event
                             statusInfo.items.loaded++;
-                            cp.trigger('status', statusInfo);
+                            triggerStatus();
                             // if all components have been loaded, then trigger 'complete' event
                             if (itemIndex === modelList.length - 1)
                                 cp.trigger('complete');
@@ -136,16 +137,22 @@ zuix.controller(function (cp) {
             }
 
             if (typeof listItems[id] !== 'undefined') {
-                if ((listMode === MODE_PAGED && i < statusInfo.page.current * itemsPerPage) || (listMode !== MODE_FULL && i > ((statusInfo.page.current + 1) * itemsPerPage - 1)))
-                    listItems[id].style.display = 'none';
-                else
-                    listItems[id].style.display = '';
+                if ((listMode === MODE_PAGED && i < statusInfo.page.current * itemsPerPage) || (listMode !== MODE_FULL && i > ((statusInfo.page.current + 1) * itemsPerPage - 1))) {
+                    if (listItems[id].parentNode != null)
+                        zuix.$(listItems[id]).detach();
+                } else if (listItems[id].parentNode == null) {
+                    // add item container to the list-view, the component will be lazy-loaded later as needed
+                    cp.view().insert(i-startItem, listItems[id]);
+                }
             }
+
+            if ((listMode === MODE_PAGED || listMode === MODE_FULL) && i > startItem+(itemsPerPage*2))
+                break;
 
         }
 
         // trigger status update event
-        cp.trigger('status', statusInfo);
+        triggerStatus();
 
         // `componentize` is required to process lazy-loaded items
         zuix.componentize(cp.view());
@@ -160,8 +167,8 @@ zuix.controller(function (cp) {
         return statusInfo.page.current;
     }
 
-    function getStatus() {
-        return statusInfo;
+    function triggerStatus() {
+        cp.trigger('status', statusInfo);
     }
 
     function pageCount() {

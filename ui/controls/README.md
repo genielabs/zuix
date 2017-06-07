@@ -9,6 +9,41 @@ More to come soon along with documentation.
 
 ## ui/controls
 
+#### scroll_helper
+
+This component will trigger the following events when attacched to a
+scrollable view:
+
+- *scrollHelper* **->** *moving*
+- *scrollHelper* **->** *hitTop*
+- *scrollHelper* **->** *hitBottom*
+
+Can also be loaded as an additional controller for other components
+(eg. a list_view):
+
+Example:
+
+```javascript
+zuix.load('components/scroll_helper', {
+    view: myLvScroll.view(),
+    on: {
+        'scrollHelper': function (e, p) {
+            switch (p) {
+                case 'moving':
+                    hideFooter();
+                    break;
+                case 'hitTop':
+                    showFooter();
+                    break;
+                case 'hitBottom':
+                    showFooter();
+                    break;
+            }
+        }
+    }
+});
+```
+
 #### list_view
 
 A lazy-loadable list view component supporting *paged*, *incremental* and
