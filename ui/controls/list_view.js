@@ -70,9 +70,8 @@ zuix.controller(function (cp) {
 
         var startItem = statusInfo.page.current*itemsPerPage;
         var i = 0;
-        if (listMode === MODE_PAGED && startItem > 0) {
-            i = startItem - itemsPerPage;
-        }
+        if (listMode === MODE_PAGED && startItem > 0)
+            i = startItem;
 
         for ( ; i < modelList.length; i++) {
 
@@ -146,7 +145,7 @@ zuix.controller(function (cp) {
                 }
             }
 
-            if ((listMode === MODE_PAGED || listMode === MODE_FULL) && i > startItem+(itemsPerPage*2))
+            if ((listMode === MODE_PAGED || listMode === MODE_INCREMENTAL) && i > startItem+itemsPerPage)
                 break;
 
         }
@@ -161,10 +160,26 @@ zuix.controller(function (cp) {
 
     function setPage(number) {
         if (!isNaN(number) && number >= 0 && number < pageCount()) {
+            if (listMode === MODE_PAGED)
+                clearPage(statusInfo.page.current);
             statusInfo.page.current = parseInt(number);
             cp.update();
         }
         return statusInfo.page.current;
+    }
+
+    function clearPage(number) {
+        var modelList = cp.model().itemList;
+        if (modelList == null) return;
+        var startItem = number*itemsPerPage;
+        for(var i = startItem; i < listItems.length && i < startItem+itemsPerPage; i++) {
+            var dataItem = cp.model().getItem(i, modelList[i]);
+            var id = dataItem.itemId;
+            if (typeof listItems[id] !== 'undefined') {
+                if (listItems[id].parentNode != null)
+                    zuix.$(listItems[id]).detach();
+            }
+        }
     }
 
     function triggerStatus() {
