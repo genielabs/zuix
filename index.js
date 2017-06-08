@@ -110,6 +110,8 @@ zuix.field('content-home').on('component:ready', function (ctx) {
 var pagedView = null;
 var actionsView = null;
 
+// Turn off debug output
+window.zuixNoConsoleOutput = true;
 //zuix.lazyLoad(false);
 //zuix.httpCaching(false);
 
