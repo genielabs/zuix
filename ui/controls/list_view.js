@@ -1,7 +1,7 @@
 /**
  * ZUIX - ListView Component
  *
- * @version 1.0.1 (2017-06-07)
+ * @version 1.0.2 (2017-06-07)
  * @author Gene
  *
  */
@@ -127,6 +127,8 @@ zuix.controller(function (cp) {
                     }(i, container);
                     // keep track of already allocated items
                     listItems[id] = container;
+                    // add item container to the list-view, the component will be lazy-loaded later as needed
+                    cp.view().insert(i-startItem, listItems[id]);
                 } else if (!dataItem.options.static) {
                     // update existing item model's data
                     // TODO: should check if the data in the model has changed before calling this
@@ -137,11 +139,9 @@ zuix.controller(function (cp) {
 
             if (typeof listItems[id] !== 'undefined') {
                 if ((listMode === MODE_PAGED && i < statusInfo.page.current * itemsPerPage) || (listMode !== MODE_FULL && i > ((statusInfo.page.current + 1) * itemsPerPage - 1))) {
-                    if (listItems[id].parentNode != null)
-                        zuix.$(listItems[id]).detach();
-                } else if (listItems[id].parentNode == null) {
-                    // add item container to the list-view, the component will be lazy-loaded later as needed
-                    cp.view().insert(i-startItem, listItems[id]);
+                    listItems[id].style['display'] = 'none';
+                } else {
+                    listItems[id].style['display'] = '';
                 }
             }
 
@@ -175,10 +175,8 @@ zuix.controller(function (cp) {
         for(var i = startItem; i < listItems.length && i < startItem+itemsPerPage; i++) {
             var dataItem = cp.model().getItem(i, modelList[i]);
             var id = dataItem.itemId;
-            if (typeof listItems[id] !== 'undefined') {
-                if (listItems[id].parentNode != null)
-                    zuix.$(listItems[id]).detach();
-            }
+            if (typeof listItems[id] !== 'undefined')
+                listItems[id].style['display'] = 'none';
         }
     }
 
