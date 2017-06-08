@@ -1346,6 +1346,17 @@ if (!Element.prototype.matches) {
     CustomEvent.prototype = window.Event.prototype;
     window.CustomEvent = CustomEvent;
 })();
+// String.hashCode extension
+String.prototype.hashCode = function() {
+    var hash = 0, i, chr;
+    if (this.length === 0) return hash;
+    for (i = 0; i < this.length; i++) {
+        chr   = this.charCodeAt(i);
+        hash  = ((hash << 5) - hash) + chr;
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
+};
 
 module.exports =  z$;
 
@@ -1421,11 +1432,14 @@ module.exports =  z$;
  */
 
 /**
- * Greeting person config
+ * Component cache object interface.
  * @typedef {object} ComponentCache
  * @property {string} componentId The id of the cached component.
  * @property {Element} view The view element.
+ * @property {string} css The CSS style text.
+ * @property {boolean} css_applied Whether the CSS style has been applied to the view or not.
  * @property {ContextControllerHandler} controller The controller handler function.
+ * @property {string} using The url/path if this is a resource loaded with `zuix.using(..)` method.
  */
 
 /** */
@@ -3130,6 +3144,7 @@ function load(componentId, options) {
 /** @private */
 function loadResources(ctx, options) {
     // pick it from cache if found
+    /** @type {ComponentCache} */
     var cachedComponent = getCachedComponent(ctx.componentId);
     if (cachedComponent !== null && options.controller == null && ctx.controller() == null) {
         ctx.controller(cachedComponent.controller);
@@ -3340,6 +3355,7 @@ function removeCachedComponent(componentId) {
  * @return {ComponentCache}
  */
 function getCachedComponent(componentId) {
+    /** @type {ComponentCache} */
     var cached = null;
     z$.each(_componentCache, function (k, v) {
         if (util.objectEquals(v.componentId, componentId)) {
@@ -3412,6 +3428,7 @@ function loadController(context, task) {
 function cacheComponent(context) {
     var html = context.view().innerHTML; //(context.view() === context.container() ? context.view().innerHTML : context.view().outerHTML);
     var c = z$.wrapElement('div', html);
+    /** @type {ComponentCache} */
     var cached = {
         componentId: context.componentId,
         view: c.innerHTML,
@@ -3455,7 +3472,10 @@ function createComponent(context, task) {
             if (typeof c.init === 'function')
                 c.init();
             if (!util.isNoU(c.view())) {
-                c.view().attr('data-ui-component', context.componentId);
+                // if it's not null, a controller was already loaded, so we preserve the base controller name
+                // TODO: when loading multiple controllers perhaps some code paths can be skipped -- check/optimize this!
+                if (c.view().attr('data-ui-component') == null)
+                    c.view().attr('data-ui-component', context.componentId);
                 // if no model is supplied, try auto-create from view fields
                 if (util.isNoU(context.model()) && !util.isNoU(context.view()))
                     context.viewToModel();
@@ -3878,6 +3898,107 @@ Zuix.prototype.httpCaching = function(enable) {
         return httpCaching();
     return this;
 };
+
+
+/**
+ * Load a CSS or Javascript resource. All CSS styles and Javascript scripts
+ * loaded with this method will be also included in the application bundle.
+ * If a resource is already loaded, the request will be ignored.
+ * This command is also meant to be used inside components' controller.
+ *
+ * @example
+ *
+ <small>**Example - JavaScript**</small>
+ <pre><code class="language-js">
+ // Controller of component 'path/to/component_name'
+ zuix.controller(function(cp) {
+    cp.init = function() {
+        zuix.using('script', 'https://some.cdn.js/moment.min.js', function(){
+            // can start using moment.js
+        });
+    };
+    cp.create = function() { ... };
+    cp.destroy = function() { ... }
+});
+ </code></pre>
+ *
+ *
+ * @param {string} resourceType Either `style` or `script`
+ * @param {string} resourcePath Relative or absolute resource url path
+ */
+Zuix.prototype.using = function(resourceType, resourcePath, callback) {
+    var hashId = resourceType+'-'+resourcePath.hashCode();
+    var isCss = (resourceType === 'style');
+
+    if (z$.find(resourceType+'[id="'+hashId+'"]').length() === 0) {
+
+        var head = document.head || document.getElementsByTagName('head')[0];
+        var resource = document.createElement(resourceType);
+        if (isCss) {
+            resource.type = 'text/css';
+            resource.id = hashId;
+        } else {
+            resource.type = 'text/javascript';
+            resource.id = hashId;
+        }
+        head.appendChild(resource);
+
+        // TODO: add logging
+        var addResource = function(text) {
+            // TODO: add logging
+            if (isCss) {
+                if (resource.styleSheet)
+                    resource.styleSheet.cssText = text;
+                else
+                    resource.appendChild(document.createTextNode(text));
+            } else {
+                if (resource.innerText)
+                    resource.innerText = text;
+                else
+                    resource.appendChild(document.createTextNode(text));
+            }
+            if (callback)
+                callback(resourcePath, hashId);
+        };
+
+        var cid = '_res/'+resourceType+'/'+hashId;
+        var cached = getCachedComponent(cid);
+        if (cached != null) {
+            addResource(isCss ? cached.css : cached.controller);
+        } else {
+            z$.ajax({
+                url: resourcePath,
+                success: function (resText) {
+
+                    // TODO: add logging
+                    /** @type {ComponentCache} */
+                    var cached = {
+                        componentId: cid,
+                        view: null,
+                        css: isCss ? resText : null,
+                        controller: !isCss ? resText : null,
+                        using: resourcePath
+                    };
+                    _componentCache.push(cached);
+
+                    addResource(resText);
+
+                },
+                error: function () {
+                    // TODO: add logging
+                    head.removeChild(resource);
+                    if (callback)
+                        callback(resourcePath);
+                }
+            });
+        }
+
+    } else {
+        // TODO: add logging
+        console.log('already added ' + hashId + '('+resourcePath+')');
+    }
+};
+
 
 /**
  * Gets/Sets the components data bundle.
