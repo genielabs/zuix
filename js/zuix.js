@@ -3534,6 +3534,11 @@ function createComponent(context, task) {
                                         cached.view = html;
                                     _log.d(context.componentId, 'component:deferred:html', pending);
                                 },
+                                error: function(err) {
+                                    _log.e(err, context);
+                                    if (util.isFunction(context.options().error))
+                                        (context.options().error).call(context, err);
+                                },
                                 then: function () {
                                     if (--pending === 0 && task != null)
                                         task.end();
