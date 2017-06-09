@@ -1151,8 +1151,7 @@ z$.ajax = function ajax(opt) {
     xhr.onload = function () {
         if (xhr.status === 200) {
             if (util.isFunction(opt.success)) opt.success(xhr.responseText);
-        }
-        else {
+        } else {
             if (util.isFunction(opt.error)) opt.error(xhr);
         }
         if (util.isFunction(opt.then)) opt.then(xhr);
@@ -3308,28 +3307,29 @@ function context(contextId, callback) {
 }
 
 /**
- * TODO: desc
+ * Register a callback for ZUIX global event (hook).
+ * There can be only one callback for each kind of event.
+ * Pass null as <handler> to unregister a previously registered callback.
  *
  * @private
- * @param path
- * @param handler
+ * @param {string} path
+ * @param {function|undefined} handler
  */
 function hook(path, handler) {
-    if (util.isNoU(handler)) {
+    if (util.isNoU(handler))
         delete _hooksCallbacks[path];
-    } else _hooksCallbacks[path] = handler;
+    else _hooksCallbacks[path] = handler;
 }
 
 /**
- * TODO: desc
+ * Fires a ZUIX hook.
  *
  * @private
- * @param context
- * @param path
- * @param data
+ * @param {object} context
+ * @param {string} path
+ * @param {object|undefined} data
  */
 function trigger(context, path, data) {
-    // TODO: call all registered callback
     if (util.isFunction(_hooksCallbacks[path]))
         _hooksCallbacks[path].call(context, data);
 }
@@ -3825,7 +3825,9 @@ Zuix.prototype.trigger = function (context, eventPath, eventData) {
     return this;
 };
 /**
- * Set handlers for global events hooks.
+ * Register a callback for ZUIX global event (hook).
+ * There can be only one callback for each kind of event.
+ * Pass null as <eventHandler> to unregister a previously registered callback.
  *
 <small>**Example - JavaScript**</small>
 ```js
@@ -3875,7 +3877,7 @@ zuix
 ```
  *
  * @param {string} eventPath The event path.
- * @param {function} eventHandler The handler function.
+ * @param {function|undefined} eventHandler The handler function.
  * @return {Zuix} The ```{Zuix}``` object itself.
  */
 Zuix.prototype.hook = function (eventPath, eventHandler) {
