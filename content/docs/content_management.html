@@ -104,8 +104,40 @@ We can also include content that is located on a different server by specifying 
     <div data-ui-include="https://genielabs.github.io/zuix/site/common/links"></div>
 </code></pre>
 
-<br/>
-<a href="https://codepen.io/genielabs/pen/YQPxqJ"><strong>Try on CodePen</strong></a>
+###### Options
+
+When loading a content (or a component) we can also use the `data-ui-options` attribute to get more control over the loading
+process. The value of this attribute is a JSON object that must be accessible in the global scope (window).
+Fields that can be used in the options object are described in the [API {ContextOptions}](#/api#ZUIX_API--ContextOptions) section.
+
+<small><strong>EXAMPLE - </strong> Use of `data-ui-options` attribute</small>
+<pre data-line="2,5"><code class="language-html">
+<div data-ui-include="content/docs/intro"
+     data-ui-options="my_loading_options"></div>
+
+<script>
+var my_loading_options = {
+    lazyLoad: false,
+    priority: -1, // minor numbers gets higher loading priority
+    ready: function(ctx) {
+        // ctx is the {ComponentContext} object holding the loaded content/component
+        console.log('Loaded '+ctx.componentId+' as '+ctx.contextId+'.');
+    },
+    error: function(err) {
+        console.log('Oh-oh!', err);
+    }
+}
+</script>
+</code></pre>
+
+
+###### Priority
+
+With the `data-ui-priority` attribute we can change the order which contents or components are loaded.
+Its value is in fact a number indicating the loading sequence order and that can also have negative values.
+The default value is zero and items with minor priority will get loaded first.
+
+<div class="animated flash infinite"><a href="https://codepen.io/genielabs/pen/YQPxqJ"><strong>Play on CodePen</strong></a></div>
 <p data-height="300" data-theme-id="light" data-slug-hash="YQPxqJ" data-default-tab="html,result" data-user="genielabs" data-embed-version="2" data-pen-title="Content inclusion (ZUIX)" class="codepen">See the Pen <a href="https://codepen.io/genielabs/pen/YQPxqJ/">Content inclusion (ZUIX)</a> by Gene (<a href="https://codepen.io/genielabs">@genielabs</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 
 
@@ -148,8 +180,7 @@ we set on it the attribute `data-ui-lazyload="false"`.
 When the visibility of the *lazy-loaded* elements depends on a scrollable container,
 then the `data-ui-lazyload="scroll"` attribute must be specified on this container.
 
-<br/>
-<a href="https://codepen.io/genielabs/pen/YQPxqJ"><strong>Try on CodePen</strong></a>
+<div class="animated flash infinite"><a href="https://codepen.io/genielabs/pen/YQPxqJ"><strong>Play on CodePen</strong></a></div>
 <p data-height="265" data-theme-id="light" data-slug-hash="jwbvdP" data-default-tab="html,result" data-user="genielabs" data-embed-version="2" data-pen-title="Lazy-Loading - Recursive Lorem Ipsum (ZUIX)" class="codepen">See the Pen <a href="https://codepen.io/genielabs/pen/jwbvdP/">Lazy-Loading - Recursive Lorem Ipsum (ZUIX)</a> by Gene (<a href="https://codepen.io/genielabs">@genielabs</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 
 

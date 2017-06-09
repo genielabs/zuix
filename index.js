@@ -203,7 +203,7 @@ function routeCurrentUrl(path) {
                 zuix.$.scrollTo(p.get(), a.position().y);
             }, 500);
         }
-    } else p.get().scrollTop = 0;
+    } //else p.get().scrollTop = 0;
 }
 
 function revealMainPage() {
