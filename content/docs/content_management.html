@@ -137,7 +137,7 @@ With the `data-ui-priority` attribute we can change the order which contents or 
 Its value is in fact a number indicating the loading sequence order and that can also have negative values.
 The default value is zero and items with minor priority will get loaded first.
 
-<div class="animated flash infinite"><a href="https://codepen.io/genielabs/pen/YQPxqJ"><strong>Play on CodePen</strong></a></div>
+<div align="right"><a href="https://codepen.io/genielabs/pen/YQPxqJ"><strong>Play on CodePen</strong> <i class="material-icons animated flash infinite">play_circle_outline</i></a></div>
 <p data-height="300" data-theme-id="light" data-slug-hash="YQPxqJ" data-default-tab="html,result" data-user="genielabs" data-embed-version="2" data-pen-title="Content inclusion (ZUIX)" class="codepen">See the Pen <a href="https://codepen.io/genielabs/pen/YQPxqJ/">Content inclusion (ZUIX)</a> by Gene (<a href="https://codepen.io/genielabs">@genielabs</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 
 
@@ -180,7 +180,7 @@ we set on it the attribute `data-ui-lazyload="false"`.
 When the visibility of the *lazy-loaded* elements depends on a scrollable container,
 then the `data-ui-lazyload="scroll"` attribute must be specified on this container.
 
-<div class="animated flash infinite"><a href="https://codepen.io/genielabs/pen/YQPxqJ"><strong>Play on CodePen</strong></a></div>
+<div align="right"><a href="https://codepen.io/genielabs/pen/jwbvdP"><strong>Play on CodePen</strong> <i class="material-icons animated flash infinite">play_circle_outline</i></a></div>
 <p data-height="265" data-theme-id="light" data-slug-hash="jwbvdP" data-default-tab="html,result" data-user="genielabs" data-embed-version="2" data-pen-title="Lazy-Loading - Recursive Lorem Ipsum (ZUIX)" class="codepen">See the Pen <a href="https://codepen.io/genielabs/pen/jwbvdP/">Lazy-Loading - Recursive Lorem Ipsum (ZUIX)</a> by Gene (<a href="https://codepen.io/genielabs">@genielabs</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 
 
@@ -188,7 +188,8 @@ then the `data-ui-lazyload="scroll"` attribute must be specified on this contain
 
 When including a content, after loading the `.html` file,
 *ZUIX* will also try to load a `.css` style
-file with the same location/basename.
+file with the same location/basename, unless the `css: false`
+field is present in the `data-ui-options` object.
 
 If the style file is found, all style definitions contained in it,
 will be applied to the container where the content has been loaded.

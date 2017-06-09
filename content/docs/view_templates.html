@@ -1,13 +1,13 @@
 <a id="Getting_Started--View_Templates"></a>
 #### View Templates <i class="material-icons mdl-color-text--grey-500">settings_ethernet</i>
 
-In a more generic fashion, we call it **View Template** (or just *View*),
-when we refer to that particular kind of content where some elements
-in it are bound to fields of a *data model* and, so, that dynamically
-change the shown data accordingly to it.
+In a more generic way, we call it **View Template** (or just *View*),
+that particular kind of content where some elements in it are bound
+to fields of a *data model* and that so dynamically changes the
+shown values accordingly to it.
 
 The `data-ui-field` attribute, placed on elements of a view template,
-is used to bind them to the associated fields in the model.
+is used to bind their values to the respective fields in the model.
 
 <small><strong>EXAMPLE - HTML</strong> View Template</small>
 <pre data-line="3,6"><code class="language-html">
@@ -48,13 +48,14 @@ Classic homemade pizza recipe, including pizza dough and toppings, step-by-step 
 }
 </style>
 
-A *View* can be either implemented in a file, like already described for
+A *View Template* can be either implemented in a file, like already described for
 [loading content](#/docs#Getting_Started--Content_Loading), or as an **inline** View, that is so
 placed in the same page rather than on a its own file.
 
 ###### Inline View Template
 
-A view is declared inline by adding the `data-ui-view` attribute to its root element.
+A view is declared inline by placing it in the same page we're using it and by adding the
+`data-ui-view` attribute to its root element.
 The value of this attribute is meant to be a unique identifier and shall not match the path
 of any other view placed in a file or inline in the same page, unless we want to *override* it.
 
@@ -82,14 +83,14 @@ Inclusion of the above view in the same page
 </span>
 </div>
 
-<div class="animated flash infinite"><a href="https://codepen.io/genielabs/pen/dRPKVP"><strong>Play on CodePen</strong></a></div>
+<div align="right"><a href="https://codepen.io/genielabs/pen/dRPKVP"><strong>Play on CodePen</strong> <i class="material-icons animated flash infinite">play_circle_outline</i></a></div>
 <p data-height="300" data-theme-id="light" data-slug-hash="dRPKVP" data-default-tab="html,result" data-user="genielabs" data-embed-version="2" data-pen-title="Content Templates (ZUIX)" class="codepen">See the Pen <a href="https://codepen.io/genielabs/pen/dRPKVP/">Content Templates (ZUIX)</a> by Gene (<a href="https://codepen.io/genielabs">@genielabs</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 
 
 ##### Data Binding
 
-So, to bind elements of a view template to fields of a given data model, we set the `data-ui-field` attribute
-on these elements with the name of the model field that we want to bind to.
+So, in order to bind elements of a view to the fields of a given data model, we set the `data-ui-field` attribute
+on the view's elements with the same name of the model's field that we want to bind to.
 
 <a id="Getting_Started--Basic_Binding"></a>
 ###### Basic Binding

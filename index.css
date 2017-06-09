@@ -181,7 +181,7 @@ pre.terminal p {
     -ms-animation-duration: 15s;
 }
 .wallpaper .backdrop {
-    background-color: black; /* fallback color */
+    background-color: white;
     background: url(images/wallpaper.jpg);
     background-position: center;
     background-size: cover;

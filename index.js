@@ -217,6 +217,8 @@ function revealMainPage() {
 
 function reveal() {
     if (splashScreen) {
+        // unregister 'componentize:end' hook
+        zuix.hook('componentize:end', null);
         // this is only executed once, on app startup
         var s = splashScreen; splashScreen = false;
         s.animateCss('fadeOutUp', function(){
@@ -285,6 +287,7 @@ zuix.$.find('section').eq(0).on('scroll', function (data) {
 
 // DOCS section header title - on scroll
 var docsPage = zuix.field('page-docs');
+/* TODO: content_path slows down page scrolling too much!, disabled... to be optimized.
 var docsTitlePath = zuix.load('ui/usability/content_path', {
     view: docsPage,
     tags: 'h3,h4,h5',
@@ -296,8 +299,11 @@ var docsTitlePath = zuix.load('ui/usability/content_path', {
         checkMenuOnScreen(menu, direction);
     }
 });
+*/
 // API section header title - on scroll
 var apiPage = zuix.field('page-api');
+/*
+ /* TODO: content_path slows down page scrolling too much!, disabled... to be optimized.
 var apiTitlePath = zuix.load('ui/usability/content_path', {
     view: apiPage,
     tags: 'h3',
@@ -309,7 +315,7 @@ var apiTitlePath = zuix.load('ui/usability/content_path', {
         checkMenuOnScreen(menu, direction);
     }
 });
-
+*/
 function checkMenuOnScreen(menu, direction) {
     var v = zuix.$(menu.view());
     if (direction > 30) {
@@ -376,16 +382,16 @@ function changePage(e, i, effectIn, effectOut, dirIn, dirOut) {
     // header title path
     if (i.page == 2)
         setTimeout(function () {
-            docsTitlePath.update();
+            //docsTitlePath.update(); // TODO: <-- disabled
             if (typeof window.__CPEmbed === 'function') {
                 window.__CPEmbed();
                 window.__CPEmbed = null;
             }
         }, 1000);
-    else if (i.page == 3)
-        setTimeout(function () {
-            apiTitlePath.update();
-        }, 1000);
+    //else if (i.page == 3) // TODO: <-- disabled
+    //    setTimeout(function () {
+    //        apiTitlePath.update();
+    //    }, 1000);
 
     // contextual FAB menu
     if (i.old == 2)

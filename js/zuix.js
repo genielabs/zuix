@@ -3315,9 +3315,9 @@ function context(contextId, callback) {
  * @param handler
  */
 function hook(path, handler) {
-    if (util.isNoU(handler))
-        return _hooksCallbacks[path];
-    _hooksCallbacks[path] = handler;
+    if (util.isNoU(handler)) {
+        delete _hooksCallbacks[path];
+    } else _hooksCallbacks[path] = handler;
 }
 
 /**
