@@ -1,4 +1,4 @@
-## Chapter I
+# Chapter I
 
 #### Down the Rabbit-Hole
 
@@ -45,11 +45,15 @@ It was all very well to say ‘Drink me,’ but the wise little Alice was not go
 
 However, this bottle was *not* marked ‘poison,’ so Alice ventured to taste it, and finding it very nice, (it had, in fact, a sort of mixed flavour of cherry-tart, custard, pine-apple, roast turkey, toffee, and hot buttered toast,) she very soon finished it off.
 
-<div align="center">
 
-`* * * * * * *`  ` * * * * * * ` `* * * * * * *`
+```
+     *       *       *       *       *       *       *
 
-</div>
+         *       *       *       *       *       *
+
+     *       *       *       *       *       *       *
+```
+
 
 ‘What a curious feeling!’ said Alice; ‘I must be shutting up like a telescope.’
 
@@ -65,8 +69,11 @@ She ate a little bit, and said anxiously to herself, ‘Which way? Which way?’
 
 So she set to work, and very soon finished off the cake.
 
-<div align="center">
 
-`* * * * * * *`  ` * * * * * * ` `* * * * * * *`
+```
+     *       *       *       *       *       *       *
 
-</div>
+         *       *       *       *       *       *
+
+     *       *       *       *       *       *       *
+```

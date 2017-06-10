@@ -1,4 +1,4 @@
-## Chapter III
+# Chapter III
 
 #### A Caucus-Race and a Long Tale
 
@@ -71,52 +71,52 @@ The next thing was to eat the comfits: this caused some noise and confusion, as 
 
 ‘It *is* a long tail, certainly,’ said Alice, looking down with wonder at the Mouse’s tail; ‘but why do you call it sad?’ And she kept on puzzling about it while the Mouse was speaking, so that her idea of the tale was something like this:—
 
-<div class="verse" id="sadtail">
-<p class="in4">‘Fury said to a</p>
-<p class="in3">mouse, That he</p>
-<p class="in2">met in the</p>
-<p class="in1">house,</p>
-<p class="in0">“Let us</p>
-<p class="in1">both go to</p>
-<p class="in2">law: I will</p>
-<p class="in3">prosecute</p>
-<p class="in4">*you* .— Come,</p>
-<p class="in5">I’ll take no</p>
-<p class="in6">denial; We</p>
-<p class="in5">must have a</p>
-<p class="in4">trial: For</p>
-<p class="in3">really this</p>
-<p class="in4">morning I’ve</p>
-<p class="in5">nothing</p>
-<p class="in6">to do.”</p>
-<p class="in5">Said the</p>
-<p class="in4">mouse to the</p>
-<p class="in3">cur, “Such</p>
-<p class="in4">a trial,</p>
-<p class="in5">dear Sir,</p>
-<p class="in6">With</p>
-<p class="in7">no jury</p>
-<p class="in6">or judge,</p>
-<p class="in5">would be</p>
-<p class="in4">wasting</p>
-<p class="in3">our</p>
-<p class="in4">breath.”</p>
-<p class="in5">“I’ll be</p>
-<p class="in6">judge, I’ll</p>
-<p class="in7">be jury,”</p>
-<p class="in8">Said</p>
-<p class="in9">cunning</p>
-<p class="in10">old Fury:</p>
-<p class="in9">“I’ll</p>
-<p class="in11">try the</p>
-<p class="in12">whole</p>
-<p class="in13">cause,</p>
-<p class="in14">and</p>
-<p class="in13">condemn</p>
-<p class="in12">you</p>
-<p class="in11">to</p>
-<p class="in10">death.”’</p>
-</div>
+```
+                    Fury said to a
+                  mouse, That he
+                met in the
+              house,
+           "Let us
+             both go to
+               law:  I will
+                 prosecute
+                    YOU.  --Come,
+                       I'll take no
+                        denial; We
+                     must have a
+                 trial:  For
+              really this
+           morning I've
+          nothing
+         to do."
+           Said the
+             mouse to the
+               cur, "Such
+                 a trial,
+                   dear Sir,
+                         With
+                     no jury
+                  or judge,
+                would be
+              wasting
+             our
+              breath."
+               "I'll be
+                 judge, I'll
+                   be jury,"
+                    Said
+                     cunning
+                      old Fury:
+                     "I'll
+                      try the
+                         whole
+                          cause,
+                             and
+                        condemn
+                       you
+                      to
+                       death."'
+```
 
 
 ![Mouse telling story to birds and Alice](https://genielabs.github.io/zuix/site/examples/alice/img/ch_3_2.png)
