@@ -20,20 +20,26 @@ zuix.controller(function (cp) {
         // toolbar view
         toolbar = cp.view();
         toolOptions = toolbar.find('.options');
-        //toolbar.css('overflow', 'hidden');
+        toolOptions.on('blur keyup', function (e) {
+            if (e.type === 'keyup') {
+                this.get().blur();
+                return;
+            }
+            setTimeout(function () {
+                if (open) toolbarToggle();
+            }, 100);
+        }).attr('tabindex', '-1');
         // fab button
         fab = toolbar.find('.menu');
         fab.on('click', function () {
-            toolbarToggle();
+            if (!open) toolbarToggle();
         });
         // actions buttons
         actions = toolbar.find('.options')
-            .css('overflow', 'hidden')
             .hide()
             .children();
         actions.each(function (index, item) {
             this.on('click', function () {
-                toolbarToggle();
                 cp.trigger('item:click', index);
             });
         });
@@ -45,6 +51,8 @@ zuix.controller(function (cp) {
         actions.each(function (i, item) {
             this.off('click');
         });
+        fab.off('click');
+        toolOptions.off('blur');
 
     };
 
@@ -68,6 +76,7 @@ zuix.controller(function (cp) {
         open = typeof doOpen !== 'undefined' ? doOpen : !open;
         if (open)
             toolOptions.show().animateCss('bounceInUp', { duration: duration+'s' }, function () {
+                this.get().focus();
                 open = true;
             });
         else

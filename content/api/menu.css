@@ -1,6 +1,10 @@
+.options {
+    outline: none;
+}
 .options .menu-item {
     padding: 16px;
     height: 48px;
+    overflow: hidden;
     cursor: pointer;
     vertical-align: middle;
     color:white;

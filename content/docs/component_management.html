@@ -271,6 +271,8 @@ zuix.controller(function(cp) {
 
     cp.destroy = function() { /* called when the component is destroyed */ }
 
+    cp.update = function() { /* called each time the data model is update */ }
+
 }).for('path/to/component_name');
 </code></pre>
 
@@ -288,6 +290,9 @@ the following fields/methods.
 
 - `cp.destroy = function() { ... }`
 <br>*optional *handler* function called when the component is destroyed
+
+- `cp.update = function() { ... }`
+<br>*optional *handler* function called when the component's data model is updated
 
 ###### Helper methods
 
