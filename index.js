@@ -48,29 +48,6 @@ var main = {
             css: false
         }
     },
-    // Component 'ui/layout/actions_view'
-    topMenu: {
-        css: false,
-        html: false,
-        // actions map
-        on: {
-            // call 'menuItemClicked' handler when a menu item is clicked
-            'item:click': menuItemClicked
-        },
-        // behaviors map
-        behavior: {
-            // animate the button when clicked
-            'item:click': function (e, i) {
-                this.children().eq(i).animateCss('tada');
-            }
-        },
-        // component ready callback
-        ready: function () {
-            actionsView = this;
-            //console.log("ZUIX", "INFO", "Top menu ready.", this);
-        }
-    },
-
     // Component 'ui/layout/paged_view'
     contentPager: {
         css: false,
@@ -108,7 +85,6 @@ zuix.field('content-home').on('component:ready', function (ctx) {
 });
 // Reference to navigation components
 var pagedView = null;
-var actionsView = null;
 
 // Turn off debug output
 window.zuixNoConsoleOutput = true;
@@ -174,6 +150,8 @@ window.onhashchange = function () {
     routeCurrentUrl(window.location.hash);
 };
 function routeCurrentUrl(path) {
+    // check if pagedView is loaded
+    if (pagedView == null) return;
     var anchorIndex = path.lastIndexOf('#');
     var pageAnchor = null;
     if (anchorIndex > 0) {
@@ -279,15 +257,15 @@ zuix.$.ZxQuery.prototype.animateCss  = function (animationName, param1, param2) 
 var zxHeader = zuix.$.find('.site-header').hide();
 zxHeader.hidden = true; var headerTriggerY = 100;
 var zxHeaderTitle = zxHeader.find('[data-ui-field=title]');
-var zxFooter = zuix.$.find('.site-footer').hide();
+//var zxFooter = zuix.$.find('.site-footer').hide();
 
 zuix.$.find('section').eq(0).on('scroll', function (data) {
    checkMenuVisibility();
 });
 
 // DOCS section header title - on scroll
-var docsPage = zuix.field('page-docs');
 /* TODO: content_path slows down page scrolling too much!, disabled... to be optimized.
+var docsPage = zuix.field('page-docs');
 var docsTitlePath = zuix.load('ui/usability/content_path', {
     view: docsPage,
     tags: 'h3,h4,h5',
@@ -301,8 +279,8 @@ var docsTitlePath = zuix.load('ui/usability/content_path', {
 });
 */
 // API section header title - on scroll
-var apiPage = zuix.field('page-api');
 /*
+var apiPage = zuix.field('page-api');
  /* TODO: content_path slows down page scrolling too much!, disabled... to be optimized.
 var apiTitlePath = zuix.load('ui/usability/content_path', {
     view: apiPage,
@@ -315,7 +293,6 @@ var apiTitlePath = zuix.load('ui/usability/content_path', {
         checkMenuOnScreen(menu, direction);
     }
 });
-*/
 function checkMenuOnScreen(menu, direction) {
     var v = zuix.$(menu.view());
     if (direction > 30) {
@@ -330,6 +307,15 @@ function checkMenuOnScreen(menu, direction) {
         }
     }
 }
+*/
+
+/*
+ // Top menu `item:click` event handler
+ function menuItemClicked(e, i) {
+ if (pagedView)
+ pagedView.setPage(i);
+ }
+ */
 
 function checkMenuVisibility() {
     var checkPosition = featuresBlock.position();
@@ -347,13 +333,6 @@ function checkMenuVisibility() {
         });
     }
 }
-
-// Top menu `item:click` event handler
-function menuItemClicked(e, i) {
-    if (pagedView)
-        pagedView.setPage(i);
-}
-
 
 // PagedView `page:change` behavior handler
 function changePage(e, i, effectIn, effectOut, dirIn, dirOut) {

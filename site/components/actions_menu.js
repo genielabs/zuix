@@ -16,11 +16,15 @@ zuix.controller(function (cp) {
                 toolbarToggle(doOpen);
             else return open;
         });
+        cp.expose('close', function () {
+            toolOptions.get().blur();
+        });
 
         // toolbar view
         toolbar = cp.view();
         toolOptions = toolbar.find('.options');
         toolOptions.on('blur keyup', function (e) {
+console.log("EVENT", e.type);
             if (e.type === 'keyup') {
                 this.get().blur();
                 return;
@@ -28,7 +32,7 @@ zuix.controller(function (cp) {
             setTimeout(function () {
                 if (open) toolbarToggle();
             }, 100);
-        }).attr('tabindex', '-1');
+        }).attr('tabIndex', '-1');
         // fab button
         fab = toolbar.find('.menu');
         fab.on('click', function () {

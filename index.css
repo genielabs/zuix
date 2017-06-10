@@ -100,16 +100,6 @@ header .mdl-menu--bottom-right {
     width: 100%;
 }
 
-/* TODO: move this to the component css */
-[data-ui-component="ui/layout/actions_view"] div {
-    height: 72px;
-}
-
-[data-ui-component="ui/layout/actions_view"] .is-active {
-    background-color: white;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    cursor: default;
-}
 section:nth-of-type(2),section:nth-of-type(3),section:nth-of-type(4) {
     padding-top: 24px;
 }

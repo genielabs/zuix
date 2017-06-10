@@ -49,6 +49,9 @@
         on: {
             'view:create': function () {
                 this.hide();
+            },
+            'item:click': function () {
+                zuix.context('menu_api').close();
             }
         }
     };
