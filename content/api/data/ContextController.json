@@ -405,7 +405,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "\n <small>**Example - View's HTML**</small>\n ```html\n <h1 data-ui-field=\"title\">...</h1>\n <p data-ui-field=\"description\">...</p>\n ```\n\n <small>**Example - JavaScript**</small>\n ```js\n cp.field('title')\n .html('Hello World!');\n var desc = cp.field('description');\n desc.html('The spectacle before us was indeed sublime.');\n ```"
+        "string": "\n<small>**Example - View's HTML**</small>\n<pre><code class=\"language-html\">\n<h1 data-ui-field=\"title\">...</h1>\n<p data-ui-field=\"description\">...</p>\n</code></pre>\n\n<small>**Example - JavaScript**</small>\n<pre><code class=\"language-js\">\ncp.field('title')\n  .html('Hello World!');\nvar desc = cp.field('description');\ndesc.html('The spectacle before us was indeed sublime.');\n</code></pre>"
       },
       {
         "type": "param",
