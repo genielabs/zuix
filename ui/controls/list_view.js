@@ -8,11 +8,6 @@
 
 zuix.controller(function (cp) {
 
-    // Set the list items' creation method either to be
-    // using HTML elements with data-ui-load attribute (htmlMode = true)
-    // or by using zuix.createComponent(..) (htmlMode = false)
-    var htmlMode = true;
-
     // Set list type: [ 'full', 'paged', 'incremental' ] (default: 'full')
     var MODE_FULL = 'full', MODE_PAGED = 'paged', MODE_INCREMENTAL = 'incremental';
     var listMode = MODE_FULL;
@@ -34,7 +29,6 @@ zuix.controller(function (cp) {
 
     // Objects data persistence
     var listItems = [];
-    var itemOptions;
 
     cp.init = function () {
         cp.options().html = false;
@@ -82,25 +76,7 @@ zuix.controller(function (cp) {
                 (listMode === MODE_PAGED && i >= startItem && i < startItem+itemsPerPage) ||
                 (listMode === MODE_INCREMENTAL && i < startItem+itemsPerPage)) {
                 if (typeof listItems[id] === 'undefined') {
-                    var container;
-                    if (htmlMode) {
-                        // This is the 'htmlMode' approach for creating the
-                        // list_view components. This methods is way faster than
-                        // `zuix.createComponent` since it just creates a `div` container.
-                        // Using this approach we have to wait for the 'component:ready'
-                        // event before obtaining a reference to the component context.
-                        container = document.createElement('div');
-                        // Set the component to load for this item
-                        container.setAttribute('data-ui-load', dataItem.componentId);
-                        container.setAttribute('data-ui-options', setItemOptions(i, dataItem.options));
-                    } else {
-                        // This other method is a bit slower since the `createComponent`
-                        // method involves other extra checks.
-                        // The main advantage is that we can obtain a reference to the
-                        // component context before it is created. For very long lists,
-                        // always prefer using the `htmlMode` approach.
-                        container = zuix.createComponent(dataItem.componentId, dataItem.options).container();
-                    }
+                    var container = zuix.createComponent(dataItem.componentId, dataItem.options).container();
                     // use a responsive CSS class if provided
                     if (dataItem.options.className != null) {
                         // this class should set the min-height property
@@ -185,25 +161,14 @@ zuix.controller(function (cp) {
         return Math.ceil(cp.model().itemList.length / itemsPerPage);
     }
 
-    function setItemOptions(i, options){
-        itemOptions['opt_'+i] = options;
-        return 'list_view_opts.'+cp.context.contextId.replace(/-/g, '_')+'.opt_'+i;
-    }
-
     function configure(options) {
         if (options.itemsPerPage != null)
             itemsPerPage = options.itemsPerPage;
         if (options.listMode != null)
             listMode = options.listMode;
-        if (options.htmlMode != null)
-            htmlMode = options.htmlMode;
     }
 
     function clear() {
-        // TODO: find a better solution for storing data globally (eg. add method zuix.store(....) - localStorage)
-        // globally store list view item options
-        window.list_view_opts = window.list_view_opts || {};
-        itemOptions = window.list_view_opts[cp.context.contextId.replace(/-/g, '_')] = {};
         // dispose components
         for (var i = 0; i < listItems.length; i++) {
             zuix.unload(listItems[i]);
