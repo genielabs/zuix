@@ -10,9 +10,9 @@ to it and can so control any element in its view and implement
 any kind of UI functionality.
 
 This piece of JavaScript code is the **Controller** (or *Presenter*)
-of the component and it consist of a function handler with two
-interface methods: **create** and **destroy**, that are obviously
-called respectively at the start and the end of the component
+of the component and it consist of a function handler with a few
+interface methods: **init**, **create**, **destroy**, **update**.
+These methods gets called in the various steps of the component's
 life-cycle.
 
 To declare a component controller the `zuix.controller(...)` method is
