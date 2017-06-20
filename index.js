@@ -91,9 +91,14 @@ window.zuixNoConsoleOutput = true;
 //zuix.lazyLoad(false);
 //zuix.httpCaching(false);
 
+// Animate CSS extension method for ZxQuery
+// TODO: create an alias for loading viewless components eg. `zuix.using('component', 'ui/utils/animate_css', callback)`
+zuix.load('ui/utils/animate_css', { view: '', priority: -10 });
+
 zuix
 .hook('load:begin', function(data){
-    if (data.task.indexOf('zuix_hackbox') > 0) return;
+
+    if (data.task.indexOf('zuix_hackbox') > 0 || zuix.$.ZxQuery.prototype.animateCss == null) return;
     if (splashScreen) splashScreen.show();
     loaderMessage.html('Loading "<em>'+data.task+'</em>" ...')
         .animateCss('bounceInUp', { duration: '1.0s' })
@@ -102,6 +107,7 @@ zuix
         clearTimeout(revealTimeout);
 
 }).hook('load:next', function(data){
+
     if (data.task.indexOf('zuix_hackbox') > 0) return;
     if (splashScreen)
         zuix.field('loader-progress')
@@ -121,6 +127,7 @@ zuix
     revealMainPage();
 
 }).hook('html:parse', function (data) {
+
     // ShowDown - Markdown compiler
     if (this.options().markdown === true && typeof showdown !== 'undefined')
         data.content = new showdown.Converter()
@@ -130,6 +137,7 @@ zuix
     //console.log(data);
 
 }).hook('view:process', function (view) {
+
     // Prism code syntax highlighter
     if (this.options().prism && typeof Prism !== 'undefined') {
         view.find('code').each(function (i, block) {
@@ -142,6 +150,7 @@ zuix
     // Material Design Light integration - DOM upgrade
     if (/*this.options().mdl &&*/ typeof componentHandler !== 'undefined')
         componentHandler.upgradeElements(view.get());
+
 })/*.hook('component:ready', function () {
 })*/;
 
@@ -211,48 +220,6 @@ function reveal() {
         routeCurrentUrl(window.location.hash);
     }
 }
-
-// TODO: move animateCss to a separate util.js file
-// animateCss extension method for ZxQuery
-zuix.$.ZxQuery.prototype.animateCss  = function (animationName, param1, param2) {
-    var callback, options;
-
-    if (typeof param2 === 'function') {
-        options = param1;
-        callback = param2;
-    } else {
-        if (typeof param1 === 'function')
-            callback = param1;
-        else options = param1;
-    }
-
-    var prefixes = ['-webkit', '-moz', '-o', '-ms'];
-    for (var key in options)
-        for (var p in prefixes)
-            this.css(prefixes[p] + '-animation-' + key, options[key]);
-    var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-    var _t = this;
-
-    if (typeof animationName !== 'function') {
-        // stops any previously running animation
-        if (this.hasClass('animated')) {
-            this.css('transition', ''); // TODO: <-- is this really needed?
-            this.trigger('animationend');
-        }
-        // TODO: should run all the following code for each element in the ZxQuery selection
-        this.addClass('animated ' + animationName);
-    } else callback = animationName;
-
-    this.one(animationEnd, function () {
-        this.removeClass('animated ' + animationName);
-        for(var key in options)
-            for (var p in prefixes)
-                _t.css(prefixes[p] + '-animation-' + key, '');
-        if (typeof callback === 'function')
-            callback.call(_t, animationName);
-    });
-    return this;
-};
 
 var zxHeader = zuix.$.find('.site-header').hide();
 zxHeader.hidden = true; var headerTriggerY = 100;

@@ -24,7 +24,6 @@ zuix.controller(function (cp) {
         toolbar = cp.view();
         toolOptions = toolbar.find('.options');
         toolOptions.on('blur keyup', function (e) {
-console.log("EVENT", e.type);
             if (e.type === 'keyup') {
                 this.get().blur();
                 return;
