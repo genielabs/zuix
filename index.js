@@ -92,19 +92,18 @@ window.zuixNoConsoleOutput = true;
 //zuix.httpCaching(false);
 
 // Animate CSS extension method for ZxQuery
-// TODO: create an alias for loading viewless components eg. `zuix.using('component', 'ui/utils/animate_css', callback)`
+// TODO: create an alias for loading view-less components eg. `zuix.using('component', 'ui/utils/animate_css', callback)`
 zuix.load('ui/utils/animate_css', { view: '', priority: -10 });
 
 zuix
 .hook('load:begin', function(data){
 
-    if (data.task.indexOf('zuix_hackbox') > 0 || zuix.$.ZxQuery.prototype.animateCss == null) return;
     if (splashScreen) splashScreen.show();
-    loaderMessage.html('Loading "<em>'+data.task+'</em>" ...')
-        .animateCss('bounceInUp', { duration: '1.0s' })
-        .show();
+    loaderMessage.html('Loading "<em>'+data.task+'</em>" ...').show();
     if (revealTimeout != null)
         clearTimeout(revealTimeout);
+    if (zuix.$.ZxQuery.prototype.animateCss != null)
+        loaderMessage.animateCss('bounceInUp', { duration: '1.0s' })
 
 }).hook('load:next', function(data){
 

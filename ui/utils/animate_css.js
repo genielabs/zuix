@@ -13,8 +13,8 @@ zuix.controller(function (cp) {
         cp.options().html = false;
         cp.options().css = false;
 
-        // load library from CDN if not already included in the document
-        if (!styleSheetContains('.animated')) {
+        // Load library from CDN if not already included in the document
+        if (!zuix.$.classExists('.animated .bounce')) {
             zuix.using('style', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css');
         }
 
@@ -68,25 +68,5 @@ zuix.controller(function (cp) {
 
         return this;
     };
-
-    // TODO: rename and move this function as part of {zuix.$}
-    function styleSheetContains(f) {
-        var hasStyle = false;
-        var docStyles = document.styleSheets;
-        if (docStyles != null) {
-            for (var sx = 0; sx < docStyles.length; sx++) {
-                var classes = docStyles[sx].rules || docStyles[sx].cssRules;
-                if (classes != null) {
-                    for (var cx = 0; cx < classes.length; cx++) {
-                        if (classes[cx].selectorText === f) {
-                            hasStyle = true;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-        return hasStyle;
-    }
 
 });
