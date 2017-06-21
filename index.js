@@ -92,8 +92,9 @@ window.zuixNoConsoleOutput = true;
 //zuix.httpCaching(false);
 
 // Animate CSS extension method for ZxQuery
-// TODO: create an alias for loading view-less components eg. `zuix.using('component', 'ui/utils/animate_css', callback)`
-zuix.load('ui/utils/animate_css', { view: '', priority: -10 });
+zuix.using('component', 'ui/utils/animate_css', function(res, ctx){
+    console.log("AnimateCSS extension loaded.", res, ctx);
+});
 
 zuix
 .hook('load:begin', function(data){
