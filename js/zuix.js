@@ -1128,19 +1128,7 @@ z$.each = function (items, iterationCallback) {
     }
     return this;
 };
-z$.hasClass = function(el, className) {
-    var classes = className.match(/\S+/g) || [];
-    var success = false;
-    z$.each(classes, function (k, cl) {
-        if (el.classList)
-            success = el.classList.contains(cl);
-        else
-            success = (new RegExp('(^| )' + cl + '( |$)', 'gi').test(el.className));
-        if (success) return false;
-    });
-    return success;
-};
-z$.ajax = function ajax(opt) {
+z$.ajax = function (opt) {
     var url;
     if (!util.isNoU(opt) && !util.isNoU(opt.url))
         url = opt.url;
@@ -1158,6 +1146,40 @@ z$.ajax = function ajax(opt) {
     };
     xhr.send();
     return this;
+};
+z$.hasClass = function(el, className) {
+    var classes = className.match(/\S+/g) || [];
+    var success = false;
+    z$.each(classes, function (k, cl) {
+        if (el.classList)
+            success = el.classList.contains(cl);
+        else
+            success = (new RegExp('(^| )' + cl + '( |$)', 'gi').test(el.className));
+        if (success) return false;
+    });
+    return success;
+};
+z$.classExists = function (className) {
+    var classes = className.match(/\S+/g) || [];
+    var success = false;
+    z$.each(classes, function (k, cl) {
+        // Perform global style check
+        var docStyles = document.styleSheets;
+        if (docStyles != null) {
+            for (var sx = 0; sx < docStyles.length; sx++) {
+                var classes = docStyles[sx].rules || docStyles[sx].cssRules;
+                if (classes != null) {
+                    for (var cx = 0; cx < classes.length; cx++) {
+                        if (classes[cx].selectorText === cl) {
+                            success = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    });
+    return success;
 };
 z$.wrapElement = function (containerTag, element) {
     //$(element).wrap($('<'+containerTag+'/>'));
@@ -2613,19 +2635,19 @@ ContextController.prototype.addBehavior = function (eventPath, handler_fn) {
  *
  * @example
  *
- <small>**Example - View's HTML**</small>
- ```html
- <h1 data-ui-field="title">...</h1>
- <p data-ui-field="description">...</p>
- ```
-
- <small>**Example - JavaScript**</small>
- ```js
- cp.field('title')
- .html('Hello World!');
- var desc = cp.field('description');
- desc.html('The spectacle before us was indeed sublime.');
- ```
+ * <small>**Example - View's HTML**</small>
+ * <pre><code class="language-html">
+ * <h1 data-ui-field="title">...</h1>
+ * <p data-ui-field="description">...</p>
+ * </code></pre>
+ *
+ * <small>**Example - JavaScript**</small>
+ * <pre><code class="language-js">
+ * cp.field('title')
+ *   .html('Hello World!');
+ * var desc = cp.field('description');
+ * desc.html('The spectacle before us was indeed sublime.');
+ * </code></pre>
  *
  *
  * @param {!string} fieldName Value to match in the `data-ui-field` attribute.
@@ -4129,79 +4151,110 @@ Zuix.prototype.httpCaching = function(enable) {
  </code></pre>
  *
  *
- * @param {string} resourceType Either `style` or `script`
+ * @param {string} resourceType Either `style`, `script` or `component`.
  * @param {string} resourcePath Relative or absolute resource url path
+ * @param {function} [callback] Callback function to call once resource is loaded.
  */
 Zuix.prototype.using = function(resourceType, resourcePath, callback) {
+    resourceType = resourceType.toLowerCase();
     var hashId = resourceType+'-'+resourcePath.hashCode();
-    var isCss = (resourceType === 'style');
 
-    if (z$.find(resourceType+'[id="'+hashId+'"]').length() === 0) {
+    if (resourceType === 'component') {
 
-        var head = document.head || document.getElementsByTagName('head')[0];
-        var resource = document.createElement(resourceType);
-        if (isCss) {
-            resource.type = 'text/css';
-            resource.id = hashId;
-        } else {
-            resource.type = 'text/javascript';
-            resource.id = hashId;
-        }
-        head.appendChild(resource);
-
-        // TODO: add logging
-        var addResource = function(text) {
-            // TODO: add logging
-            if (isCss) {
-                if (resource.styleSheet)
-                    resource.styleSheet.cssText = text;
-                else
-                    resource.appendChild(document.createTextNode(text));
-            } else {
-                if (resource.innerText)
-                    resource.innerText = text;
-                else
-                    resource.appendChild(document.createTextNode(text));
-            }
-            if (callback)
-                callback(resourcePath, hashId);
-        };
-
-        var cid = '_res/'+resourceType+'/'+hashId;
-        var cached = getCachedComponent(cid);
-        if (cached != null) {
-            addResource(isCss ? cached.css : cached.controller);
-        } else {
-            z$.ajax({
-                url: resourcePath,
-                success: function (resText) {
-
-                    // TODO: add logging
-                    /** @type {ComponentCache} */
-                    var cached = {
-                        componentId: cid,
-                        view: null,
-                        css: isCss ? resText : null,
-                        controller: !isCss ? resText : null,
-                        using: resourcePath
-                    };
-                    _componentCache.push(cached);
-
-                    addResource(resText);
-
+        var c = context(hashId);
+        if (c == null) {
+            zuix.load(resourcePath, {
+                contextId: hashId,
+                view: '',
+                priority: -10,
+                ready: function (ctx) {
+                    if (typeof callback === 'function')
+                        callback(resourcePath, ctx);
                 },
                 error: function () {
-                    // TODO: add logging
-                    head.removeChild(resource);
-                    if (callback)
-                        callback(resourcePath);
+                    callback(resourcePath, null);
                 }
             });
+        } else if (typeof callback === 'function') {
+            // already loaded
+            callback(resourcePath, c);
         }
 
     } else {
-        // TODO: add logging
-        console.log('already added ' + hashId + '('+resourcePath+')');
+
+        var isCss = (resourceType === 'style');
+        if (z$.find(resourceType + '[id="' + hashId + '"]').length() === 0) {
+
+            var head = document.head || document.getElementsByTagName('head')[0];
+            var resource = document.createElement(resourceType);
+            if (isCss) {
+                resource.type = 'text/css';
+                resource.id = hashId;
+            } else {
+                resource.type = 'text/javascript';
+                resource.id = hashId;
+            }
+            head.appendChild(resource);
+
+            // TODO: add logging
+            var addResource = function (text) {
+                // TODO: add logging
+                if (isCss) {
+                    if (resource.styleSheet)
+                        resource.styleSheet.cssText = text;
+                    else
+                        resource.appendChild(document.createTextNode(text));
+                } else {
+                    if (resource.innerText)
+                        resource.innerText = text;
+                    else
+                        resource.appendChild(document.createTextNode(text));
+                }
+                if (callback)
+                    callback(resourcePath, hashId);
+            };
+
+            var cid = '_res/' + resourceType + '/' + hashId;
+            var cached = getCachedComponent(cid);
+            if (cached != null) {
+                addResource(isCss ? cached.css : cached.controller);
+            } else {
+                z$.ajax({
+                    url: resourcePath,
+                    success: function (resText) {
+
+                        // TODO: add logging
+                        /** @type {ComponentCache} */
+                        var cached = {
+                            componentId: cid,
+                            view: null,
+                            css: isCss ? resText : null,
+                            controller: !isCss ? resText : null,
+                            using: resourcePath
+                        };
+                        _componentCache.push(cached);
+
+                        addResource(resText);
+
+                    },
+                    error: function () {
+                        // TODO: add logging
+                        head.removeChild(resource);
+                        if (callback)
+                            callback(resourcePath);
+                    }
+                });
+            }
+
+        } else {
+
+            // TODO: add logging
+            console.log('Resource already added ' + hashId + '(' + resourcePath + ')');
+            if (callback)
+                callback(resourcePath, hashId);
+
+        }
+
     }
 };
 
