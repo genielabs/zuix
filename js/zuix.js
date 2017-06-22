@@ -1,5 +1,5 @@
 /** @typedef {Zuix} window.zuix */!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.zuix=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  This file is part of
  *  ZUIX, Javascript library for component-based development.
@@ -112,7 +112,7 @@ module.exports = function (callback) {
     return new AsynChain(callback);
 };
 },{}],2:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -129,7 +129,7 @@ module.exports = function (callback) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  This file is part of
  *  ZUIX, Javascript library for component-based development.
@@ -263,7 +263,7 @@ module.exports = function(ctx) {
 };
 
 },{}],3:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -280,7 +280,7 @@ module.exports = function(ctx) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  This file is part of
  *  ZUIX, Javascript library for component-based development.
@@ -376,7 +376,7 @@ TaskQueue.prototype.queue = function(tid, fn, pri) {
 
 module.exports = TaskQueue;
 },{"./Logger":2}],4:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -393,7 +393,7 @@ module.exports = TaskQueue;
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  This file is part of
  *  ZUIX, Javascript library for component-based development.
@@ -503,7 +503,7 @@ module.exports = {
 
 };
 },{}],5:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -520,7 +520,7 @@ module.exports = {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  This file is part of
  *  ZUIX, Javascript library for component-based development.
@@ -1388,7 +1388,7 @@ String.prototype.hashCode = function() {
 module.exports =  z$;
 
 },{"./Logger":2,"./Util.js":4}],6:[function(_dereq_,module,exports){
-/**
+/*!
  * @license
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
@@ -1433,7 +1433,7 @@ module.exports =  z$;
 }(this, _dereq_('./zuix/Zuix.js')));
 
 },{"./zuix/Zuix.js":17}],7:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -1450,7 +1450,7 @@ module.exports =  z$;
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  ZUIX, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
@@ -1475,7 +1475,7 @@ module.exports = function (root) {
     return null;
 };
 },{}],8:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -1492,7 +1492,7 @@ module.exports = function (root) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  This file is part of
  *  ZUIX, Javascript library for component-based development.
@@ -2025,7 +2025,7 @@ ComponentContext.prototype.modelToView = function () {
 
 module.exports = ComponentContext;
 },{"../helpers/Logger":2,"../helpers/Util":4,"../helpers/ZxQuery":5,"./EventCallback":15}],9:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -2042,7 +2042,7 @@ module.exports = ComponentContext;
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  This file is part of
  *  ZUIX, Javascript library for component-based development.
@@ -2487,7 +2487,7 @@ function lazyElementCheck(element) {
 }
 
 },{"../helpers/Logger":2,"../helpers/Util":4,"../helpers/ZxQuery":5,"./../helpers/AsynChain":1}],10:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -2504,7 +2504,7 @@ function lazyElementCheck(element) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  This file is part of
  *  ZUIX, Javascript library for component-based development.
@@ -2885,7 +2885,7 @@ ContextController.prototype.for = function (componentId) { return this; };
 
 module.exports = ContextController;
 },{"../helpers/ZxQuery":5,"./ContextControllerHandler":11}],11:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -2902,7 +2902,7 @@ module.exports = ContextController;
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  ZUIX, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
@@ -2924,7 +2924,7 @@ module.exports = function (root) {
     return null;
 };
 },{}],12:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -2941,7 +2941,7 @@ module.exports = function (root) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  ZUIX, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
@@ -2962,7 +2962,7 @@ module.exports = function (root) {
     return null;
 };
 },{}],13:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -2979,7 +2979,7 @@ module.exports = function (root) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  ZUIX, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
@@ -3017,7 +3017,7 @@ module.exports = function (root) {
     return null;
 };
 },{"./ContextErrorCallback":12,"./ContextReadyCallback":14,"./EventCallback":15,"./EventMapping":16}],14:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -3034,7 +3034,7 @@ module.exports = function (root) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  ZUIX, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
@@ -3054,7 +3054,7 @@ module.exports = function (root) {
     return null;
 };
 },{}],15:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -3071,7 +3071,7 @@ module.exports = function (root) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  ZUIX, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
@@ -3092,7 +3092,7 @@ module.exports = function (root) {
     return null;
 };
 },{}],16:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -3109,7 +3109,7 @@ module.exports = function (root) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  ZUIX, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
@@ -3129,7 +3129,7 @@ module.exports = function (root) {
     return null;
 };
 },{}],17:[function(_dereq_,module,exports){
-/**
+/*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
  *
@@ -3146,7 +3146,7 @@ module.exports = function (root) {
  * limitations under the License.
  */
 
-/**
+/*
  *
  *  ZUIX, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
