@@ -92,6 +92,7 @@ window.zuixNoConsoleOutput = true;
 //zuix.httpCaching(false);
 
 // Animate CSS extension method for ZxQuery
+zuix.$.ZxQuery.prototype.animateCss = function() {};
 zuix.using('component', 'ui/utils/animate_css', function(res, ctx){
     console.log("AnimateCSS extension loaded.", res, ctx);
 });
@@ -103,8 +104,7 @@ zuix
     loaderMessage.html('Loading "<em>'+data.task+'</em>" ...').show();
     if (revealTimeout != null)
         clearTimeout(revealTimeout);
-    if (zuix.$.ZxQuery.prototype.animateCss != null)
-        loaderMessage.animateCss('bounceInUp', { duration: '1.0s' })
+    loaderMessage.animateCss('bounceInUp', { duration: '1.0s' })
 
 }).hook('load:next', function(data){
 
