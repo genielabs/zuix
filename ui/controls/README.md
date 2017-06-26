@@ -1,11 +1,12 @@
 # ZUIX UI Controls
 
-This folder contains a collection of framework agnostic UI controls.
+This folder contains a collection of **framework agnostic UI controls**.
+
 Either you are using plain HTML or an UI framework
 (eg. Bootstrap, Material Design Lite, ..) these controls will work.
 
-Currently only a `list_view` component is implemented in this folder.
-More to come soon along with documentation.
+Currently only `scroll_helper` and `list_view` components are implemented
+in this folder. More to come soon along with documentation and examples.
 
 ## ui/controls
 
