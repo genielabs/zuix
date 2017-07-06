@@ -39,6 +39,90 @@
   {
     "tags": [
       {
+        "type": "typedef",
+        "string": "{Object} ContextController",
+        "types": [
+          "Object"
+        ],
+        "typesDescription": "<code>Object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "property",
+        "string": "{function} init",
+        "name": "init",
+        "description": "",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "property",
+        "string": "{function} create",
+        "name": "create",
+        "description": "",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "property",
+        "string": "{function} update",
+        "name": "update",
+        "description": "",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "property",
+        "string": "{function} destroy",
+        "name": "destroy",
+        "description": "",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "ContextController user-defined handlers definition",
+      "summary": "ContextController user-defined handlers definition",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 35,
+    "codeStart": 43
+  },
+  {
+    "tags": [
+      {
         "type": "param",
         "string": "{ComponentContext} context",
         "name": "context",
@@ -53,7 +137,7 @@
         "variable": false
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{ContextController}",
         "types": [
           "ContextController"
@@ -71,8 +155,8 @@
       }
     ],
     "description": {
-      "full": "TODO: complete JSDoc",
-      "summary": "TODO: complete JSDoc",
+      "full": "ContextController constructor.",
+      "summary": "ContextController constructor.",
       "body": ""
     },
     "isPrivate": false,
@@ -80,57 +164,14 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 35,
-    "codeStart": 42,
+    "line": 44,
+    "codeStart": 50,
     "code": "function ContextController(context) {\n    var _t = this;\n\n    this._view = null;\n\n    this.context = context;",
     "ctx": {
       "type": "constructor",
       "name": "ContextController",
       "string": "ContextController()"
     }
-  },
-  {
-    "tags": [
-      {
-        "type": "type",
-        "string": "{function}",
-        "types": [
-          "function"
-        ],
-        "typesDescription": "<code>function</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      }
-    ],
-    "description": {
-      "full": "",
-      "summary": "",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 48,
-    "codeStart": 49
-  },
-  {
-    "tags": [],
-    "description": {
-      "full": "this.behavior = function () {\n        return context.behavior;\n    };",
-      "summary": "this.behavior = function () {\n        return context.behavior;\n    };",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 49,
-    "codeStart": 52
   },
   {
     "tags": [
@@ -162,8 +203,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 53,
-    "codeStart": 57,
+    "line": 57,
+    "codeStart": 61,
     "code": "this._fieldCache = [];\n\n// Interface methods",
     "ctx": {
       "type": "property",
@@ -198,8 +239,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 61,
-    "codeStart": 62,
+    "line": 65,
+    "codeStart": 66,
     "code": "this.init = null;",
     "ctx": {
       "type": "property",
@@ -234,8 +275,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 63,
-    "codeStart": 64,
+    "line": 67,
+    "codeStart": 68,
     "code": "this.create = null;",
     "ctx": {
       "type": "property",
@@ -270,8 +311,44 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 65,
-    "codeStart": 66,
+    "line": 69,
+    "codeStart": 70,
+    "code": "this.update = null;",
+    "ctx": {
+      "type": "property",
+      "receiver": "this",
+      "name": "update",
+      "value": "null",
+      "string": "this.update"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "type",
+        "string": "{function}",
+        "types": [
+          "function"
+        ],
+        "typesDescription": "<code>function</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      }
+    ],
+    "description": {
+      "full": "",
+      "summary": "",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 71,
+    "codeStart": 72,
     "code": "this.destroy = null;",
     "ctx": {
       "type": "property",
@@ -287,6 +364,18 @@
         "type": "protected",
         "string": "",
         "visibility": "protected"
+      },
+      {
+        "type": "type",
+        "string": "{!Array.<Element>}",
+        "types": [
+          "Array.<Element>"
+        ],
+        "typesDescription": "!<code>Array</code>.&lt;<code>Element</code>&gt;",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": true,
+        "variable": false
       }
     ],
     "description": {
@@ -299,8 +388,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 68,
-    "codeStart": 69,
+    "line": 74,
+    "codeStart": 78,
     "code": "this._childNodes = [];",
     "ctx": {
       "type": "property",
@@ -335,8 +424,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 70,
-    "codeStart": 71,
+    "line": 79,
+    "codeStart": 80,
     "code": "this.saveView = function () {\n    this.restoreView();\n    this.view().children().each(function (i, el) {\n        _t._childNodes.push(el);\n    });\n};\nthis.restoreView = function() {\n    if (this._childNodes.length > 0) {\n        _t.view().html('');\n        z$.each(_t._childNodes, function (i, el) {\n            _t.view().append(el);\n        });\n        this._childNodes.length = 0;\n    }\n};\n\nthis.on = function (eventPath, handler_fn) {\n    this.addEvent(eventPath, handler_fn);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -363,8 +452,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 91,
-    "codeStart": 92,
+    "line": 100,
+    "codeStart": 101,
     "code": "this.mapEvent = function (eventMap, target, eventPath, handler_fn) {\n    if (target != null) {\n        target.off(eventPath, this.eventRouter);\n        eventMap[eventPath] = handler_fn;\n        target.on(eventPath, this.eventRouter);\n    } else {\n        // TODO: should report missing target\n    }\n};",
     "ctx": {
       "type": "method",
@@ -391,8 +480,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 101,
-    "codeStart": 102,
+    "line": 110,
+    "codeStart": 111,
     "code": "this.eventRouter = function (e) {\n    if (typeof context._behaviorMap[e.type] === 'function')\n        context._behaviorMap[e.type].call(_t.view(), e, e.detail);\n    if (typeof context._eventMap[e.type] === 'function')\n        context._eventMap[e.type].call(_t.view(), e, e.detail);\n    // TODO: else-> should report anomaly\n};\n\n// create event map from context options\nvar options = context.options(), handler = null;\nif (options.on != null) {\n    for (var ep in options.on) {\n        handler = options.on[ep];\n        _t.addEvent(ep, handler);\n    }\n}\n// create behavior map from context options\nif (options.behavior != null) {\n    for (var bp in options.behavior) {\n        handler = options.behavior[bp];\n        _t.addBehavior(bp, handler);\n    }\n}\n\ncontext.controller().call(this, this);\n\nreturn this;\n}\n\n// TODO: add jsDoc\nContextController.prototype.addEvent = function (eventPath, handler_fn) {\nthis.mapEvent(this.context._eventMap, this.view(), eventPath, handler_fn);\nreturn this;\n};\n\n// TODO: add jsDoc\nContextController.prototype.addBehavior = function (eventPath, handler_fn) {\nthis.mapEvent(this.context._behaviorMap, this.view(), eventPath, handler_fn);\nreturn this;\n};",
     "ctx": {
       "type": "method",
@@ -422,7 +511,7 @@
         "variable": false
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{ZxQuery} A `{ZxQuery}` object wrapping the matching element.",
         "types": [
           "ZxQuery"
@@ -445,8 +534,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 143,
-    "codeStart": 167,
+    "line": 152,
+    "codeStart": 176,
     "code": "ContextController.prototype.field = function (fieldName) {\n    // this method is \"attacched\" from Zuix.js on controller initialization\n    return null;\n};\nContextController.prototype.clearCache = function () {\n    this._fieldCache.length = 0;\n};",
     "ctx": {
       "type": "method",
@@ -500,8 +589,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 174,
-    "codeStart": 192,
+    "line": 183,
+    "codeStart": 201,
     "code": "ContextController.prototype.view = function (filter) {\n    // context view changed, dispose cached fields from previous attacched view\n    if (this.context.view() != null || this._view !== this.context.view()) {\n        this.clearCache();\n        // TODO: !!!!\n        // TODO: dispose also events on view change (!!!)\n        // TODO: !!!!\n        this._view = z$(this.context.view());\n    }\n    if (filter != null)\n        return this._view.find(filter);\n    else if (this._view !== null)\n        return this._view;\n    else\n        throw({\n            message: 'Not attacched to a view yet.',\n            source: this\n        });\n};",
     "ctx": {
       "type": "method",
@@ -556,8 +645,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 211,
-    "codeStart": 229,
+    "line": 220,
+    "codeStart": 238,
     "code": "ContextController.prototype.model = function (model) {\n    if (model == null)\n        return this.context.model();\n    else this.context.model(model);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -593,8 +682,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 235,
-    "codeStart": 240,
+    "line": 244,
+    "codeStart": 249,
     "code": "ContextController.prototype.options = function () {\n    return this.context.options();\n};",
     "ctx": {
       "type": "method",
@@ -676,8 +765,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 243,
-    "codeStart": 268,
+    "line": 252,
+    "codeStart": 277,
     "code": "ContextController.prototype.trigger = function (eventPath, eventData, isHook) {\n    if (this.context._eventMap[eventPath] == null && isHook !== true)\n        this.addEvent(eventPath, null);\n    // TODO: ...\n    if (isHook === true) {\n        var target = this.context.container();\n        if (target == null) target = this.context.view();\n        if (target != null)\n            z$(target)\n                .trigger(eventPath, eventData);\n        this.context.trigger(this.context, eventPath, eventData);\n    } else\n        this.view().trigger(eventPath, eventData);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -746,8 +835,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 283,
-    "codeStart": 312,
+    "line": 292,
+    "codeStart": 321,
     "code": "ContextController.prototype.expose = function (methodName, handler) {\n    if (typeof methodName === 'object') {\n        var _t = this;\n        z$.each(methodName, function (k, v) {\n            _t.context[k] = v;\n        });\n    } else this.context[methodName] = handler;\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -801,8 +890,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 321,
-    "codeStart": 343,
+    "line": 330,
+    "codeStart": 352,
     "code": "ContextController.prototype.loadCss = function(options) {\n    this.context.loadCss(options);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -856,8 +945,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 347,
-    "codeStart": 369,
+    "line": 356,
+    "codeStart": 378,
     "code": "ContextController.prototype.loadHtml = function(options) {\n    this.saveView();\n    this.context.loadHtml(options);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -892,8 +981,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 374,
-    "codeStart": 377,
+    "line": 383,
+    "codeStart": 386,
     "code": "ContextController.prototype.log = {};",
     "ctx": {
       "type": "property",
@@ -948,8 +1037,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 378,
-    "codeStart": 395,
+    "line": 387,
+    "codeStart": 404,
     "code": "ContextController.prototype.for = function (componentId) { return this; };\n\nmodule.exports = ContextController;",
     "ctx": {
       "type": "method",

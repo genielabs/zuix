@@ -140,7 +140,7 @@
       },
       {
         "type": "type",
-        "string": "{!Array<ComponentContext>}",
+        "string": "{!Array.<ComponentContext>}",
         "types": [
           "Array.<ComponentContext>"
         ],
@@ -377,7 +377,7 @@
         "string": ""
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{Zuix}",
         "types": [
           "Zuix"
@@ -1474,7 +1474,7 @@
         "optional": false
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{ContextControllerHandler}",
         "types": [
           "ContextControllerHandler"
@@ -1563,14 +1563,13 @@
     "ignore": false,
     "line": 714,
     "codeStart": 736,
-    "code": "Zuix.prototype.controller = controller;",
+    "code": "Zuix.prototype.controller = function(handler) {\n    return controller(handler);\n};",
     "ctx": {
-      "type": "property",
+      "type": "method",
       "constructor": "Zuix",
       "cons": "Zuix",
       "name": "controller",
-      "value": "controller",
-      "string": "Zuix.prototype.controller"
+      "string": "Zuix.prototype.controller()"
     }
   },
   {
@@ -1631,16 +1630,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 737,
-    "codeStart": 760,
-    "code": "Zuix.prototype.field = field;",
+    "line": 739,
+    "codeStart": 762,
+    "code": "Zuix.prototype.field = function(fieldName, container) {\n    return field(fieldName, container);\n};",
     "ctx": {
-      "type": "property",
+      "type": "method",
       "constructor": "Zuix",
       "cons": "Zuix",
       "name": "field",
-      "value": "field",
-      "string": "Zuix.prototype.field"
+      "string": "Zuix.prototype.field()"
     }
   },
   {
@@ -1688,8 +1686,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 761,
-    "codeStart": 778,
+    "line": 765,
+    "codeStart": 782,
     "code": "Zuix.prototype.componentize = function (element) {\n    _componentizer.componentize(element);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -1757,16 +1755,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 782,
-    "codeStart": 822,
-    "code": "Zuix.prototype.load = load;",
+    "line": 786,
+    "codeStart": 826,
+    "code": "Zuix.prototype.load = function(componentId, options) {\n    return load(componentId, options);\n};",
     "ctx": {
-      "type": "property",
+      "type": "method",
       "constructor": "Zuix",
       "cons": "Zuix",
       "name": "load",
-      "value": "load",
-      "string": "Zuix.prototype.load"
+      "string": "Zuix.prototype.load()"
     }
   },
   {
@@ -1814,8 +1811,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 823,
-    "codeStart": 838,
+    "line": 829,
+    "codeStart": 844,
     "code": "Zuix.prototype.unload = function (context) {\n    unload(context);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -1885,16 +1882,15 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 842,
-    "codeStart": 876,
-    "code": "Zuix.prototype.context = context;",
+    "line": 848,
+    "codeStart": 882,
+    "code": "Zuix.prototype.context = function(contextId, callback) {\n    return context(contextId, callback);\n};",
     "ctx": {
-      "type": "property",
+      "type": "method",
       "constructor": "Zuix",
       "cons": "Zuix",
       "name": "context",
-      "value": "context",
-      "string": "Zuix.prototype.context"
+      "string": "Zuix.prototype.context()"
     }
   },
   {
@@ -1951,8 +1947,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 877,
-    "codeStart": 887,
+    "line": 885,
+    "codeStart": 895,
     "code": "Zuix.prototype.createComponent = function(componentId, options) {\n    if (options == null) options = {};\n    if (util.isNoU(options.contextId))\n        options.contextId = 'zuix-ctx-' + (++_contextSeqNum);\n    if (context(options.contextId) != null) {\n        throw ('Context arelady exists.');\n    } else {\n        options.container = document.createElement('div');\n        options.componentId = componentId;\n        _componentizer.applyOptions(options.container, options);\n    }\n    return createContext(options);\n};",
     "ctx": {
       "type": "method",
@@ -2030,8 +2026,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 900,
-    "codeStart": 908,
+    "line": 908,
+    "codeStart": 916,
     "code": "Zuix.prototype.trigger = function (context, eventPath, eventData) {\n    trigger(context, eventPath, eventData);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -2095,8 +2091,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 912,
-    "codeStart": 968,
+    "line": 920,
+    "codeStart": 976,
     "code": "Zuix.prototype.hook = function (eventPath, eventHandler) {\n    hook(eventPath, eventHandler);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -2161,8 +2157,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 972,
-    "codeStart": 979,
+    "line": 980,
+    "codeStart": 987,
     "code": "Zuix.prototype.lazyLoad = function (enable, threshold) {\n    if (enable != null)\n        _componentizer.lazyLoad(enable, threshold);\n    else\n        return _componentizer.lazyLoad();\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -2213,8 +2209,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 986,
-    "codeStart": 992,
+    "line": 994,
+    "codeStart": 1000,
     "code": "Zuix.prototype.httpCaching = function(enable) {\n    if (enable != null)\n        httpCaching(enable);\n    else\n        return httpCaching();\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -2271,6 +2267,17 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{void}",
+        "types": [],
+        "typesDescription": "<code>undefined</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": ""
       }
     ],
     "description": {
@@ -2283,8 +2290,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1001,
-    "codeStart": 1028,
+    "line": 1009,
+    "codeStart": 1037,
     "code": "Zuix.prototype.using = function(resourceType, resourcePath, callback) {\n    resourceType = resourceType.toLowerCase();\n    var hashId = resourceType+'-'+resourcePath.hashCode();\n\n    if (resourceType === 'component') {\n\n        var c = context(hashId);\n        if (c == null) {\n            zuix.load(resourcePath, {\n                contextId: hashId,\n                view: '',\n                priority: -10,\n                ready: function (ctx) {\n                    if (typeof callback === 'function')\n                        callback(resourcePath, ctx);\n                },\n                error: function () {\n                    callback(resourcePath, null);\n                }\n            });\n        } else if (typeof callback === 'function') {\n            // already loaded\n            callback(resourcePath, c);\n        }\n\n    } else {\n\n        var isCss = (resourceType === 'style');\n        if (z$.find(resourceType + '[id=\"' + hashId + '\"]').length() === 0) {\n\n            var head = document.head || document.getElementsByTagName('head')[0];\n            var resource = document.createElement(resourceType);\n            if (isCss) {\n                resource.type = 'text/css';\n                resource.id = hashId;\n            } else {\n                resource.type = 'text/javascript';\n                resource.id = hashId;\n            }\n            head.appendChild(resource);\n\n            // TODO: add logging\n            var addResource = function (text) {\n                // TODO: add logging\n                if (isCss) {\n                    if (resource.styleSheet)\n                        resource.styleSheet.cssText = text;\n                    else\n                        resource.appendChild(document.createTextNode(text));\n                } else {\n                    if (resource.innerText)\n                        resource.innerText = text;\n                    else\n                        resource.appendChild(document.createTextNode(text));\n                }\n                if (callback)\n                    callback(resourcePath, hashId);\n            };\n\n            var cid = '_res/' + resourceType + '/' + hashId;\n            var cached = getCachedComponent(cid);\n            if (cached != null) {\n                addResource(isCss ? cached.css : cached.controller);\n            } else {\n                z$.ajax({\n                    url: resourcePath,\n                    success: function (resText) {\n\n                        // TODO: add logging",
     "ctx": {
       "type": "method",
@@ -2319,8 +2326,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1097,
-    "codeStart": 1098,
+    "line": 1106,
+    "codeStart": 1107,
     "code": "var cached = {\n    componentId: cid,\n    view: null,\n    css: isCss ? resText : null,\n    controller: !isCss ? resText : null,\n    using: resourcePath\n};\n_componentCache.push(cached);\n\naddResource(resText);\n\n                    },\n                    error: function () {\n// TODO: add logging\nhead.removeChild(resource);\nif (callback)\n    callback(resourcePath);\n                    }\n                });\n            }\n\n        } else {\n\n            // TODO: add logging\n            console.log('Resource already added ' + hashId + '(' + resourcePath + ')');\n            if (callback)\n                callback(resourcePath, hashId);\n\n        }\n\n    }\n};",
     "ctx": {
       "type": "declaration",
@@ -2333,16 +2340,16 @@
     "tags": [
       {
         "type": "param",
-        "string": "{Array.<{ view, css, controller }>} bundleData A bundle object holding in memory all components data (cache).",
+        "string": "{!Array.<BundleItem>} bundleData A bundle object holding in memory all components data (cache).",
         "name": "bundleData",
         "description": "A bundle object holding in memory all components data (cache).",
         "types": [
-          "Array.<{ view: *, css: *, controller: * }>"
+          "Array.<BundleItem>"
         ],
-        "typesDescription": "<code>Array</code>.&lt;{ view: <code>*</code>, css: <code>*</code>, controller: <code>*</code> }&gt;",
+        "typesDescription": "!<code>Array</code>.&lt;<a href=\"BundleItem.html\">BundleItem</a>&gt;",
         "optional": false,
         "nullable": false,
-        "nonNullable": false,
+        "nonNullable": true,
         "variable": false
       },
       {
@@ -2361,12 +2368,12 @@
       },
       {
         "type": "return",
-        "string": "{Zuix|Array.<{ view, css, controller }>}",
+        "string": "{Zuix|Array.<BundleItem>}",
         "types": [
           "Zuix",
-          "Array.<{ view: *, css: *, controller: * }>"
+          "Array.<BundleItem>"
         ],
-        "typesDescription": "<a href=\"Zuix.html\">Zuix</a>|<code>Array</code>.&lt;{ view: <code>*</code>, css: <code>*</code>, controller: <code>*</code> }&gt;",
+        "typesDescription": "<a href=\"Zuix.html\">Zuix</a>|<code>Array</code>.&lt;<a href=\"BundleItem.html\">BundleItem</a>&gt;",
         "optional": false,
         "nullable": false,
         "nonNullable": false,
@@ -2384,8 +2391,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1132,
-    "codeStart": 1139,
+    "line": 1141,
+    "codeStart": 1148,
     "code": "Zuix.prototype.bundle = function(bundleData, callback) {\n    if (util.isNoU(bundleData))\n        return _componentCache;\n    else if (bundleData && typeof bundleData === 'boolean') {\n        _log.t('bundle:start');\n        var ll = _componentizer.lazyLoad();\n        _componentizer.lazyLoad(false);\n        _componentizer.componentize();\n        if (typeof callback === 'function') {\n            var waitLoop = function(w) {\n                setTimeout(function () {\n                    if (_componentizer.willLoadMore()) {\n                        _log.t('bundle:wait');\n                        w(w);\n                    } else {\n                        _log.t('bundle:end');\n                        _componentizer.lazyLoad(ll);\n                        callback();\n                    }\n                }, 1000);\n            };\n            waitLoop(waitLoop);\n        }\n    } else {\n        // reset css flag before importing bundle\n        for (var c = 0; c < bundleData.length; c++) {\n            if (bundleData[c].css_applied)\n                delete bundleData[c].css_applied;\n        }\n        _componentCache = bundleData;\n    }\n    return this;\n};\n\nZuix.prototype.$ = z$;\nZuix.prototype.TaskQueue = TaskQueue;\nZuix.prototype.ZxQuery = z$.ZxQuery;\n\nZuix.prototype.dumpCache = function () {\n    return _componentCache;\n};\nZuix.prototype.dumpContexts = function () {\n    return _contextRoot;\n};\n\n// TODO: add zuix.options to configure stuff like\n// TODO: the css/html/js lookup base path (each individually own prop)",
     "ctx": {
       "type": "method",
@@ -2433,8 +2440,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1187,
-    "codeStart": 1191,
+    "line": 1196,
+    "codeStart": 1200,
     "code": "module.exports = function (root) {\n    var zuix = new Zuix();\n    if (document.readyState != 'loading'){\n        zuix.componentize();\n    } else {\n        document.addEventListener('DOMContentLoaded', function () {\n            zuix.componentize();\n        });\n    }\n    // log messages monitor (one global listener)\n    _log.monitor(function (level, args) {\n        if (util.isFunction(zuix.monitor))\n            zuix.monitor(level, Array.prototype.slice.call(args));\n    });\n    return zuix;\n};",
     "ctx": {
       "type": "method",

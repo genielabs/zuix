@@ -33,7 +33,7 @@
     "ignore": false,
     "line": 18,
     "codeStart": 26,
-    "code": "require('./ContextErrorCallback');\nrequire('./ContextReadyCallback');\nrequire('./EventCallback');\nrequire('./EventMapping');",
+    "code": "require('./ContextErrorCallback');\nrequire('./ContextReadyCallback');\nrequire('./EventCallback');",
     "ctx": {
       "type": "method",
       "name": "require",
@@ -126,14 +126,13 @@
       },
       {
         "type": "property",
-        "string": "{Array.<EventMapping>|EventCallback|undefined} on The events handling map.",
+        "string": "{Array.<Object.<string, EventCallback>>|undefined} on The events handling map.",
         "name": "on",
         "description": "The events handling map.",
         "types": [
-          "Array.<EventMapping>",
-          "EventCallback"
+          "Array.<Object.<string, EventCallback>>"
         ],
-        "typesDescription": "<code>Array</code>.&lt;<a href=\"EventMapping.html\">EventMapping</a>&gt;|<a href=\"EventCallback.html\">EventCallback</a>|<code>undefined</code>",
+        "typesDescription": "<code>Array</code>.&lt;<code>Object</code>.&lt;<code>string</code>, <a href=\"EventCallback.html\">EventCallback</a>&gt;&gt;|<code>undefined</code>",
         "optional": true,
         "nullable": false,
         "nonNullable": false,
@@ -141,14 +140,13 @@
       },
       {
         "type": "property",
-        "string": "{Array.<EventMapping>|EventCallback|undefined} behavior The behaviors handling map.",
+        "string": "{Array.<Object.<string, EventCallback>>|undefined} behavior The behaviors handling map.",
         "name": "behavior",
         "description": "The behaviors handling map.",
         "types": [
-          "Array.<EventMapping>",
-          "EventCallback"
+          "Array.<Object.<string, EventCallback>>"
         ],
-        "typesDescription": "<code>Array</code>.&lt;<a href=\"EventMapping.html\">EventMapping</a>&gt;|<a href=\"EventCallback.html\">EventCallback</a>|<code>undefined</code>",
+        "typesDescription": "<code>Array</code>.&lt;<code>Object</code>.&lt;<code>string</code>, <a href=\"EventCallback.html\">EventCallback</a>&gt;&gt;|<code>undefined</code>",
         "optional": true,
         "nullable": false,
         "nonNullable": false,
@@ -265,8 +263,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 31,
-    "codeStart": 49
+    "line": 30,
+    "codeStart": 48
   },
   {
     "tags": [],
@@ -280,8 +278,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 50,
-    "codeStart": 51,
+    "line": 49,
+    "codeStart": 50,
     "code": "module.exports = function (root) {\n    // dummy module for JsDocs/Closure Compiler\n    return null;\n};",
     "ctx": {
       "type": "method",

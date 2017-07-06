@@ -67,7 +67,7 @@
         "variable": false
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{ComponentContext} The component context instance.",
         "types": [
           "ComponentContext"
@@ -390,6 +390,11 @@
   {
     "tags": [
       {
+        "type": "protected",
+        "string": "",
+        "visibility": "protected"
+      },
+      {
         "type": "type",
         "string": "{ContextController}",
         "types": [
@@ -403,8 +408,8 @@
       }
     ],
     "description": {
-      "full": "--@-protected",
-      "summary": "--@-protected",
+      "full": "",
+      "summary": "",
       "body": ""
     },
     "isPrivate": false,
@@ -440,7 +445,7 @@
         "variable": false
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{ComponentContext|Element}",
         "types": [
           "ComponentContext",
@@ -493,7 +498,7 @@
         "variable": false
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{ComponentContext|Element}",
         "types": [
           "ComponentContext",
@@ -567,7 +572,7 @@
         "variable": false
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{ComponentContext|Element}",
         "types": [
           "ComponentContext",
@@ -623,7 +628,7 @@
         "variable": false
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{ComponentContext|object}",
         "types": [
           "ComponentContext",
@@ -679,7 +684,7 @@
         "variable": false
       },
       {
-        "type": "returns",
+        "type": "return",
         "string": "{ComponentContext|ContextControllerHandler}",
         "types": [
           "ComponentContext",
