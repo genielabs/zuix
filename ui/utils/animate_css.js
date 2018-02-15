@@ -1,7 +1,7 @@
 /**
  * ZUIX - AnimateCSS extension for {ZxQuery} objects
  *
- * @version 1.0.1 (2017-06-16)
+ * @version 1.0.2 (2018-02-10)
  * @author Gene
  *
  */
@@ -34,11 +34,19 @@ zuix.controller(function (cp) {
         if (typeof param2 === 'function') {
             options = param1;
             callback = param2;
-        } else {
-            if (typeof param1 === 'function')
-                callback = param1;
-            else options = param1;
+        } else if (typeof param1 === 'function') {
+            callback = param1;
         }
+        if (typeof animationName !== 'string') {
+            if (typeof animationName === 'function') {
+                callback = animationName;
+            } else {
+                options = animationName;
+            }
+            animationName = '';
+        } else options = param1;
+
+        // TODO: should run all the following code for each element in the ZxQuery selection
 
         var prefixes = ['-webkit', '-moz', '-o', '-ms'];
         for (var key in options)
@@ -47,18 +55,17 @@ zuix.controller(function (cp) {
         var animationEnd = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
         var _t = this;
 
-        if (typeof animationName !== 'function') {
-            // stops any previously running animation
-            if (this.hasClass('animated')) {
-                this.css('transition', ''); // TODO: <-- is this really needed?
-                this.trigger('animationend');
-            }
-            // TODO: should run all the following code for each element in the ZxQuery selection
-            this.addClass('animated ' + animationName);
-        } else callback = animationName;
-
+        // stops any previously running animation
+        if (this.hasClass('animated')) {
+            this.css('transition', ''); // TODO: <-- is this really needed?
+            this.trigger('animationend');
+        }
+        this.addClass('animated ' + animationName);
+        // add event listener for animation end
         this.one(animationEnd, function () {
-            this.removeClass('animated ' + animationName);
+            if (animationName !== '') {
+                this.removeClass('animated ' + animationName);
+            }
             for(var key in options)
                 for (var p in prefixes)
                     _t.css(prefixes[p] + '-animation-' + key, '');
