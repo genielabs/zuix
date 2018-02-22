@@ -187,10 +187,31 @@ function routeCurrentUrl(path) {
         var a = p.find('a[id=' + pageAnchor+']');
         if (a.length() > 0) {
             setTimeout(function () {
-                zuix.$.scrollTo(p.get(), a.position().y);
+                scrollTo(p.get(), p.get().scrollTop+a.position().y-80, 750);
             }, 500);
         }
     } //else p.get().scrollTop = 0;
+}
+
+var scrollEndTs, scrollInterval;
+function scrollTo(element, to, duration) {
+    if (scrollInterval != null) {
+        clearTimeout(scrollInterval);
+    }
+    var currentTs = Date.now();
+    if (duration != null) {
+        scrollEndTs = currentTs + duration;
+    }
+    duration = scrollEndTs-currentTs;
+    var difference = to - element.scrollTop;
+    if (duration <= 0) {
+        element.scrollTop = to;
+        return;
+    }
+    scrollInterval = setTimeout(function() {
+        element.scrollTop = element.scrollTop + (difference / (duration/10));
+        scrollTo(element, to);
+    });
 }
 
 function revealMainPage() {

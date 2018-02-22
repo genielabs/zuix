@@ -63,7 +63,7 @@ zuix.controller(function (cp) {
         } else cp.field('container-properties').hide();
 
         // Custom types and callbacks used in this class
-        if (data.types != null && data.types.length > 0) {
+        if ((data.types != null && data.types.length > 0) || (data.callbacks != null && data.callbacks.length > 0)) {
 
             html = '';
 

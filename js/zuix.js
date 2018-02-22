@@ -540,6 +540,7 @@ var util = _dereq_('./Util.js');
 
 /**
  * The `ElementPosition` object returned by the `position()` method.
+ *
  * @typedef {object} ElementPosition
  * @property {number} x X coordinate of the element in the viewport.
  * @property {number} y Y coordinate of the element in the viewport.
@@ -548,6 +549,8 @@ var util = _dereq_('./Util.js');
 
 /**
  * The `IterationCallback` function.
+ *
+ * @private
  * @callback IterationCallback
  * @param {number} i Iteration count.
  * @param {object} item Current element.
@@ -555,8 +558,9 @@ var util = _dereq_('./Util.js');
  */
 
 /**
- * The `InstanceIterationCallback` function.
- * @callback InstanceIterationCallback
+ * Callback function used with the `each(..)` method.
+ *
+ * @callback ElementsIterationCallback
  * @param {number} count Iteration count.
  * @param {Element} item Current element.
  * @this {ZxQuery}
@@ -733,7 +737,7 @@ ZxQuery.prototype.find = function (selector) {
  * instance wrapping the current `item`.
  *
  * If the callback returns *false*, the iteration loop will interrupt.
- * @param {InstanceIterationCallback} iterationCallback The callback *fn* to call at each iteration
+ * @param {ElementsIterationCallback} iterationCallback The callback *fn* to call for each element in the selection
  * @return {ZxQuery} The *ZxQuery* object itself
  */
 ZxQuery.prototype.each = function (iterationCallback) {
@@ -1343,41 +1347,6 @@ z$.isInView = function (el, tolerance) {
         && rect.left < area.width + xt
         && rect.top < area.height + yt;
 };
-z$.scrollTo = function(el, targetY, duration) {
-    if (targetY === 0 || targetY == null)
-        return;
-    if (duration == null) duration = 500;
-    var scrollParent = z$.getScrollParent(el);
-    var scrollTop = scrollParent.scrollTop+targetY;
-    var scrollOffset = el.scrollTop-targetY;
-    scrollParent.style.transition = 'transform '+duration+'ms ease';
-    if (typeof scrollParent.style.WebkitTransform !== 'undefined')
-        scrollParent.style.WebkitTransform = "translate(0, " + (scrollOffset) + "px)";
-    else if (typeof scrollParent.style.MozTransform !== 'undefined')
-        scrollParent.style.MozTransform= "translate(0, " + (scrollOffset) + "px)";
-    else
-        scrollParent.style.transform = "translate(0, " + (scrollOffset) + "px)";
-    window.setTimeout(function () {
-        // TODO: should backup and restore old value
-        if (typeof scrollParent.style.WebkitTransform !== 'undefined')
-            scrollParent.style.WebkitTransform = "";
-        else if (typeof scrollParent.style.MozTransform !== 'undefined')
-            scrollParent.style.MozTransform= "";
-        else
-            scrollParent.style.transform = "";
-        scrollParent.style.transition = '';
-        scrollParent.scrollTop = scrollTop;
-    }, duration);
-    return this;
-};
-z$.getScrollParent = function(node) {
-    if (node == null)
-        return null;
-    if (node.scrollHeight > node.clientHeight)
-        return node;
-    else
-        return z$.getScrollParent(node.parentNode);
-};
 
 z$.ZxQuery = ZxQuery;
 
@@ -1565,31 +1534,6 @@ var util =
 // Custom objects definition used to generate JsDoc
 
 /**
- * TODO: describe this...
- *
- * @callback ContextErrorCallback
- * @param {Object} error
- * @this {ComponentContext}
- */
-
-/**
- * TODO: describe this...
- *
- * @callback ContextReadyCallback
- * @param {ComponentContext} ctx The component context.
- * @this {ComponentContext}
- */
-
-/**
- * TODO: describe this...
- *
- * @callback EventCallback
- * @param {string} event Event name.
- * @param {Object} data Event data.
- * @this {ZxQuery}
- */
-
-/**
  * The `ContextOptions` object can be supplied when loading a component. It can be either used as argument for the
  * `zuix.load(...)` method in the javascript code, or in the `data-ui-options` attribute of the component's container
  * HTML code.
@@ -1609,6 +1553,31 @@ var util =
  * @property {number|undefined} priority Loading priority (**default:** 0).
  * @property {ContextReadyCallback|undefined} ready The ready callback, called once the component is succesfully loaded.
  * @property {ContextErrorCallback|undefined} error The error callback, called when error occurs.
+ */
+
+/**
+ * Callback function called if an error occurs when loading a component.
+ *
+ * @callback ContextErrorCallback
+ * @param {Object} error
+ * @this {ComponentContext}
+ */
+
+/**
+ * Callback function called when a component has been successfully loaded.
+ *
+ * @callback ContextReadyCallback
+ * @param {ComponentContext} ctx The component context.
+ * @this {ComponentContext}
+ */
+
+/**
+ * Callback function called when an event registered with the `on` method occurs.
+ *
+ * @callback EventCallback
+ * @param {string} event Event name.
+ * @param {Object} data Event data.
+ * @this {ZxQuery}
  */
 
 /***
@@ -2623,7 +2592,7 @@ var z$ =
  * and it is used to initialize the component's controller.
  *
  * @callback ContextControllerHandler
- * @param {ContextController} cp The context controller instance.
+ * @param {ContextController} cp The context controller object.
  * @this {ContextController}
  */
 
@@ -2747,6 +2716,8 @@ ContextController.prototype.addBehavior = function (eventPath, handler_fn) {
 /**
  * Gets elements in the component's view with `data-ui-field`
  * matching the given `fieldName`.
+ * This method implements a caching mechanism and automatic
+ * disposal of allocated objects and events.
  *
  * @example
  *
@@ -2781,6 +2752,7 @@ ContextController.prototype.clearCache = function () {
  * `cp.view().find(filter)`.
  *
  * @example
+ *
  * <small>Example - JavaScript</small>
  * <pre><code class="language-js">
  * // get all `checkbox` elements with `.checked` class.
@@ -2816,6 +2788,7 @@ ContextController.prototype.view = function (filter) {
  * Gets/Sets the component's data model.
  *
  * @example
+ *
  * <small>Example - JavaScript</small>
  * <pre><code class="language-js">
  * var m = {
@@ -2852,6 +2825,7 @@ ContextController.prototype.options = function () {
  * `zuix.hook(eventPath, handler)` method.
  *
  * @example
+ *
  * <small>Example - JavaScript</small>
  * <pre><code class="language-js">
 // somewhere inside the slide-show component controller
@@ -2889,6 +2863,7 @@ ContextController.prototype.trigger = function (eventPath, eventData, isHook) {
  *  defined in the controller.
  *
  * @example
+ *
  * <small>Example - JavaScript</small>
  * <pre data-line="5"><code class="language-js">
  * // somewhere in the `create` method of the {ContextController}
@@ -2928,6 +2903,7 @@ ContextController.prototype.expose = function (methodName, handler) {
  * the file with the same base-name as the `componentId`.
  *
  * @example
+ *
  * <small>Example - JavaScript</small>
  * <pre><code class="language-js">
  * // loads 'path/to/component_name.css' by default
@@ -2954,6 +2930,7 @@ ContextController.prototype.loadCss = function(options) {
  * file with the same base-name as the `componentId`.
  *
  * @example
+ *
  * <small>Example - JavaScript</small>
  * <pre><code class="language-js">
  * // loads 'path/to/component_name.html' by default
@@ -2983,6 +2960,7 @@ ContextController.prototype.log = {};
  * Register as default controller for the given component type.
  *
  * @example
+ *
 <small>**Example - JavaScript**</small>
 <pre data-line="6"><code class="language-js">
 // Controller of component 'path/to/component_name'
@@ -3712,7 +3690,7 @@ function replaceCache(c) {
 <small>**Example - JavaScript**</small>
 <pre data-line="2"><code class="language-js">
 // Allocates the controller handler to be used for the component 'path/to/component_name'
-var componentContext = zuix.controller(function(cp) {
+var ctrl = zuix.controller(function(cp) {
     // `cp` is the {ContextController}
     cp.create = function() { ... };
     cp.destroy = function() { ... }
@@ -3728,6 +3706,8 @@ Zuix.prototype.controller = function(handler) {
 /**
  * Searches in the document or inside the provided `container` for elements with `data-ui-field`
  * attribute matching the given `fieldName`.
+ * This method implements a caching mechanism and automatic
+ * disposal of allocated objects and events.
  *
  * @example
  *
@@ -3754,7 +3734,7 @@ Zuix.prototype.field = function(fieldName, container) {
 /**
  * Searches in the document or inside the given element ```element```
  * for all ```data-ui-include``` and ```data-ui-load``` directives
- * and process them by loading the requested components.
+ * and process these by loading the requested components.
  * This is a service function that should only be called if dynamically
  * adding content with elements that contain *load* or *include* directives.
  *
@@ -3837,6 +3817,7 @@ Zuix.prototype.unload = function (context) {
  * The `contextId` is the one specified by the `ContextOptions` object or by using the HTML attribute `data-ui-context`.
  *
  * @example
+ *
 <small>**Example - HTML**</small>
 ```html
 <div data-ui-load="site/components/slideshow"
@@ -3907,6 +3888,8 @@ Zuix.prototype.trigger = function (context, eventPath, eventData) {
  * Register a callback for a ZUIX global event (AKA hook).
  * There can be only one callback for each different type of global event.
  * Pass null as <eventHandler> to unregister a previously registered callback.
+ *
+ * @example
  *
 <small>**Example - JavaScript**</small>
 ```js

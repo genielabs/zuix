@@ -1521,61 +1521,6 @@
     "tags": [
       {
         "type": "example",
-        "string": "\n<small>**Example - JavaScript**</small>\n<pre data-line=\"2\"><code class=\"language-js\">\n// Allocates the controller handler to be used for the component 'path/to/component_name'\nvar componentContext = zuix.controller(function(cp) {\n    // `cp` is the {ContextController}\n    cp.create = function() { ... };\n    cp.destroy = function() { ... }\n}).for('path/to/component_name');\n</code></pre>"
-      },
-      {
-        "type": "param",
-        "string": "{ContextControllerHandler} handler Function called to initialize the component's controller that will be passed as argument of this function.",
-        "name": "handler",
-        "description": "Function called to initialize the component's controller that will be passed as argument of this function.",
-        "types": [
-          "ContextControllerHandler"
-        ],
-        "typesDescription": "<a href=\"ContextControllerHandler.html\">ContextControllerHandler</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "return",
-        "string": "{ContextControllerHandler} The allocated controller handler.",
-        "types": [
-          "ContextControllerHandler"
-        ],
-        "typesDescription": "<a href=\"ContextControllerHandler.html\">ContextControllerHandler</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "description": "The allocated controller handler."
-      }
-    ],
-    "description": {
-      "full": "Allocates a component's controller handler. The provided `handler` function will be called\nto initialize the controller object once the component has been loaded.",
-      "summary": "Allocates a component's controller handler. The provided `handler` function will be called\nto initialize the controller object once the component has been loaded.",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 704,
-    "codeStart": 723,
-    "code": "Zuix.prototype.controller = function(handler) {\n    return controller.call(this, handler);\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Zuix",
-      "cons": "Zuix",
-      "name": "controller",
-      "string": "Zuix.prototype.controller()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "example",
         "string": "\n<small>**Example - HTML**</small>\n```html\n<div data-ui-field=\"container-div\">\n   <!-- container HTML -->\n</div>\n```\n\n<small>**Example - JavaScript**</small>\n```js\nvar containerDiv = zuix.field('container-div');\ncontainerDiv.html('Hello World!');\n```"
       },
       {
@@ -1621,8 +1566,8 @@
       }
     ],
     "description": {
-      "full": "Searches in the document or inside the provided `container` for elements with `data-ui-field`\nattribute matching the given `fieldName`.",
-      "summary": "Searches in the document or inside the provided `container` for elements with `data-ui-field`\nattribute matching the given `fieldName`.",
+      "full": "Searches in the document or inside the provided `container` for elements with `data-ui-field`\nattribute matching the given `fieldName`.\nThis method implements a caching mechanism and automatic\ndisposal of allocated objects and events.",
+      "summary": "Searches in the document or inside the provided `container` for elements with `data-ui-field`\nattribute matching the given `fieldName`.\nThis method implements a caching mechanism and automatic\ndisposal of allocated objects and events.",
       "body": ""
     },
     "isPrivate": false,
@@ -1630,8 +1575,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 726,
-    "codeStart": 749,
+    "line": 704,
+    "codeStart": 729,
     "code": "Zuix.prototype.field = function(fieldName, container) {\n    return field.call(this, fieldName, container);\n};",
     "ctx": {
       "type": "method",
@@ -1639,62 +1584,6 @@
       "cons": "Zuix",
       "name": "field",
       "string": "Zuix.prototype.field()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "example",
-        "string": "\n<small>**Example - JavaScript**</small>\n```js\nzuix.componentize(document);\n```"
-      },
-      {
-        "type": "param",
-        "string": "{Element|ZxQuery} [element] Container to use as starting node for the search (**default:** *document*).",
-        "name": "[element]",
-        "description": "Container to use as starting node for the search (**default:** *document*).",
-        "types": [
-          "Element",
-          "ZxQuery"
-        ],
-        "typesDescription": "<code>Element</code>|<a href=\"ZxQuery.html\">ZxQuery</a>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "return",
-        "string": "{Zuix} The ```{Zuix}``` object itself.",
-        "types": [
-          "Zuix"
-        ],
-        "typesDescription": "<a href=\"Zuix.html\">Zuix</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "description": "The ```{Zuix}``` object itself."
-      }
-    ],
-    "description": {
-      "full": "Searches in the document or inside the given element ```element```\nfor all ```data-ui-include``` and ```data-ui-load``` directives\nand process them by loading the requested components.\nThis is a service function that should only be called if dynamically\nadding content with elements that contain *load* or *include* directives.",
-      "summary": "Searches in the document or inside the given element ```element```\nfor all ```data-ui-include``` and ```data-ui-load``` directives\nand process them by loading the requested components.\nThis is a service function that should only be called if dynamically\nadding content with elements that contain *load* or *include* directives.",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 752,
-    "codeStart": 769,
-    "code": "Zuix.prototype.componentize = function (element) {\n    _componentizer.componentize(element);\n    return this;\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Zuix",
-      "cons": "Zuix",
-      "name": "componentize",
-      "string": "Zuix.prototype.componentize()"
     }
   },
   {
@@ -1755,8 +1644,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 773,
-    "codeStart": 812,
+    "line": 732,
+    "codeStart": 771,
     "code": "Zuix.prototype.load = function(componentId, options) {\n    return load.call(this, componentId, options);\n};",
     "ctx": {
       "type": "method",
@@ -1811,8 +1700,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 815,
-    "codeStart": 829,
+    "line": 774,
+    "codeStart": 788,
     "code": "Zuix.prototype.unload = function (context) {\n    unload(context);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -1826,7 +1715,62 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>**Example - HTML**</small>\n```html\n<div data-ui-load=\"site/components/slideshow\"\n     data-ui-context=\"my-slide-show\">...</div>\n```\n<small>**Example - JavaScript**</small>\n```js\nvar slideShowDiv = zuix.$.find('[data-ui-context=\"my-slide-show\"]');\nvar ctx = zuix.context(slideShowDiv);\n// or\nvar ctx = zuix.context('my-slide-show');\n// call component's exposed methods\nctx.setSlide(1);\n// or\nvar ctx;\nzuix.context('my-slide-show', function(c) {\n    // call component's methods\n    c.setSlide(1);\n    // eventually store a reference to the component for later use\n    ctx = c;\n});\n```"
+        "string": "\n <small>**Example - JavaScript**</small>\n <pre data-line=\"2\"><code class=\"language-js\">\n // Allocates the controller handler to be used for the component 'path/to/component_name'\n var ctrl = zuix.controller(function(cp) {\n    // `cp` is the {ContextController}\n    cp.create = function() { ... };\n    cp.destroy = function() { ... }\n}).for('path/to/component_name');\n </code></pre>"
+      },
+      {
+        "type": "param",
+        "string": "{ContextControllerHandler} handler Function called to initialize the component's controller that will be passed as argument of this function.",
+        "name": "handler",
+        "description": "Function called to initialize the component's controller that will be passed as argument of this function.",
+        "types": [
+          "ContextControllerHandler"
+        ],
+        "typesDescription": "<a href=\"ContextControllerHandler.html\">ContextControllerHandler</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{ContextControllerHandler} The allocated controller handler.",
+        "types": [
+          "ContextControllerHandler"
+        ],
+        "typesDescription": "<a href=\"ContextControllerHandler.html\">ContextControllerHandler</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "The allocated controller handler."
+      }
+    ],
+    "description": {
+      "full": "Allocates a component's controller handler. The provided `handler` function will be called\nto initialize the controller object once the component has been loaded.",
+      "summary": "Allocates a component's controller handler. The provided `handler` function will be called\nto initialize the controller object once the component has been loaded.",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 792,
+    "codeStart": 811,
+    "code": "Zuix.prototype.controller = function(handler) {\n    return controller.call(this, handler);\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zuix",
+      "cons": "Zuix",
+      "name": "controller",
+      "string": "Zuix.prototype.controller()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "\n<small>**Example - HTML**</small>\n```html\n<div data-ui-load=\"site/components/slideshow\"\n     data-ui-context=\"my-slide-show\">...</div>\n```\n<small>**Example - JavaScript**</small>\n```js\nvar slideShowDiv = zuix.$.find('[data-ui-context=\"my-slide-show\"]');\nvar ctx = zuix.context(slideShowDiv);\n// or\nvar ctx = zuix.context('my-slide-show');\n// call component's exposed methods\nctx.setSlide(1);\n// or\nvar ctx;\nzuix.context('my-slide-show', function(c) {\n    // call component's methods\n    c.setSlide(1);\n    // eventually store a reference to the component for later use\n    ctx = c;\n});\n```"
       },
       {
         "type": "param",
@@ -1882,8 +1826,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 833,
-    "codeStart": 866,
+    "line": 814,
+    "codeStart": 848,
     "code": "Zuix.prototype.context = function(contextId, callback) {\n    return context.call(this, contextId, callback);\n};",
     "ctx": {
       "type": "method",
@@ -1947,8 +1891,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 869,
-    "codeStart": 879,
+    "line": 851,
+    "codeStart": 861,
     "code": "Zuix.prototype.createComponent = function(componentId, options) {\n    if (options == null) options = {};\n    if (util.isNoU(options.contextId))\n        options.contextId = 'zuix-ctx-' + (++_contextSeqNum);\n    if (context(options.contextId) != null) {\n        throw ('Context arelady exists.');\n    } else {\n        options.container = document.createElement('div');\n        options.componentId = componentId;\n        _componentizer.applyOptions(options.container, options);\n    }\n    return createContext(options);\n};",
     "ctx": {
       "type": "method",
@@ -2026,8 +1970,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 892,
-    "codeStart": 900,
+    "line": 874,
+    "codeStart": 882,
     "code": "Zuix.prototype.trigger = function (context, eventPath, eventData) {\n    trigger(context, eventPath, eventData);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -2039,6 +1983,10 @@
   },
   {
     "tags": [
+      {
+        "type": "example",
+        "string": "\n<small>**Example - JavaScript**</small>\n```js\n// The context `this` in the event handlers will be\n// the {ComponentContext} object that sourced the event.\n// The `data` parameter passed to the handlers, is of\n// variant type, depending on the type of the occurring event.\nzuix\n  .hook('load:begin', function(data){\n    loaderMessage.html('Loading \"'+data.task+'\" ...');\n    loaderMessage.show();\n\n}).hook('load:next', function(data){\n    loaderMessage.html('\"'+data.task+'\" done, loading next..');\n\n}).hook('load:end', function(){\n    loaderMessage.hide();\n\n}).hook('html:parse', function (data) {\n    // ShowDown - MarkDown syntax compiler\n    if (this.options().markdown === true && typeof showdown !== 'undefined')\n        data.content = new showdown.Converter()\n            .makeHtml(data.content);\n\n}).hook('css:parse', function (data) {\n    // process css, eg. run a CSS pre-processor\n    // eg. Sass, Less, ...\n\n}).hook('view:process', function (view) {\n    // The view DOM is now fully loaded and ready\n\n    // Prism code syntax highlighter\n    view.find('code').each(function (i, block) {\n        this.addClass('language-javascript');\n        Prism.highlightElement(block);\n    });\n\n    // Force opening of all non-local links in a new window\n    zuix.$('a[href*=\"://\"]').attr('target','_blank');\n\n    // Material Design Light auto-detection\n    // Call DOM upgrade on newly added view elements\n    if (componentHandler)\n        componentHandler.upgradeElements(view.get());\n\n});\n```"
+      },
       {
         "type": "param",
         "string": "{string} eventPath The event path.",
@@ -2082,17 +2030,17 @@
       }
     ],
     "description": {
-      "full": "Register a callback for a ZUIX global event (AKA hook).\nThere can be only one callback for each different type of global event.\nPass null as <eventHandler> to unregister a previously registered callback.\n\n<small>**Example - JavaScript**</small>\n```js\n// The context `this` in the event handlers will be\n// the {ComponentContext} object that sourced the event.\n// The `data` parameter passed to the handlers, is of\n// variant type, depending on the type of the occurring event.\nzuix\n  .hook('load:begin', function(data){\n    loaderMessage.html('Loading \"'+data.task+'\" ...');\n    loaderMessage.show();\n\n}).hook('load:next', function(data){\n    loaderMessage.html('\"'+data.task+'\" done, loading next..');\n\n}).hook('load:end', function(){\n    loaderMessage.hide();\n\n}).hook('html:parse', function (data) {\n    // ShowDown - MarkDown syntax compiler\n    if (this.options().markdown === true && typeof showdown !== 'undefined')\n        data.content = new showdown.Converter()\n            .makeHtml(data.content);\n\n}).hook('css:parse', function (data) {\n    // process css, eg. run a CSS pre-processor\n    // eg. Sass, Less, ...\n\n}).hook('view:process', function (view) {\n    // The view DOM is now fully loaded and ready\n\n    // Prism code syntax highlighter\n    view.find('code').each(function (i, block) {\n        this.addClass('language-javascript');\n        Prism.highlightElement(block);\n    });\n\n    // Force opening of all non-local links in a new window\n    zuix.$('a[href*=\"://\"]').attr('target','_blank');\n\n    // Material Design Light auto-detection\n    // Call DOM upgrade on newly added view elements\n    if (componentHandler)\n        componentHandler.upgradeElements(view.get());\n\n});\n```",
+      "full": "Register a callback for a ZUIX global event (AKA hook).\nThere can be only one callback for each different type of global event.\nPass null as <eventHandler> to unregister a previously registered callback.",
       "summary": "Register a callback for a ZUIX global event (AKA hook).\nThere can be only one callback for each different type of global event.\nPass null as <eventHandler> to unregister a previously registered callback.",
-      "body": "<small>**Example - JavaScript**</small>\n```js\n// The context `this` in the event handlers will be\n// the {ComponentContext} object that sourced the event.\n// The `data` parameter passed to the handlers, is of\n// variant type, depending on the type of the occurring event.\nzuix\n  .hook('load:begin', function(data){\n    loaderMessage.html('Loading \"'+data.task+'\" ...');\n    loaderMessage.show();\n\n}).hook('load:next', function(data){\n    loaderMessage.html('\"'+data.task+'\" done, loading next..');\n\n}).hook('load:end', function(){\n    loaderMessage.hide();\n\n}).hook('html:parse', function (data) {\n    // ShowDown - MarkDown syntax compiler\n    if (this.options().markdown === true && typeof showdown !== 'undefined')\n        data.content = new showdown.Converter()\n            .makeHtml(data.content);\n\n}).hook('css:parse', function (data) {\n    // process css, eg. run a CSS pre-processor\n    // eg. Sass, Less, ...\n\n}).hook('view:process', function (view) {\n    // The view DOM is now fully loaded and ready\n\n    // Prism code syntax highlighter\n    view.find('code').each(function (i, block) {\n        this.addClass('language-javascript');\n        Prism.highlightElement(block);\n    });\n\n    // Force opening of all non-local links in a new window\n    zuix.$('a[href*=\"://\"]').attr('target','_blank');\n\n    // Material Design Light auto-detection\n    // Call DOM upgrade on newly added view elements\n    if (componentHandler)\n        componentHandler.upgradeElements(view.get());\n\n});\n```"
+      "body": ""
     },
     "isPrivate": false,
     "isConstructor": false,
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 904,
-    "codeStart": 960,
+    "line": 886,
+    "codeStart": 944,
     "code": "Zuix.prototype.hook = function (eventPath, eventHandler) {\n    hook(eventPath, eventHandler);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -2100,124 +2048,6 @@
       "cons": "Zuix",
       "name": "hook",
       "string": "Zuix.prototype.hook()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "string": "{boolean} [enable] Enable or disable lazy loading.",
-        "name": "[enable]",
-        "description": "Enable or disable lazy loading.",
-        "types": [
-          "boolean"
-        ],
-        "typesDescription": "<code>boolean</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{number} [threshold] Load-ahead threshold (default is 1.0 => 100% of view size).",
-        "name": "[threshold]",
-        "description": "Load-ahead threshold (default is 1.0 => 100% of view size).",
-        "types": [
-          "number"
-        ],
-        "typesDescription": "<code>number</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "return",
-        "string": "{Zuix|boolean} *true* if lazy-loading is enabled, *false* otherwise.",
-        "types": [
-          "Zuix",
-          "boolean"
-        ],
-        "typesDescription": "<a href=\"Zuix.html\">Zuix</a>|<code>boolean</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "description": "*true* if lazy-loading is enabled, *false* otherwise."
-      }
-    ],
-    "description": {
-      "full": "Enable/Disable lazy-loading or get current setting.",
-      "summary": "Enable/Disable lazy-loading or get current setting.",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 964,
-    "codeStart": 971,
-    "code": "Zuix.prototype.lazyLoad = function (enable, threshold) {\n    if (enable != null)\n        _componentizer.lazyLoad(enable, threshold);\n    else\n        return _componentizer.lazyLoad();\n    return this;\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Zuix",
-      "cons": "Zuix",
-      "name": "lazyLoad",
-      "string": "Zuix.prototype.lazyLoad()"
-    }
-  },
-  {
-    "tags": [
-      {
-        "type": "param",
-        "string": "{boolean} [enable]",
-        "name": "[enable]",
-        "description": "",
-        "types": [
-          "boolean"
-        ],
-        "typesDescription": "<code>boolean</code>",
-        "optional": true,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "return",
-        "string": "{Zuix|boolean} *true* if HTTP caching is enabled, *false* otherwise.",
-        "types": [
-          "Zuix",
-          "boolean"
-        ],
-        "typesDescription": "<a href=\"Zuix.html\">Zuix</a>|<code>boolean</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false,
-        "description": "*true* if HTTP caching is enabled, *false* otherwise."
-      }
-    ],
-    "description": {
-      "full": "Enable/Disable HTTP caching or get current settings.",
-      "summary": "Enable/Disable HTTP caching or get current settings.",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 978,
-    "codeStart": 984,
-    "code": "Zuix.prototype.httpCaching = function(enable) {\n    if (enable != null)\n        httpCaching(enable);\n    else\n        return httpCaching();\n    return this;\n};",
-    "ctx": {
-      "type": "method",
-      "constructor": "Zuix",
-      "cons": "Zuix",
-      "name": "httpCaching",
-      "string": "Zuix.prototype.httpCaching()"
     }
   },
   {
@@ -2290,8 +2120,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 993,
-    "codeStart": 1023,
+    "line": 948,
+    "codeStart": 978,
     "code": "Zuix.prototype.using = function(resourceType, resourcePath, callback) {\n    resourceType = resourceType.toLowerCase();\n    var hashId = resourceType+'-'+resourcePath.hashCode();\n\n    if (resourceType === 'component') {\n\n        var c = context(hashId);\n        if (c == null) {\n            zuix.load(resourcePath, {\n                contextId: hashId,\n                view: '',\n                priority: -10,\n                ready: function (ctx) {\n                    if (typeof callback === 'function')\n                        callback(resourcePath, ctx);\n                },\n                error: function () {\n                    callback(resourcePath, null);\n                }\n            });\n        } else if (typeof callback === 'function') {\n            // already loaded\n            callback(resourcePath, c);\n        }\n\n    } else {\n\n        var isCss = (resourceType === 'style');\n        if (z$.find(resourceType + '[id=\"' + hashId + '\"]').length() === 0) {\n\n            var head = document.head || document.getElementsByTagName('head')[0];\n            var resource = document.createElement(resourceType);\n            if (isCss) {\n                resource.type = 'text/css';\n                resource.id = hashId;\n            } else {\n                resource.type = 'text/javascript';\n                resource.id = hashId;\n            }\n            head.appendChild(resource);\n\n            // TODO: add logging\n            var addResource = function (text) {\n                // TODO: add logging\n                if (isCss) {\n                    if (resource.styleSheet)\n                        resource.styleSheet.cssText = text;\n                    else\n                        resource.appendChild(document.createTextNode(text));\n                } else {\n                    if (resource.innerText)\n                        resource.innerText = text;\n                    else\n                        resource.appendChild(document.createTextNode(text));\n                }\n                if (callback)\n                    callback(resourcePath, hashId);\n            };\n\n            var cid = '_res/' + resourceType + '/' + hashId;\n            var cached = getCachedComponent(cid);\n            if (cached != null) {\n                addResource(isCss ? cached.css : cached.controller);\n            } else {\n                z$.ajax({\n                    url: resourcePath,\n                    success: function (resText) {\n\n                        // TODO: add logging",
     "ctx": {
       "type": "method",
@@ -2326,14 +2156,188 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1092,
-    "codeStart": 1093,
+    "line": 1047,
+    "codeStart": 1048,
     "code": "var cached = {\n    componentId: cid,\n    view: null,\n    css: isCss ? resText : null,\n    controller: !isCss ? resText : null,\n    using: resourcePath\n};\n_componentCache.push(cached);\n\naddResource(resText);\n\n                    },\n                    error: function () {\n// TODO: add logging\nhead.removeChild(resource);\nif (callback)\n    callback(resourcePath);\n                    }\n                });\n            }\n\n        } else {\n\n            // TODO: add logging\n            console.log('Resource already added ' + hashId + '(' + resourcePath + ')');\n            if (callback)\n                callback(resourcePath, hashId);\n\n        }\n\n    }\n};",
     "ctx": {
       "type": "declaration",
       "name": "cached",
       "value": "{",
       "string": "cached"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{boolean} [enable] Enable or disable lazy loading.",
+        "name": "[enable]",
+        "description": "Enable or disable lazy loading.",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{number} [threshold] Load-ahead threshold (default is 1.0 => 100% of view size).",
+        "name": "[threshold]",
+        "description": "Load-ahead threshold (default is 1.0 => 100% of view size).",
+        "types": [
+          "number"
+        ],
+        "typesDescription": "<code>number</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{Zuix|boolean} *true* if lazy-loading is enabled, *false* otherwise.",
+        "types": [
+          "Zuix",
+          "boolean"
+        ],
+        "typesDescription": "<a href=\"Zuix.html\">Zuix</a>|<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "*true* if lazy-loading is enabled, *false* otherwise."
+      }
+    ],
+    "description": {
+      "full": "Enable/Disable lazy-loading or get current setting.",
+      "summary": "Enable/Disable lazy-loading or get current setting.",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 1080,
+    "codeStart": 1087,
+    "code": "Zuix.prototype.lazyLoad = function (enable, threshold) {\n    if (enable != null)\n        _componentizer.lazyLoad(enable, threshold);\n    else\n        return _componentizer.lazyLoad();\n    return this;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zuix",
+      "cons": "Zuix",
+      "name": "lazyLoad",
+      "string": "Zuix.prototype.lazyLoad()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "param",
+        "string": "{boolean} [enable]",
+        "name": "[enable]",
+        "description": "",
+        "types": [
+          "boolean"
+        ],
+        "typesDescription": "<code>boolean</code>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{Zuix|boolean} *true* if HTTP caching is enabled, *false* otherwise.",
+        "types": [
+          "Zuix",
+          "boolean"
+        ],
+        "typesDescription": "<a href=\"Zuix.html\">Zuix</a>|<code>boolean</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "*true* if HTTP caching is enabled, *false* otherwise."
+      }
+    ],
+    "description": {
+      "full": "Enable/Disable HTTP caching or get current settings.",
+      "summary": "Enable/Disable HTTP caching or get current settings.",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 1094,
+    "codeStart": 1100,
+    "code": "Zuix.prototype.httpCaching = function(enable) {\n    if (enable != null)\n        httpCaching(enable);\n    else\n        return httpCaching();\n    return this;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zuix",
+      "cons": "Zuix",
+      "name": "httpCaching",
+      "string": "Zuix.prototype.httpCaching()"
+    }
+  },
+  {
+    "tags": [
+      {
+        "type": "example",
+        "string": "\n <small>**Example - JavaScript**</small>\n ```js\n zuix.componentize(document);\n ```"
+      },
+      {
+        "type": "param",
+        "string": "{Element|ZxQuery} [element] Container to use as starting node for the search (**default:** *document*).",
+        "name": "[element]",
+        "description": "Container to use as starting node for the search (**default:** *document*).",
+        "types": [
+          "Element",
+          "ZxQuery"
+        ],
+        "typesDescription": "<code>Element</code>|<a href=\"ZxQuery.html\">ZxQuery</a>",
+        "optional": true,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "return",
+        "string": "{Zuix} The ```{Zuix}``` object itself.",
+        "types": [
+          "Zuix"
+        ],
+        "typesDescription": "<a href=\"Zuix.html\">Zuix</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false,
+        "description": "The ```{Zuix}``` object itself."
+      }
+    ],
+    "description": {
+      "full": "Searches in the document or inside the given element ```element```\nfor all ```data-ui-include``` and ```data-ui-load``` directives\nand process these by loading the requested components.\nThis is a service function that should only be called if dynamically\nadding content with elements that contain *load* or *include* directives.",
+      "summary": "Searches in the document or inside the given element ```element```\nfor all ```data-ui-include``` and ```data-ui-load``` directives\nand process these by loading the requested components.\nThis is a service function that should only be called if dynamically\nadding content with elements that contain *load* or *include* directives.",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 1107,
+    "codeStart": 1124,
+    "code": "Zuix.prototype.componentize = function (element) {\n    _componentizer.componentize(element);\n    return this;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "Zuix",
+      "cons": "Zuix",
+      "name": "componentize",
+      "string": "Zuix.prototype.componentize()"
     }
   },
   {
@@ -2391,8 +2395,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1127,
-    "codeStart": 1134,
+    "line": 1128,
+    "codeStart": 1135,
     "code": "Zuix.prototype.bundle = function(bundleData, callback) {\n    if (util.isNoU(bundleData))\n        return _componentCache;\n    else if (bundleData && typeof bundleData === 'boolean') {\n        _log.t('bundle:start');\n        var ll = _componentizer.lazyLoad();\n        _componentizer.lazyLoad(false);\n        _componentizer.componentize();\n        if (typeof callback === 'function') {\n            var waitLoop = function(w) {\n                setTimeout(function () {\n                    if (_componentizer.willLoadMore()) {\n                        _log.t('bundle:wait');\n                        w(w);\n                    } else {\n                        _log.t('bundle:end');\n                        _componentizer.lazyLoad(ll);\n                        callback();\n                    }\n                }, 1000);\n            };\n            waitLoop(waitLoop);\n        }\n    } else {\n        // reset css flag before importing bundle\n        for (var c = 0; c < bundleData.length; c++) {\n            if (bundleData[c].css_applied)\n                delete bundleData[c].css_applied;\n        }\n        _componentCache = bundleData;\n    }\n    return this;\n};\n\nZuix.prototype.$ = z$;\nZuix.prototype.TaskQueue = TaskQueue;\nZuix.prototype.ZxQuery = z$.ZxQuery;\n\nZuix.prototype.dumpCache = function () {\n    return _componentCache;\n};\nZuix.prototype.dumpContexts = function () {\n    return _contextRoot;\n};\n\n// TODO: add zuix.options to configure stuff like\n// TODO: the css/html/js lookup base path (each individually own prop)",
     "ctx": {
       "type": "method",
@@ -2440,8 +2444,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 1182,
-    "codeStart": 1186,
+    "line": 1183,
+    "codeStart": 1187,
     "code": "module.exports = function (root) {\n    var zuix = new Zuix();\n    if (document.readyState != 'loading'){\n        zuix.componentize();\n    } else {\n        document.addEventListener('DOMContentLoaded', function () {\n            zuix.componentize();\n        });\n    }\n    // log messages monitor (one global listener)\n    _log.monitor(function (level, args) {\n        if (util.isFunction(zuix.monitor))\n            zuix.monitor(level, Array.prototype.slice.call(args));\n    });\n    return zuix;\n};",
     "ctx": {
       "type": "method",

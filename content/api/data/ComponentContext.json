@@ -39,134 +39,6 @@
   {
     "tags": [
       {
-        "type": "callback",
-        "string": "ContextErrorCallback"
-      },
-      {
-        "type": "param",
-        "string": "{Object} error",
-        "name": "error",
-        "description": "",
-        "types": [
-          "Object"
-        ],
-        "typesDescription": "<code>Object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "this",
-        "string": "{ComponentContext}"
-      }
-    ],
-    "description": {
-      "full": "TODO: describe this...",
-      "summary": "TODO: describe this...",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 38,
-    "codeStart": 45
-  },
-  {
-    "tags": [
-      {
-        "type": "callback",
-        "string": "ContextReadyCallback"
-      },
-      {
-        "type": "param",
-        "string": "{ComponentContext} ctx The component context.",
-        "name": "ctx",
-        "description": "The component context.",
-        "types": [
-          "ComponentContext"
-        ],
-        "typesDescription": "<a href=\"ComponentContext.html\">ComponentContext</a>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "this",
-        "string": "{ComponentContext}"
-      }
-    ],
-    "description": {
-      "full": "TODO: describe this...",
-      "summary": "TODO: describe this...",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 46,
-    "codeStart": 53
-  },
-  {
-    "tags": [
-      {
-        "type": "callback",
-        "string": "EventCallback"
-      },
-      {
-        "type": "param",
-        "string": "{string} event Event name.",
-        "name": "event",
-        "description": "Event name.",
-        "types": [
-          "string"
-        ],
-        "typesDescription": "<code>string</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "param",
-        "string": "{Object} data Event data.",
-        "name": "data",
-        "description": "Event data.",
-        "types": [
-          "Object"
-        ],
-        "typesDescription": "<code>Object</code>",
-        "optional": false,
-        "nullable": false,
-        "nonNullable": false,
-        "variable": false
-      },
-      {
-        "type": "this",
-        "string": "{ZxQuery}"
-      }
-    ],
-    "description": {
-      "full": "TODO: describe this...",
-      "summary": "TODO: describe this...",
-      "body": ""
-    },
-    "isPrivate": false,
-    "isConstructor": false,
-    "isClass": false,
-    "isEvent": false,
-    "ignore": false,
-    "line": 54,
-    "codeStart": 62
-  },
-  {
-    "tags": [
-      {
         "type": "typedef",
         "string": "{object} ContextOptions",
         "types": [
@@ -387,7 +259,135 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 63,
+    "line": 38,
+    "codeStart": 59
+  },
+  {
+    "tags": [
+      {
+        "type": "callback",
+        "string": "ContextErrorCallback"
+      },
+      {
+        "type": "param",
+        "string": "{Object} error",
+        "name": "error",
+        "description": "",
+        "types": [
+          "Object"
+        ],
+        "typesDescription": "<code>Object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "this",
+        "string": "{ComponentContext}"
+      }
+    ],
+    "description": {
+      "full": "Callback function called if an error occurs when loading a component.",
+      "summary": "Callback function called if an error occurs when loading a component.",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 60,
+    "codeStart": 67
+  },
+  {
+    "tags": [
+      {
+        "type": "callback",
+        "string": "ContextReadyCallback"
+      },
+      {
+        "type": "param",
+        "string": "{ComponentContext} ctx The component context.",
+        "name": "ctx",
+        "description": "The component context.",
+        "types": [
+          "ComponentContext"
+        ],
+        "typesDescription": "<a href=\"ComponentContext.html\">ComponentContext</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "this",
+        "string": "{ComponentContext}"
+      }
+    ],
+    "description": {
+      "full": "Callback function called when a component has been successfully loaded.",
+      "summary": "Callback function called when a component has been successfully loaded.",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 68,
+    "codeStart": 75
+  },
+  {
+    "tags": [
+      {
+        "type": "callback",
+        "string": "EventCallback"
+      },
+      {
+        "type": "param",
+        "string": "{string} event Event name.",
+        "name": "event",
+        "description": "Event name.",
+        "types": [
+          "string"
+        ],
+        "typesDescription": "<code>string</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "param",
+        "string": "{Object} data Event data.",
+        "name": "data",
+        "description": "Event data.",
+        "types": [
+          "Object"
+        ],
+        "typesDescription": "<code>Object</code>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "this",
+        "string": "{ZxQuery}"
+      }
+    ],
+    "description": {
+      "full": "Callback function called when an event registered with the `on` method occurs.",
+      "summary": "Callback function called when an event registered with the `on` method occurs.",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 76,
     "codeStart": 84
   },
   {

@@ -137,7 +137,6 @@ zuix.controller(function (cp) {
     }
 
     function addHandler(handler) {
-        console.log(handler);
         var item = {};
         item.name = handler.name;
         item.description = handler.description.full || handler.description;

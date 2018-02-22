@@ -44,9 +44,9 @@
       },
       {
         "type": "param",
-        "string": "{ContextController} cp The context controller instance.",
+        "string": "{ContextController} cp The context controller object.",
         "name": "cp",
-        "description": "The context controller instance.",
+        "description": "The context controller object.",
         "types": [
           "ContextController"
         ],
@@ -563,8 +563,8 @@
       }
     ],
     "description": {
-      "full": "Gets elements in the component's view with `data-ui-field`\nmatching the given `fieldName`.",
-      "summary": "Gets elements in the component's view with `data-ui-field`\nmatching the given `fieldName`.",
+      "full": "Gets elements in the component's view with `data-ui-field`\nmatching the given `fieldName`.\nThis method implements a caching mechanism and automatic\ndisposal of allocated objects and events.",
+      "summary": "Gets elements in the component's view with `data-ui-field`\nmatching the given `fieldName`.\nThis method implements a caching mechanism and automatic\ndisposal of allocated objects and events.",
       "body": ""
     },
     "isPrivate": false,
@@ -573,7 +573,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 158,
-    "codeStart": 182,
+    "codeStart": 184,
     "code": "ContextController.prototype.field = function (fieldName) {\n    // this method is \"attacched\" from Zuix.js on controller initialization\n    return null;\n};\nContextController.prototype.clearCache = function () {\n    this._fieldCache.length = 0;\n};",
     "ctx": {
       "type": "method",
@@ -587,7 +587,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// get all `checkbox` elements with `.checked` class.\nvar choices = cp.view('input[type=\"checkbox\"].checked');\nchoices.removeClass('.checked');\n// hide the component's view\ncp.view().hide();\n</code></pre>"
+        "string": "\n<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// get all `checkbox` elements with `.checked` class.\nvar choices = cp.view('input[type=\"checkbox\"].checked');\nchoices.removeClass('.checked');\n// hide the component's view\ncp.view().hide();\n</code></pre>"
       },
       {
         "type": "param",
@@ -627,8 +627,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 189,
-    "codeStart": 207,
+    "line": 191,
+    "codeStart": 210,
     "code": "ContextController.prototype.view = function (filter) {\n    // context view changed, dispose cached fields from previous attacched view\n    if (this.context.view() != null || this._view !== this.context.view()) {\n        this.clearCache();\n        // TODO: !!!!\n        // TODO: dispose also events on view change (!!!)\n        // TODO: !!!!\n        this._view = z$(this.context.view());\n    }\n    if (filter != null)\n        return this._view.find(filter);\n    else if (this._view !== null)\n        return this._view;\n    else\n        throw({\n            message: 'Not attacched to a view yet.',\n            source: this\n        });\n};",
     "ctx": {
       "type": "method",
@@ -642,7 +642,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\nvar m = {\n     title: 'Thoughts',\n     message: 'She stared through the window at the stars.'\n };\ncp.model(m);\ncp.model().title = 'Changes';\nconsole.log(cp.model().title);\n</code></pre>"
+        "string": "\n<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\nvar m = {\n     title: 'Thoughts',\n     message: 'She stared through the window at the stars.'\n };\ncp.model(m);\ncp.model().title = 'Changes';\nconsole.log(cp.model().title);\n</code></pre>"
       },
       {
         "type": "param",
@@ -683,8 +683,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 226,
-    "codeStart": 244,
+    "line": 229,
+    "codeStart": 248,
     "code": "ContextController.prototype.model = function (model) {\n    if (model == null)\n        return this.context.model();\n    else this.context.model(model);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -720,8 +720,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 250,
-    "codeStart": 255,
+    "line": 254,
+    "codeStart": 259,
     "code": "ContextController.prototype.options = function () {\n    return this.context.options();\n};",
     "ctx": {
       "type": "method",
@@ -735,7 +735,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// somewhere inside the slide-show component controller\ncp.trigger('slide:change', slideIndex);\n\n// somewhere in a page hosting the slide-show component\n// set component's event listeners\nzuix.context('my-slide-show')\n  .on('slide:change', function(slideIndex) { ... })\n  .on(...);\n</code></pre>"
+        "string": "\n<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// somewhere inside the slide-show component controller\ncp.trigger('slide:change', slideIndex);\n\n// somewhere in a page hosting the slide-show component\n// set component's event listeners\nzuix.context('my-slide-show')\n  .on('slide:change', function(slideIndex) { ... })\n  .on(...);\n</code></pre>"
       },
       {
         "type": "param",
@@ -803,8 +803,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 258,
-    "codeStart": 283,
+    "line": 262,
+    "codeStart": 288,
     "code": "ContextController.prototype.trigger = function (eventPath, eventData, isHook) {\n    if (this.context._eventMap[eventPath] == null && isHook !== true)\n        this.addEvent(eventPath, null);\n    // TODO: ...\n    if (isHook === true) {\n        var target = this.context.container();\n        if (target == null) target = this.context.view();\n        if (target != null)\n            z$(target)\n                .trigger(eventPath, eventData);\n        this.context.trigger(this.context, eventPath, eventData);\n    } else\n        this.view().trigger(eventPath, eventData);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -818,7 +818,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>Example - JavaScript</small>\n<pre data-line=\"5\"><code class=\"language-js\">\n// somewhere in the `create` method of the {ContextController}\nzuix.controller(function(cp){\n  cp.create = function() {\n    // ....\n    cp.expose('setSlide', slide);\n  }\n  // ...\n  function slide(slideIndex) { ... }\n  // ...\n});\n// ...\n// calling the exposed method from the instance of\n// the component.\nvar ctx = zuix.context('my-slide-show');\nctx.setSlide(2);\n</code></pre>"
+        "string": "\n<small>Example - JavaScript</small>\n<pre data-line=\"5\"><code class=\"language-js\">\n// somewhere in the `create` method of the {ContextController}\nzuix.controller(function(cp){\n  cp.create = function() {\n    // ....\n    cp.expose('setSlide', slide);\n  }\n  // ...\n  function slide(slideIndex) { ... }\n  // ...\n});\n// ...\n// calling the exposed method from the instance of\n// the component.\nvar ctx = zuix.context('my-slide-show');\nctx.setSlide(2);\n</code></pre>"
       },
       {
         "type": "param",
@@ -873,8 +873,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 298,
-    "codeStart": 327,
+    "line": 303,
+    "codeStart": 333,
     "code": "ContextController.prototype.expose = function (methodName, handler) {\n    if (typeof methodName === 'object') {\n        var _t = this;\n        z$.each(methodName, function (k, v) {\n            _t.context[k] = v;\n        });\n    } else this.context[methodName] = handler;\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -888,7 +888,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// loads 'path/to/component_name.css' by default\ncp.loadCss();\n// or loads the view's css with options\ncp.loadCss({\n    path: 'url/of/style/file.css',\n    success: function() { ... },\n    error: function(err) { ... },\n    then: function() { ... }\n});\n</code></pre>"
+        "string": "\n<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// loads 'path/to/component_name.css' by default\ncp.loadCss();\n// or loads the view's css with options\ncp.loadCss({\n    path: 'url/of/style/file.css',\n    success: function() { ... },\n    error: function(err) { ... },\n    then: function() { ... }\n});\n</code></pre>"
       },
       {
         "type": "param",
@@ -928,8 +928,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 336,
-    "codeStart": 358,
+    "line": 342,
+    "codeStart": 365,
     "code": "ContextController.prototype.loadCss = function(options) {\n    this.context.loadCss(options);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -943,7 +943,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// loads 'path/to/component_name.html' by default\ncp.loadHtml();\n// or loads the view's html with options\ncp.loadHtml({\n    path: 'url/of/view/file.html',\n    success: function() { ... },\n    error: function(err) { ... },\n    then: function() { ... }\n});\n</code></pre>"
+        "string": "\n<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// loads 'path/to/component_name.html' by default\ncp.loadHtml();\n// or loads the view's html with options\ncp.loadHtml({\n    path: 'url/of/view/file.html',\n    success: function() { ... },\n    error: function(err) { ... },\n    then: function() { ... }\n});\n</code></pre>"
       },
       {
         "type": "param",
@@ -983,8 +983,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 362,
-    "codeStart": 384,
+    "line": 369,
+    "codeStart": 392,
     "code": "ContextController.prototype.loadHtml = function(options) {\n    this.saveView();\n    this.context.loadHtml(options);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -1019,8 +1019,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 389,
-    "codeStart": 392,
+    "line": 397,
+    "codeStart": 400,
     "code": "ContextController.prototype.log = {};",
     "ctx": {
       "type": "property",
@@ -1035,7 +1035,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>**Example - JavaScript**</small>\n<pre data-line=\"6\"><code class=\"language-js\">\n// Controller of component 'path/to/component_name'\nvar ctrl = zuix.controller(function(cp) {\n    // `cp` is the {ContextController}\n    cp.create = function() { ... };\n    cp.destroy = function() { ... }\n}).for('path/to/component_name');\n</pre></code>"
+        "string": "\n<small>**Example - JavaScript**</small>\n<pre data-line=\"6\"><code class=\"language-js\">\n// Controller of component 'path/to/component_name'\nvar ctrl = zuix.controller(function(cp) {\n    // `cp` is the {ContextController}\n    cp.create = function() { ... };\n    cp.destroy = function() { ... }\n}).for('path/to/component_name');\n</pre></code>"
       },
       {
         "type": "param",
@@ -1075,8 +1075,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 393,
-    "codeStart": 410,
+    "line": 401,
+    "codeStart": 419,
     "code": "ContextController.prototype.for = function (componentId) { return this; };\n\nmodule.exports = ContextController;",
     "ctx": {
       "type": "method",
