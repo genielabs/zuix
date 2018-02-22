@@ -1563,7 +1563,7 @@
     "ignore": false,
     "line": 714,
     "codeStart": 736,
-    "code": "Zuix.prototype.controller = function(handler) {\n    return controller(handler);\n};",
+    "code": "Zuix.prototype.controller = function(handler) {\n    return controller.call(this, handler);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zuix",
@@ -1632,7 +1632,7 @@
     "ignore": false,
     "line": 739,
     "codeStart": 762,
-    "code": "Zuix.prototype.field = function(fieldName, container) {\n    return field(fieldName, container);\n};",
+    "code": "Zuix.prototype.field = function(fieldName, container) {\n    return field.call(this, fieldName, container);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zuix",
@@ -1757,7 +1757,7 @@
     "ignore": false,
     "line": 786,
     "codeStart": 826,
-    "code": "Zuix.prototype.load = function(componentId, options) {\n    return load(componentId, options);\n};",
+    "code": "Zuix.prototype.load = function(componentId, options) {\n    return load.call(this, componentId, options);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zuix",
@@ -1884,7 +1884,7 @@
     "ignore": false,
     "line": 848,
     "codeStart": 882,
-    "code": "Zuix.prototype.context = function(contextId, callback) {\n    return context(contextId, callback);\n};",
+    "code": "Zuix.prototype.context = function(contextId, callback) {\n    return context.call(this, contextId, callback);\n};",
     "ctx": {
       "type": "method",
       "constructor": "Zuix",

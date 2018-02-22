@@ -54,12 +54,12 @@
         "type": "property",
         "string": "{function} init",
         "name": "init",
-        "description": "",
+        "description": "description... TODO: ...",
         "types": [
           "function"
         ],
         "typesDescription": "<code>function</code>",
-        "optional": false,
+        "optional": true,
         "nullable": false,
         "nonNullable": false,
         "variable": false
@@ -68,7 +68,7 @@
         "type": "property",
         "string": "{function} create",
         "name": "create",
-        "description": "",
+        "description": "description... TODO: ...",
         "types": [
           "function"
         ],
@@ -82,7 +82,7 @@
         "type": "property",
         "string": "{function} update",
         "name": "update",
-        "description": "",
+        "description": "description... TODO: ...",
         "types": [
           "function"
         ],
@@ -96,7 +96,7 @@
         "type": "property",
         "string": "{function} destroy",
         "name": "destroy",
-        "description": "",
+        "description": "description... TODO: ...",
         "types": [
           "function"
         ],
