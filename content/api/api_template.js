@@ -5,6 +5,13 @@ zuix.controller(function (cp) {
         'ContextOptions',
         'ComponentContext',
         'ContextController',
+        'ContextControllerHandler',
+        'ContextErrorCallback',
+        'ContextReadyCallback',
+        'EventCallback',
+        'IterationCallback',
+        'InstanceIterationCallback',
+        'ContextOptions',
         'ElementPosition'];
 
     cp.create = function () {
@@ -34,7 +41,6 @@ zuix.controller(function (cp) {
                 html += '</div></div>';
 
             });
-
             cp.field('methods')
                 .html(html)
                 .find('div.title')
@@ -56,21 +62,36 @@ zuix.controller(function (cp) {
 
         } else cp.field('container-properties').hide();
 
-        // Custom objects/types
+        // Custom types and callbacks used in this class
         if (data.types != null && data.types.length > 0) {
+
+            html = '';
+
+            zuix.$.each(data.callbacks, function (i) {
+
+                html += '<div><a id="ZUIX_API--'+this.name+'"></a>';
+                html += '<h6>' + this.name + '</h6>';
+                html += '<p>' + this.description + '</p>';
+                html += '<code class="language-js">function '+buildCallbackArgs(this)+' { ... }</code>';
+                html += buildMethodParams(this);
+                html += buildReturnType(this);
+                html += buildExamples(this);
+                html += '</div>';
+
+            });
 
             zuix.$.each(data.types, function (i) {
 
-                html = '<div><a id="ZUIX_API--'+this.name+'"></a>';
+                html += '<div><a id="ZUIX_API--'+this.name+'"></a>';
+                html += '<h6>' + this.name + '</h6>';
                 html += '<p>' + this.description + '</p>';
-                html += '<code class="mdl-typography--font-bold">' + this.name + '</code><br>';
+                html += '<strong><small>PROPERTIES</small></strong>';
                 html += '<span class="mdl-color-text--accent mdl-typography--font-bold">{</span><br>';
                 html += buildTypes(this.properties);
                 html += '<span class="mdl-color-text--accent mdl-typography--font-bold">}</span>';
                 html += '</div>';
 
             });
-
             cp.field('types')
                 .html(html);
             cp.trigger('view:process', cp.field('types'), true);
@@ -90,6 +111,19 @@ zuix.controller(function (cp) {
                 args += ',';
         });
         return '<div class="title"><h5><i class="material-icons">expand_more</i><code>'+method.name+'('+ args +')</code></h5></div>';
+    }
+
+    function buildCallbackArgs(method) {
+        var args = '';
+        zuix.$.each(method.parameters, function (i) {
+            if (this.optional)
+                args += '[' + this.name + ']';
+            else
+                args += this.name;
+            if (i < method.parameters.length-1)
+                args += ',';
+        });
+        return '('+ args +')';
     }
 
     function buildMethodParams(method) {

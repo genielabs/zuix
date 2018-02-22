@@ -12,14 +12,6 @@ zuix.controller(function (cp) {
                 cp.view().html('');
                 var dox = JSON.parse(json);
 
-                var html = '';
-                var sectionHtml = {
-                    'methods': {},
-                    'properties': {},
-                    'constructor': {},
-                    'types': []
-                };
-
                 var apiDocs = {};
                 apiDocs.name = apiName;
                 apiDocs.constructor = null;
@@ -27,6 +19,7 @@ zuix.controller(function (cp) {
                 apiDocs.methods = [];
                 apiDocs.properties = [];
                 apiDocs.types = []; // custom object/types used in this object
+                apiDocs.callbacks = []; // callback functions
 
                 zuix.$.each(dox, function() {
 
@@ -57,146 +50,12 @@ zuix.controller(function (cp) {
                             else
                                 apiDocs.types.push(type);
                             break;
+                        case 'callback':
+                            apiDocs.callbacks.push(addHandler(this));
+                            break;
                     }
-
-
-                    //sectionHtml[currentSection].description = this.description.full || this.description;
-
-
-                    /*
-                    "isPrivate": false,
-                    "isConstructor": false,
-                    "isClass": false,
-                    "isEvent": false,
-                    "ignore": false,
-                    "line": 35,
-                    "codeStart": 43
-                    */
-
-
-                    /*
-
-                    zuix.$.each(this.tags, function () {
-
-                        if (this.type === 'param')
-                            params += this.name + ', ';
-                        else if (this.type === 'typedef')
-                            apiMember = isTypeDef = true;
-                        else if (this.type === 'constructor')
-                            apiMember = isConstructor = true;
-
-
-                    });
-
-                    //var isTypeDef = false;
-                    //var isConstructor = false;
-                    //var apiMember = (!this.isPrivate && this.ctx != null && (this.ctx.cons === apiName));
-
-
-                    var params; params = '';
-                    zuix.$.each(this.tags, function () {
-                        if (this.type === 'param')
-                            params += this.name + ', ';
-                        else if (this.type === 'typedef')
-                            apiMember = isTypeDef = true;
-                        else if (this.type === 'constructor')
-                            apiMember = isConstructor = true;parameter.name
-                    });
-                    var currentSection = isConstructor ? 'constructor' : 'methods';
-                    if (apiMember) {
-
-                        if (params.length > 0)
-                            params = params.substring(0, params.length-2);
-                        if (this.ctx != nulil)
-                            sectionHtml[currentSection] += '<div class="title"><h5><i class="material-icons">expand_more</i><code>'+this.ctx.name+'('+params+')</code></h5></div>';
-                        sectionHtml[currentSection] += '<div class="container"><div class="details'+(isTypeDef || isConstructor ? '' : ' collapsed')+'">';
-
-                        var pl = { content: this.description.full };
-                        cp.trigger('html:parse', pl, true);
-                        sectionHtml[currentSection] += '<div class="description">'+pl.content+'</div>';
-
-                        var currentType = '', example = '';
-                        zuix.$.each(this.tags, function () {
-
-                            var typeName = this.type.toLowerCase();
-                            if (typeName.indexOf('return') >= 0)
-                                typeName = "RETURNS";
-                            else if (typeName.indexOf('param') >= 0)
-                                typeName = "PARAMETERS";
-                            else if (typeName.indexOf('property') >= 0) {
-                                typeName = "PROPERTIES";
-                                currentSection = 'properties';
-                            } else if (typeName.indexOf("example") === 0) {
-                                example += this.string;
-                                return true;
-                            } else return true;
-
-                            if (currentType !== typeName) {
-                                currentType = typeName;
-                                sectionHtml[currentSection] += '<p><strong><small>' + typeName + '</small></strong></p> '
-                            }
-
-                            sectionHtml[currentSection] += '<div class="api-member-details">';
-
-                            var types = '', t = this.types;
-                            zuix.$.each(t, function (i) {
-                                if (linkedApi.indexOf(this.toString()) >= 0)
-                                    types += '<a href="#ZUIX_API--'+this+'">'+this.replace(/</g,"&lt;").replace(/>/g,"&gt;")+'</a>';
-                                else
-                                    types += this.toString().replace(/</g,"&lt;").replace(/>/g,"&gt;");
-                                if (i < t.length-1)
-                                    types +=' | ';
-                            });
-
-                            if (this.optional)
-                                sectionHtml[currentSection] += ' <strong class="mdl-color-text--grey-500">optional</strong>';
-
-                            sectionHtml[currentSection] += ' <em class="mdl-color-text--grey-700">{'+types+'}</em>';
-
-                            //noinspection JSPotentiallyInvalidUsageOfThis
-                            pl = { content: this.description };
-                            if (this.name != null)
-                                pl.content = '<code>'+ this.name.replace('[','').replace(']','') +'</code>: '+pl.content;
-                            cp.trigger('html:parse', pl, true);
-                            if (pl.content.indexOf('<p>') === -1)
-                                pl.content = '<p>'+pl.content+'</p>';
-                            sectionHtml[currentSection] += pl.content;
-
-                            sectionHtml[currentSection] += '</div>';
-
-                            if (isConstructor) {
-                                isConstructor = false;
-                                currentSection = 'methods';
-                            }
-                            pl = { content: example };
-                            cp.trigger('html:parse', pl, true);
-                            sectionHtml[currentSection] += '<div class="example">'+pl.content+'</div>';
-
-                        });
-
-                        if (example !== '') {
-                            pl = { content: example };
-                            cp.trigger('html:parse', pl, true);
-                            sectionHtml[currentSection] += '<div class="example">'+pl.content+'</div>';
-                        }
-
-                        sectionHtml[currentSection] += '</div>';
-                        sectionHtml[currentSection] += '</div><!-- details -->';
-
-                    }
-
-                    //if (!isTypeDef)
-                    //    html += sectionHtml['methods'];
-
-
-                    */
-
-                    //console.log(sectionHtml);
 
                 });
-
-                console.log(apiDocs);
-
 
                 zuix.load('content/api/api_template', {
                     data: apiDocs,
@@ -207,16 +66,7 @@ zuix.controller(function (cp) {
                     }
                 });
 
-                /*
-                cp.view()
-                    .html(html)
-                    .find('div.title')
-                    .css('cursor', 'pointer')
-                    .on('click', function () {
-                        expandItem(this);
-                    });
-                cp.trigger('view:process', cp.view(), true);
-                */
+                console.log(apiDocs);
 
             },
             error: function() {
@@ -281,6 +131,32 @@ zuix.controller(function (cp) {
                 item.name = this.string;
                 if (item.name.indexOf('}') > 0)
                     item.name = item.name.substring(item.name.lastIndexOf('}')+1).trim();
+            }
+        });
+        return item;
+    }
+
+    function addHandler(handler) {
+        console.log(handler);
+        var item = {};
+        item.name = handler.name;
+        item.description = handler.description.full || handler.description;
+        item.parameters = [];
+        item.context = {};
+        item.return = {};
+        item.example = '';
+        zuix.$.each(handler.tags, function (i) {
+            var param = getParam(this);
+            if (this.type === 'callback') {
+                item.name = item.name || this.string;
+            } else if (this.type === 'param') {
+                item.parameters.push(param);
+            } else if (this.type === 'example') {
+                item.example = this.string;
+            } else if (this.type === 'this') {
+                item.context = this.string;
+            } else if (this.type === 'return') {
+                item.return = param;
             }
         });
         return item;

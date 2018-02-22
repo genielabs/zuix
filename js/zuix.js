@@ -536,29 +536,29 @@ var _log =
 var util = _dereq_('./Util.js');
 
 
-// Types definitions
+// Types definitions for JsDoc
 
 /**
- *
+ * The `ElementPosition` object returned by the `position()` method.
  * @typedef {object} ElementPosition
- * @property {number} x
- * @property {number} y
- * @property {boolean} visible
+ * @property {number} x X coordinate of the element in the viewport.
+ * @property {number} y Y coordinate of the element in the viewport.
+ * @property {boolean} visible Boolean value indicating whether the element is visible in the viewport.
  */
 
 /**
- *
+ * The `IterationCallback` function.
  * @callback IterationCallback
- * @param {number} i Iteration count
- * @param {object} item Current element
+ * @param {number} i Iteration count.
+ * @param {object} item Current element.
  * @this {object}
  */
 
 /**
- *
+ * The `InstanceIterationCallback` function.
  * @callback InstanceIterationCallback
- * @param {number} count Iteration count
- * @param {Element} item Current element
+ * @param {number} count Iteration count.
+ * @param {Element} item Current element.
  * @this {ZxQuery}
  */
 
@@ -1474,7 +1474,7 @@ module.exports =  z$;
     }
 }(this, _dereq_('./zuix/Zuix.js')));
 
-},{"./zuix/Zuix.js":16}],7:[function(_dereq_,module,exports){
+},{"./zuix/Zuix.js":11}],7:[function(_dereq_,module,exports){
 /*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
@@ -1502,6 +1502,7 @@ module.exports =  z$;
 
 /**
  * Component cache object interface.
+ *
  * @typedef {object} ComponentCache
  * @property {string} componentId The id of the cached component.
  * @property {Element} view The view element.
@@ -1513,6 +1514,7 @@ module.exports =  z$;
 
 /**
  * Bundle item object.
+ *
  * @typedef {object} BundleItem
  * @property {Element} view
  * @property {string} css
@@ -1560,10 +1562,57 @@ var z$ =
 var util =
     _dereq_('../helpers/Util');
 
-_dereq_('./EventCallback');
+// Custom objects definition used to generate JsDoc
+
+/**
+ * TODO: describe this...
+ *
+ * @callback ContextErrorCallback
+ * @param {Object} error
+ * @this {ComponentContext}
+ */
+
+/**
+ * TODO: describe this...
+ *
+ * @callback ContextReadyCallback
+ * @param {ComponentContext} ctx The component context.
+ * @this {ComponentContext}
+ */
+
+/**
+ * TODO: describe this...
+ *
+ * @callback EventCallback
+ * @param {string} event Event name.
+ * @param {Object} data Event data.
+ * @this {ZxQuery}
+ */
+
+/**
+ * The `ContextOptions` object can be supplied when loading a component. It can be either used as argument for the
+ * `zuix.load(...)` method in the javascript code, or in the `data-ui-options` attribute of the component's container
+ * HTML code.
+ *
+ * @typedef {object} ContextOptions
+ * @property {Object|undefined} contextId The context id. HTML attribute equivalent: `data-ui-context`.
+ * @property {Element|undefined} container The container element,
+ * @property {JSON|undefined} model The data model.  HTML attribute equivalent: `data-bind-model`.
+ * @property {Element|undefined} view The view element. HTML attribute equivalent: `data-ui-view`.
+ * @property {ContextControllerHandler|undefined} controller The controller handler.
+ * @property {Array.<Object.<string, EventCallback>>|undefined} on The events handling map.
+ * @property {Array.<Object.<string, EventCallback>>|undefined} behavior The behaviors handling map.
+ * @property {Element|string|boolean|undefined} css The view style.
+ * @property {string|undefined} cext When loading view content, append the specified string instead of `.html`.
+ * @property {boolean|undefined} html Enable or disable HTML auto-loading (**default:** true).
+ * @property {boolean|undefined} lazyLoad Enable or disable lazy-loading (**default:** false).
+ * @property {number|undefined} priority Loading priority (**default:** 0).
+ * @property {ContextReadyCallback|undefined} ready The ready callback, called once the component is succesfully loaded.
+ * @property {ContextErrorCallback|undefined} error The error callback, called when error occurs.
+ */
 
 /***
- * TODO: describe this class...
+ * The component's context object.
  *
  * @param {ContextOptions} options The context options.
  * @param {function} [eventCallback] Event routing callback.
@@ -2074,7 +2123,7 @@ ComponentContext.prototype.modelToView = function () {
 };
 
 module.exports = ComponentContext;
-},{"../helpers/Logger":2,"../helpers/Util":4,"../helpers/ZxQuery":5,"./EventCallback":15}],9:[function(_dereq_,module,exports){
+},{"../helpers/Logger":2,"../helpers/Util":4,"../helpers/ZxQuery":5}],9:[function(_dereq_,module,exports){
 /*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
@@ -2105,6 +2154,7 @@ module.exports = ComponentContext;
 
 
 /**
+ * TODO: describe this...
  *
  * @param {Element|ZxQuery|undefined} [element] Scan and process loadable elements inside `element`.
  * @param {Element|undefined} [child] Process only the specified `child` of `element`.
@@ -2568,16 +2618,22 @@ function lazyElementCheck(element) {
 var z$ =
     _dereq_('../helpers/ZxQuery');
 
-// dummy module containing just JsDoc definitions
-_dereq_('./ContextControllerHandler');
+/**
+ * This callback function is called after a component is loaded
+ * and it is used to initialize the component's controller.
+ *
+ * @callback ContextControllerHandler
+ * @param {ContextController} cp The context controller instance.
+ * @this {ContextController}
+ */
 
 /**
  * ContextController user-defined handlers definition
  * @typedef {Object} ContextController
- * @property {function} init
- * @property {function} create
- * @property {function} update
- * @property {function} destroy
+ * @property {function} init Function that gets called after loading and before the component is created.
+ * @property {function} create Function that gets called after loading, when the component is created.
+ * @property {function} update Function called when the component is destroyed.
+ * @property {function} destroy Function called when the component's data model is updated.
  */
 
 /**
@@ -2943,214 +2999,7 @@ var ctrl = zuix.controller(function(cp) {
 ContextController.prototype.for = function (componentId) { return this; };
 
 module.exports = ContextController;
-},{"../helpers/ZxQuery":5,"./ContextControllerHandler":11}],11:[function(_dereq_,module,exports){
-/*
- * Copyright 2015-2017 G-Labs. All Rights Reserved.
- *         https://genielabs.github.io/zuix
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
- *
- *  ZUIX, Javascript library for component-based development.
- *        https://genielabs.github.io/zuix
- *
- * @author Generoso Martello <generoso@martello.com>
- */
-
-/**
- * TODO: describe
- *
- * @callback ContextControllerHandler
- * @param {ContextController} cp The context controller instance.
- * @this {ContextController}
- */
-
-/** */
-module.exports = function (root) {
-    // dummy module for JsDocs/Closure Compiler
-    return null;
-};
-},{}],12:[function(_dereq_,module,exports){
-/*
- * Copyright 2015-2017 G-Labs. All Rights Reserved.
- *         https://genielabs.github.io/zuix
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
- *
- *  ZUIX, Javascript library for component-based development.
- *        https://genielabs.github.io/zuix
- *
- * @author Generoso Martello <generoso@martello.com>
- */
-
-/**
- *
- * @callback ContextErrorCallback
- * @param {Object} error
- * @this {ComponentContext}
- */
-
-/** */
-module.exports = function (root) {
-    // dummy module for JsDocs/Closure Compiler
-    return null;
-};
-},{}],13:[function(_dereq_,module,exports){
-/*
- * Copyright 2015-2017 G-Labs. All Rights Reserved.
- *         https://genielabs.github.io/zuix
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
- *
- *  ZUIX, Javascript library for component-based development.
- *        https://genielabs.github.io/zuix
- *
- * @author Generoso Martello <generoso@martello.com>
- */
-
-_dereq_('./ContextErrorCallback');
-_dereq_('./ContextReadyCallback');
-_dereq_('./EventCallback');
-
-/**
- * Component Context options object.
- * @typedef {object} ContextOptions
- * @property {Object|undefined} contextId The context id. HTML attribute equivalent: `data-ui-context`.
- * @property {Element|undefined} container The container element,
- * @property {JSON|undefined} model The data model.  HTML attribute equivalent: `data-bind-model`.
- * @property {Element|undefined} view The view element. HTML attribute equivalent: `data-ui-view`.
- * @property {ContextControllerHandler|undefined} controller The controller handler.
- * @property {Array.<Object.<string, EventCallback>>|undefined} on The events handling map.
- * @property {Array.<Object.<string, EventCallback>>|undefined} behavior The behaviors handling map.
- * @property {Element|string|boolean|undefined} css The view style.
- * @property {string|undefined} cext When loading view content, append the specified string instead of `.html`.
- * @property {boolean|undefined} html Enable or disable HTML auto-loading (**default:** true).
- * @property {boolean|undefined} lazyLoad Enable or disable lazy-loading (**default:** false).
- * @property {number|undefined} priority Loading priority (**default:** 0).
- * @property {ContextReadyCallback|undefined} ready The ready callback, called once the component is succesfully loaded.
- * @property {ContextErrorCallback|undefined} error The error callback, called when error occurs.
- */
-
-/** */
-module.exports = function (root) {
-    // dummy module for JsDocs/Closure Compiler
-    return null;
-};
-},{"./ContextErrorCallback":12,"./ContextReadyCallback":14,"./EventCallback":15}],14:[function(_dereq_,module,exports){
-/*
- * Copyright 2015-2017 G-Labs. All Rights Reserved.
- *         https://genielabs.github.io/zuix
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
- *
- *  ZUIX, Javascript library for component-based development.
- *        https://genielabs.github.io/zuix
- *
- * @author Generoso Martello <generoso@martello.com>
- */
-
-/**
- *
- * @callback ContextReadyCallback
- * @param {ComponentContext} ctx The component context.
- * @this {ComponentContext}
- */
-
-/** */
-module.exports = function (root) {
-    // dummy module for JsDocs/Closure Compiler
-    return null;
-};
-},{}],15:[function(_dereq_,module,exports){
-/*
- * Copyright 2015-2017 G-Labs. All Rights Reserved.
- *         https://genielabs.github.io/zuix
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/*
- *
- *  ZUIX, Javascript library for component-based development.
- *        https://genielabs.github.io/zuix
- *
- * @author Generoso Martello <generoso@martello.com>
- */
-
-/**
- * @callback EventCallback
- * @param {string} event Event name.
- * @param {Object} data Event data.
- * @this {ZxQuery}
- */
-
-/** */
-module.exports = function (root) {
-    // dummy module for JsDocs/Closure Compiler
-    return null;
-};
-},{}],16:[function(_dereq_,module,exports){
+},{"../helpers/ZxQuery":5}],11:[function(_dereq_,module,exports){
 /*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
  *         https://genielabs.github.io/zuix
@@ -3195,7 +3044,6 @@ var _componentizer =
     _dereq_('./Componentizer')();
 
 _dereq_('./ComponentCache');
-_dereq_('./ContextOptions');
 
 /**
  * @const
@@ -3260,7 +3108,6 @@ function Zuix() {
 }
 
 /**
- * Initializes a controller ```handler```.
  *
  * @private
  * @param handler {ContextControllerHandler}
@@ -3276,8 +3123,6 @@ function controller(handler) {
 }
 
 /**
- * Gets elements with `data-ui-field`
- * attribute matching the given `fieldName`.
  *
  * @private
  * @param {!string} fieldName Value to match in the `data-ui-field` attribute.
@@ -3302,7 +3147,6 @@ function field(fieldName, container, context) {
 }
 
 /**
- * Loads a component with the given options.
  *
  * @private
  * @param {!string} componentId The id/name of the component we want to load.
@@ -3460,7 +3304,6 @@ function loadResources(ctx, options) {
     return ctx;
 }
 /**
- * Unload and dispose the component.
  *
  * @private
  * @param context {ComponentContext|Element}
@@ -3506,7 +3349,6 @@ function createContext(options) {
 }
 
 /**
- * TODO: desc
  *
  * @private
  * @param {Element|ZxQuery|object} contextId The `contextId` object
@@ -3536,9 +3378,6 @@ function context(contextId, callback) {
 }
 
 /**
- * Register a callback for ZUIX global event (hook).
- * There can be only one callback for each kind of event.
- * Pass null as <handler> to unregister a previously registered callback.
  *
  * @private
  * @param {string} path
@@ -3865,32 +3704,29 @@ function replaceCache(c) {
 
 
 /**
- * Initializes a controller ```handler```.
+ * Allocates a component's controller handler. The provided `handler` function will be called
+ * to initialize the controller object once the component has been loaded.
  *
  * @example
  *
 <small>**Example - JavaScript**</small>
 <pre data-line="2"><code class="language-js">
-// Controller of component 'path/to/component_name'
-var ctrl = zuix.controller(function(cp) {
+// Allocates the controller handler to be used for the component 'path/to/component_name'
+var componentContext = zuix.controller(function(cp) {
     // `cp` is the {ContextController}
     cp.create = function() { ... };
     cp.destroy = function() { ... }
 }).for('path/to/component_name');
 </code></pre>
  *
- * @param {ContextControllerHandler} handler The controller handler
- * function ```function(cp){ ... } ```,
- * where `cp` is the [`{ContextController}`](#ZUIX_API--ContextController)
- * object that is passed to the handler once the component
- * is created.
- * @return {ContextControllerHandler} The initialized controller handler.
+ * @param {ContextControllerHandler} handler Function called to initialize the component's controller that will be passed as argument of this function.
+ * @return {ContextControllerHandler} The allocated controller handler.
  */
 Zuix.prototype.controller = function(handler) {
     return controller.call(this, handler);
 };
 /**
- * Searches and returns elements with `data-ui-field`
+ * Searches in the document or inside the provided `container` for elements with `data-ui-field`
  * attribute matching the given `fieldName`.
  *
  * @example
@@ -3908,19 +3744,19 @@ var containerDiv = zuix.field('container-div');
 containerDiv.html('Hello World!');
 ```
  *
- * @param {!string} fieldName The class to check for.
+ * @param {!string} fieldName Value of `data-ui-field` to look for.
  * @param {!Element} [container] Starting DOM element for this search (**default:** *document*)
- * @return {ZxQuery} The `{ZxQuery}`-wrapped elements with matching ```data-ui-field``` attribute.
+ * @return {ZxQuery} Elements with matching ```data-ui-field``` attribute.
  */
 Zuix.prototype.field = function(fieldName, container) {
     return field.call(this, fieldName, container);
 };
 /**
- * Searches inside the given element ```element```
- * for all ```data-ui-include``` and ```data-ui-load```
- * directives and process them.
- * This is to be called if adding dynamically content
- * with elements that declare the above attributes.
+ * Searches in the document or inside the given element ```element```
+ * for all ```data-ui-include``` and ```data-ui-load``` directives
+ * and process them by loading the requested components.
+ * This is a service function that should only be called if dynamically
+ * adding content with elements that contain *load* or *include* directives.
  *
  * @example
  *
@@ -3939,9 +3775,8 @@ Zuix.prototype.componentize = function (element) {
 /**
  * Loads a component with the given options.
  * This is the programmatic equivalent of
- * `data-ui-include` or `data-ui-load`.
- * All available options are described in the
- * `ContextOptions` object documentation.
+ * `data-ui-include` or `data-ui-load` attributes used to
+ * include content or load components from the HTML code.
  *
  * @example
  *
@@ -3953,7 +3788,7 @@ var exampleController = zuix.controller(function(cp){
         cp.view().html('Helllo World!');
     }
     function testMethod() {
-        console.log('Test method exposing');
+        console.log("Method's exposing test");
         cp.view().html('A simple test.');
     }
 });
@@ -3961,11 +3796,11 @@ var componentOptions = {
     container: zuix.field('container-div');
     controller: exampleController,
     ready: function () {
-        console.log('Loading complete.');
-        console.log('Component context instance', this);
+        console.log("Loading complete.");
+        console.log("Component's instance context", this);
     },
     error: function(error) {
-        console.log('Loading error!', error);
+        console.log("Loading error!", error);
     }
 };
 var ctx = zuix.load('path/to/component_name', componentOptions);
@@ -3974,13 +3809,13 @@ ctx.test();
  *
  * @param {!string} componentId The identifier name of the component to be loaded.
  * @param {ContextOptions} [options] Options used to initialize the loaded component.
- * @return {ComponentContext} The component instance context.
+ * @return {ComponentContext} The component's instance context.
  */
 Zuix.prototype.load = function(componentId, options) {
     return load.call(this, componentId, options);
 };
 /**
- * Unload and dispose the component.
+ * Unload and dispose a component's context.
  *
  * @example
  *
@@ -3989,9 +3824,8 @@ Zuix.prototype.load = function(componentId, options) {
 zuix.unload(ctx);
 ```
  *
- * @param {ComponentContext|Element} context The `ComponentContext` instance of the
- * component to be unloaded or its container element. Pass *Element* type if the
- * underlying component is lazy-loadable and the context might not have been loaded yet.
+ * @param {ComponentContext|Element} context The instance of the component to be unloaded or its container element.
+ * Pass *Element* type if the underlying component is lazy-loadable and it might not have been instantiated yet.
  * @return {Zuix} The ```{Zuix}``` object itself.
  */
 Zuix.prototype.unload = function (context) {
@@ -3999,9 +3833,8 @@ Zuix.prototype.unload = function (context) {
     return this;
 };
 /**
- * Get the `ComponentContext`, given its `contextId`
- * or component's container/view element.
- * HTML attribute equivalent: `data-ui-context`.
+ * Get a `ComponentContext` object, given its `contextId` or its container/view element.
+ * The `contextId` is the one specified by the `ContextOptions` object or by using the HTML attribute `data-ui-context`.
  *
  * @example
 <small>**Example - HTML**</small>
@@ -4029,17 +3862,17 @@ zuix.context('my-slide-show', function(c) {
  *
  * @param {Element|ZxQuery|object} contextId The `contextId` object
  * (usually a string) or the component's container/view element.
- * @param {function} [callback] The callback function that will pass the context object once it is ready.
- * @return {ComponentContext} The matching component context or `null` if the context does not exists or it is not yet loaded.
+ * @param {function} [callback] The callback function that will be called once the component is loaded. The {ComponentContext} object will be passed as argument of this callback.
+ * @return {ComponentContext} The matching component context or `null` if the component does not exists or it is not yet loaded.
  */
 Zuix.prototype.context = function(contextId, callback) {
     return context.call(this, contextId, callback);
 };
 /**
- * Create the component `componentId` and return its `{ComponentContext}` object.
- * The `{ComponentContext}.container()` element is detached from the DOM.
+ * Create the component specified by `componentId` and return its `{ComponentContext}` object.
+ * The returned component is unloaded and detached from the DOM and it must be explicitly attached.
  * After attaching it to the DOM, `zuix.componentize()` must be called in
- * order to load and display the component.
+ * order to actually load and display the component.
  *
  * @param {string} componentId Identifier name of the component to create.
  * @param {ContextOptions|undefined} [options] Component context options.
@@ -4061,7 +3894,7 @@ Zuix.prototype.createComponent = function(componentId, options) {
 /**
  * Triggers the event specified by `eventPath`.
  *
- * @param {Object} context Context (`this`) for the event handler
+ * @param {Object} context The context object (`this`) passed to handler functions listening to this event.
  * @param {string} eventPath The path of the event to fire.
  * @param {object} [eventData] The data object of the event.
  * @return {Zuix} The ```{Zuix}``` object itself.
@@ -4071,8 +3904,8 @@ Zuix.prototype.trigger = function (context, eventPath, eventData) {
     return this;
 };
 /**
- * Register a callback for ZUIX global event (hook).
- * There can be only one callback for each kind of event.
+ * Register a callback for a ZUIX global event (AKA hook).
+ * There can be only one callback for each different type of global event.
  * Pass null as <eventHandler> to unregister a previously registered callback.
  *
 <small>**Example - JavaScript**</small>
@@ -4131,7 +3964,7 @@ Zuix.prototype.hook = function (eventPath, eventHandler) {
     return this;
 };
 /**
- * Enable/Disable lazy-loading, or get current setting.
+ * Enable/Disable lazy-loading or get current setting.
  *
  * @param {boolean} [enable] Enable or disable lazy loading.
  * @param {number} [threshold] Load-ahead threshold (default is 1.0 => 100% of view size).
@@ -4145,7 +3978,7 @@ Zuix.prototype.lazyLoad = function (enable, threshold) {
     return this;
 };
 /**
- * Enable/Disable HTTP caching
+ * Enable/Disable HTTP caching or get current settings.
  *
  * @param {boolean} [enable]
  * @return {Zuix|boolean} *true* if HTTP caching is enabled, *false* otherwise.
@@ -4163,7 +3996,9 @@ Zuix.prototype.httpCaching = function(enable) {
  * Load a CSS or Javascript resource. All CSS styles and Javascript scripts
  * loaded with this method will be also included in the application bundle.
  * If a resource is already loaded, the request will be ignored.
- * This command is also meant to be used inside components' controller.
+ * This command is also meant to be used inside a components' controller.
+ * This enables the loading of a component without the need of manually including
+ * all of its dependencies since those will be automatically fetched as required.
  *
  * @example
  *
@@ -4367,6 +4202,6 @@ module.exports = function (root) {
     return zuix;
 };
 
-},{"../helpers/Logger":2,"../helpers/TaskQueue":3,"../helpers/Util":4,"../helpers/ZxQuery":5,"./ComponentCache":7,"./ComponentContext":8,"./Componentizer":9,"./ContextController":10,"./ContextOptions":13}]},{},[6])
+},{"../helpers/Logger":2,"../helpers/TaskQueue":3,"../helpers/Util":4,"../helpers/ZxQuery":5,"./ComponentCache":7,"./ComponentContext":8,"./Componentizer":9,"./ContextController":10}]},{},[6])
 (6)
 });

@@ -144,7 +144,7 @@
     "isEvent": false,
     "ignore": false,
     "line": 26,
-    "codeStart": 36
+    "codeStart": 37
   },
   {
     "tags": [
@@ -213,8 +213,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 37,
-    "codeStart": 44
+    "line": 38,
+    "codeStart": 46
   },
   {
     "tags": [],
@@ -228,8 +228,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 45,
-    "codeStart": 46,
+    "line": 47,
+    "codeStart": 48,
     "code": "module.exports = function (root) {\n    // dummy module for JsDocs/Closure Compiler\n    return null;\n};",
     "ctx": {
       "type": "method",

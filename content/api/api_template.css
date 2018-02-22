@@ -17,8 +17,9 @@ code {
     background-color: transparent;
 }
 small {
-    margin-left: 8px;
-    margin-right: 8px;
+    font-size: 80%;
+    margin-left: 2px;
+    margin-right: 12px;
     margin-top: 12px;
     font-weight:bold;
 }
@@ -44,6 +45,9 @@ h5 code.language-javascript {
 }
 .details {
     padding: 0 24px 16px;
+}
+.details small {
+    margin-left: 8px;
 }
 .api-member-details {
     margin-left: 8px;

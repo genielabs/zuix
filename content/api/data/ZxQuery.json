@@ -33,7 +33,7 @@
     "ignore": false,
     "line": 18,
     "codeStart": 27,
-    "code": "\"use strict\";\n\nvar _log =\n    require('./Logger')('TaskQueue.js');\nvar util = require('./Util.js');\n\n\n// Types definitions",
+    "code": "\"use strict\";\n\nvar _log =\n    require('./Logger')('TaskQueue.js');\nvar util = require('./Util.js');\n\n\n// Types definitions for JsDoc",
     "ctx": false
   },
   {
@@ -52,9 +52,9 @@
       },
       {
         "type": "property",
-        "string": "{number} x",
+        "string": "{number} x X coordinate of the element in the viewport.",
         "name": "x",
-        "description": "",
+        "description": "X coordinate of the element in the viewport.",
         "types": [
           "number"
         ],
@@ -66,9 +66,9 @@
       },
       {
         "type": "property",
-        "string": "{number} y",
+        "string": "{number} y Y coordinate of the element in the viewport.",
         "name": "y",
-        "description": "",
+        "description": "Y coordinate of the element in the viewport.",
         "types": [
           "number"
         ],
@@ -80,9 +80,9 @@
       },
       {
         "type": "property",
-        "string": "{boolean} visible",
+        "string": "{boolean} visible Boolean value indicating whether the element is visible in the viewport.",
         "name": "visible",
-        "description": "",
+        "description": "Boolean value indicating whether the element is visible in the viewport.",
         "types": [
           "boolean"
         ],
@@ -94,8 +94,8 @@
       }
     ],
     "description": {
-      "full": "",
-      "summary": "",
+      "full": "The `ElementPosition` object returned by the `position()` method.",
+      "summary": "The `ElementPosition` object returned by the `position()` method.",
       "body": ""
     },
     "isPrivate": false,
@@ -114,9 +114,9 @@
       },
       {
         "type": "param",
-        "string": "{number} i Iteration count",
+        "string": "{number} i Iteration count.",
         "name": "i",
-        "description": "Iteration count",
+        "description": "Iteration count.",
         "types": [
           "number"
         ],
@@ -128,9 +128,9 @@
       },
       {
         "type": "param",
-        "string": "{object} item Current element",
+        "string": "{object} item Current element.",
         "name": "item",
-        "description": "Current element",
+        "description": "Current element.",
         "types": [
           "object"
         ],
@@ -146,8 +146,8 @@
       }
     ],
     "description": {
-      "full": "",
-      "summary": "",
+      "full": "The `IterationCallback` function.",
+      "summary": "The `IterationCallback` function.",
       "body": ""
     },
     "isPrivate": false,
@@ -166,9 +166,9 @@
       },
       {
         "type": "param",
-        "string": "{number} count Iteration count",
+        "string": "{number} count Iteration count.",
         "name": "count",
-        "description": "Iteration count",
+        "description": "Iteration count.",
         "types": [
           "number"
         ],
@@ -180,9 +180,9 @@
       },
       {
         "type": "param",
-        "string": "{Element} item Current element",
+        "string": "{Element} item Current element.",
         "name": "item",
-        "description": "Current element",
+        "description": "Current element.",
         "types": [
           "Element"
         ],
@@ -198,8 +198,8 @@
       }
     ],
     "description": {
-      "full": "",
-      "summary": "",
+      "full": "The `InstanceIterationCallback` function.",
+      "summary": "The `InstanceIterationCallback` function.",
       "body": ""
     },
     "isPrivate": false,
