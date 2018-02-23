@@ -66,8 +66,6 @@ zuix.controller(function (cp) {
                     }
                 });
 
-                console.log(apiDocs);
-
             },
             error: function() {
                 cp.view().html('Error loading '+apiName+' API!');
