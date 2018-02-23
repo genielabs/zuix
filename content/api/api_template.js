@@ -69,31 +69,38 @@ zuix.controller(function (cp) {
 
             zuix.$.each(data.callbacks, function (i) {
 
-                html += '<div><a id="ZUIX_API--'+this.name+'"></a>';
-                html += '<h6>' + this.name + '</h6>';
+                html += '<a id="ZUIX_API--'+this.name+'"></a>';
+                html += '<div class="title"><i class="material-icons">expand_more</i> <h6>' + this.name + '</h6></div>';
+                html += '<div class="type-details"><div class="collapsed">';
                 html += '<p>' + this.description + '</p>';
                 html += '<code class="language-js">function '+buildCallbackArgs(this)+' { ... }</code>';
                 html += buildMethodParams(this);
                 html += buildReturnType(this);
                 html += buildExamples(this);
-                html += '</div>';
+                html += '</div></div>';
 
             });
 
             zuix.$.each(data.types, function (i) {
 
-                html += '<div><a id="ZUIX_API--'+this.name+'"></a>';
-                html += '<h6>' + this.name + '</h6>';
+                html += '<a id="ZUIX_API--'+this.name+'"></a>';
+                html += '<div class="title"><i class="material-icons">expand_more</i> <h6>' + this.name + '</h6></div>';
+                html += '<div class="type-details"><div class="collapsed">';
                 html += '<p>' + this.description + '</p>';
                 html += '<strong><small>PROPERTIES</small></strong>';
                 html += '<span class="mdl-color-text--accent mdl-typography--font-bold">{</span><br>';
                 html += buildTypes(this.properties);
                 html += '<span class="mdl-color-text--accent mdl-typography--font-bold">}</span>';
-                html += '</div>';
+                html += '</div></div>';
 
             });
             cp.field('types')
-                .html(html);
+                .html(html)
+                .find('div.title')
+                .css('cursor', 'pointer')
+                .on('click', function () {
+                    expandItem(this);
+                });
             cp.trigger('view:process', cp.field('types'), true);
 
         } else cp.field('container-types').hide();

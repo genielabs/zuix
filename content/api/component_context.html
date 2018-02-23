@@ -1,24 +1,52 @@
 ### `ComponentContext` class
 
-This is the class that holds all objects and data of a component
-instance, hence represent a component instance itself.
+We call context of a component (or a content), that object that holds a reference and manage all the resources
+related to the component instance. So, when a component is loaded, the container/view element,
+the CSS style and the JavaScript controller will be accessible though its `ComponentContext` object.
 
-A reference to a component can be obtained in two ways:
+A reference to a component context can be obtained in either one of the following ways:
 
-```
-// get component context as return value of the ```zuix.load(...)``` command
+<i class="material-icons">arrow_forward</i>
+as the return value of the `zuix.load(...)` method, when loading a component from JavaScript.
+
+```javascript
+// get component context as return value of the `zuix.load(...)` command
 var ctx = zuix.load( ... );
 ```
 
-or
+<i class="material-icons">arrow_forward</i>
+by using the `zuix.context(...)` method, when loading a component from HTML.
 
 ```html
 <div data-ui-load="path/to/component_name"
-     data-ui-context="my-context-id"><!-- ... -->
+     data-ui-field="my-field-id"
+     data-ui-context="my-context-id">
+    <!-- ... -->
 </div>
 <script>
-// get component instance starting from it's view or container element
-var ctx = zuix.context('my-context-id');
+// Get the component context by using the assigned id
+ctx = zuix.context('my-context-id');
+// OR by referencing its HTML element container
+var componentDiv = zuix.field('my-field-id');
+ctx = zuix.context(componentDiv);
+</script>
+```
+
+<i class="material-icons">arrow_forward</i>
+as the result of the `{ContextReadyCallback}` specified in the `{ContextOptions}`.
+
+```html
+<div data-ui-load="path/to/component_name"
+     data-ui-options="component_options">
+    <!-- ... -->
+</div>
+<script>
+var component_options = {
+    ready: function(ctx) {
+        console.log('Component loaded', ctx);
+        // ...
+    }
+};
 </script>
 ```
 
