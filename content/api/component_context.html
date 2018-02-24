@@ -1,12 +1,12 @@
 ### `ComponentContext` class
 
-We call context of a component (or a content), that object that holds a reference and manage all the resources
-related to the component instance. So, when a component is loaded, the container/view element,
+The context of a component (or a content) is that object that manages and holds a reference to all the resources
+related to the component instance itself. So, when a component is loaded, the container/view element,
 the CSS style and the JavaScript controller will be accessible though its `ComponentContext` object.
 
 A reference to a component context can be obtained in either one of the following ways:
 
-<i class="material-icons">arrow_forward</i>
+<i class="material-icons mdl-typography--font-bold">arrow_right</i>
 as the return value of the `zuix.load(...)` method, when loading a component from JavaScript.
 
 ```javascript
@@ -14,7 +14,7 @@ as the return value of the `zuix.load(...)` method, when loading a component fro
 var ctx = zuix.load( ... );
 ```
 
-<i class="material-icons">arrow_forward</i>
+<i class="material-icons mdl-typography--font-bold">arrow_right</i>
 by using the `zuix.context(...)` method, when loading a component from HTML.
 
 ```html
@@ -32,7 +32,7 @@ ctx = zuix.context(componentDiv);
 </script>
 ```
 
-<i class="material-icons">arrow_forward</i>
+<i class="material-icons mdl-typography--font-bold">arrow_right</i>
 as the result of the `{ContextReadyCallback}` specified in the `{ContextOptions}`.
 
 ```html

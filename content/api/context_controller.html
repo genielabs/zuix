@@ -1,8 +1,9 @@
 ### `ContextController` class
 
-Instance of this class is passed to the *context controller handler*
-and allow accessing and controlling the component's view, events
-and all other aspect of it from inside the controller JavaScript code.
+This is the class that implements the component controller. After a component is loaded it
+will trigger the `init` function of the `ContextController` object and then, once the component view is ready,
+the `create` function.
+Methods of the controller object allow accessing and managing the view, events and all other aspect of a ZUIX component.
 
 <div data-ui-load="content/api/api_loader"
      data-ui-options="api_loader_options"

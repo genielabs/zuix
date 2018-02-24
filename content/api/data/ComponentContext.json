@@ -40,6 +40,44 @@
     "tags": [
       {
         "type": "callback",
+        "string": "ContextControllerHandler"
+      },
+      {
+        "type": "param",
+        "string": "{ContextController} cp The component controller object.",
+        "name": "cp",
+        "description": "The component controller object.",
+        "types": [
+          "ContextController"
+        ],
+        "typesDescription": "<a href=\"ContextController.html\">ContextController</a>",
+        "optional": false,
+        "nullable": false,
+        "nonNullable": false,
+        "variable": false
+      },
+      {
+        "type": "this",
+        "string": "{ContextController}"
+      }
+    ],
+    "description": {
+      "full": "This function is called after the component is loaded\nand it is used to initialize its controller.",
+      "summary": "This function is called after the component is loaded\nand it is used to initialize its controller.",
+      "body": ""
+    },
+    "isPrivate": false,
+    "isConstructor": false,
+    "isClass": false,
+    "isEvent": false,
+    "ignore": false,
+    "line": 38,
+    "codeStart": 46
+  },
+  {
+    "tags": [
+      {
+        "type": "callback",
         "string": "EventCallback"
       },
       {
@@ -76,8 +114,8 @@
       }
     ],
     "description": {
-      "full": "Callback function called when an event registered with the `on` method occurs.",
-      "summary": "Callback function called when an event registered with the `on` method occurs.",
+      "full": "Callback function triggered when an event registered with the `on` method occurs.",
+      "summary": "Callback function triggered when an event registered with the `on` method occurs.",
       "body": ""
     },
     "isPrivate": false,
@@ -85,8 +123,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 38,
-    "codeStart": 46
+    "line": 47,
+    "codeStart": 55
   },
   {
     "tags": [
@@ -137,8 +175,8 @@
       }
     ],
     "description": {
-      "full": "*\nThe component's context object.",
-      "summary": "*\nThe component's context object.",
+      "full": "*\nThe component context object.",
+      "summary": "*\nThe component context object.",
       "body": ""
     },
     "isPrivate": false,
@@ -146,8 +184,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 47,
-    "codeStart": 56,
+    "line": 56,
+    "codeStart": 65,
     "code": "function ComponentContext(options, eventCallback) {\n\n    this._options = null;\n    this.contextId = (options == null || options.contextId == null) ? null : options.contextId;\n    this.componentId = null;\n    this.trigger = function(context, eventPath, eventValue) {\n        if (typeof eventCallback === 'function')\n            eventCallback(context, eventPath, eventValue);\n    };",
     "ctx": {
       "type": "constructor",
@@ -173,8 +211,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 66,
-    "codeStart": 67,
+    "line": 75,
+    "codeStart": 76,
     "code": "this._container = null;",
     "ctx": {
       "type": "property",
@@ -202,8 +240,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 69,
-    "codeStart": 70,
+    "line": 78,
+    "codeStart": 79,
     "code": "this._model = null;",
     "ctx": {
       "type": "property",
@@ -231,8 +269,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 71,
-    "codeStart": 72,
+    "line": 80,
+    "codeStart": 81,
     "code": "this._view = null;",
     "ctx": {
       "type": "property",
@@ -260,8 +298,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 73,
-    "codeStart": 74,
+    "line": 82,
+    "codeStart": 83,
     "code": "this._css = null;",
     "ctx": {
       "type": "property",
@@ -289,8 +327,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 75,
-    "codeStart": 76,
+    "line": 84,
+    "codeStart": 85,
     "code": "this._style = null;",
     "ctx": {
       "type": "property",
@@ -330,8 +368,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 77,
-    "codeStart": 81,
+    "line": 86,
+    "codeStart": 90,
     "code": "this._controller = null;",
     "ctx": {
       "type": "property",
@@ -370,8 +408,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 83,
-    "codeStart": 90,
+    "line": 92,
+    "codeStart": 99,
     "code": "this.behavior = null;",
     "ctx": {
       "type": "property",
@@ -399,8 +437,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 92,
-    "codeStart": 93,
+    "line": 101,
+    "codeStart": 102,
     "code": "this._eventMap = [];",
     "ctx": {
       "type": "property",
@@ -428,8 +466,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 94,
-    "codeStart": 95,
+    "line": 103,
+    "codeStart": 104,
     "code": "this._behaviorMap = [];",
     "ctx": {
       "type": "property",
@@ -469,8 +507,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 97,
-    "codeStart": 101,
+    "line": 106,
+    "codeStart": 110,
     "code": "this._c = null;\n\nthis.options(options);\n\nreturn this;\n}",
     "ctx": {
       "type": "property",
@@ -512,8 +550,8 @@
       }
     ],
     "description": {
-      "full": "Gets/Sets the component's container element.\nReturns the current component element if no\nargument is passed, the {ComponentContext} itself\notherwise.",
-      "summary": "Gets/Sets the component's container element.\nReturns the current component element if no\nargument is passed, the {ComponentContext} itself\notherwise.",
+      "full": "Gets/Sets the container element of the component.\nReturns the current container element if no\nargument is passed, the {ComponentContext} itself\notherwise.",
+      "summary": "Gets/Sets the container element of the component.\nReturns the current container element if no\nargument is passed, the {ComponentContext} itself\notherwise.",
       "body": ""
     },
     "isPrivate": false,
@@ -521,8 +559,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 107,
-    "codeStart": 116,
+    "line": 116,
+    "codeStart": 125,
     "code": "ComponentContext.prototype.container = function (container) {\n    // TODO: should automatically re-attach view to the new parent?\n    if (container == null) return this._container;\n    else if (container instanceof z$.ZxQuery)\n        container = container.get();\n    this._container = container;\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -536,9 +574,9 @@
     "tags": [
       {
         "type": "param",
-        "string": "{Element|string|undefined} [view] The view *HTML* string or element.",
+        "string": "{Element|string|undefined} [view] The *HTML* string or element of the view.",
         "name": "[view]",
-        "description": "The view *HTML* string or element.",
+        "description": "The *HTML* string or element of the view.",
         "types": [
           "Element",
           "string"
@@ -565,8 +603,8 @@
       }
     ],
     "description": {
-      "full": "Gets/Sets the component's view element.\nIf an *HTML* string is passed, the the view element\nwill be a new `div` wrapping the given markup.\nReturns the current view element if no\nargument is passed, the {ComponentContext} itself otherwise.",
-      "summary": "Gets/Sets the component's view element.\nIf an *HTML* string is passed, the the view element\nwill be a new `div` wrapping the given markup.\nReturns the current view element if no\nargument is passed, the {ComponentContext} itself otherwise.",
+      "full": "Gets/Sets the view element of the component.\nIf an *HTML* string is passed, then the view element\nwill be a new `div` wrapping the given markup.\nReturns the current view element if no\nargument is passed, the {ComponentContext} itself otherwise.",
+      "summary": "Gets/Sets the view element of the component.\nIf an *HTML* string is passed, then the view element\nwill be a new `div` wrapping the given markup.\nReturns the current view element if no\nargument is passed, the {ComponentContext} itself otherwise.",
       "body": ""
     },
     "isPrivate": false,
@@ -574,8 +612,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 125,
-    "codeStart": 135,
+    "line": 134,
+    "codeStart": 144,
     "code": "ComponentContext.prototype.view = function (view) {\n    if (typeof view === 'undefined') return this._view;\n    else if (view instanceof z$.ZxQuery)\n        view = view.get();\n\n    _log.t(this.componentId, 'view:attach', 'timer:view:start');\n    if (typeof view === 'string') {\n        // load view from HTML source\n\n        // trigger `html:parse` hook before assigning content to the view\n        var hookData = {content: view};\n        this.trigger(this, 'html:parse', hookData);\n        view = hookData.content;\n\n        if (this._container != null) {\n            // append view content to the container\n            this._view = this._container;\n            this._view.innerHTML += view;\n        } else {\n            var viewDiv = z$.wrapElement('div', view);\n            if (this._view != null)\n                this._view.innerHTML = viewDiv.innerHTML;\n            else this._view = viewDiv;\n        }\n\n        z$(this._view).find('script').each(function (i, el) {\n            if (this.attr('zuix-loaded') !== 'true') {\n                this.attr('zuix-loaded', 'true');",
     "ctx": {
       "type": "method",
@@ -597,8 +635,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 163,
-    "codeStart": 177,
+    "line": 172,
+    "codeStart": 186,
     "code": "(eval).call(window, el.innerHTML);\n            }\n        });\n\n        // trigger `view:process` hook when the view is ready to be processed\n        this.trigger(this, 'view:process', z$(this._view));\n\n    } else {\n        if (view instanceof z$.ZxQuery)\n            view = view.get();\n        // load inline view\n        if (this._container != null) {\n            this._view = z$.wrapElement('div', view.outerHTML).firstElementChild;\n            this._view.removeAttribute('data-ui-view');\n            this._container.appendChild(this._view);\n            this._view = this._container;\n        } else this._view = view;\n    }\n\n    var v = z$(this._view);\n    if (this._options.css === false)\n    // disable local css styling for this instance\n        v.addClass('zuix-css-ignore');\n    else\n    // enable local css styling\n        v.removeClass('zuix-css-ignore');\n\n    this.modelToView();\n\n    _log.t(this.componentId, 'view:attach', 'timer:view:stop');\n    return this;\n};",
     "ctx": false
   },
@@ -639,8 +677,8 @@
       }
     ],
     "description": {
-      "full": "Gets/Sets the component's view style.\nThe `css` argument can be a string containing all\nstyles definitions or a reference to a style\nelement. When a string is passed the css\nis linked to the `componentId` attribute so that\nits styles will be only applied to the component\ncontainer.\nIf no argument is given, then the current style\nelement is returned.",
-      "summary": "Gets/Sets the component's view style.\nThe `css` argument can be a string containing all\nstyles definitions or a reference to a style\nelement. When a string is passed the css\nis linked to the `componentId` attribute so that\nits styles will be only applied to the component\ncontainer.\nIf no argument is given, then the current style\nelement is returned.",
+      "full": "Gets/Sets the view style of the component.\nThe `css` argument can be a string containing all\nstyles definitions or a reference to a style\nelement. When a string is passed the css\nis linked to the `componentId` attribute so that\nits styles will be only applied to the component\ncontainer.\nIf no argument is given, then the current style\nelement is returned.",
+      "summary": "Gets/Sets the view style of the component.\nThe `css` argument can be a string containing all\nstyles definitions or a reference to a style\nelement. When a string is passed the css\nis linked to the `componentId` attribute so that\nits styles will be only applied to the component\ncontainer.\nIf no argument is given, then the current style\nelement is returned.",
       "body": ""
     },
     "isPrivate": false,
@@ -648,8 +686,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 210,
-    "codeStart": 230,
+    "line": 219,
+    "codeStart": 239,
     "code": "ComponentContext.prototype.style = function (css) {\n    if (typeof css === 'undefined') return this._style;\n    _log.t(this.componentId, 'view:style', 'timer:view:start');\n    if (css == null || css instanceof Element) {\n\n        this._css = (css instanceof Element) ? css.innerText : css;\n        this._style = z$.appendCss(css, this._style, this.componentId);\n\n    } else if (typeof css === 'string') {\n\n        // store original unparsed css (might be useful for debugging)\n        this._css = css;\n\n        // nest the CSS inside [data-ui-component='<componentId>']\n        // so that the style is only applied to this component type\n        css = z$.wrapCss('[data-ui-component=\"' + this.componentId + '\"]:not(.zuix-css-ignore)', css);\n\n        // trigger `css:parse` hook before assigning content to the view\n        var hookData = { content: css };\n        this.trigger(this, 'css:parse', hookData);\n        css = hookData.content;\n\n        // output css\n        this._style = z$.appendCss(css, this._style, this.componentId);\n\n    }\n    // TODO: should throw error if ```css``` is not a valid type\n    _log.t(this.componentId, 'view:style', 'timer:view:stop');\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -695,8 +733,8 @@
       }
     ],
     "description": {
-      "full": "Gets/Sets the component's data model.",
-      "summary": "Gets/Sets the component's data model.",
+      "full": "Gets/Sets the data model of the component.",
+      "summary": "Gets/Sets the data model of the component.",
       "body": ""
     },
     "isPrivate": false,
@@ -704,9 +742,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 260,
-    "codeStart": 275,
-    "code": "ComponentContext.prototype.model = function (model) {\n    if (typeof model === 'undefined') return this._model;\n    else this._model = model; // model can be set to null\n    this.modelToView();\n    // call controller's `update` method when model is updated\n    if (this._c != null && util.isFunction(this._c.update))\n        this._c.update.call(this._c);\n    return this;\n};",
+    "line": 269,
+    "codeStart": 284,
+    "code": "ComponentContext.prototype.model = function (model) {\n    if (typeof model === 'undefined') return this._model;\n    else this._model = model; // model can be set to null\n    this.modelToView();\n    // call controller `update` method when model is updated\n    if (this._c != null && util.isFunction(this._c.update))\n        this._c.update.call(this._c);\n    return this;\n};",
     "ctx": {
       "type": "method",
       "constructor": "ComponentContext",
@@ -723,9 +761,9 @@
       },
       {
         "type": "param",
-        "string": "{ContextControllerHandler|undefined} [controller] The controller handler function.",
+        "string": "{ContextControllerHandler|undefined} [controller] The handler function of the controller.",
         "name": "[controller]",
-        "description": "The controller handler function.",
+        "description": "The handler function of the controller.",
         "types": [
           "ContextControllerHandler"
         ],
@@ -751,8 +789,8 @@
       }
     ],
     "description": {
-      "full": "Gets/Sets the controller handler function.",
-      "summary": "Gets/Sets the controller handler function.",
+      "full": "Gets/Sets the handler function of the controller.",
+      "summary": "Gets/Sets the handler function of the controller.",
       "body": ""
     },
     "isPrivate": false,
@@ -760,8 +798,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 284,
-    "codeStart": 301,
+    "line": 293,
+    "codeStart": 310,
     "code": "ComponentContext.prototype.controller = function (controller) {\n    if (typeof controller === 'undefined') return this._controller;\n    // TODO: should dispose previous context controller first\n    else this._controller = controller; // can be null\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -812,8 +850,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 308,
-    "codeStart": 314,
+    "line": 317,
+    "codeStart": 323,
     "code": "ComponentContext.prototype.options = function (options) {\n    if (options == null)\n        return this._options;\n    var o = this._options = this._options || {};\n    z$.each(options, function (k, v) {\n        o[k] = v;\n    });\n    if (o.componentId != null)\n        this.componentId = o.componentId;\n    this.container(o.container);\n    this.view(o.view);\n    if (typeof o.css !== 'undefined')\n        this.style(o.css);\n    this.controller(o.controller);\n    this.model(o.model);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -845,9 +883,9 @@
       },
       {
         "type": "param",
-        "string": "{EventCallback} eventHandler The event handler function.",
+        "string": "{EventCallback} eventHandler The event handling function.",
         "name": "eventHandler",
-        "description": "The event handler function.",
+        "description": "The event handling function.",
         "types": [
           "EventCallback"
         ],
@@ -872,8 +910,8 @@
       }
     ],
     "description": {
-      "full": "Listen for a component event.",
-      "summary": "Listen for a component event.",
+      "full": "Listens for a component event.",
+      "summary": "Listens for a component event.",
       "body": ""
     },
     "isPrivate": false,
@@ -881,8 +919,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 332,
-    "codeStart": 345,
+    "line": 341,
+    "codeStart": 354,
     "code": "ComponentContext.prototype.on = function (eventPath, eventHandler) {\n    // TODO: throw error if _c (controller instance) is not yet ready\n    this._c.on(eventPath, eventHandler);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -896,7 +934,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// loads 'path/to/component_name.css' by default\nctx.loadCss();\n// or loads the view's css with options\nctx.loadCss({\n    path: 'url/of/style/file.css',\n    success: function() { ... },\n    error: function(err) { ... },\n    then: function() { ... }\n});\n</code></pre>"
+        "string": "<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// loads 'path/to/component_name.css' by default\nctx.loadCss();\n// or loads the view css with options\nctx.loadCss({\n    path: 'url/of/style/file.css',\n    success: function() { ... },\n    error: function(err) { ... },\n    then: function() { ... }\n});\n</code></pre>"
       },
       {
         "type": "private",
@@ -946,8 +984,8 @@
       }
     ],
     "description": {
-      "full": "Load the `.css` file and replace the component's view style.\nIf no `options.path` is specified, it will try to load\nthe file with the same base-name as the `componentId`.",
-      "summary": "Load the `.css` file and replace the component's view style.\nIf no `options.path` is specified, it will try to load\nthe file with the same base-name as the `componentId`.",
+      "full": "Loads the `.css` file and replace the view style of the component.\nIf no `options.path` is specified, it will try to load\nthe file with the same base-name as the `componentId`.",
+      "summary": "Loads the `.css` file and replace the view style of the component.\nIf no `options.path` is specified, it will try to load\nthe file with the same base-name as the `componentId`.",
       "body": ""
     },
     "isPrivate": true,
@@ -955,8 +993,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 350,
-    "codeStart": 374,
+    "line": 359,
+    "codeStart": 383,
     "code": "ComponentContext.prototype.loadCss = function (options, enableCaching) {\n    var context = this;\n    if (util.isNoU(options)) options = {};\n    if (!util.isNoU(options.caching))\n        enableCaching = options.caching;\n    var cssPath = context.componentId + '.css';\n    if (!util.isNoU(options.path))\n        cssPath = options.path;\n    if (!enableCaching)\n        cssPath += '?'+new Date().getTime();\n    z$.ajax({\n        url: cssPath,\n        success: function (viewCss) {\n            context.style(viewCss);\n            if (util.isFunction(options.success))\n                (options.success).call(context, viewCss);\n        },\n        error: function (err) {\n            _log.e(err, context);\n            if (util.isFunction(options.error))\n                (options.error).call(context, err);\n        },\n        then: function () {\n            if (util.isFunction(options.then))\n                (options.then).call(context);\n        }\n    });\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -970,7 +1008,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// loads 'path/to/component_name.html' by default\nctx.loadHtml();\n// or loads the view's html with options\nctx.loadHtml({\n    path: 'url/of/view/file.html',\n    success: function() { ... },\n    error: function(err) { ... },\n    then: function() { ... }\n});\n</code></pre>"
+        "string": "<small>Example - JavaScript</small>\n<pre><code class=\"language-js\">\n// loads 'path/to/component_name.html' by default\nctx.loadHtml();\n// or loads the view html with options\nctx.loadHtml({\n    path: 'url/of/view/file.html',\n    success: function() { ... },\n    error: function(err) { ... },\n    then: function() { ... }\n});\n</code></pre>"
       },
       {
         "type": "private",
@@ -1020,8 +1058,8 @@
       }
     ],
     "description": {
-      "full": "Load the `.html` file and replace the component's view markup.\nIf no `options.path` is specified, it will try to load the\nfile with the same base-name as the `componentId`.",
-      "summary": "Load the `.html` file and replace the component's view markup.\nIf no `options.path` is specified, it will try to load the\nfile with the same base-name as the `componentId`.",
+      "full": "Loads the `.html` file and replace the view markup code of the component.\nIf no `options.path` is specified, it will try to load the\nfile with the same base-name as the `componentId`.",
+      "summary": "Loads the `.html` file and replace the view markup code of the component.\nIf no `options.path` is specified, it will try to load the\nfile with the same base-name as the `componentId`.",
       "body": ""
     },
     "isPrivate": true,
@@ -1029,8 +1067,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 403,
-    "codeStart": 427,
+    "line": 412,
+    "codeStart": 436,
     "code": "ComponentContext.prototype.loadHtml = function(options, enableCaching) {\n    var context = this;\n    var htmlPath = context.componentId;\n    if (util.isNoU(options)) options = {};\n    if (!util.isNoU(options.caching))\n        enableCaching = options.caching;\n    if (!util.isNoU(options.path))\n        htmlPath = options.path;\n    // TODO: check if view caching is working in this case too\n    var inlineView = z$().find('[data-ui-view=\"' + htmlPath + '\"]:not([data-ui-component*=\"\"])');\n    if (inlineView.length() > 0) {\n        var inlineElement = inlineView.get(0);\n        if (context.view() === inlineElement || (context.container() != null && context.container().contains(inlineElement)))\n            // TODO: test this case\n            context.view(inlineElement);\n        else\n            context.view(inlineElement.outerHTML);\n        var html = context.view().innerHTML;\n        if (util.isFunction(options.success))\n            (options.success).call(context, html);\n        if (util.isFunction(options.then))\n            (options.then).call(context);\n    } else {\n        var cext = util.isNoU(options.cext) ? '.html' : options.cext;\n        if (htmlPath == context.componentId)\n            htmlPath += cext + (!enableCaching ? '?' + new Date().getTime() : '');\n        z$.ajax({\n            url: htmlPath,\n            success: function (viewHtml) {\n                context.view(viewHtml);\n                if (util.isFunction(options.success))\n                    (options.success).call(context, viewHtml);\n            },\n            error: function (err) {\n                _log.e(err, context);\n                if (util.isFunction(options.error))\n                    (options.error).call(context, err);\n            },\n            then: function () {\n                if (util.isFunction(options.then))\n                    (options.then).call(context);\n            }\n        });\n    }\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -1057,8 +1095,8 @@
       }
     ],
     "description": {
-      "full": "Create the data model starting from ```data-ui-field```\nelements declared in the component's view.",
-      "summary": "Create the data model starting from ```data-ui-field```\nelements declared in the component's view.",
+      "full": "Creates the data model starting from ```data-ui-field```\nelements declared in the component view.",
+      "summary": "Creates the data model starting from ```data-ui-field```\nelements declared in the component view.",
       "body": ""
     },
     "isPrivate": false,
@@ -1066,8 +1104,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 473,
-    "codeStart": 479,
+    "line": 482,
+    "codeStart": 488,
     "code": "ComponentContext.prototype.viewToModel = function() {\n    _log.t(this.componentId, 'view:model', 'timer:vm:start');\n    var _t = this;\n    this._model = {};\n    // create data model from inline view fields\n    z$(this._view).find('[data-ui-field]').each(function(i, el) {\n        if (this.parent('pre,code').length() > 0)\n            return true;\n        var name = this.attr('data-ui-field');\n        var value =\n            // TODO: this is a work around for IE where \"el.innerHTML\" is lost after view replacing\n            (!util.isNoU(el.innerHTML) && util.isIE())\n                ? el.cloneNode(true) : el;\n        // dotted field path\n        if (name.indexOf('.')>0) {\n            var path = name.split('.');\n            var cur = _t._model;\n            for (var p = 0; p < path.length - 1; p++) {\n                if (typeof cur[path[p]] === 'undefined')\n                    cur[path[p]] = {};\n                cur = cur[path[p]];\n            }\n            cur[path[path.length - 1]] = value;\n        } else _t._model[name] = value;\n    });\n    _log.t(this.componentId, 'view:model', 'timer:vm:stop');\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -1094,8 +1132,8 @@
       }
     ],
     "description": {
-      "full": "Copy values from the data model to the ```data-ui-field``\nelements declared in the component's view.",
-      "summary": "Copy values from the data model to the ```data-ui-field``\nelements declared in the component's view.",
+      "full": "Copies values from the data model to the ```data-ui-field```\nelements declared in the component view.",
+      "summary": "Copies values from the data model to the ```data-ui-field```\nelements declared in the component view.",
       "body": ""
     },
     "isPrivate": false,
@@ -1103,8 +1141,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 507,
-    "codeStart": 513,
+    "line": 516,
+    "codeStart": 522,
     "code": "ComponentContext.prototype.modelToView = function () {\n    _log.t(this.componentId, 'model:view', 'timer:mv:start');\n    if (this._view != null && this._model != null) {\n        var _t = this;\n        z$(this._view).find('[data-ui-field]').each(function(i, el) {\n            if (this.parent('pre,code').length() > 0)\n                return true;\n            var boundField = this.attr('data-bind-to');\n            if (boundField == null)\n                boundField = this.attr('data-ui-field');\n            if (typeof _t._model === 'function')\n                (_t._model).call(z$(_t._view), this, boundField);\n            else {\n                var boundData = util.propertyFromPath(_t._model, boundField);\n                if (typeof boundData === 'function') {\n                    (boundData).call(z$(_t._view), this, boundField);\n                } else if (boundData != null) {\n                    // try to guess target property\n                    switch (el.tagName.toLowerCase()) {\n                        // TODO: complete binding cases\n                        case 'img':\n                            el.src = (!util.isNoU(boundData.src) ?  boundData.src :\n                                (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));\n                            if (boundData.alt) el.alt = boundData.alt;\n                            break;\n                        case 'a':\n                            el.href = (!util.isNoU(boundData.href) ? boundData.href :\n                                (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));\n                            if (boundData.title) el.title = boundData.title;\n                            break;\n                        case 'input':\n                            el.value = (!util.isNoU(boundData.value) ? boundData.value :\n                                (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));\n                            break;\n                        default:\n                            el.innerHTML = (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData);\n                    }\n                }\n            }\n        });\n    }\n    _log.t(this.componentId, 'model:view', 'timer:mv:stop');\n    return this;\n};\n\nmodule.exports = ComponentContext;",
     "ctx": {
       "type": "method",

@@ -222,9 +222,9 @@
       },
       {
         "type": "property",
-        "string": "{ContextReadyCallback|undefined} ready The ready callback, called once the component is succesfully loaded.",
+        "string": "{ContextReadyCallback|undefined} ready The ready callback, triggered once the component is succesfully loaded.",
         "name": "ready",
-        "description": "The ready callback, called once the component is succesfully loaded.",
+        "description": "The ready callback, triggered once the component is succesfully loaded.",
         "types": [
           "ContextReadyCallback"
         ],
@@ -236,9 +236,9 @@
       },
       {
         "type": "property",
-        "string": "{ContextErrorCallback|undefined} error The error callback, called when an error occurs.",
+        "string": "{ContextErrorCallback|undefined} error The error callback, triggered when an error occurs.",
         "name": "error",
-        "description": "The error callback, called when an error occurs.",
+        "description": "The error callback, triggered when an error occurs.",
         "types": [
           "ContextErrorCallback"
         ],
@@ -288,8 +288,8 @@
       }
     ],
     "description": {
-      "full": "Callback function called if an error occurs when loading a component.",
-      "summary": "Callback function called if an error occurs when loading a component.",
+      "full": "Callback function triggered if an error occurs when loading a component.",
+      "summary": "Callback function triggered if an error occurs when loading a component.",
       "body": ""
     },
     "isPrivate": false,
@@ -326,8 +326,8 @@
       }
     ],
     "description": {
-      "full": "Callback function called when a component has been successfully loaded.",
-      "summary": "Callback function called when a component has been successfully loaded.",
+      "full": "Callback function triggered when a component has been successfully loaded.",
+      "summary": "Callback function triggered when a component has been successfully loaded.",
       "body": ""
     },
     "isPrivate": false,
@@ -1165,9 +1165,9 @@
       },
       {
         "type": "param",
-        "string": "{Element|ZxQuery|object} contextId The `contextId` object\n(usually a string) or the component's container/view element.",
+        "string": "{Element|ZxQuery|object} contextId The `contextId` object\n(usually a string) or the container/view element of the component.",
         "name": "contextId",
-        "description": "The `contextId` object (usually a string) or the component's container/view element.",
+        "description": "The `contextId` object (usually a string) or the container/view element of the component.",
         "types": [
           "Element",
           "ZxQuery",
@@ -1868,8 +1868,8 @@
       }
     ],
     "description": {
-      "full": "Searches in the document or inside the provided `container` for elements with `data-ui-field`\nattribute matching the given `fieldName`.\nThis method implements a caching mechanism and automatic\ndisposal of allocated objects and events.",
-      "summary": "Searches in the document or inside the provided `container` for elements with `data-ui-field`\nattribute matching the given `fieldName`.\nThis method implements a caching mechanism and automatic\ndisposal of allocated objects and events.",
+      "full": "Search the document or inside the given `container` for elements\nwith `data-ui-field` attribute matching the provided `fieldName`.\nThis method implements a caching mechanism and automatic\ndisposal of allocated objects and events.",
+      "summary": "Search the document or inside the given `container` for elements\nwith `data-ui-field` attribute matching the provided `fieldName`.\nThis method implements a caching mechanism and automatic\ndisposal of allocated objects and events.",
       "body": ""
     },
     "isPrivate": false,
@@ -1892,7 +1892,7 @@
     "tags": [
       {
         "type": "example",
-        "string": "\n<small>**Example - JavaScript**</small>\n```js\nvar exampleController = zuix.controller(function(cp){\n    cp.create = function() {\n        cp.expose('test', testMethod);\n        cp.view().html('Helllo World!');\n    }\n    function testMethod() {\n        console.log(\"Method's exposing test\");\n        cp.view().html('A simple test.');\n    }\n});\nvar componentOptions = {\n    container: zuix.field('container-div');\n    controller: exampleController,\n    ready: function () {\n        console.log(\"Loading complete.\");\n        console.log(\"Component's instance context\", this);\n    },\n    error: function(error) {\n        console.log(\"Loading error!\", error);\n    }\n};\nvar ctx = zuix.load('path/to/component_name', componentOptions);\nctx.test();\n```"
+        "string": "\n<small>**Example - JavaScript**</small>\n```js\nvar exampleController = zuix.controller(function(cp){\n    cp.create = function() {\n        cp.expose('test', testMethod);\n        cp.view().html('Helllo World!');\n    }\n    function testMethod() {\n        console.log(\"Method exposing test\");\n        cp.view().html('A simple test.');\n    }\n});\nvar componentOptions = {\n    container: zuix.field('container-div');\n    controller: exampleController,\n    ready: function () {\n        console.log(\"Loading complete.\");\n        console.log(\"Component instance context\", this);\n    },\n    error: function(error) {\n        console.log(\"Loading error!\", error);\n    }\n};\nvar ctx = zuix.load('path/to/component_name', componentOptions);\nctx.test();\n```"
       },
       {
         "type": "param",
@@ -1924,7 +1924,7 @@
       },
       {
         "type": "return",
-        "string": "{ComponentContext} The component's instance context.",
+        "string": "{ComponentContext} The component context.",
         "types": [
           "ComponentContext"
         ],
@@ -1933,12 +1933,12 @@
         "nullable": false,
         "nonNullable": false,
         "variable": false,
-        "description": "The component's instance context."
+        "description": "The component context."
       }
     ],
     "description": {
-      "full": "Loads a component with the given options.\nThis is the programmatic equivalent of\n`data-ui-include` or `data-ui-load` attributes used to\ninclude content or load components from the HTML code.",
-      "summary": "Loads a component with the given options.\nThis is the programmatic equivalent of\n`data-ui-include` or `data-ui-load` attributes used to\ninclude content or load components from the HTML code.",
+      "full": "Loads a component with the given options.\nThis is the programmatic equivalent of `data-ui-include`\nor `data-ui-load` attributes used to\ninclude content or load components from the HTML code.",
+      "summary": "Loads a component with the given options.\nThis is the programmatic equivalent of `data-ui-include`\nor `data-ui-load` attributes used to\ninclude content or load components from the HTML code.",
       "body": ""
     },
     "isPrivate": false,
@@ -1993,8 +1993,8 @@
       }
     ],
     "description": {
-      "full": "Unload and dispose a component's context.",
-      "summary": "Unload and dispose a component's context.",
+      "full": "Unloads the given component context releasing all allocated resources.",
+      "summary": "Unloads the given component context releasing all allocated resources.",
       "body": ""
     },
     "isPrivate": false,
@@ -2021,9 +2021,9 @@
       },
       {
         "type": "param",
-        "string": "{ContextControllerHandler} handler Function called to initialize the component's controller that will be passed as argument of this function.",
+        "string": "{ContextControllerHandler} handler Function called to initialize the component controller that will be passed as argument of this function.",
         "name": "handler",
-        "description": "Function called to initialize the component's controller that will be passed as argument of this function.",
+        "description": "Function called to initialize the component controller that will be passed as argument of this function.",
         "types": [
           "ContextControllerHandler"
         ],
@@ -2048,8 +2048,8 @@
       }
     ],
     "description": {
-      "full": "Allocates a component's controller handler. The provided `handler` function will be called\nto initialize the controller object once the component has been loaded.",
-      "summary": "Allocates a component's controller handler. The provided `handler` function will be called\nto initialize the controller object once the component has been loaded.",
+      "full": "Allocates the handler for the component controller. The provided `handler` function will be called\nto initialize the controller object once the component has been loaded.",
+      "summary": "Allocates the handler for the component controller. The provided `handler` function will be called\nto initialize the controller object once the component has been loaded.",
       "body": ""
     },
     "isPrivate": false,
@@ -2072,13 +2072,13 @@
     "tags": [
       {
         "type": "example",
-        "string": "\n<small>**Example - HTML**</small>\n```html\n<div data-ui-load=\"site/components/slideshow\"\n     data-ui-context=\"my-slide-show\">...</div>\n```\n<small>**Example - JavaScript**</small>\n```js\nvar slideShowDiv = zuix.$.find('[data-ui-context=\"my-slide-show\"]');\nvar ctx = zuix.context(slideShowDiv);\n// or\nvar ctx = zuix.context('my-slide-show');\n// call component's exposed methods\nctx.setSlide(1);\n// or\nvar ctx;\nzuix.context('my-slide-show', function(c) {\n    // call component's methods\n    c.setSlide(1);\n    // eventually store a reference to the component for later use\n    ctx = c;\n});\n```"
+        "string": "\n<small>**Example - HTML**</small>\n```html\n<div data-ui-load=\"site/components/slideshow\"\n     data-ui-context=\"my-slide-show\">...</div>\n```\n<small>**Example - JavaScript**</small>\n```js\nvar slideShowDiv = zuix.$.find('[data-ui-context=\"my-slide-show\"]');\nvar ctx = zuix.context(slideShowDiv);\n// or\nvar ctx = zuix.context('my-slide-show');\n// call exposed component methods\nctx.setSlide(1);\n// or\nvar ctx;\nzuix.context('my-slide-show', function(c) {\n    // call component methods\n    c.setSlide(1);\n    // eventually store a reference to the component for later use\n    ctx = c;\n});\n```"
       },
       {
         "type": "param",
-        "string": "{Element|ZxQuery|object} contextId The `contextId` object\n(usually a string) or the component's container/view element.",
+        "string": "{Element|ZxQuery|object} contextId The `contextId` object\n(usually a string) or the container/view element of the component.",
         "name": "contextId",
-        "description": "The `contextId` object (usually a string) or the component's container/view element.",
+        "description": "The `contextId` object (usually a string) or the container/view element of the component.",
         "types": [
           "Element",
           "ZxQuery",
@@ -2119,8 +2119,8 @@
       }
     ],
     "description": {
-      "full": "Get a `ComponentContext` object, given its `contextId` or its container/view element.\nThe `contextId` is the one specified by the `ContextOptions` object or by using the HTML attribute `data-ui-context`.",
-      "summary": "Get a `ComponentContext` object, given its `contextId` or its container/view element.\nThe `contextId` is the one specified by the `ContextOptions` object or by using the HTML attribute `data-ui-context`.",
+      "full": "Gets a `ComponentContext` object, given its `contextId` or its container/view element.\nThe `contextId` is the one specified by the `ContextOptions` object or by using the HTML attribute `data-ui-context`.",
+      "summary": "Gets a `ComponentContext` object, given its `contextId` or its container/view element.\nThe `contextId` is the one specified by the `ContextOptions` object or by using the HTML attribute `data-ui-context`.",
       "body": ""
     },
     "isPrivate": false,
@@ -2184,8 +2184,8 @@
       }
     ],
     "description": {
-      "full": "Create the component specified by `componentId` and return its `{ComponentContext}` object.\nThe returned component is unloaded and detached from the DOM and it must be explicitly attached.\nAfter attaching it to the DOM, `zuix.componentize()` must be called in\norder to actually load and display the component.",
-      "summary": "Create the component specified by `componentId` and return its `{ComponentContext}` object.\nThe returned component is unloaded and detached from the DOM and it must be explicitly attached.\nAfter attaching it to the DOM, `zuix.componentize()` must be called in\norder to actually load and display the component.",
+      "full": "Creates the component specified by `componentId` and returns its `{ComponentContext}` object.\nThe returned component it's unloaded and detached from the DOM and it must be explicitly attached.\nAfter attaching it to the DOM, `zuix.componentize()` must be called in\norder to actually load and display the component.",
+      "summary": "Creates the component specified by `componentId` and returns its `{ComponentContext}` object.\nThe returned component it's unloaded and detached from the DOM and it must be explicitly attached.\nAfter attaching it to the DOM, `zuix.componentize()` must be called in\norder to actually load and display the component.",
       "body": ""
     },
     "isPrivate": false,
@@ -2332,8 +2332,8 @@
       }
     ],
     "description": {
-      "full": "Register a callback for a ZUIX global event (AKA hook).\nThere can be only one callback for each different type of global event.\nPass null as <eventHandler> to unregister a previously registered callback.",
-      "summary": "Register a callback for a ZUIX global event (AKA hook).\nThere can be only one callback for each different type of global event.\nPass null as <eventHandler> to unregister a previously registered callback.",
+      "full": "Registers a callback for a global ZUIX event.\nThere can only be one callback for each kind of global hook event.\nPass null as <eventHandler> to stop listening to a previously registered callback.",
+      "summary": "Registers a callback for a global ZUIX event.\nThere can only be one callback for each kind of global hook event.\nPass null as <eventHandler> to stop listening to a previously registered callback.",
       "body": ""
     },
     "isPrivate": false,
@@ -2413,8 +2413,8 @@
       }
     ],
     "description": {
-      "full": "Load a CSS or Javascript resource. All CSS styles and Javascript scripts\nloaded with this method will be also included in the application bundle.\nIf a resource is already loaded, the request will be ignored.\nThis command is also meant to be used inside a components' controller.\nThis enables the loading of a component without the need of manually including\nall of its dependencies since those will be automatically fetched as required.",
-      "summary": "Load a CSS or Javascript resource. All CSS styles and Javascript scripts\nloaded with this method will be also included in the application bundle.\nIf a resource is already loaded, the request will be ignored.\nThis command is also meant to be used inside a components' controller.\nThis enables the loading of a component without the need of manually including\nall of its dependencies since those will be automatically fetched as required.",
+      "full": "Loads a CSS or Javascript resource. All CSS styles and Javascript scripts\nloaded with this method will be also included in the application bundle.\nIf a resource is already loaded, the request will be ignored.\nThis command is also meant to be used inside a components' controller.\nThis enables the loading of a component without the need of manually including\nall of its dependencies since those will be automatically fetched as required.",
+      "summary": "Loads a CSS or Javascript resource. All CSS styles and Javascript scripts\nloaded with this method will be also included in the application bundle.\nIf a resource is already loaded, the request will be ignored.\nThis command is also meant to be used inside a components' controller.\nThis enables the loading of a component without the need of manually including\nall of its dependencies since those will be automatically fetched as required.",
       "body": ""
     },
     "isPrivate": false,
@@ -2514,8 +2514,8 @@
       }
     ],
     "description": {
-      "full": "Enable/Disable lazy-loading or get current setting.",
-      "summary": "Enable/Disable lazy-loading or get current setting.",
+      "full": "Enables/Disables lazy-loading or gets the current setting.",
+      "summary": "Enables/Disables lazy-loading or gets the current setting.",
       "body": ""
     },
     "isPrivate": false,
@@ -2566,8 +2566,8 @@
       }
     ],
     "description": {
-      "full": "Enable/Disable HTTP caching or get current settings.",
-      "summary": "Enable/Disable HTTP caching or get current settings.",
+      "full": "Enables/Disables HTTP caching or gets the current settings.",
+      "summary": "Enables/Disables HTTP caching or gets the current settings.",
       "body": ""
     },
     "isPrivate": false,
@@ -2622,8 +2622,8 @@
       }
     ],
     "description": {
-      "full": "Searches in the document or inside the given element ```element```\nfor all ```data-ui-include``` and ```data-ui-load``` directives\nand process these by loading the requested components.\nThis is a service function that should only be called if dynamically\nadding content with elements that contain *load* or *include* directives.",
-      "summary": "Searches in the document or inside the given element ```element```\nfor all ```data-ui-include``` and ```data-ui-load``` directives\nand process these by loading the requested components.\nThis is a service function that should only be called if dynamically\nadding content with elements that contain *load* or *include* directives.",
+      "full": "Searches the document, or inside the given ```element```,\nfor all ```data-ui-include``` and ```data-ui-load``` attributes\nand processes these by loading the requested components.\nThis is a service function that should only be called if dynamically\nadding content with elements that contain *load* or *include* directives.",
+      "summary": "Searches the document, or inside the given ```element```,\nfor all ```data-ui-include``` and ```data-ui-load``` attributes\nand processes these by loading the requested components.\nThis is a service function that should only be called if dynamically\nadding content with elements that contain *load* or *include* directives.",
       "body": ""
     },
     "isPrivate": false,
