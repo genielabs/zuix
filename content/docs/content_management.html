@@ -5,10 +5,10 @@ With *Content Management* we are referring here to the capability of
 dynamically loading into a page some content that is placed in
 other files.
 
-With such feature, it is possible to structure a web site or application into modules
+With such feature, it is possible to structure a web site/application into modules
 that can be conveniently organized in the directory tree.
 
-For example, the following page template
+For instance, the following page template
 
 <div style="margin: 24px">
 <div self="size-1of2 center" layout="column center-center" style="height: 320px">
@@ -18,12 +18,19 @@ For example, the following page template
 </div>
 </div>
 
-could be implemented with the following files:
+could be implemented by the following files:
 
-- site/layout/header.html
-- site/content/main.html
-- site/layout/footer.html
-- **index.html**
+<div class="indent-1">
+    <i class="material-icons mdl-color-text--grey-800">folder</i> <strong class="mdl-color-text--grey-800">layout</strong><br/>
+    &nbsp;<i class="material-icons mdl-color-text--grey-800">subdirectory_arrow_right</i>
+    header.html<br/>
+    &nbsp;<i class="material-icons mdl-color-text--grey-800">subdirectory_arrow_right</i>
+    footer.html<br/>
+    <i class="material-icons mdl-color-text--grey-800">folder</i> <strong class="mdl-color-text--grey-800">content</strong><br/>
+    &nbsp;<i class="material-icons mdl-color-text--grey-800">subdirectory_arrow_right</i>
+    main.html<br/>
+    index.html<br/>
+</div>
 
 where the `index.html` is the main page that will include the other files.
 
@@ -32,6 +39,8 @@ where the `index.html` is the main page that will include the other files.
 
 To include a content, we just add a `div` (or any other tag supposed to be a container tag)
 setting the `data-ui-include` attribute with the path of the content that we want to be loaded.
+This can be either a path relative to the file requesting the content inclusion or an absolute
+path pointing to a different server.
 
 <small><strong>EXAMPLE PAGE - </strong> **HTML** file `index.html`</small>
 <pre data-line="9,11,13"><code class="language-html">
@@ -43,11 +52,11 @@ setting the `data-ui-include` attribute with the path of the content that we wan
     </head>
     <body>
         <!-- header -->
-        <div data-ui-include="site/layout/header"></div>
+        <div data-ui-include="layout/header"></div>
         <!-- page content -->
-        <div data-ui-include="site/content/main"></div>
+        <div data-ui-include="content/main"></div>
         <!-- footer -->
-        <div data-ui-include="site/layout/footer"></div>
+        <div data-ui-include="layout/footer"></div>
     </body>
 </html>
 </code></pre>
@@ -55,8 +64,8 @@ setting the `data-ui-include` attribute with the path of the content that we wan
 The `data-ui-include` attribute shown at lines 9-11-13, will instruct *ZUIX* to load the specified content
 into each `div` element.
 
-Notice that the value of the `data-ui-include` attribute is the URL of the file to include
-<u>without</u> the `.html` extension. This value is the *component identifier*.
+Notice that the value of the `data-ui-include` attribute it is the path of the file to include
+<u>without</u> the `.html` extension. This value is also referred as the *component identifier* (`componentId`).
 
 The following example shows how a `div` will looks like after the content `site/common/links` is included into it.
 
@@ -70,14 +79,14 @@ The following example shows how a `div` will looks like after the content `site/
     </div>
 </code></pre>
 
-Element including the above content
+Container element including the above content
 
 <pre data-line="1"><code class="language-html">
     <!-- include common links -->
     <div data-ui-include="site/common/links"></div>
 </code></pre>
 
-<small><strong>PROCESSED OUTPUT</strong> - resulting `div` after content is loaded into it</small>
+<small><strong>PROCESSED OUTPUT</strong> - resulting `div` HTML after the content is loaded into it</small>
 <pre data-line="1,4"><code class="language-html">
     <!-- include common links -->
     <div data-ui-include="site/common/links"
@@ -98,7 +107,7 @@ Element including the above content
 
 <p>&nbsp;</p>
 
-We can also include content that is located on a different server by specifying the absolute URL:
+We can also include a content that is located on a different server by specifying the absolute URL:
 
 <pre><code class="language-html">
     <div data-ui-include="https://genielabs.github.io/zuix/site/common/links"></div>
@@ -107,8 +116,8 @@ We can also include content that is located on a different server by specifying 
 ###### Options
 
 When loading a content (or a component) we can also use the `data-ui-options` attribute to get more control over the loading
-process. The value of this attribute is a JSON object that must be accessible in the global scope (window).
-Fields that can be used in the options object are described in the [API {ContextOptions}](#/api#ZUIX_API--ContextOptions) section.
+process. The value of this attribute is a JSON object that must be accessible in the global scope (`window`).
+Fields that can be used for this object are described in the [API {ContextOptions}](#/api#ZUIX_API--ContextOptions) section.
 
 <small><strong>EXAMPLE - </strong> Use of `data-ui-options` attribute</small>
 <pre data-line="2,5"><code class="language-html">
@@ -118,9 +127,10 @@ Fields that can be used in the options object are described in the [API {Context
 <script>
 var my_loading_options = {
     lazyLoad: false,
-    priority: -1, // minor numbers gets higher loading priority
+    priority: -1,
     ready: function(ctx) {
-        // ctx is the {ComponentContext} object holding the loaded content/component
+        // ctx is the {ComponentContext} object
+        // associated to the loaded content/component
         console.log('Loaded '+ctx.componentId+' as '+ctx.contextId+'.');
     },
     error: function(err) {
@@ -134,7 +144,7 @@ var my_loading_options = {
 ###### Priority
 
 With the `data-ui-priority` attribute we can change the order which contents or components are loaded.
-Its value is in fact a number indicating the loading sequence order and that can also have negative values.
+Its value is indeed a number indicating the loading sequence order and that can also have negative values.
 The default value is zero and items with minor priority will get loaded first.
 
 <div align="center"><a href="https://codepen.io/genielabs/pen/YQPxqJ" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect"><i class="material-icons animated flash infinite">play_circle_outline</i> Example on CodePen</a></div>
@@ -143,7 +153,7 @@ The default value is zero and items with minor priority will get loaded first.
 
 When dealing with big pages that load lot of content/components
 it is perhaps desirable to have the content loaded only when
-it actually comes into the user screen's view. This kind of
+it actually comes into the user screen view. This kind of
 *on-demand* content composition, is called *lazy loading*.
 
 To enable this feature, we set the attribute `data-ui-lazyload="true"`

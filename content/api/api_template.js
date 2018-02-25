@@ -72,7 +72,9 @@ zuix.controller(function (cp) {
                 html += '<a id="ZUIX_API--'+this.name+'"></a>';
                 html += '<div class="title"><i class="material-icons">expand_more</i> <h6>' + this.name + '</h6></div>';
                 html += '<div class="type-details"><div class="collapsed">';
-                html += '<p>' + this.description + '</p>';
+                var pl = {content: this.description};
+                cp.trigger('html:parse', pl, true);
+                html += '<p>' + pl.content + '</p>';
                 html += '<code class="language-js">function '+buildCallbackArgs(this)+' { ... }</code>';
                 html += buildMethodParams(this);
                 html += buildReturnType(this);
@@ -86,7 +88,9 @@ zuix.controller(function (cp) {
                 html += '<a id="ZUIX_API--'+this.name+'"></a>';
                 html += '<div class="title"><i class="material-icons">expand_more</i> <h6>' + this.name + '</h6></div>';
                 html += '<div class="type-details"><div class="collapsed">';
-                html += '<p>' + this.description + '</p>';
+                var pl = {content: this.description};
+                cp.trigger('html:parse', pl, true);
+                html += '<p>' + pl.content + '</p>';
                 html += '<strong><small>PROPERTIES</small></strong>';
                 html += '<span class="mdl-color-text--accent mdl-typography--font-bold">{</span><br>';
                 html += buildTypes(this.properties);

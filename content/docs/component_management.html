@@ -12,7 +12,7 @@ any kind of UI functionality.
 This piece of JavaScript code is the **Controller** (or *Presenter*)
 of the component and it consist of a function handler with a few
 interface methods: **init**, **create**, **destroy**, **update**.
-These methods gets called in the various steps of the component's
+These methods gets called in the various steps of the component
 life-cycle.
 
 To declare a component controller the `zuix.controller(...)` method is
@@ -292,19 +292,19 @@ the following fields/methods.
 <br>*optional *handler* function called when the component is destroyed
 
 - `cp.update = function() { ... }`
-<br>*optional *handler* function called when the component's data model is updated
+<br>*optional *handler* function called when the data model of the component is updated
 
 ###### Helper methods
 
 - `cp.view([selector])`
-<br/>get the component's view or if a *selector* is specified, get
-the view's elements matching the *selector* criteria.
+<br/>get the component view or if a *selector* is specified, get
+the view elements matching the *selector* criteria.
 The returned value is a *ZxQuery* object. To get the underlying
 DOM *Element* object, use  the *ZxQuery***.get()** method
 (eg. `var el = cp.view().get();`).
 
 - `cp.field(fieldName)`
-<br/>get the view's element with matching `data-ui-field` attribute.
+<br/>get the view element with matching `data-ui-field` attribute.
 The returned value is a *ZxQuery* object. To get the underlying
 DOM *Element* object, use  the *ZxQuery***.get()** method
 (eg. <small>`var el = cp.view().get();`</small>).
@@ -316,10 +316,10 @@ DOM *Element* object, use  the *ZxQuery***.get()** method
 <br/><em>trigger a component event.</em>
 
 - `cp.options([options])`
-<br/><em>get/set the component's options.</em>
+<br/><em>get/set the component options.</em>
 
 - `cp.expose(methodName, handler)`
-<br/><em>expose a component's method.</em>
+<br/><em>expose a component method.</em>
 
 ###### ZxQuery DOM helper class
 
@@ -328,7 +328,7 @@ lite subset of jQuery-like functionality. So, it can wrap elements
 in a DOM and provide useful methods for manipulating it.
 
 Some fields/parameters in *ZUIX* classes are exposed as *ZxQuery*
-objects to facilitate common element's manipulation tasks.
+objects to facilitate common element manipulation tasks.
 
 For example the `cp.view()` method of a controller handler,
 used to get the *View* element of a component,
