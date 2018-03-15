@@ -1,11 +1,11 @@
 <a id="Getting_Started--Content_Management"></a>
 #### Content Management <i class="material-icons mdl-color-text--grey-500">dashboard</i>
 
-With *Content Management* we are referring here to the capability of
-dynamically loading into a page some content that is placed in
-other files.
+With *Content Management* we are referring here to the capability of loading
+into the HTML document a content that is located in some other files,
+with no need for server side processing. It all happens in the client browser.
 
-With such feature, it is possible to structure a web site/application into modules
+With such a feature, it is possible to structure a web site/application into modules
 that can be conveniently organized in the directory tree.
 
 For instance, the following page template
@@ -270,6 +270,7 @@ Container including the above:
 <small><strong>RESULT</strong></small>
 <div data-ui-include="site/common/links"
      data-ui-options="main.options.content"
+     data-ui-priority="-1"
      data-ui-lazyload="false"></div>
 
 <p>&nbsp;</p>

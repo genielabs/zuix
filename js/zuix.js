@@ -1326,6 +1326,12 @@ z$.replaceBraces = function (html, callback) {
     var tags = new RegExp(/[^{}]+(?=})/g),
         result;
     while (result = tags.exec(html)) {
+        if (typeof result[0] === 'string' && (result[0].trim().length === 0 || result[0].indexOf('\n') >= 0)) {
+            var nv = html.substr(currentIndex, result.index-currentIndex)+result[0]+'}';
+            outHtml += nv;
+            currentIndex += nv.length;
+            continue;
+        }
         var value = '{'+result[0]+'}';
         if (typeof callback === 'function') {
             var r = callback(result[0]);
@@ -2089,6 +2095,8 @@ ComponentContext.prototype.modelToView = function () {
                             el.href = (!util.isNoU(boundData.href) ? boundData.href :
                                 (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));
                             if (boundData.title) el.title = boundData.title;
+                            if (!util.isNoU(boundData.href) && !util.isNoU(boundData.innerHTML) && boundData.innerHTML.trim() !== '')
+                                el.innerHTML = boundData.innerHTML;
                             break;
                         case 'input':
                             el.value = (!util.isNoU(boundData.value) ? boundData.value :
@@ -3171,7 +3179,10 @@ function controller(handler) {
  * @param {!string} fieldName Value to match in the `data-ui-field` attribute.
  * @param {!Element|!ZxQuery} [container] Starting DOM element for this search (**default:** *document*)
  * @param {object} [context] The context
- * @return {ZxQuery}
+ * @return {ZxQuery} ZxQuery object with elements matching the given ```data-ui-field``` attribute.
+ * If the matching element is just one, then it will also have the extra method `field(fieldName)`
+ * to search for fields contained in it.
+ *
  */
 function field(fieldName, container, context) {
     if (util.isNoU(context))
@@ -3182,8 +3193,16 @@ function field(fieldName, container, context) {
     var el = null;
     if (typeof context._fieldCache[fieldName] === 'undefined') {
         el = z$(container).find('[' + ZUIX_FIELD_ATTRIBUTE + '="' + fieldName + '"]');
-        if (el != null)
+        if (el != null && el.length() > 0) {
             context._fieldCache[fieldName] = el;
+            // extend the returned `ZxQuery` object adding the `field` method
+            if (el.length() === 1 && util.isNoU(el.field)) {
+                var that = this;
+                el.field = function (name) {
+                    return that.field(name, el, el);
+                };
+            }
+        }
     } else el = context._fieldCache[fieldName];
 
     return el;
@@ -3769,7 +3788,10 @@ containerDiv.html('Hello World!');
  *
  * @param {!string} fieldName Value of `data-ui-field` to look for.
  * @param {!Element} [container] Starting DOM element for this search (**default:** *document*)
- * @return {ZxQuery} Elements with matching ```data-ui-field``` attribute.
+ * @return {ZxQuery} ZxQuery object with elements matching the given ```data-ui-field``` attribute.
+ * If the matching element is just one, then it will also have the extra method `field(fieldName)`
+ * to search for fields contained in it.
+ *
  */
 Zuix.prototype.field = function(fieldName, container) {
     return field.call(this, fieldName, container);
