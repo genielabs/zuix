@@ -2,7 +2,8 @@
     overflow: hidden;
     background-color: rgba(16, 16, 53, 0.9);
     color:white;
-    padding: 24px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     font-size: 110%;
 }
 .logo {
@@ -11,14 +12,19 @@
     color:yellow;
     font-size: 200%;
 }
-.logo .material-icons {
-    font-size: 90%;
-}
 .logo span {
-    font-size: 90%;
+    font-size: 80%;
+    margin-left: 4px;
+    margin-right: 2px;
 }
 .logo-text {
     color:yellow;
+}
+.intro {
+    margin: 32px;
+    font-size: 140%;
+    line-height: 150%;
+    text-align: center;
 }
 p {
     font-size: 100%;
@@ -27,5 +33,7 @@ h3 {
     font-weight: 400;
 }
 .content-padding {
-  padding-top: 0;
+    padding-top: 32px;
+    padding-left: 0;
+    padding-right: 0;
 }

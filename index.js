@@ -25,7 +25,9 @@
  *
  */
 
-// Main page setup
+
+// Main options and configuration
+
 var main = {
     options: {
         content: {
@@ -72,24 +74,15 @@ var main = {
 
 };
 
-var revealTimeout = null;
-// Zuix hook handlers
-var splashScreen = zuix.field('splashScreen').show();
-var loaderMessage = zuix.field('loaderMessage');
-var mainPage = zuix.field('main').hide();
-// reference to homepage's cover and features block (used for change-page animation)
-var coverBlock = null, featuresBlock = null;
-zuix.field('content-home').on('component:ready', function (ctx) {
-    coverBlock = zuix.field('mainCover', this);
-    featuresBlock = zuix.field('mainFeatures', this);
-});
-// Reference to navigation components
-var pagedView = null;
 
-// Turn off debug output
-window.zuixNoConsoleOutput = true;
-//zuix.lazyLoad(false);
-//zuix.httpCaching(false);
+// Instead of including CSS and JS scripts
+// using '<style>' and '<script>' we take
+// advantage of the 'zuix.using' method so
+// the included files will be packed into
+// the final 'app.bundle.js'
+
+zuix.using('style', 'https://cdnjs.cloudflare.com/ajax/libs/flex-layout-attribute/1.0.3/css/flex-layout-attribute.min.css');
+zuix.using('style', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css');
 
 // Animate CSS extension method for ZxQuery
 zuix.$.ZxQuery.prototype.animateCss = function() {};
@@ -97,8 +90,34 @@ zuix.using('component', 'ui/utils/animate_css', function(res, ctx){
     console.log("AnimateCSS extension loaded.", res, ctx);
 });
 
-zuix
-.hook('load:begin', function(data){
+
+// Get reference to various elements of the main page
+
+var revealTimeout = null;
+var splashScreen = zuix.field('splashScreen').show();
+var loaderMessage = zuix.field('loaderMessage');
+var mainPage = zuix.field('main').hide();
+// reference to homepage's cover and features block (used for change-page animation)
+var coverBlock = null, featuresBlock = null;
+zuix.field('content-home').on('component:ready', function (ctx) {
+    // these element are available only after the 'content-home' is loaded
+    coverBlock = zuix.field('mainCover', this);
+    featuresBlock = zuix.field('mainFeatures', this);
+});
+// Reference to navigation components
+var pagedView = null;
+
+
+// Turn off debug output
+
+window.zuixNoConsoleOutput = true;
+//zuix.lazyLoad(false);
+//zuix.httpCaching(false);
+
+
+// Global zUIx event hooks
+
+zuix.hook('load:begin', function(data){
 
     if (splashScreen) splashScreen.show();
     loaderMessage.html('Loading "<em>'+data.task+'</em>" ...').show();
@@ -154,7 +173,9 @@ zuix
 })/*.hook('component:ready', function () {
 })*/;
 
-// url routing
+
+// URL routing
+
 window.onhashchange = function () {
     routeCurrentUrl(window.location.hash);
 };
@@ -192,6 +213,9 @@ function routeCurrentUrl(path) {
         }
     } //else p.get().scrollTop = 0;
 }
+
+
+// Other utility functions
 
 var scrollEndTs, scrollInterval;
 function scrollTo(element, to, duration) {
