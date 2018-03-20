@@ -12,10 +12,46 @@ p {
 ul li {
     list-style: disc;
 }
-.mdl-card {
+
+.features-box {
+    color: white;
     padding: 16px;
 }
-.mdl-card__title {
+.features-box .title {
+    width: 100%;
+    margin: 0 0 12px;
+}
+.features-box .title h2 {
+    font-weight: bold;
+    font-size: 140%;
+    color:yellow;
+    text-wrap: avoid;
+    white-space: nowrap;
+    vertical-align: middle;
+    margin: 0;
+    padding: 12px 0 12px;
+}
+.features-box .material-icons {
+    font-size: 150%;
+    min-width: 32px;
+    text-align: center;
+}
+.features-box .text {
+    font-family: 'Dosis', sans-serif;
+    padding: 0 32px 0 48px;
+    font-weight: 400;
+    width: 100%;
+    font-size: 100%;
+    line-height: 180%;
+}
+
+.opaqueBlocK .mdl-card {
+    padding: 16px;
+}
+.opaqueBlocK .material-icons {
+    color: white;
+}
+.opaqueBlocK .mdl-card__title {
     color:yellow;
     padding: 0;
     text-wrap: avoid;
@@ -23,20 +59,15 @@ ul li {
     vertical-align: middle;
     margin-bottom: 24px;
 }
-.mdl-card__title .material-icons {
-    color: white;
-}
-.mdl-card__title-text {
+.opaqueBlocK .mdl-card__title-text {
     width: 100%;
     font-weight: bold;
     font-size: 140%;
 }
-.mdl-card__supporting-text {
+.opaqueBlocK .mdl-card__supporting-text {
+    color: white;
     font-family: 'Dosis', sans-serif;
-    color:white;
-    padding: 0;
-    padding-left: 48px;
-    padding-right: 32px;
+    padding: 0 32px 0 48px;
     font-weight: 400;
     width: 100%;
     font-size: 100%;

@@ -1,5 +1,5 @@
-### ZUIX Web, presentation and documentation site.
+### zUIx web, presentation and documentation site.
+
+http://zuix.it
 
 http://genielabs.github.io/zuix
-
-http://www.zuix.it

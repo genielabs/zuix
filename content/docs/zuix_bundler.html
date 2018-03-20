@@ -1,39 +1,47 @@
 <a id="Getting_Started--Zuix_Bundler"></a>
 #### App Bundler <i class="material-icons mdl-color-text--grey-500">folder</i>
 
-When your site or application is ready for production it can then be bundled so that all of its components and resources
-will be crunched into a single file.
+When your website or application is ready for production it can then be bundled,
+so that all of its components and resources will be crunched into a single file
+and loaded from memory rather than from network/localhost.
 
-This can be done directly from the browser with the `zuix-bundler` extension script.
+This can be done directly in the browser using the `zuix-bundler` script.
+This script extends the `zuix` object with the `saveBundle` method.
 
-This extension adds the `saveBundle` method to the `zuix` object that is meant to be called from the
-developer console of the browser.
 
-#### Usage
+##### Usage
 
-Include the **zuix-bundler** extension script in your app right after the main *zuix* script inclusion:
+Include the **zuix-bundler** extension script in your app right after the main *zuix*
+script inclusion:
 
 ```html
+<script src="js/zuix.js"></script>
 <script src="https://genielabs.github.io/zuix/js/zuix-bundler.min.js"></script>
 ```
 
-After adding this script you can create an application bundle by typing in the developer console of the browser
+After adding this script you can generate the application bundle by typing in
+the **developer console** of the browser the command
 
 ```javascript
 zuix.saveBundle()
 ```
 
-After the bundle is created it will be downloaded by the browser as **app.bundle.js** file that you can then compress/minify,
-copy and include into your app right after the main *zuix* script inclusion.
+This will generate and save the **app.bundle.js** file to the *Downloads* folder.
 
-###### Example
+Copy the generated file in your website/app root and include it right after
+the main *zuix* script inclusion.
 
 ```html
-<script src="js/app.bundle.js"></script>
+<script src="js/zuix.js"></script>
+<script src="app.bundle.js"></script>
 ```
 
-This way all components and resources will be loaded into memory with just one file and this will speed-up application
-loading and promptness and will consequently improve user experience.
+All components and resources are now loaded in memory with just one file.
+This will speed-up application loading and promptness and it will consequently
+improve user experience.
+
+Remove the `zuix-bundler` script inclusion from your app after the bundle is created.
+
 
 ###### Remarks
 
@@ -50,6 +58,29 @@ zuix.componentize()
 zuix.saveBundle()
 ```
 
-Remove the `zuix-bundler` script inclusion from your app after the bundle is created.
+Also any other JavaScript library and CSS file can be included in the app bundle.
+In order to achieve this, remove the `<script src="..."></script>` or `<link rel="stylesheet">`
+and use the method `zuix.using(...)` instead to load the script/css.
+
+<small><strong>EXAMPLE</strong></small>
+```javascript
+var flaCss = 'https://cdnjs.cloudflare.com/ajax/libs/flex-layout-attribute/1.0.3/css/flex-layout-attribute.min.css';
+zuix.using('style', flaCss, function(res, styleObject) {
+    console.log("Add Flex Layout Attributes CSS.", res, styleObject);
+});
+var momentJs = 'https://momentjs.com/downloads/moment.js';
+zuix.using('script', momentJs, function(res, scriptObject){
+    console.log("Added Moment.js.", res, scriptObject);
+});
+zuix.using('component', 'kit/extensions/animate_css', function(res, componentContext){
+   console.log("Added AnimateCSS extension for zUIx.", res, componentContext);
+});
+```
+
+If the `zuix.using` method is called on a resource that was already loaded, it will
+just ignore the request.
+This is useful since it can be used to create self-contained components that
+can be loaded without having to worry about the dependencies.
+
 
 <p>&nbsp;</p>

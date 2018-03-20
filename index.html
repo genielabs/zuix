@@ -2,13 +2,13 @@
 <!--suppress JSCheckFunctionSignatures -->
 <html lang="en">
 <head>
-    <title>zuix - javascript content and component manager for web and apps</title>
+    <title>zUIx.js</title>
 
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <meta http-equiv="Content-Language" content="en-us" />
 
-    <meta name="description" content="ZUIX is a JavaScript library for creating component-based sites and web apps." />
-    <meta name="keywords" lang="en-us" content="web components,web app,web application,framework,javascript,library,content manager,component manager,web app,content authoring,web master,static site,spa,single page application,content loader,content include,material,material design lite,mdl" />
+    <meta name="description" content="zUIx is a JavaScript library for creating component-based websites and web apps." />
+    <meta name="keywords" lang="en-us" content="web components,web app,pwa,progressive,web application,framework,javascript,library,content manager,component manager,web app,content authoring,web master,static site,spa,single page application,content loader,content include,material,material design lite,mdl" />
     <meta name="author" content="G-Labs" />
 
     <meta charset="utf-8">
@@ -48,7 +48,7 @@
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:200,200i,300,300i,600,600i&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <!-- ZUIX-HOOK add-on: Prism, code syntax highlighting -->
+    <!-- Prism, code syntax highlighting -->
     <script type="text/javascript" src="js/prism/clipboard.min.js"></script>
     <link rel="stylesheet" href="js/prism/prism.css">
     <script type="text/javascript" src="js/prism/prism.js"></script>
@@ -57,14 +57,14 @@
     <script src="js/showdown.min.js"></script>
 
     <!-- ZUIX library  -->
-    <script src="js/zuix.min.js"></script>
+    <script src="js/zuix.js"></script>
     <!-- app bundle -->
-    <!--script src="js/zuix-bundler.min.js"></script-->
-    <script src="app.bundle.js"></script>
+    <script src="js/zuix-bundler.min.js"></script>
+    <!--script src="app.bundle.js"></script-->
 
-    <!-- Main Page includes -->
-    <link rel="stylesheet" href="index.css">
-    <script defer type="text/javascript" src="index.js"></script>
+    <!-- App main includes -->
+    <link rel="stylesheet" href="app/main.css">
+    <script defer type="text/javascript" src="app/main.js"></script>
 </head>
 <body>
 
@@ -161,8 +161,8 @@
     </header>
     <main class="mdl-layout__content">
 
-        <!-- zuix "ui/layout/paged_view" layout -->
-        <div data-ui-load="ui/layout/paged_view" data-ui-options="main.contentPager">
+        <!-- Page change/cross-fade component -->
+        <div data-ui-load="app/controllers/paged_view" data-ui-options="main.contentPager">
 
             <!-- page 0 -->
             <section>
@@ -230,9 +230,6 @@
 
 <!-- absolute positioned elements -->
 
-<div data-ui-include="content/api/menu" data-ui-priority="-1"></div>
-<div data-ui-include="content/docs/menu" data-ui-priority="-1"></div>
-
 <div data-ui-field="loaderMessage-c">
     <div class="mdl-color--black mdl-color-text--white mdl-shadow--8dp"
          data-ui-field="loaderMessage"></div>
@@ -261,7 +258,7 @@
 
 <!-- ZUIX Hack Box widget -->
 <!--
-<div data-ui-load="ui/widgets/zuix_hackbox"
+<div data-ui-load="app/widgets/zuix_hackbox"
      data-ui-priority="-10"
      class="hackbox"
      self="size-large lg-full"></div>

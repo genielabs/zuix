@@ -1,0 +1,97 @@
+<a id="Getting_Started--Components"></a>
+#### Components <i class="material-icons mdl-color-text--grey-500">extension</i>
+
+Exception made for handling of standard events and behaviors,
+a [view template](#/docs#Getting_Started--View_Templates) cannot implement a more complex UI logic.
+
+This is where *components* come in handy. In addition to all the features of
+a view template, a component has a piece of *JavaScript* code associated
+to it and may so control any element in its view, make service calls and
+implement any kind of complex UI functionality.
+
+This piece of JavaScript code is the **Controller** of the component.
+
+<!--
+and it consist of a handler function that holds the
+component controller object that implement a few interface methods:
+**init**, **create**, **destroy**, **update**.
+These methods gets called in the various steps of the component
+life-cycle
+
+To declare a component controller the `zuix.controller(...)` method is
+used. This will be described in next paragraph.
+-->
+
+
+##### Loading a component
+
+To load a component the `data-ui-load` attribute is used in the same way
+described for `data-ui-include` attribute in [content loading](#/docs#Getting_Started--Content_Loading),
+so also the `data-ui-options` attribute may be used to provide options
+such as *lazy loading* and *data binding*.
+
+<small><strong>EXAMPLE - HTML</strong> Loading a component</small>
+<pre><code class="language-html">
+    <div data-ui-load="kit/widgets/timeclock"></div>
+</code></pre>
+
+<small><strong>RESULT</strong></small>
+
+<div data-ui-load="kit/widgets/timeclock"></div>
+
+<p>&nbsp;</p>
+
+When loading a component *zIUx* will first try to get the **controller** script,
+then the **view** and finally the **style**, any of which can be defined either
+inline or in a file.
+
+The example above is defined by the following files:
+<div class="list" markdown="1">
+- [timeclock.html](https://github.com/genielabs/zuix/blob/gh-pages/kit/widgets/timeclock.html)
+- [timeclock.css](https://github.com/genielabs/zuix/blob/gh-pages/kit/widgets/timeclock.css)
+- [timeclock.js](https://github.com/genielabs/zuix/blob/gh-pages/kit/widgets/timeclock.js)
+</div>
+
+
+##### The Controller
+
+When all elements of a component are loaded (html, css, js) the
+controller method `create()` is called.
+When otherwise a component is requestd to unload, the `destroy()`
+method is called.
+
+The following snippet is the skeleton of a controller declaration.
+
+<small><strong>EXAMPLE</strong> Controller declaration</small>
+<pre><code class="language-js">
+zuix.controller(function(cp) {
+
+    /* private fields */
+    // ...
+
+    /* life-cycle handlers declaration */
+    cp.init = function() { /* called before component is created and before applying options */ };
+    cp.create = function() { /* called after loading, when the component is created */ };
+    cp.destroy = function() { /* called when the component is destroyed */ }
+    cp.update = function() { /* called each time the data model is update */ }
+
+    /* private functions */
+    // ...
+
+}).for('path/of/component');
+</code></pre>
+
+The method call `.for('path/of/component')` is only required when
+the controller is defined inline rather than in a separate file.
+
+The `cp` object passed to the controller handler is the
+`{ContextController}` object.
+Referer to the API page for a complete list of properties and methods
+of the [{ContextController}](#/api#ZUIX_API--ContextController) object.
+
+
+##### Component polymorphism
+
+
+`// TODO: ...`
+
