@@ -217,11 +217,8 @@ function routeCurrentUrl(path) {
 
 // Other utility functions
 
-var scrollEndTs, scrollInterval;
+var scrollEndTs;
 function scrollTo(element, to, duration) {
-    if (scrollInterval != null) {
-        clearTimeout(scrollInterval);
-    }
     var currentTs = Date.now();
     if (duration != null) {
         scrollEndTs = currentTs + duration;
@@ -232,7 +229,7 @@ function scrollTo(element, to, duration) {
         element.scrollTop = to;
         return;
     }
-    scrollInterval = requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
         element.scrollTop = element.scrollTop + (difference / (duration/2));
         scrollTo(element, to);
     });

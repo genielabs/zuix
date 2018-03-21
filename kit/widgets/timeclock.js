@@ -20,7 +20,7 @@ zuix.controller(function (cp) {
         cp.field('date').html(month+' '+now.getDate()+', '+now.getFullYear());
         cp.field('time').html(now.toLocaleTimeString());
         if (updateTimeout != null)
-            clearInterval(updateTimeout);
+            clearTimeout(updateTimeout);
         updateTimeout = setTimeout(refresh, 1000);
     }
 });
