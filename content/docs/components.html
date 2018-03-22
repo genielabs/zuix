@@ -55,9 +55,9 @@ The example above is defined by the following files:
 
 ##### The Controller
 
-When all elements of a component are loaded (html, css, js) the
-controller method `create()` is called.
-When otherwise a component is requestd to unload, the `destroy()`
+When all elements of a component are loaded (js controller, html view, css style)
+the controller method `create()` is called.
+When otherwise a component is requested to unload, the `destroy()`
 method is called.
 
 The following snippet is the skeleton of a controller declaration.
@@ -73,7 +73,7 @@ zuix.controller(function(cp) {
     cp.init = function() { /* called before component is created and before applying options */ };
     cp.create = function() { /* called after loading, when the component is created */ };
     cp.destroy = function() { /* called when the component is destroyed */ }
-    cp.update = function() { /* called each time the data model is update */ }
+    cp.update = function() { /* called each time the data model is updated */ }
 
     /* private functions */
     // ...
@@ -90,8 +90,8 @@ Referer to the API page for a complete list of properties and methods
 of the [{ContextController}](#/api#ZUIX_API--ContextController) object.
 
 
-##### Component polymorphism
+##### Controllers overlapping
 
 
-`// TODO: ...`
+`// TODO: explain overlapping and show examples`
 

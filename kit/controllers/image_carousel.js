@@ -170,14 +170,11 @@ zuix.controller(function (cp) {
             scrollTo(offsetX, 300);
     }
 
-    var scrollEndTs, scrollInterval;
+    var scrollEndTs;
     function scrollTo(to, duration) {
         var container = cp.view().get();
         if (to instanceof Element) {
             to = container.scrollLeft+zuix.$(to).position().x;
-        }
-        if (scrollInterval != null) {
-            clearTimeout(scrollInterval);
         }
         var currentTs = Date.now();
         if (duration != null) {
@@ -188,9 +185,8 @@ zuix.controller(function (cp) {
             container.scrollLeft = to;
             return;
         }
-        scrollInterval = setTimeout(function() {
-            var increment = (to - container.scrollLeft) / (duration/10);
-            container.scrollLeft += increment;
+        requestAnimationFrame(function() {
+            container.scrollLeft += (to - container.scrollLeft) / (duration/10);
             scrollTo(to);
         });
     }
