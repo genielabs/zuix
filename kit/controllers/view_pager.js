@@ -117,7 +117,7 @@ zuix.controller(function (cp) {
 
     function resetAutoSlide() {
         stopAutoSlide();
-        if (cp.options().autoSlide != 'false')
+        if (cp.options().autoSlide !== false)
             slideTimeout = setTimeout(slideNext, slideInterval);
     }
 
