@@ -80,19 +80,19 @@ zuix.controller(function (cp) {
         if (touchPointer.shiftX === 0 && touchPointer.shiftY === 0 && elapsedTime < 1000) {
             // gesture TAP
             cp.trigger('gesture:tap', touchPointer);
-        } else if (touchPointer.shiftX > 30 && Math.abs(touchPointer.shiftY) < 50) {
+        } else if (touchPointer.shiftX > 30 && Math.abs(touchPointer.shiftY) < 80) {
             // gesture swipe LEFT
             touchPointer.direction = 'left';
             cp.trigger('gesture:swipe', touchPointer);
-        } else if (touchPointer.shiftX < -30 && Math.abs(touchPointer.shiftY) < 50) {
+        } else if (touchPointer.shiftX < -30 && Math.abs(touchPointer.shiftY) < 80) {
             // gesture swipe RIGHT
             touchPointer.direction = 'right';
             cp.trigger('gesture:swipe', touchPointer);
-        } else if (touchPointer.shiftY > 30 && Math.abs(touchPointer.shiftX) < 50) {
+        } else if (touchPointer.shiftY > 30 && Math.abs(touchPointer.shiftX) < 80) {
             // gesture swipe UP
             touchPointer.direction = 'up';
             cp.trigger('gesture:swipe', touchPointer);
-        } else if (touchPointer.shiftY < -30 && Math.abs(touchPointer.shiftX) < 50) {
+        } else if (touchPointer.shiftY < -30 && Math.abs(touchPointer.shiftX) < 80) {
             // gesture swipe DOWN
             touchPointer.direction = 'down';
             cp.trigger('gesture:swipe', touchPointer);
