@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "info": "echo 'ZUIX Web, presentation and documentation site.'",
-    "start": "http-server ./"
+    "start": "http-server --cors ./"
   },
   "dependencies": {
     "zuix-dist": "^0.4.9-23"
