@@ -46,6 +46,11 @@ zuix.controller(function (cp) {
         });
     };
 
+    // Math.sign Polyfill
+    Math.sign = Math.sign || function(x) {
+        return ((x > 0) - (x < 0)) || +x;
+    };
+
     function touchStart(e, x, y) {
         touchPointer = {
             event: e,
@@ -59,6 +64,7 @@ zuix.controller(function (cp) {
             startY: y,
             shiftX: 0,
             shiftY: 0,
+            velocity: 0,
             'x': x,
             'y': y
         };
@@ -77,29 +83,31 @@ zuix.controller(function (cp) {
     function touchStop(e) {
         touchPointer.event = e;
         touchPointer.endTime = new Date().getTime();
-        var elapsedTime = touchPointer.endTime - touchPointer.startTime;
+        var elapsedTime = touchPointer.endTime-touchPointer.startTime;
+        var d = Math.sqrt(touchPointer.shiftX*touchPointer.shiftX+touchPointer.shiftY*touchPointer.shiftY);
+        touchPointer.velocity = (d/elapsedTime);
+        var cx = Math.abs(touchPointer.shiftX)/(Math.abs(touchPointer.shiftY)+1);
+        var cy = 1/(cx+1);
         if (touchPointer.shiftX === 0 && touchPointer.shiftY === 0 && elapsedTime < 1000) {
             // gesture TAP
             cp.trigger('gesture:tap', touchPointer);
-        } else if (touchPointer.shiftX > 30 && Math.abs(touchPointer.shiftY) < 80) {
+        } else if (d > 30 && cx > 3 && Math.sign(touchPointer.shiftX) > 0) {
             // gesture swipe LEFT
             touchPointer.direction = 'left';
-            touchPointer.velocity = touchPointer.shiftX / elapsedTime;
             cp.trigger('gesture:swipe', touchPointer);
-        } else if (touchPointer.shiftX < -30 && Math.abs(touchPointer.shiftY) < 80) {
+        } else if (d > 30 && cx > 3 && Math.sign(touchPointer.shiftX) < 0) {
             // gesture swipe RIGHT
             touchPointer.direction = 'right';
-            touchPointer.velocity = touchPointer.shiftX / elapsedTime;
+            touchPointer.velocity *= -1;
             cp.trigger('gesture:swipe', touchPointer);
-        } else if (touchPointer.shiftY > 30 && Math.abs(touchPointer.shiftX) < 80) {
+        } else if (d > 30 && cy > 0.3 && Math.sign(touchPointer.shiftY) > 0) {
             // gesture swipe UP
             touchPointer.direction = 'up';
-            touchPointer.velocity = touchPointer.shiftY / elapsedTime;
             cp.trigger('gesture:swipe', touchPointer);
-        } else if (touchPointer.shiftY < -30 && Math.abs(touchPointer.shiftX) < 80) {
+        } else if (d > 30 && cy > 0.3 && Math.sign(touchPointer.shiftY) < 0) {
             // gesture swipe DOWN
             touchPointer.direction = 'down';
-            touchPointer.velocity = touchPointer.shiftY / elapsedTime;
+            touchPointer.velocity *= -1;
             cp.trigger('gesture:swipe', touchPointer);
         } else cp.trigger('gesture:release', touchPointer);
         touchPointer = null;

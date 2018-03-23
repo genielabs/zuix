@@ -63,16 +63,17 @@ zuix.controller(function (cp) {
                     tp.cancel();
                 },
                 'gesture:swipe': function (e, tp) {
-                    if (tp.velocity != null) {
-                        console.log("SHIFT", tp.velocity, tp.velocity * 100.0);
-                        dragShift(tp.velocity * 1000, 0, '0.75s ease-out');
+                    if (Math.abs(tp.velocity) > 0.1) {
+                        if (layoutType == LAYOUT_HORIZONTAL)
+                            dragShift(tp.velocity * 1000, 0, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
+                        else
+                            dragShift(0, tp.velocity * 1000, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
                         setTimeout(function () {
                             var viewSize = getSize(cp.view().get());
                             setPage(getItemIndexAt(viewSize.width/2, viewSize.height/2), DEFAULT_PAGE_TRANSITION);
-                        }, 750);
+                        }, 500);
                     }
-                    tp.cancel();
-                    /*
+                    return;
                     switch(tp.direction) {
                         case 'left':
                             if (layoutType === LAYOUT_HORIZONTAL)
@@ -91,7 +92,7 @@ zuix.controller(function (cp) {
                                 next();
                             break;
                     }
-                    */
+                    tp.cancel();
                 }
             }
         });
