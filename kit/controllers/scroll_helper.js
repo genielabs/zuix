@@ -44,10 +44,10 @@ zuix.controller(function (cp) {
         var endScroll = scrollHeight-scrollTop-visibleHeight;
         var dy = scrollTop - scrollInfo.lastTop;
         if ((endScroll === 0 || scrollTop === 0)) {
-            cp.trigger('scroll_change', { event: scrollTop === 0 ? 'hitTop' : 'hitBottom', delta: dy });
+            cp.trigger('scroll:change', { event: scrollTop === 0 ? 'hitTop' : 'hitBottom', delta: dy });
         } else if (now - scrollInfo.timestamp > 200) {
             scrollInfo.timestamp = now;
-            cp.trigger('scroll_change', { event: 'moving', delta: dy });
+            cp.trigger('scroll:change', { event: 'moving', delta: dy });
             scrollInfo.lastTop = scrollTop;
         }
 

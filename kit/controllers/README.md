@@ -25,7 +25,7 @@ Example:
 zuix.load('kit/controllers/scroll_helper', {
     view: myLvScroll.view(),
     on: {
-        'scrollHelper': function (e, data) {
+        'scroll:change': function (e, data) {
             switch (data.event) {
                 case 'moving':
                     hideFooter();
@@ -162,3 +162,8 @@ listView.on('status', function(info) {
 #### gesture_helper
 
 // TODO: Document gesture detector for touch/pointer gestures...
+
+
+#### view_pager
+
+// TODO: Document view pager controller...
