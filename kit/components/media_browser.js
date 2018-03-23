@@ -63,7 +63,7 @@ zuix.controller(function(cp){
                 'display': 'flex',
                 'align-items': 'center',
                 'justify-content': 'center'
-            }).append(img);
+            });
             zuix.$(img)
                 .attr({'src': this.url, 'title': this.description })
                 .one('load', function () {
@@ -83,6 +83,7 @@ zuix.controller(function(cp){
                     'max-height': '100%'
                 });
             cp.field('media').append(wrapperDiv.get());
+            wrapperDiv.append(img);
         });
         imageList = cp.field('media').children();
         viewPager.refresh();

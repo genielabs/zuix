@@ -63,6 +63,17 @@ zuix.controller(function (cp) {
                     tp.cancel();
                 },
                 'gesture:swipe': function (e, tp) {
+                    if (tp.velocity != null) {
+                        console.log("SHIFT", tp.velocity, tp.velocity * 100.0);
+                        dragShift(tp.velocity * 1000, 0, '0.75s ease-out');
+                        setTimeout(function () {
+                            var viewSize = getSize(cp.view().get());
+                            currentPage = getItemIndexAt(viewSize.width/2, viewSize.height/2);
+                            setPage(currentPage, DEFAULT_PAGE_TRANSITION);
+                        }, 750);
+                    }
+                    tp.cancel();
+                    /*
                     switch(tp.direction) {
                         case 'left':
                             if (layoutType === LAYOUT_HORIZONTAL)
@@ -81,7 +92,7 @@ zuix.controller(function (cp) {
                                 next();
                             break;
                     }
-                    tp.cancel();
+                    */
                 }
             }
         });
@@ -255,8 +266,8 @@ zuix.controller(function (cp) {
     }
 
     function dragStop(tp) {
-        focusPageAt(tp);
-        //setPage(currentPage, DEFAULT_PAGE_TRANSITION);
+        //focusPageAt(tp);
+        setPage(currentPage, DEFAULT_PAGE_TRANSITION);
     }
 
     function translate(el, x, y, t) {

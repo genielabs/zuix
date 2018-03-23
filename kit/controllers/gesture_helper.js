@@ -54,6 +54,7 @@ zuix.controller(function (cp) {
                 touchPointer.event.preventDefault();
             },
             startTime: new Date().getTime(),
+            endTime: 0,
             startX: x,
             startY: y,
             shiftX: 0,
@@ -75,28 +76,32 @@ zuix.controller(function (cp) {
     }
     function touchStop(e) {
         touchPointer.event = e;
-        var elapsedTime = new Date().getTime() - touchPointer.startTime;
-        cp.trigger('gesture:release', touchPointer);
+        touchPointer.endTime = new Date().getTime();
+        var elapsedTime = touchPointer.endTime - touchPointer.startTime;
         if (touchPointer.shiftX === 0 && touchPointer.shiftY === 0 && elapsedTime < 1000) {
             // gesture TAP
             cp.trigger('gesture:tap', touchPointer);
         } else if (touchPointer.shiftX > 30 && Math.abs(touchPointer.shiftY) < 80) {
             // gesture swipe LEFT
             touchPointer.direction = 'left';
+            touchPointer.velocity = touchPointer.shiftX / elapsedTime;
             cp.trigger('gesture:swipe', touchPointer);
         } else if (touchPointer.shiftX < -30 && Math.abs(touchPointer.shiftY) < 80) {
             // gesture swipe RIGHT
             touchPointer.direction = 'right';
+            touchPointer.velocity = touchPointer.shiftX / elapsedTime;
             cp.trigger('gesture:swipe', touchPointer);
         } else if (touchPointer.shiftY > 30 && Math.abs(touchPointer.shiftX) < 80) {
             // gesture swipe UP
             touchPointer.direction = 'up';
+            touchPointer.velocity = touchPointer.shiftY / elapsedTime;
             cp.trigger('gesture:swipe', touchPointer);
         } else if (touchPointer.shiftY < -30 && Math.abs(touchPointer.shiftX) < 80) {
             // gesture swipe DOWN
             touchPointer.direction = 'down';
+            touchPointer.velocity = touchPointer.shiftY / elapsedTime;
             cp.trigger('gesture:swipe', touchPointer);
-        }
+        } else cp.trigger('gesture:release', touchPointer);
         touchPointer = null;
     }
 
