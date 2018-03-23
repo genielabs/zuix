@@ -68,8 +68,7 @@ zuix.controller(function (cp) {
                         dragShift(tp.velocity * 1000, 0, '0.75s ease-out');
                         setTimeout(function () {
                             var viewSize = getSize(cp.view().get());
-                            currentPage = getItemIndexAt(viewSize.width/2, viewSize.height/2);
-                            setPage(currentPage, DEFAULT_PAGE_TRANSITION);
+                            setPage(getItemIndexAt(viewSize.width/2, viewSize.height/2), DEFAULT_PAGE_TRANSITION);
                         }, 750);
                     }
                     tp.cancel();
