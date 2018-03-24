@@ -68,10 +68,15 @@ zuix.controller(function (cp) {
                             dragShift(tp.velocity * 1000, 0, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
                         else
                             dragShift(0, tp.velocity * 1000, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
-                        setTimeout(function () {
-                            var viewSize = getSize(cp.view().get());
-                            setPage(getItemIndexAt(viewSize.width/2, viewSize.height/2), DEFAULT_PAGE_TRANSITION);
-                        }, 500);
+                        if (pageList.length() > 0) {
+                            var animationEndHandler = function () {
+                                var viewSize = getSize(cp.view().get());
+                                setPage(getItemIndexAt(viewSize.width / 2, viewSize.height / 2), DEFAULT_PAGE_TRANSITION);
+                            };
+                            pageList
+                                .one('webkitTransitionEnd', animationEndHandler)
+                                .one('transitionend', animationEndHandler);
+                        }
                     } else switch(tp.direction) {
                         case 'left':
                             if (layoutType === LAYOUT_HORIZONTAL)
