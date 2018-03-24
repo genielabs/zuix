@@ -26,8 +26,14 @@ zuix.controller(function (cp) {
             'position': 'relative',
             'overflow': 'hidden'
         });
+        var animationEndHandler = function () {
+            var viewSize = getSize(cp.view().get());
+            setPage(getItemIndexAt(viewSize.width / 2, viewSize.height / 2), DEFAULT_PAGE_TRANSITION);
+        };
         // get child items (pages)
-        pageList = cp.view().children();
+        pageList = cp.view().children()
+            .on('webkitTransitionEnd', animationEndHandler)
+            .on('transitionend', animationEndHandler);
         // loading of images could change elements size, so layout update might be required
         cp.view().find('img').each(function (i, el) {
             this.one('load', updateLayout);
@@ -65,18 +71,9 @@ zuix.controller(function (cp) {
                 'gesture:swipe': function (e, tp) {
                     if (Math.abs(tp.velocity) > 0.1) {
                         if (layoutType == LAYOUT_HORIZONTAL)
-                            dragShift(tp.velocity * 1000, 0, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
+                            dragShift(tp.velocity * 1500, 0, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
                         else
-                            dragShift(0, tp.velocity * 1000, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
-                        if (pageList.length() > 0) {
-                            var animationEndHandler = function () {
-                                var viewSize = getSize(cp.view().get());
-                                setPage(getItemIndexAt(viewSize.width / 2, viewSize.height / 2), DEFAULT_PAGE_TRANSITION);
-                            };
-                            pageList
-                                .one('webkitTransitionEnd', animationEndHandler)
-                                .one('transitionend', animationEndHandler);
-                        }
+                            dragShift(0, tp.velocity * 1500, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
                     } else switch(tp.direction) {
                         case 'left':
                             if (layoutType === LAYOUT_HORIZONTAL)
