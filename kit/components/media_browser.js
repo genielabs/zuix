@@ -112,7 +112,7 @@ zuix.controller(function(cp){
     function closeBrowser() {
         cp.view().animateCss('zoomOut', function () {
             this.hide();
-        });
+        }).trigger('close');
         return cp.context;
     }
 
