@@ -60,9 +60,7 @@ zuix.controller(function(cp){
             var img = document.createElement('img');
             var wrapperDiv = zuix.$(document.createElement('div'));
             wrapperDiv.css({
-                'display': 'flex',
-                'align-items': 'center',
-                'justify-content': 'center'
+                'position': 'relative'
             });
             zuix.$(img)
                 .attr({'src': this.url, 'title': this.description })
@@ -79,6 +77,10 @@ zuix.controller(function(cp){
                         });
                     }
                 }).css({
+                    'position' :'absolute',
+                    'top': 0, 'bottom': 0,
+                    'left': 0, 'right': 0,
+                    'margin': 'auto',
                     'max-width': '100%',
                     'max-height': '100%'
                 });
