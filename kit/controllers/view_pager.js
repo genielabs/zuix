@@ -72,6 +72,23 @@ zuix.controller(function (cp) {
                             var viewSize = getSize(cp.view().get());
                             setPage(getItemIndexAt(viewSize.width/2, viewSize.height/2), DEFAULT_PAGE_TRANSITION);
                         }, 500);
+                    } else switch(tp.direction) {
+                        case 'left':
+                            if (layoutType === LAYOUT_HORIZONTAL)
+                                prev();
+                            break;
+                        case 'right':
+                            if (layoutType === LAYOUT_HORIZONTAL)
+                                next();
+                            break;
+                        case 'up':
+                            if (layoutType === LAYOUT_VERTICAL)
+                                prev();
+                            break;
+                        case 'down':
+                            if (layoutType === LAYOUT_VERTICAL)
+                                next();
+                            break;
                     }
                     tp.cancel();
                 }
@@ -104,7 +121,7 @@ zuix.controller(function (cp) {
     function updateLayout() {
         if (updateLayoutTimeout != null)
             clearTimeout(updateLayoutTimeout);
-        updateLayoutTimeout = setTimeout(layoutElements, 200);
+        updateLayoutTimeout = setTimeout(layoutElements, 500);
     }
     function layoutElements() {
         var viewSize = getSize(cp.view().get());
