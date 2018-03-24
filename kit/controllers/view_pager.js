@@ -63,7 +63,7 @@ zuix.controller(function (cp) {
                     tp.cancel();
                 },
                 'gesture:swipe': function (e, tp) {
-                    if (Math.abs(tp.velocity) > 0.5) {
+                    if (Math.abs(tp.velocity) > 0.7) {
                         var animationEndHandler = function () {
                             var viewSize = getSize(cp.view().get());
                             setPage(getItemIndexAt(viewSize.width / 2, viewSize.height / 2), DEFAULT_PAGE_TRANSITION);
@@ -72,9 +72,9 @@ zuix.controller(function (cp) {
                             .one('webkitTransitionEnd', animationEndHandler)
                             .one('transitionend', animationEndHandler);
                         if (layoutType == LAYOUT_HORIZONTAL)
-                            dragShift(tp.velocity * 1000, 0, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
+                            dragShift(tp.velocity * 1200, 0, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
                         else
-                            dragShift(0, tp.velocity * 1000, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
+                            dragShift(0, tp.velocity * 1200, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
                     } else switch(tp.direction) {
                         case 'left':
                             if (layoutType === LAYOUT_HORIZONTAL)
