@@ -63,18 +63,22 @@ zuix.controller(function (cp) {
                     tp.cancel();
                 },
                 'gesture:swipe': function (e, tp) {
-                    if (Math.abs(tp.velocity) > 0.7) {
+                    if (Math.abs(tp.velocity) > 1) {
                         var animationEndHandler = function () {
                             var viewSize = getSize(cp.view().get());
                             setPage(getItemIndexAt(viewSize.width / 2, viewSize.height / 2), DEFAULT_PAGE_TRANSITION);
                         };
-                        pageList.eq(0)
-                            .one('webkitTransitionEnd', animationEndHandler)
-                            .one('transitionend', animationEndHandler);
                         if (layoutType == LAYOUT_HORIZONTAL)
                             dragShift(tp.velocity * 1200, 0, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
                         else
                             dragShift(0, tp.velocity * 1200, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
+                        pageList.eq(0)
+                            .one('webkitAnimationEnd', animationEndHandler)
+                            .one('oanimationend', animationEndHandler)
+                            .one('msAnimationEnd', animationEndHandler)
+                            .one('animationend', animationEndHandler)
+                            .one('webkitTransitionEnd', animationEndHandler)
+                            .one('transitionend', animationEndHandler);
                     } else switch(tp.direction) {
                         case 'left':
                             if (layoutType === LAYOUT_HORIZONTAL)
