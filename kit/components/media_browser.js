@@ -33,7 +33,6 @@ zuix.controller(function(cp){
             autoSlide: false,
             on: {
                 'page:change': function (e, page) {
-                    console.log(page);
                     currentPage = page;
                     updateButtons();
                 }
@@ -76,6 +75,7 @@ zuix.controller(function(cp){
                     }
                 }).css({
                     'position' :'absolute',
+                    'margin': 'auto',
                     'top': 0, 'bottom': 0,
                     'left': 0, 'right': 0,
                     'max-width': '100%',

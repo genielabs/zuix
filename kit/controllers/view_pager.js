@@ -104,11 +104,12 @@ zuix.controller(function (cp) {
                 resetAutoSlide();
             else stopAutoSlide();
         }).expose('layout', function (mode) {
-            if (mode === 'vertical')
+            if (mode == null)
+                return layoutType;
+            else if (mode === 'vertical')
                 layoutType = LAYOUT_VERTICAL;
             else layoutType = LAYOUT_HORIZONTAL;
             updateLayout();
-            if (mode == null) return layoutType;
         }).expose('refresh', function () {
             updateLayout();
         }).expose('gesture', function () {
@@ -121,15 +122,9 @@ zuix.controller(function (cp) {
     function updateLayout() {
         if (updateLayoutTimeout != null)
             clearTimeout(updateLayoutTimeout);
-        updateLayoutTimeout = setTimeout(layoutElements, 200);
+        updateLayoutTimeout = setTimeout(layoutElements, 250);
     }
     function layoutElements() {
-        var viewSize = getSize(cp.view().get());
-        if (viewSize.width === 0 || viewSize.height === 0) {
-            // cannot measure view, try again later
-            //updateLayout();
-            return;
-        }
         // init elements
         pageList.each(function (i, el) {
             this.css({
@@ -138,9 +133,16 @@ zuix.controller(function (cp) {
                 'top': 0,
                 'right': 0,
                 'bottom': 0
-            }).css('max-width', viewSize.width+'px')
-              .css('max-height', viewSize.height+'px');
+            }).css('max-width', '100%')
+              .css('max-height', '100%');
         });
+        // measure
+        var viewSize = getSize(cp.view().get());
+        if (viewSize.width === 0 || viewSize.height === 0) {
+            // cannot measure view, try again later
+            updateLayout();
+            return;
+        }
         // position elements
         pageList.each(function (i, el) {
             var size = getSize(el);
