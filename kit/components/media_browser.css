@@ -25,7 +25,7 @@
     -webkit-align-items: stretch;
     align-items: stretch;
     justify-content: center;
-    background: rgba(0,0,0,0.9);
+    background: black;
 }
 
 .nav-prev {
