@@ -1,6 +1,6 @@
 zuix.controller(function (cp) {
     var menuOverlayShowing = false, menuButtonShowing = true;
-    var menuButton, menuButtonClose, menuOverlay, menuItems;
+    var menuButton, menuButtonClose, menuOverlay, itemsWrapper, menuItems;
     var scroller = null, currentOffset = 0;
 
     cp.create = function () {
@@ -11,38 +11,25 @@ zuix.controller(function (cp) {
             .on('click', toggleMenu);
         menuOverlay = cp.field('menu_overlay').visibility('hidden')
             .on('click', toggleMenu);
+        itemsWrapper = cp.field('items_wrapper');
 
-        var itemList = [];
-        if (cp.model().items instanceof Element) {
-            var items = zuix.$(cp.model().items).find('a');
-            items.each(function (i,el) {
-                itemList.push({
-                    title: this.html(),
-                    tooltip: this.attr('title'),
-                    href: this.attr('href'),
-                    icon: this.attr('data-icon'),
-                    delay: (items.length()-i)/10
-                });
-            });
-        } else itemList = cp.model().items;
-
-        // Create menu items out of provided data model
-        zuix.$.each(itemList, function (i, item) {
-            zuix.load('res/menu_overlay/item', {
-                controller: function(cp){},
-                css: false,
-                on: {
-                    'view:apply': function () {
-                        var html = zuix.$.replaceBraces(this.html(), function (varName) {
-                            return item[varName];
-                        });
-                        this.html(html);
-                        menuOverlay.append(this.get());
-                    }
-                }
-            })
+        var items = zuix.$(cp.model().items).find('a');
+        items.each(function (i,el) {
+            var wrapperDiv = zuix.$(document.createElement('div'))
+                .addClass('menu-item')
+                .attr('data-ui-transition-delay', ((items.length()-i)/10)+'s')
+                .append(el);
+            itemsWrapper.append(wrapperDiv.get());
         });
-        menuItems = menuOverlay.find('div[class*="menu-item"]');
+        menuItems = itemsWrapper.find('div[class*="menu-item"]');
+
+        // apply custom color to menu button
+        if (cp.model()['button_color'] != null) {
+            cp.view().find('.circle-button').css('background', cp.model()['button_color'].innerText);
+        }
+        if (cp.model()['icon_color'] != null) {
+            cp.view().find('.circle-button').css('fill', cp.model()['icon_color'].innerText);
+        }
 
         var scrollerName = cp.view().attr('data-ui-scroller');
         if (scrollerName != null) {
