@@ -68,8 +68,6 @@ zuix.controller(function(cp){
                     // update loading progress
                     loadProgress += Math.round(100/itemList.length);
                     if (loadProgress > 100) loadProgress = 100;
-                    //cp.field('load-progress').get()
-                    //    .MaterialProgress.setProgress(loadProgress);
                     cp.field('load-progress').html(loadProgress+'%');
                     if (loadProgress === 100) {
                         cp.field('progress-container').animateCss('fadeOutUp', function () {
@@ -80,7 +78,6 @@ zuix.controller(function(cp){
                     'position' :'absolute',
                     'top': 0, 'bottom': 0,
                     'left': 0, 'right': 0,
-                    'margin': 'auto',
                     'max-width': '100%',
                     'max-height': '100%'
                 });

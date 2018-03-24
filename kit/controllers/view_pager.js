@@ -121,7 +121,7 @@ zuix.controller(function (cp) {
     function updateLayout() {
         if (updateLayoutTimeout != null)
             clearTimeout(updateLayoutTimeout);
-        updateLayoutTimeout = setTimeout(layoutElements, 500);
+        updateLayoutTimeout = setTimeout(layoutElements, 200);
     }
     function layoutElements() {
         var viewSize = getSize(cp.view().get());
