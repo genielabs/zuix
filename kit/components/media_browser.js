@@ -59,7 +59,8 @@ zuix.controller(function(cp){
             var img = document.createElement('img');
             var wrapperDiv = zuix.$(document.createElement('div'));
             wrapperDiv.css({
-                'position': 'relative'
+                'position': 'relative',
+                'background-color': 'rgba(0,0,0,0.5)'
             });
             zuix.$(img)
                 .attr({'src': this.url, 'title': this.description })
