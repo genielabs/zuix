@@ -1,6 +1,6 @@
 // Basic image carousel
 zuix.controller(function (cp) {
-    var DEFAULT_PAGE_TRANSITION = '0.5s ease';
+    var DEFAULT_PAGE_TRANSITION = '0.3s ease';
     var currentPage = -1, oldPage = 0;
     var slideTimeout = null, slideInterval = 3000;
     var LAYOUT_HORIZONTAL = 1, LAYOUT_VERTICAL = 2;
