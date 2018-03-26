@@ -73,11 +73,10 @@ zuix.controller(function (cp) {
                         else
                             dragShift(0, tp.velocity * 1200, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
                         pageList.eq(0)
-                            .one('webkitAnimationEnd', animationEndHandler)
-                            .one('oanimationend', animationEndHandler)
-                            .one('msAnimationEnd', animationEndHandler)
-                            .one('animationend', animationEndHandler)
                             .one('webkitTransitionEnd', animationEndHandler)
+                            .one('otransitionend', animationEndHandler)
+                            .one('oTransitionEnd', animationEndHandler)
+                            .one('msTransitionEnd', animationEndHandler)
                             .one('transitionend', animationEndHandler);
                     } else switch(tp.direction) {
                         case 'left':
