@@ -293,6 +293,8 @@ zuix.controller(function (cp) {
     }
 
     function transition(el, transition) {
+        if (transition == null)
+            transition = '';
         el.css({
             '-webkit-transition': transition,
             '-moz-transition': transition,
