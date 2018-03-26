@@ -73,11 +73,7 @@ zuix.controller(function (cp) {
                         else
                             dragShift(0, tp.velocity * 1200, '0.5s cubic-bezier(0.2,0.5,0.3,1)');
                         pageList.eq(0)
-                            .one('webkitTransitionEnd', animationEndHandler)
-                            .one('otransitionend', animationEndHandler)
-                            .one('oTransitionEnd', animationEndHandler)
-                            .one('msTransitionEnd', animationEndHandler)
-                            .one('transitionend', animationEndHandler);
+                            .one(getTransitionEvent(), animationEndHandler);
                     } else switch(tp.direction) {
                         case 'left':
                             if (layoutType === LAYOUT_HORIZONTAL)
@@ -303,4 +299,16 @@ zuix.controller(function (cp) {
         });
     }
 
+    function getTransitionEvent(){
+        var t, el = document.createElement("fakeelement");
+        var transitions = {
+            "transition"      : "transitionend",
+            "OTransition"     : "oTransitionEnd",
+            "MozTransition"   : "transitionend",
+            "WebkitTransition": "webkitTransitionEnd"
+        };
+        for (t in transitions)
+            if (typeof el.style[t] !== 'undefined')
+                return transitions[t];
+    }
 });
