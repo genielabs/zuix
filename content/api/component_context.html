@@ -11,7 +11,7 @@ as the return value of the `zuix.load(...)` method, when loading a component fro
 
 ```javascript
 // get component context as return value of the `zuix.load(...)` command
-var ctx = zuix.load( ... );
+const ctx = zuix.load( ... );
 ```
 
 <i class="material-icons mdl-typography--font-bold">arrow_right</i>
@@ -25,10 +25,10 @@ by using the `zuix.context(...)` method, when loading a component from HTML.
 </div>
 <script>
 // Get the component context by using the assigned id
-ctx = zuix.context('my-context-id');
+const ctx = zuix.context('my-context-id');
 // OR by referencing its HTML element container
-var componentDiv = zuix.field('my-field-id');
-ctx = zuix.context(componentDiv);
+const componentDiv = zuix.field('my-field-id');
+const ctx = zuix.context(componentDiv);
 </script>
 ```
 

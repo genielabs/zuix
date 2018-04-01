@@ -217,11 +217,11 @@ the `data-bind-model` attribute as shown below:
 </div>
 <script>
 // example inline data model
-foo_bar_contact = {
+var foo_bar_contact = {
     image: 'images/avatar_02.png',
     name: 'Foo Bar'
 };
-a_random_contact = {
+var a_random_contact = {
     image: 'images/avatar_01.png',
     name: function(element, field) { element.html(a_random_name()); }
 };
@@ -244,8 +244,8 @@ var chip_items = {
 };
 // example model view adapter
 var chip_adapter = function(element, field) {
-    var id = this.attr('data-id');
-    var value = chip_items[id][field];
+    const id = this.attr('data-id');
+    const value = chip_items[id][field];
     switch (field) {
         case 'name':
             element.html(value);
@@ -290,16 +290,16 @@ context object **this**, is the view itself.
 </div>
 <script>
 // items list
-chip_items = {
+var chip_items = {
     "0": { name: 'Foo Bar', image: 'examples/images/avatar_02.png'},
     "1": { name: 'Jane Doe', image: 'examples/images/avatar_01.png'}
 };
 // example adapter
-chip_adapter = function(element, field) {
+var chip_adapter = function(element, field) {
     // the context 'this', is the View itself
-    var id = this.attr('data-id');
+    const id = this.attr('data-id');
     // get the value of 'field' in the data model
-    var value = chip_items[id][field];
+    const value = chip_items[id][field];
     // use the value to update the bound 'element'
     switch (field) {
         case 'name':
@@ -337,7 +337,7 @@ For example a view could animate if clicked.
      data-ui-options="chip_view_options"></div>
 </div>
 <script>
-chip_view_behavior = {
+var chip_view_behavior = {
     'mouseover': function () {
         this.css('cursor', 'pointer');
     },
@@ -352,7 +352,7 @@ chip_view_behavior = {
             .animateCss('bounce');
     }
 };
-chip_view_options = {
+var chip_view_options = {
     css: false,
     behavior: chip_view_behavior
 }
@@ -375,7 +375,7 @@ For example by clicking a button, a link will open.
      data-ui-options="chip_view_options"></div>
 </div>
 <script>
-chip_view_behavior = {
+var chip_view_behavior = {
     'mouseover': function () {
         this.css('cursor', 'pointer');
     },
@@ -390,7 +390,7 @@ chip_view_behavior = {
             .animateCss('bounce');
     }
 };
-chip_view_options = {
+var chip_view_options = {
     behavior: chip_view_behavior,
     on: { // inline events mapping
         'click': function() {

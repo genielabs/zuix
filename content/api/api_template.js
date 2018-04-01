@@ -1,5 +1,6 @@
+"use strict";
 zuix.controller(function (cp) {
-    var linkedApi = [
+    const linkedApi = [
         'ZxQuery',
         'Zuix',
         'ContextOptions',
@@ -15,8 +16,8 @@ zuix.controller(function (cp) {
         'ElementPosition'];
 
     cp.create = function () {
-        var data = cp.options().data;
-        var html;
+        let data = cp.options().data;
+        let html;
 
         // TODO: Constructor...
 
@@ -30,7 +31,7 @@ zuix.controller(function (cp) {
 
                 html += '<div class="container"><div class="details collapsed">';
 
-                var pl = {content: this.description};
+                const pl = {content: this.description};
                 cp.trigger('html:parse', pl, true);
                 html += '<div class="description">' + pl.content + '</div>';
 
@@ -72,7 +73,7 @@ zuix.controller(function (cp) {
                 html += '<a id="ZUIX_API--'+this.name+'"></a>';
                 html += '<div class="title"><i class="material-icons">expand_more</i> <h6>' + this.name + '</h6></div>';
                 html += '<div class="type-details"><div class="collapsed">';
-                var pl = {content: this.description};
+                const pl = {content: this.description};
                 cp.trigger('html:parse', pl, true);
                 html += '<p>' + pl.content + '</p>';
                 html += '<code class="language-js">function '+buildCallbackArgs(this)+' { ... }</code>';
@@ -88,7 +89,7 @@ zuix.controller(function (cp) {
                 html += '<a id="ZUIX_API--'+this.name+'"></a>';
                 html += '<div class="title"><i class="material-icons">expand_more</i> <h6>' + this.name + '</h6></div>';
                 html += '<div class="type-details"><div class="collapsed">';
-                var pl = {content: this.description};
+                const pl = {content: this.description};
                 cp.trigger('html:parse', pl, true);
                 html += '<p>' + pl.content + '</p>';
                 html += '<strong><small>PROPERTIES</small></strong>';
@@ -112,7 +113,7 @@ zuix.controller(function (cp) {
     };
 
     function buildMethodTitle(method) {
-        var args = '';
+        let args = '';
         zuix.$.each(method.parameters, function (i) {
             if (this.optional)
                 args += '[' + this.name + ']';
@@ -125,7 +126,7 @@ zuix.controller(function (cp) {
     }
 
     function buildCallbackArgs(method) {
-        var args = '';
+        let args = '';
         zuix.$.each(method.parameters, function (i) {
             if (this.optional)
                 args += '[' + this.name + ']';
@@ -138,7 +139,7 @@ zuix.controller(function (cp) {
     }
 
     function buildMethodParams(method) {
-        var parameterList = '';
+        let parameterList = '';
         if (method.parameters.length > 0) {
             parameterList = '<p><strong><small>PARAMETERS</small></strong></p> ';
             parameterList += buildTypes(method.parameters);
@@ -147,7 +148,7 @@ zuix.controller(function (cp) {
     }
 
     function buildReturnType(method) {
-        var returnType = '';
+        let returnType = '';
         if (method.return.length > 0) {
             returnType = '<p><strong><small>RETURN</small></strong></p> ';
             returnType += buildTypes(method.return);
@@ -156,11 +157,11 @@ zuix.controller(function (cp) {
     }
 
     function buildTypes(types) {
-        var typesList = '<div class="api-member-details">';
+        let typesList = '<div class="api-member-details">';
         zuix.$.each(types, function (i) {
             if (this.optional)
                 typesList += ' <strong class="mdl-color-text--grey-500">optional</strong>';
-            var typesHtml = '', types = this.types;
+            let typesHtml = '', types = this.types;
             zuix.$.each(types, function (i) {
                 if (linkedApi.indexOf(this.toString()) >= 0)
                     typesHtml += '<a href="#api#ZUIX_API--' + this + '">' + this.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</a>';
@@ -170,7 +171,7 @@ zuix.controller(function (cp) {
                     typesHtml += ' | ';
             });
             typesList += ' <em class="mdl-color-text--grey-700">{' + typesHtml + '}</em>';
-            var pl = { content: this.description };
+            const pl = { content: this.description };
             if (this.name != null)
                 pl.content = '<code>'+ this.name.replace('[','').replace(']','') +'</code>: '+pl.content;
             cp.trigger('html:parse', pl, true);
@@ -183,9 +184,9 @@ zuix.controller(function (cp) {
     }
 
     function buildExamples(method) {
-        var examples = '';
+        let examples = '';
         if (method.example.length > 0) {
-            var pl = { content: method.example };
+            const pl = { content: method.example };
             cp.trigger('html:parse', pl, true);
             examples += '<div class="example">'+pl.content+'</div>';
         }
@@ -193,8 +194,8 @@ zuix.controller(function (cp) {
     }
 
     function expandItem(element) {
-        var detail = element.next().children().eq(0);
-        var collapsed = detail.hasClass('collapsed');
+        const detail = element.next().children().eq(0);
+        const collapsed = detail.hasClass('collapsed');
         if (collapsed) {
             detail.animateCss('fadeInDown', { duration: '0.2s'}).removeClass('collapsed');
             element.find('i').html('expand_less')

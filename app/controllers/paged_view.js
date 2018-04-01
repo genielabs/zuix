@@ -1,6 +1,6 @@
-// TODO: this should be moved/promoted to "ui/controls" folder
-
+"use strict";
 zuix.controller(function (cp) {
+    let currentPage = -1;
 
     cp.init = function () {
         cp.options().html = false;
@@ -37,10 +37,8 @@ zuix.controller(function (cp) {
 
     // Private Members
 
-    var currentPage = -1;
-
     function getPage(p) {
-        var pages = cp.view().children();
+        const pages = cp.view().children();
         return pages.eq(p);
     }
 
@@ -53,8 +51,8 @@ zuix.controller(function (cp) {
     }
 
     function setPage(p, anchor) {
-        var pages = cp.view().children();
-        var oldPage = currentPage;
+        const pages = cp.view().children();
+        const oldPage = currentPage;
         if (p != currentPage) {
             currentPage = p;
             pages.eq(p).show();

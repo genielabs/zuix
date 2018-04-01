@@ -1,8 +1,9 @@
+"use strict";
 zuix.controller(function (cp) {
 
     cp.create = function () {
 
-        var apiName = cp.view().attr('data-ui-api');
+        const apiName = cp.view().attr('data-ui-api');
         cp.view().html('Loading '+apiName+' API...');
 
         // download the jsDoc data file and HTML-format it.
@@ -10,9 +11,9 @@ zuix.controller(function (cp) {
             url: 'content/api/data/'+apiName+'.json?'+Date.now(),
             success: function(json) {
                 cp.view().html('');
-                var dox = JSON.parse(json);
+                const dox = JSON.parse(json);
 
-                var apiDocs = {};
+                const apiDocs = {};
                 apiDocs.name = apiName;
                 apiDocs.constructor = null;
                 apiDocs.parameters = []; // constructor parameters
@@ -23,7 +24,7 @@ zuix.controller(function (cp) {
 
                 zuix.$.each(dox, function() {
 
-                    var skipItem = (this.isPrivate || (this.ctx != null && (this.ctx.name !== apiName && this.ctx.cons !== apiName)) || this.tags == null || this.tags.length === 0);
+                    const skipItem = (this.isPrivate || (this.ctx != null && (this.ctx.name !== apiName && this.ctx.cons !== apiName)) || this.tags == null || this.tags.length === 0);
                     if (skipItem)
                         return true;
 
@@ -32,19 +33,19 @@ zuix.controller(function (cp) {
                         return true;
                     }
 
-                    var apiMember = (!this.isPrivate && this.ctx != null && (this.ctx.cons === apiName));
+                    const apiMember = (!this.isPrivate && this.ctx != null && (this.ctx.cons === apiName));
                     if (apiMember) {
                         apiDocs.methods.push(addMember(this));
                         return true;
                     }
 
-                    var itemType = this.tags[0].type;
+                    const itemType = this.tags[0].type;
                     switch (itemType) {
                         case 'param':
                             apiDocs.parameters.push(addType(this));
                             break;
                         case 'typedef':
-                            var type = addType(this);
+                            const type = addType(this);
                             if (type.name === apiName)
                                 apiDocs.properties = type.properties;
                             else
@@ -75,13 +76,13 @@ zuix.controller(function (cp) {
     };
 
     function addConstructor(constructor) {
-        var item = {};
+        const item = {};
         item.name = constructor.ctx.name;
         item.description = constructor.description.full || constructor.description;
         item.parameters = [];
         item.return = {};
         zuix.$.each(constructor.tags, function (i) {
-            var param = getParam(this);
+            const param = getParam(this);
             if (this.type === 'param') {
                 item.parameters.push(param);
             } else if (this.type === 'example') {
@@ -94,14 +95,14 @@ zuix.controller(function (cp) {
     }
 
     function addMember(member) {
-        var item = {};
+        const item = {};
         item.name = member.ctx.name;
         item.description = member.description.full || member.description;
         item.parameters = [];
         item.return = [];
         item.example = '';
         zuix.$.each(member.tags, function () {
-            var param = getParam(this);
+            const param = getParam(this);
             if (this.type === 'param') {
                 item.parameters.push(param);
             } else if (this.type === 'example') {
@@ -114,14 +115,14 @@ zuix.controller(function (cp) {
     }
 
     function addType(typeDef) {
-        var item = {};
+        const item = {};
         item.name = '';
         item.description = typeDef.description.full || typeDef.description;
         item.properties = [];
         item.example = '';
         zuix.$.each(typeDef.tags, function () {
             if (this.type === 'property') {
-                var property = getParam(this);
+                const property = getParam(this);
                 item.properties.push(property);
             } else if (this.type === 'example') {
                 item.example = this.string;
@@ -135,7 +136,7 @@ zuix.controller(function (cp) {
     }
 
     function addHandler(handler) {
-        var item = {};
+        const item = {};
         item.name = handler.name;
         item.description = handler.description.full || handler.description;
         item.parameters = [];
@@ -143,7 +144,7 @@ zuix.controller(function (cp) {
         item.return = {};
         item.example = '';
         zuix.$.each(handler.tags, function (i) {
-            var param = getParam(this);
+            const param = getParam(this);
             if (this.type === 'callback') {
                 item.name = item.name || this.string;
             } else if (this.type === 'param') {
@@ -160,7 +161,7 @@ zuix.controller(function (cp) {
     }
 
     function getParam(parameter) {
-        var param = {};
+        const param = {};
         param.name = parameter.name != null ? parameter.name.replace('[','').replace(']','') : null;
         param.description = parameter.description;
         param.types = parameter.types;

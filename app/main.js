@@ -25,9 +25,9 @@
  *
  */
 
+"use strict";
 
 // Main options and configuration
-
 var main = {
     options: {
         content: {
@@ -93,19 +93,19 @@ zuix.using('component', 'kit/extensions/animate_css', function(res, ctx){
 
 // Get reference to various elements of the main page
 
-var revealTimeout = null;
-var splashScreen = zuix.field('splashScreen').show();
-var loaderMessage = zuix.field('loaderMessage');
-var mainPage = zuix.field('main').hide();
+const loaderMessage = zuix.field('loaderMessage');
+const mainPage = zuix.field('main').hide();
+let splashScreen = zuix.field('splashScreen').show();
+let revealTimeout = null;
 // reference to homepage's cover and features block (used for change-page animation)
-var coverBlock = null, featuresBlock = null;
+let coverBlock = null, featuresBlock = null;
 zuix.field('content-home').on('component:ready', function (ctx) {
     // these element are available only after the 'content-home' is loaded
     coverBlock = zuix.field('mainCover', this);
     featuresBlock = zuix.field('mainFeatures', this);
 });
 // Reference to navigation components
-var pagedView = null;
+let pagedView = null;
 
 
 // Turn off debug output
@@ -182,8 +182,8 @@ window.onhashchange = function () {
 function routeCurrentUrl(path) {
     // check if pagedView is loaded
     if (pagedView == null) return;
-    var anchorIndex = path.lastIndexOf('#');
-    var pageAnchor = null;
+    const anchorIndex = path.lastIndexOf('#');
+    let pageAnchor = null;
     if (anchorIndex > 0) {
         pageAnchor = path.substring(anchorIndex + 1);
         path = path.substring(0, anchorIndex);
@@ -203,9 +203,9 @@ function routeCurrentUrl(path) {
             pagedView.setPage(0, 0);
             break;
     }
-    var p = pagedView.getCurrentPage();
+    const p = pagedView.getCurrentPage();
     if (pageAnchor !== null) {
-        var a = p.find('a[id=' + pageAnchor+']');
+        const a = p.find('a[id=' + pageAnchor+']');
         if (a.length() > 0) {
             setTimeout(function () {
                 scrollTo(p.get(), p.get().scrollTop+a.position().y-64, 750);
@@ -217,14 +217,14 @@ function routeCurrentUrl(path) {
 
 // Other utility functions
 
-var scrollEndTs;
+let scrollEndTs;
 function scrollTo(element, to, duration) {
-    var currentTs = Date.now();
+    const currentTs = Date.now();
     if (duration != null) {
         scrollEndTs = currentTs + duration;
     }
     duration = scrollEndTs-currentTs;
-    var difference = to - element.scrollTop;
+    const difference = to - element.scrollTop;
     if (duration <= 0) {
         element.scrollTop = to;
         return;
@@ -249,7 +249,7 @@ function reveal() {
         // unregister 'componentize:end' hook
         zuix.hook('componentize:end', null);
         // this is only executed once, on app startup
-        var s = splashScreen; splashScreen = false;
+        const s = splashScreen; splashScreen = false;
         s.animateCss('fadeOutUp', function(){
             s.hide();
         });
@@ -263,17 +263,17 @@ function reveal() {
     }
 }
 
-var zxHeader = zuix.$.find('.site-header').hide();
-zxHeader.hidden = true; var headerTriggerY = 100;
-//var zxHeaderTitle = zxHeader.find('[data-ui-field=title]');
-//var zxFooter = zuix.$.find('.site-footer').hide();
+const zxHeader = zuix.$.find('.site-header').hide();
+zxHeader.hidden = true; const headerTriggerY = 100;
+//const zxHeaderTitle = zxHeader.find('[data-ui-field=title]');
+//const zxFooter = zuix.$.find('.site-footer').hide();
 
 zuix.$.find('section').eq(0).on('scroll', function (data) {
    checkMenuVisibility();
 });
 
 function checkMenuVisibility() {
-    var checkPosition = featuresBlock.position();
+    const checkPosition = featuresBlock.position();
     //console.log(checkPosition, zxHeader.display());
     if (checkPosition.y < headerTriggerY && zxHeader.hidden && !zxHeader.hasClass('animated')) {
         zxHeader.show()
@@ -325,8 +325,8 @@ function changePage(e, i, effectIn, effectOut, dirIn, dirOut) {
     if (effectIn == null) effectIn = 'fadeIn';
     if (effectOut == null) effectOut = 'fadeOut';
     // Animate page changing
-    var options = { duration: '1.0s' };
-    var pages = this.children();
+    const options = { duration: '1.0s' };
+    const pages = this.children();
     if (i.page > i.old) {
         if (dirIn == null) dirIn = ''; //'Right';
         if (dirOut == null) dirOut = ''; //'Left';
