@@ -86,8 +86,8 @@ zuix.using('style', 'https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
 
 // Animate CSS extension method for ZxQuery
 zuix.$.ZxQuery.prototype.animateCss = function() {};
-zuix.using('component', 'kit/extensions/animate_css', function(res, ctx){
-    console.log("AnimateCSS extension loaded.", res, ctx);
+zuix.using('component', '@lib/extensions/animate_css', function(res, ctx){
+    console.log('AnimateCSS extension loaded.', res, ctx);
 });
 
 
@@ -111,22 +111,19 @@ let pagedView = null;
 // Turn off debug output
 
 window.zuixNoConsoleOutput = true;
-//zuix.lazyLoad(false);
-//zuix.httpCaching(false);
+// zuix.lazyLoad(false);
+// zuix.httpCaching(false);
 
 
 // Global zUIx event hooks
 
 zuix.hook('load:begin', function(data){
-
     if (splashScreen) splashScreen.show();
     loaderMessage.html('Loading "<em>'+data.task+'</em>" ...').show();
     if (revealTimeout != null)
         clearTimeout(revealTimeout);
     loaderMessage.animateCss('bounceInUp', { duration: '1.0s' })
-
 }).hook('load:next', function(data){
-
     if (data.task.indexOf('zuix_hackbox') > 0) return;
     if (splashScreen)
         zuix.field('loader-progress')
@@ -136,27 +133,19 @@ zuix.hook('load:begin', function(data){
         .animateCss('bounceInUp', { duration: '1.0s' });
     if (revealTimeout != null)
         clearTimeout(revealTimeout);
-
 }).hook('load:end', function(data){
-
     revealMainPage();
-
 }).hook('componentize:end', function(data){
-
     revealMainPage();
-
 }).hook('html:parse', function (data) {
-
     // ShowDown - Markdown compiler
-    if (this.options().markdown === true && typeof showdown !== 'undefined')
+    if (typeof data.content == 'string' && this.options().markdown === true && typeof showdown !== 'undefined') {
         data.content = new showdown.Converter()
             .makeHtml(data.content);
-
+    }
 }).hook('css:parse', function (data) {
-    //console.log(data);
-
+    // console.log(data);
 }).hook('view:process', function (view) {
-
     // Prism code syntax highlighter
     if (this.options().prism && typeof Prism !== 'undefined') {
         view.find('code').each(function (i, block) {
@@ -169,9 +158,7 @@ zuix.hook('load:begin', function(data){
     // Material Design Light integration - DOM upgrade
     if (this.options().mdl && typeof componentHandler !== 'undefined')
         componentHandler.upgradeElements(view.get());
-
-})/*.hook('component:ready', function () {
-})*/;
+});
 
 
 // URL routing
