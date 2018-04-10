@@ -33,7 +33,7 @@
     "ignore": false,
     "line": 18,
     "codeStart": 27,
-    "code": "'use strict';\n\nconst _log =\n    require('../helpers/Logger')('ComponentContext.js');\nconst z$ =\n    require('../helpers/ZxQuery');\nconst util =\n    require('../helpers/Util');\n\n// Custom objects definition used to generate JsDoc",
+    "code": "'use strict';\n\nconst _log =\n    require('../helpers/Logger')('ComponentContext.js');\nconst _optionAttributes =\n    require('./OptionAttributes')();\nconst z$ =\n    require('../helpers/ZxQuery');\nconst util =\n    require('../helpers/Util');\n\n// Custom objects definition used to generate JsDoc",
     "ctx": false
   },
   {
@@ -71,8 +71,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 38,
-    "codeStart": 46
+    "line": 40,
+    "codeStart": 48
   },
   {
     "tags": [
@@ -123,8 +123,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 47,
-    "codeStart": 55
+    "line": 49,
+    "codeStart": 57
   },
   {
     "tags": [
@@ -184,8 +184,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 56,
-    "codeStart": 65,
+    "line": 58,
+    "codeStart": 67,
     "code": "function ComponentContext(options, eventCallback) {\n    this._options = null;\n    this.contextId = (options == null || options.contextId == null) ? null : options.contextId;\n    this.componentId = null;\n    this.trigger = function(context, eventPath, eventValue) {\n        if (typeof eventCallback === 'function') {\n            eventCallback(context, eventPath, eventValue);\n        }\n    };",
     "ctx": {
       "type": "constructor",
@@ -211,8 +211,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 75,
-    "codeStart": 76,
+    "line": 77,
+    "codeStart": 78,
     "code": "this._container = null;",
     "ctx": {
       "type": "property",
@@ -240,8 +240,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 78,
-    "codeStart": 79,
+    "line": 80,
+    "codeStart": 81,
     "code": "this._model = null;",
     "ctx": {
       "type": "property",
@@ -269,8 +269,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 80,
-    "codeStart": 81,
+    "line": 82,
+    "codeStart": 83,
     "code": "this._view = null;",
     "ctx": {
       "type": "property",
@@ -298,8 +298,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 82,
-    "codeStart": 83,
+    "line": 84,
+    "codeStart": 85,
     "code": "this._css = null;",
     "ctx": {
       "type": "property",
@@ -327,8 +327,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 84,
-    "codeStart": 85,
+    "line": 86,
+    "codeStart": 87,
     "code": "this._style = null;",
     "ctx": {
       "type": "property",
@@ -368,8 +368,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 86,
-    "codeStart": 90,
+    "line": 88,
+    "codeStart": 92,
     "code": "this._controller = null;",
     "ctx": {
       "type": "property",
@@ -408,8 +408,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 92,
-    "codeStart": 99,
+    "line": 94,
+    "codeStart": 101,
     "code": "this.behavior = null;",
     "ctx": {
       "type": "property",
@@ -436,8 +436,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 101,
-    "codeStart": 102,
+    "line": 103,
+    "codeStart": 104,
     "code": "this._eventMap = [];",
     "ctx": {
       "type": "property",
@@ -464,8 +464,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 103,
-    "codeStart": 104,
+    "line": 105,
+    "codeStart": 106,
     "code": "this._behaviorMap = [];",
     "ctx": {
       "type": "property",
@@ -504,8 +504,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 106,
-    "codeStart": 110,
+    "line": 108,
+    "codeStart": 112,
     "code": "this._c = null;\n\nthis.options(options);\n\nreturn this;\n}",
     "ctx": {
       "type": "property",
@@ -556,8 +556,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 116,
-    "codeStart": 125,
+    "line": 118,
+    "codeStart": 127,
     "code": "ComponentContext.prototype.container = function(container) {\n    // TODO: should automatically re-attach view to the new parent?\n    if (container == null) return this._container;\n    else if (container instanceof z$.ZxQuery) {\n        container = container.get();\n    }\n    this._container = container;\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -609,8 +609,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 135,
-    "codeStart": 145,
+    "line": 137,
+    "codeStart": 147,
     "code": "ComponentContext.prototype.view = function(view) {\n    if (typeof view === 'undefined') return this._view;\n    else if (view instanceof z$.ZxQuery) {\n        view = view.get();\n    }\n\n    _log.t(this.componentId, 'view:attach', 'timer:view:start');\n    if (typeof view === 'string') {\n        // load view from HTML source\n\n        // trigger `html:parse` hook before assigning content to the view\n        const hookData = {content: view};\n        this.trigger(this, 'html:parse', hookData);\n        view = hookData.content;\n\n        if (this._container != null) {\n            // append view content to the container\n            this._view = this._container;\n            this._view.innerHTML += view;\n        } else {\n            const viewDiv = z$.wrapElement('div', view);\n            if (this._view != null) {\n                this._view.innerHTML = viewDiv.innerHTML;\n            } else this._view = viewDiv;\n        }\n\n        z$(this._view).find('script').each(function(i, el) {\n            if (this.attr('zuix-loaded') !== 'true') {\n                this.attr('zuix-loaded', 'true');",
     "ctx": {
       "type": "method",
@@ -632,9 +632,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 174,
-    "codeStart": 188,
-    "code": "(eval).call(window, el.innerHTML);\n            }\n        });\n\n        // trigger `view:process` hook when the view is ready to be processed\n        this.trigger(this, 'view:process', z$(this._view));\n    } else {\n        if (view instanceof z$.ZxQuery) {\n            view = view.get();\n        }\n        // load inline view\n        if (this._container != null) {\n            this._view = z$.wrapElement('div', view.outerHTML).firstElementChild;\n            this._view.removeAttribute('data-ui-view');\n            this._container.appendChild(this._view);\n            this._view = this._container;\n        } else this._view = view;\n    }\n\n    const v = z$(this._view);\n    if (this._options.css === false) {\n        // disable local css styling for this instance\n        v.addClass('zuix-css-ignore');\n    } else {\n        // enable local css styling\n        v.removeClass('zuix-css-ignore');\n    }\n\n    this.modelToView();\n\n    _log.t(this.componentId, 'view:attach', 'timer:view:stop');\n    return this;\n};",
+    "line": 176,
+    "codeStart": 190,
+    "code": "(eval).call(window, el.innerHTML);\n            }\n        });\n\n        // trigger `view:process` hook when the view is ready to be processed\n        this.trigger(this, 'view:process', z$(this._view));\n    } else {\n        if (view instanceof z$.ZxQuery) {\n            view = view.get();\n        }\n        // load inline view\n        if (this._container != null) {\n            this._view = z$.wrapElement('div', view.outerHTML).firstElementChild;\n            this._view.removeAttribute(_optionAttributes.dataUiView);\n            this._container.appendChild(this._view);\n            this._view = this._container;\n        } else this._view = view;\n    }\n\n    const v = z$(this._view);\n    if (this._options.css === false) {\n        // disable local css styling for this instance\n        v.addClass('zuix-css-ignore');\n    } else {\n        // enable local css styling\n        v.removeClass('zuix-css-ignore');\n    }\n\n    this.modelToView();\n\n    _log.t(this.componentId, 'view:attach', 'timer:view:stop');\n    return this;\n};",
     "ctx": false
   },
   {
@@ -683,9 +683,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 222,
-    "codeStart": 242,
-    "code": "ComponentContext.prototype.style = function(css) {\n    if (typeof css === 'undefined') return this._style;\n    _log.t(this.componentId, 'view:style', 'timer:view:start');\n    if (css == null || css instanceof Element) {\n        this._css = (css instanceof Element) ? css.innerText : css;\n        this._style = z$.appendCss(css, this._style, this.componentId);\n    } else if (typeof css === 'string') {\n        // store original unparsed css (might be useful for debugging)\n        this._css = css;\n\n        // nest the CSS inside [data-ui-component='<componentId>']\n        // so that the style is only applied to this component type\n        css = z$.wrapCss('[data-ui-component=\"' + this.componentId + '\"]:not(.zuix-css-ignore)', css);\n\n        // trigger `css:parse` hook before assigning content to the view\n        const hookData = {content: css};\n        this.trigger(this, 'css:parse', hookData);\n        css = hookData.content;\n\n        // output css\n        this._style = z$.appendCss(css, this._style, this.componentId);\n    }\n    // TODO: should throw error if ```css``` is not a valid type\n    _log.t(this.componentId, 'view:style', 'timer:view:stop');\n    return this;\n};",
+    "line": 224,
+    "codeStart": 244,
+    "code": "ComponentContext.prototype.style = function(css) {\n    if (typeof css === 'undefined') return this._style;\n    _log.t(this.componentId, 'view:style', 'timer:view:start');\n    if (css == null || css instanceof Element) {\n        this._css = (css instanceof Element) ? css.innerText : css;\n        this._style = z$.appendCss(css, this._style, this.componentId);\n    } else if (typeof css === 'string') {\n        // store original unparsed css (might be useful for debugging)\n        this._css = css;\n\n        // nest the CSS inside [data-ui-component='<componentId>']\n        // so that the style is only applied to this component type\n        css = z$.wrapCss('['+_optionAttributes.dataUiComponent+'=\"' + this.componentId + '\"]:not(.zuix-css-ignore)', css);\n\n        // trigger `css:parse` hook before assigning content to the view\n        const hookData = {content: css};\n        this.trigger(this, 'css:parse', hookData);\n        css = hookData.content;\n\n        // output css\n        this._style = z$.appendCss(css, this._style, this.componentId);\n    }\n    // TODO: should throw error if ```css``` is not a valid type\n    _log.t(this.componentId, 'view:style', 'timer:view:stop');\n    return this;\n};",
     "ctx": {
       "type": "method",
       "constructor": "ComponentContext",
@@ -739,8 +739,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 268,
-    "codeStart": 283,
+    "line": 270,
+    "codeStart": 285,
     "code": "ComponentContext.prototype.model = function(model) {\n    if (typeof model === 'undefined') return this._model;\n    else this._model = model; // model can be set to null\n    this.modelToView();\n    // call controller `update` method when model is updated\n    if (this._c != null && util.isFunction(this._c.update)) {\n        this._c.update.call(this._c);\n    }\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -795,8 +795,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 293,
-    "codeStart": 310,
+    "line": 295,
+    "codeStart": 312,
     "code": "ComponentContext.prototype.controller = function(controller) {\n    if (typeof controller === 'undefined') return this._controller;\n    // TODO: should dispose previous context controller first\n    else this._controller = controller; // can be null\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -847,8 +847,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 317,
-    "codeStart": 323,
+    "line": 319,
+    "codeStart": 325,
     "code": "ComponentContext.prototype.options = function(options) {\n    if (options == null) {\n        return this._options;\n    }\n    const o = this._options = this._options || {};\n    z$.each(options, function(k, v) {\n        o[k] = v;\n    });\n    if (o.componentId != null) {\n        this.componentId = o.componentId;\n    }\n    this.container(o.container);\n    this.view(o.view);\n    if (typeof o.css !== 'undefined') {\n        this.style(o.css);\n    }\n    this.controller(o.controller);\n    this.model(o.model);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -916,8 +916,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 344,
-    "codeStart": 357,
+    "line": 346,
+    "codeStart": 359,
     "code": "ComponentContext.prototype.on = function(eventPath, eventHandler) {\n    // TODO: throw error if _c (controller instance) is not yet ready\n    this._c.on(eventPath, eventHandler);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -990,8 +990,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 362,
-    "codeStart": 386,
+    "line": 364,
+    "codeStart": 388,
     "code": "ComponentContext.prototype.loadCss = function(options, enableCaching) {\n    const context = this;\n    if (util.isNoU(options)) options = {};\n    if (!util.isNoU(options.caching)) {\n        enableCaching = options.caching;\n    }\n    let cssPath = context.componentId + '.css';\n    if (!util.isNoU(options.path)) {\n        cssPath = options.path;\n    }\n    if (!enableCaching) {\n        cssPath += '?'+new Date().getTime();\n    }\n    z$.ajax({\n        url: cssPath,\n        success: function(viewCss) {\n            context.style(viewCss);\n            if (util.isFunction(options.success)) {\n                (options.success).call(context, viewCss);\n            }\n        },\n        error: function(err) {\n            _log.e(err, context);\n            if (util.isFunction(options.error)) {\n                (options.error).call(context, err);\n            }\n        },\n        then: function() {\n            if (util.isFunction(options.then)) {\n                (options.then).call(context);\n            }\n        }\n    });\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -1064,9 +1064,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 421,
-    "codeStart": 445,
-    "code": "ComponentContext.prototype.loadHtml = function(options, enableCaching) {\n    const context = this;\n    let htmlPath = context.componentId;\n    if (util.isNoU(options)) options = {};\n    if (!util.isNoU(options.caching)) {\n        enableCaching = options.caching;\n    }\n    if (!util.isNoU(options.path)) {\n        htmlPath = options.path;\n    }\n    // TODO: check if view caching is working in this case too\n    const inlineView = z$().find('[data-ui-view=\"' + htmlPath + '\"]:not([data-ui-component*=\"\"])');\n    if (inlineView.length() > 0) {\n        const inlineElement = inlineView.get(0);\n        if (context.view() === inlineElement || (context.container() != null && context.container().contains(inlineElement))) {\n            // TODO: test this case\n            context.view(inlineElement);\n        } else {\n            context.view(inlineElement.outerHTML);\n        }\n        const html = context.view().innerHTML;\n        if (util.isFunction(options.success)) {\n            (options.success).call(context, html);\n        }\n        if (util.isFunction(options.then)) {\n            (options.then).call(context);\n        }\n    } else {\n        const cext = util.isNoU(options.cext) ? '.html' : options.cext;\n        if (htmlPath == context.componentId) {\n            htmlPath += cext + (!enableCaching ? '?' + new Date().getTime() : '');\n        }\n        z$.ajax({\n            url: htmlPath,\n            success: function(viewHtml) {\n                context.view(viewHtml);\n                if (util.isFunction(options.success)) {\n                    (options.success).call(context, viewHtml);\n                }\n            },\n            error: function(err) {\n                _log.e(err, context);\n                if (util.isFunction(options.error)) {\n                    (options.error).call(context, err);\n                }\n            },\n            then: function() {\n                if (util.isFunction(options.then)) {\n                    (options.then).call(context);\n                }\n            }\n        });\n    }\n    return this;\n};",
+    "line": 423,
+    "codeStart": 447,
+    "code": "ComponentContext.prototype.loadHtml = function(options, enableCaching) {\n    const context = this;\n    let htmlPath = context.componentId;\n    if (util.isNoU(options)) options = {};\n    if (!util.isNoU(options.caching)) {\n        enableCaching = options.caching;\n    }\n    if (!util.isNoU(options.path)) {\n        htmlPath = options.path;\n    }\n    // TODO: check if view caching is working in this case too\n    const inlineView = z$().find('['+_optionAttributes.dataUiView+'=\"' + htmlPath + '\"]:not(['+_optionAttributes.dataUiComponent+'*=\"\"])');\n    if (inlineView.length() > 0) {\n        const inlineElement = inlineView.get(0);\n        if (context.view() === inlineElement || (context.container() != null && context.container().contains(inlineElement))) {\n            // TODO: test this case\n            context.view(inlineElement);\n        } else {\n            context.view(inlineElement.outerHTML);\n        }\n        const html = context.view().innerHTML;\n        if (util.isFunction(options.success)) {\n            (options.success).call(context, html);\n        }\n        if (util.isFunction(options.then)) {\n            (options.then).call(context);\n        }\n    } else {\n        const cext = util.isNoU(options.cext) ? '.html' : options.cext;\n        if (htmlPath == context.componentId) {\n            htmlPath += cext + (!enableCaching ? '?' + new Date().getTime() : '');\n        }\n        z$.ajax({\n            url: htmlPath,\n            success: function(viewHtml) {\n                context.view(viewHtml);\n                if (util.isFunction(options.success)) {\n                    (options.success).call(context, viewHtml);\n                }\n            },\n            error: function(err) {\n                _log.e(err, context);\n                if (util.isFunction(options.error)) {\n                    (options.error).call(context, err);\n                }\n            },\n            then: function() {\n                if (util.isFunction(options.then)) {\n                    (options.then).call(context);\n                }\n            }\n        });\n    }\n    return this;\n};",
     "ctx": {
       "type": "method",
       "constructor": "ComponentContext",
@@ -1101,9 +1101,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 500,
-    "codeStart": 506,
-    "code": "ComponentContext.prototype.viewToModel = function() {\n    _log.t(this.componentId, 'view:model', 'timer:vm:start');\n    const _t = this;\n    this._model = {};\n    // create data model from inline view fields\n    z$(this._view).find('[data-ui-field]').each(function(i, el) {\n        if (this.parent('pre,code').length() > 0) {\n            return true;\n        }\n        const name = this.attr('data-ui-field');\n        const value =\n            // TODO: this is a work around for IE where \"el.innerHTML\" is lost after view replacing\n            (!util.isNoU(el.innerHTML) && util.isIE())\n                ? el.cloneNode(true) : el;\n        // dotted field path\n        if (name.indexOf('.')>0) {\n            const path = name.split('.');\n            let cur = _t._model;\n            for (let p = 0; p < path.length - 1; p++) {\n                if (typeof cur[path[p]] === 'undefined') {\n                    cur[path[p]] = {};\n                }\n                cur = cur[path[p]];\n            }\n            cur[path[path.length - 1]] = value;\n        } else _t._model[name] = value;\n    });\n    _log.t(this.componentId, 'view:model', 'timer:vm:stop');\n    return this;\n};",
+    "line": 502,
+    "codeStart": 508,
+    "code": "ComponentContext.prototype.viewToModel = function() {\n    _log.t(this.componentId, 'view:model', 'timer:vm:start');\n    const _t = this;\n    this._model = {};\n    // create data model from inline view fields\n    z$(this._view).find('['+_optionAttributes.dataUiField+']').each(function(i, el) {\n        if (this.parent('pre,code').length() > 0) {\n            return true;\n        }\n        const name = this.attr(_optionAttributes.dataUiField);\n        const value =\n            // TODO: this is a work around for IE where \"el.innerHTML\" is lost after view replacing\n            (!util.isNoU(el.innerHTML) && util.isIE())\n                ? el.cloneNode(true) : el;\n        // dotted field path\n        if (name.indexOf('.')>0) {\n            const path = name.split('.');\n            let cur = _t._model;\n            for (let p = 0; p < path.length - 1; p++) {\n                if (typeof cur[path[p]] === 'undefined') {\n                    cur[path[p]] = {};\n                }\n                cur = cur[path[p]];\n            }\n            cur[path[path.length - 1]] = value;\n        } else _t._model[name] = value;\n    });\n    _log.t(this.componentId, 'view:model', 'timer:vm:stop');\n    return this;\n};",
     "ctx": {
       "type": "method",
       "constructor": "ComponentContext",
@@ -1138,9 +1138,9 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 536,
-    "codeStart": 542,
-    "code": "ComponentContext.prototype.modelToView = function() {\n    _log.t(this.componentId, 'model:view', 'timer:mv:start');\n    if (this._view != null && this._model != null) {\n        const _t = this;\n        z$(this._view).find('[data-ui-field]').each(function(i, el) {\n            if (this.parent('pre,code').length() > 0) {\n                return true;\n            }\n            let boundField = this.attr('data-bind-to');\n            if (boundField == null) {\n                boundField = this.attr('data-ui-field');\n            }\n            if (typeof _t._model === 'function') {\n                (_t._model).call(z$(_t._view), this, boundField);\n            } else {\n                const boundData = util.propertyFromPath(_t._model, boundField);\n                if (typeof boundData === 'function') {\n                    (boundData).call(z$(_t._view), this, boundField);\n                } else if (boundData != null) {\n                    // try to guess target property\n                    switch (el.tagName.toLowerCase()) {\n                        // TODO: complete binding cases\n                        case 'img':\n                            el.src = (!util.isNoU(boundData.src) ? boundData.src :\n                                (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));\n                            if (boundData.alt) el.alt = boundData.alt;\n                            break;\n                        case 'a':\n                            el.href = (!util.isNoU(boundData.href) ? boundData.getAttribute('href'):\n                                (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));\n                            if (boundData.title) el.title = boundData.title;\n                            if (!util.isNoU(boundData.href) && !util.isNoU(boundData.innerHTML) && boundData.innerHTML.trim() !== '') {\n                                el.innerHTML = boundData.innerHTML;\n                            }\n                            break;\n                        case 'input':\n                            el.value = (!util.isNoU(boundData.value) ? boundData.value :\n                                (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));\n                            break;\n                        default:\n                            el.innerHTML = (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData);\n                    }\n                }\n            }\n        });\n    }\n    _log.t(this.componentId, 'model:view', 'timer:mv:stop');\n    return this;\n};\n\nmodule.exports = ComponentContext;",
+    "line": 538,
+    "codeStart": 544,
+    "code": "ComponentContext.prototype.modelToView = function() {\n    _log.t(this.componentId, 'model:view', 'timer:mv:start');\n    if (this._view != null && this._model != null) {\n        const _t = this;\n        z$(this._view).find('['+_optionAttributes.dataUiField+']').each(function(i, el) {\n            if (this.parent('pre,code').length() > 0) {\n                return true;\n            }\n            let boundField = this.attr(_optionAttributes.dataBindTo);\n            if (boundField == null) {\n                boundField = this.attr(_optionAttributes.dataUiField);\n            }\n            if (typeof _t._model === 'function') {\n                (_t._model).call(z$(_t._view), this, boundField);\n            } else {\n                const boundData = util.propertyFromPath(_t._model, boundField);\n                if (typeof boundData === 'function') {\n                    (boundData).call(z$(_t._view), this, boundField);\n                } else if (boundData != null) {\n                    // try to guess target property\n                    switch (el.tagName.toLowerCase()) {\n                        // TODO: complete binding cases\n                        case 'img':\n                            el.src = (!util.isNoU(boundData.src) ? boundData.src :\n                                (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));\n                            if (boundData.alt) el.alt = boundData.alt;\n                            break;\n                        case 'a':\n                            el.href = (!util.isNoU(boundData.href) ? boundData.getAttribute('href'):\n                                (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));\n                            if (boundData.title) el.title = boundData.title;\n                            if (!util.isNoU(boundData.href) && !util.isNoU(boundData.innerHTML) && boundData.innerHTML.trim() !== '') {\n                                el.innerHTML = boundData.innerHTML;\n                            }\n                            break;\n                        case 'input':\n                            el.value = (!util.isNoU(boundData.value) ? boundData.value :\n                                (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData));\n                            break;\n                        default:\n                            el.innerHTML = (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData);\n                    }\n                }\n            }\n        });\n    }\n    _log.t(this.componentId, 'model:view', 'timer:mv:stop');\n    return this;\n};\n\nmodule.exports = ComponentContext;",
     "ctx": {
       "type": "method",
       "constructor": "ComponentContext",
