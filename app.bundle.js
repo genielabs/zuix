@@ -298,7 +298,7 @@
             });
         }
 
-        zuix.using('component', '@lib/extensions/animate_css', function(res, ctx){
+        zuix.using('component', '//genielabs.github.io/zuix/kit/extensions/animate_css', function(res, ctx){
             // show floating action button
             menuButton.animateCss('slideInUp').show();
         });

@@ -20,9 +20,9 @@ zuix.controller(function(cp){
             'z-index': 20
         }).hide();
         // load Animate CSS extension
-        zuix.using('component', '@lib/extensions/animate_css');
+        zuix.using('component', '//genielabs.github.io/zuix/kit/extensions/animate_css');
         // load view-pager
-        zuix.load('@lib/controllers/view_pager', {
+        zuix.load('//genielabs.github.io/zuix/kit/controllers/view_pager', {
             view: cp.field('media'),
             ready: function (ctx) {
                 viewPager = this.on('gesture:tap', toggleControls);
