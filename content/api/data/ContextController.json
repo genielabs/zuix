@@ -836,8 +836,14 @@
     "ignore": false,
     "line": 304,
     "codeStart": 334,
-    "code": "// eslint-disable-next-line no-unused-vars\nContextController.prototype.expose = function(methodName, handler) {\n    if (typeof methodName === 'object') {\n        const _t = this;\n        z$.each(methodName, function(k, v) {\n            _t.context[k] = v;\n        });\n    } else this.context[methodName] = handler;\n    return this;\n};",
-    "ctx": false
+    "code": "ContextController.prototype.expose = function(methodName, handler) {\n    if (typeof methodName === 'object') {\n        const _t = this;\n        z$.each(methodName, function(k, v) {\n            _t.context[k] = v;\n        });\n    } else this.context[methodName] = handler;\n    return this;\n};",
+    "ctx": {
+      "type": "method",
+      "constructor": "ContextController",
+      "cons": "ContextController",
+      "name": "expose",
+      "string": "ContextController.prototype.expose()"
+    }
   },
   {
     "tags": [
@@ -883,8 +889,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 344,
-    "codeStart": 367,
+    "line": 343,
+    "codeStart": 366,
     "code": "ContextController.prototype.loadCss = function(options) {\n    this.context.loadCss(options);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -938,8 +944,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 371,
-    "codeStart": 394,
+    "line": 370,
+    "codeStart": 393,
     "code": "ContextController.prototype.loadHtml = function(options) {\n    this.saveView();\n    this.context.loadHtml(options);\n    return this;\n};",
     "ctx": {
       "type": "method",
@@ -978,8 +984,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 399,
-    "codeStart": 418,
+    "line": 398,
+    "codeStart": 417,
     "code": "ContextController.prototype.log = {};",
     "ctx": {
       "type": "property",
@@ -1034,8 +1040,8 @@
     "isClass": false,
     "isEvent": false,
     "ignore": false,
-    "line": 419,
-    "codeStart": 438,
+    "line": 418,
+    "codeStart": 437,
     "code": "ContextController.prototype.for = function(componentId) {\n    // this method is \"attached\" from Zuix.js on controller initialization\n    return this;\n};\n\nmodule.exports = ContextController;",
     "ctx": {
       "type": "method",
