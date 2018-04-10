@@ -230,7 +230,7 @@
     "ignore": false,
     "line": 47,
     "codeStart": 48,
-    "code": "module.exports = function (root) {\n    // dummy module for JsDocs/Closure Compiler\n    return null;\n};",
+    "code": "module.exports = function(root) {\n    // dummy module for JsDocs/Closure Compiler\n    return null;\n};",
     "ctx": {
       "type": "method",
       "receiver": "module",

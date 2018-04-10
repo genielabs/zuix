@@ -1,3 +1,5 @@
+/* ZUIX v0.4.9-30 18.04.10 17:04:10 */
+
 /** @typedef {Zuix} window.zuix */!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.zuix=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 /*
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
@@ -32,8 +34,9 @@ function AsynChain(callback) {
 }
 
 AsynChain.prototype.isReady = function() {
-    return jobsList.length == 0 || currentIndex == -1;
+    return jobsList.length === 0 || currentIndex === -1;
 };
+// eslint-disable-next-line no-unused-vars
 AsynChain.prototype.getJobs = function() {
     return jobsList;
 };
@@ -255,6 +258,7 @@ Logger.prototype.i = Logger.prototype.info =
         this.log('INFO', arguments);
         return this;
     };
+// eslint-disable-next-line no-unused-vars
 Logger.prototype.w = Logger.prototype.warn = function() {
     this.log('WARN', arguments);
     return this;
@@ -267,6 +271,7 @@ Logger.prototype.d = Logger.prototype.debug = function() {
     this.log('DEBUG', arguments);
     return this;
 };
+// eslint-disable-next-line no-unused-vars
 Logger.prototype.t = Logger.prototype.trace = function() {
     this.log('TRACE', arguments);
     return this;
@@ -364,7 +369,7 @@ function TaskQueue(listener) {
     };
     _t.taskCheck = function() {
         for (let i = 0; i < _t._taskList.length; i++) {
-            if (_t._taskList[i].status == 0) {
+            if (_t._taskList[i].status === 0) {
                 _t._taskList[i].status = 1;
                 _log.t(_t._taskList[i].tid, 'load:begin', 'timer:task:start');
                 listener(_t, 'load:begin', {
@@ -373,10 +378,10 @@ function TaskQueue(listener) {
                 _t._taskList[i].index = i;
                 (_t._taskList[i].fn).call(_t._taskList[i]);
                 return;
-            } else if (_t._taskList[i].status == 1) {
+            } else if (_t._taskList[i].status === 1) {
                 // currently running
                 return;
-            } else if (_t._taskList[i].status == 2) {
+            } else if (_t._taskList[i].status === 2) {
                 // TODO: _!!!-!
                 return;
             }
@@ -385,6 +390,12 @@ function TaskQueue(listener) {
         listener(_t, 'load:end');
     };
 }
+
+/**
+ *
+ * @param handler {function}
+ */
+TaskQueue.prototype.callback = function(handler) { };
 TaskQueue.prototype.queue = function(tid, fn, pri) {
     return this.taskQueue(tid, fn, pri);
 };
@@ -486,7 +497,7 @@ module.exports = {
             return;
         }
         s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
-        s = s.replace(/^\./, '');           // strip a leading dot
+        s = s.replace(/^\./, ''); // strip a leading dot
         const a = s.split('.');
         let ref = o;
         for (let i = 0; i < a.length; ++i) {
@@ -512,7 +523,9 @@ module.exports = {
         try {
             temp = obj.constructor();
             for (let key in obj) {
-                temp[key] = cloneObject(obj[key]);
+                if (obj.hasOwnProperty(key)) {
+                    temp[key] = cloneObject(obj[key]);
+                }
             }
         } catch (e) {
             // TODO: should warn when clone is not possible
@@ -723,6 +736,7 @@ ZxQuery.prototype.children = function(filter) {
  *
  * @return {ZxQuery} The *ZxQuery* object itself.
  */
+// eslint-disable-next-line no-unused-vars
 ZxQuery.prototype.reverse = function() {
     const elements = (Array.prototype.slice).call(this._selection, 0);
     this._selection = elements.reverse();
@@ -751,7 +765,7 @@ ZxQuery.prototype.eq = function(i) {
     let resultSet = selection[i];
     if (arguments.length > 1) {
         resultSet = [];
-        z$.each(arguments, function (k, v) {
+        z$.each(arguments, function(k, v) {
             if (selection[v] != null) {
                 resultSet.push(selection[v]);
             }
@@ -906,6 +920,7 @@ ZxQuery.prototype.isEmpty = function() {
  *
  * @return {ElementPosition}
  */
+// eslint-disable-next-line no-unused-vars
 ZxQuery.prototype.position = function() {
     if (this._selection[0] != null) {
         return z$.getPosition(this._selection[0]);
@@ -989,6 +1004,7 @@ ZxQuery.prototype.removeClass = function(className) {
  *
  * @return {ZxQuery} A new *ZxQuery* object containing the previous sibling element.
  */
+// eslint-disable-next-line no-unused-vars
 ZxQuery.prototype.prev = function() {
     return new ZxQuery(this._selection[0].previousElementSibling);
 };
@@ -1024,6 +1040,7 @@ ZxQuery.prototype.html = function(htmlText) {
  * @param {boolean|undefined} [check] Value to assign to the 'checked' attribute.
  * @return {ZxQuery|boolean}
  */
+// eslint-disable-next-line no-unused-vars
 ZxQuery.prototype.checked = function(check) {
     if (util.isNoU(check)) {
         const checked = this._selection[0].checked;
@@ -1087,6 +1104,7 @@ ZxQuery.prototype.insert = function(index, el) {
  * @param {Object|ZxQuery|Array<Node>|Node|NodeList|string} el Element to append.
  * @return {ZxQuery} The *ZxQuery* object itself.
  */
+// eslint-disable-next-line no-unused-vars
 ZxQuery.prototype.prepend = function(el) {
     if (typeof el === 'string') {
         this._selection[0].innerHTML = el + this._selection[0].innerHTML;
@@ -1116,6 +1134,7 @@ ZxQuery.prototype.detach = function() {
  *
  * @return {ZxQuery}
  */
+// eslint-disable-next-line no-unused-vars
 ZxQuery.prototype.attach = function() {
     const el = this._selection[0];
     if (el.parentNode == null && el.__zuix_oldParent != null) {
@@ -1208,16 +1227,18 @@ z$.each = function(items, iterationCallback) {
     if (len > 0) {
         let count = 0;
         for (let i in items) {
-            let item = items[i];
-            if (item instanceof Element) {
-                item = z$(item);
-            }
-            if (iterationCallback.call(item, i, items[i]) === false) {
-                break;
-            }
-            count++;
-            if (count >= len) {
-                break;
+            if (items.hasOwnProperty(i)) {
+                let item = items[i];
+                if (item instanceof Element) {
+                    item = z$(item);
+                }
+                if (iterationCallback.call(item, i, items[i]) === false) {
+                    break;
+                }
+                count++;
+                if (count >= len) {
+                    break;
+                }
             }
         }
     }
@@ -1546,6 +1567,7 @@ if (!String.prototype.startsWith) {
 module.exports = z$;
 
 },{"./Logger":2,"./Util.js":4}],6:[function(_dereq_,module,exports){
+/* eslint-disable */
 /*!
  * @license
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
@@ -1572,9 +1594,11 @@ module.exports = z$;
  * @author Generoso Martello <generoso@martello.com>
  */
 
+/* global define */
+
 'use strict';
 
-// TODO: detect whether running in a browser enviroment or not
+// TODO: detect whether running in a browser environment or not
 (function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
@@ -1744,13 +1768,13 @@ function ComponentContext(options, eventCallback) {
      */
     this.behavior = null;
 
-    /** @protected */
+    /** @package */
     this._eventMap = [];
-    /** @protected */
+    /** @package */
     this._behaviorMap = [];
 
     /**
-     * @protected
+     * @package
      * @type {ContextController}
      */
     this._c = null;
@@ -2775,7 +2799,7 @@ function ContextController(context) {
     this.context = context;
 
     /**
-     * @protected
+     * @package
      * @type {!Array.<ZxQuery>}
      **/
     this._fieldCache = [];
@@ -2843,15 +2867,19 @@ function ContextController(context) {
     let handler = null;
     if (options.on != null) {
         for (let ep in options.on) {
-            handler = options.on[ep];
-            _t.addEvent(ep, handler);
+            if (options.on.hasOwnProperty(ep)) {
+                handler = options.on[ep];
+                _t.addEvent(ep, handler);
+            }
         }
     }
     // create behavior map from context options
     if (options.behavior != null) {
         for (let bp in options.behavior) {
-            handler = options.behavior[bp];
-            _t.addBehavior(bp, handler);
+            if (options.behavior.hasOwnProperty(bp)) {
+                handler = options.behavior[bp];
+                _t.addBehavior(bp, handler);
+            }
         }
     }
 
@@ -2899,7 +2927,7 @@ ContextController.prototype.addBehavior = function(eventPath, handler) {
  * @return {ZxQuery} A `{ZxQuery}` object wrapping the matching element.
  */
 ContextController.prototype.field = function(fieldName) {
-    // this method is "attacched" from Zuix.js on controller initialization
+    // this method is "attached" from Zuix.js on controller initialization
     return null;
 };
 ContextController.prototype.clearCache = function() {
@@ -3048,6 +3076,7 @@ ContextController.prototype.trigger = function(eventPath, eventData, isHook) {
  * @param {function} [handler] Reference to the controller member to expose.
  * @return {ContextController} The `{ContextController}` itself.
  */
+// eslint-disable-next-line no-unused-vars
 ContextController.prototype.expose = function(methodName, handler) {
     if (typeof methodName === 'object') {
         const _t = this;
@@ -3152,6 +3181,7 @@ var ctrl = zuix.controller(function(cp) {
  * @return {ContextController} The `{ContextController}` itself.
  */
 ContextController.prototype.for = function(componentId) {
+    // this method is "attached" from Zuix.js on controller initialization
     return this;
 };
 
@@ -3544,7 +3574,7 @@ function unload(context) {
                 context._c.view().reset();
                 // un-register event handlers for all cached fields accessed through cp.field(...) method
                 if (!util.isNoU(context._c._fieldCache)) {
-                    z$.each(context._c._fieldCache, function(k, v) {
+                    z$.each(context._c._fieldCache, /** @param {ZxQuery} v */ function(k, v) {
                         v.reset();
                     });
                 }
@@ -3552,7 +3582,7 @@ function unload(context) {
                 context._c.view().detach();
             }
             if (util.isFunction(context._c.destroy)) {
-                context._c.destroy();
+                context._c.destroy.call(context);
             }
         }
         // detach the container from the DOM as well
@@ -3651,6 +3681,7 @@ function httpCaching(enable) {
 // eslint-disable-next-line no-unused-vars
 function removeCachedComponent(componentId) {
     // TODO: removeCachedComponent
+    // TODO: should this be called when last instance of a component type is disposed?
 }
 
 /**
@@ -4040,6 +4071,7 @@ zuix.unload(ctx);
  * Pass *Element* type if the underlying component is lazy-loadable and it might not have been instantiated yet.
  * @return {Zuix} The ```{Zuix}``` object itself.
  */
+// eslint-disable-next-line no-unused-vars
 Zuix.prototype.unload = function(context) {
     unload(context);
     return this;
@@ -4113,6 +4145,7 @@ Zuix.prototype.context = function(contextId, callback) {
  * @param {ContextOptions|undefined} [options] Component context options.
  * @return {ComponentContext}
  */
+// eslint-disable-next-line no-unused-vars
 Zuix.prototype.createComponent = function(componentId, options) {
     if (options == null) options = {};
     if (util.isNoU(options.contextId)) {
@@ -4197,6 +4230,7 @@ zuix
  * @param {function|undefined} eventHandler The handler function.
  * @return {Zuix} The ```{Zuix}``` object itself.
  */
+// eslint-disable-next-line no-unused-vars
 Zuix.prototype.hook = function(eventPath, eventHandler) {
     hook(eventPath, eventHandler);
     return this;
@@ -4349,6 +4383,7 @@ Zuix.prototype.lazyLoad = function(enable, threshold) {
  * @param {boolean} [enable]
  * @return {Zuix|boolean} *true* if HTTP caching is enabled, *false* otherwise.
  */
+// eslint-disable-next-line no-unused-vars
 Zuix.prototype.httpCaching = function(enable) {
     if (enable != null) {
         httpCaching(enable);
@@ -4420,13 +4455,25 @@ Zuix.prototype.bundle = function(bundleData, callback) {
     return this;
 };
 
+/**
+ * @property {ZxQuery}
+ */
 Zuix.prototype.$ = z$;
 Zuix.prototype.TaskQueue = TaskQueue;
 Zuix.prototype.ZxQuery = z$.ZxQuery;
-
+/**
+ * Dumps content of the components cache. Mainly for debugging purpose.
+ * @return {Array<ComponentCache>}
+ */
+// eslint-disable-next-line no-unused-vars
 Zuix.prototype.dumpCache = function() {
     return _componentCache;
 };
+/**
+ * Dumps allocated component contexts. Mainly for debugging purpose.
+ * @return {Array<ComponentContext>}
+ */
+// eslint-disable-next-line no-unused-vars
 Zuix.prototype.dumpContexts = function() {
     return _contextRoot;
 };

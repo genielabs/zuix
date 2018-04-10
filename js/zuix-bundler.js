@@ -1,4 +1,7 @@
+/* ZUIX v0.4.9-30 18.04.10 17:04:10 */
+
 !function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.zuixBundler=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
+/* eslint-disable */
 /*!
  * @license
  * Copyright 2015-2017 G-Labs. All Rights Reserved.
@@ -25,13 +28,15 @@
  * @author Generoso Martello <generoso@martello.com>
  */
 
-"use strict";
+/* global define */
 
-// TODO: detect whether running in a browser enviroment or not
-(function (root, factory) {
+'use strict';
+
+// TODO: detect whether running in a browser environment or not
+(function(root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Register as an anonymous module.
-        define('zuix', function () {
+        define('zuix', function() {
             return (root.zuix = (factory).call(root));
         });
     } else if (typeof module === 'object' && module.exports) {
@@ -54,8 +59,10 @@
  *   See https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md
  */
 
-/*global self */
-/*jslint bitwise: true, indent: 4, laxbreak: true, laxcomma: true, smarttabs: true, plusplus: true */
+/* eslint-disable */
+
+/* global self */
+/* jslint bitwise: true, indent: 4, laxbreak: true, laxcomma: true, smarttabs: true, plusplus: true */
 
 /*! @source http://purl.eligrey.com/github/FileSaver.js/blob/master/FileSaver.js */
 
@@ -243,19 +250,19 @@ if (typeof module !== "undefined" && module.exports) {
 
  */
 
-var isRegExp = function (re) {
+const isRegExp = function(re) {
     return Object.prototype.toString.call(re) === '[object RegExp]';
 };
 
-var UID = Math.floor(Math.random() * 0x10000000000).toString(16);
-var PLACE_HOLDER_REGEXP = new RegExp('"@__(F|R)-' + UID + '-(\\d+)__@"', 'g');
+const UID = Math.floor(Math.random() * 0x10000000000).toString(16);
+const PLACE_HOLDER_REGEXP = new RegExp('"@__(F|R)-' + UID + '-(\\d+)__@"', 'g');
 
-var IS_NATIVE_CODE_REGEXP = /\{\s*\[native code\]\s*\}/g;
-var UNSAFE_CHARS_REGEXP = /[<>\/\u2028\u2029]/g;
+const IS_NATIVE_CODE_REGEXP = /\{\s*\[native code\]\s*\}/g;
+const UNSAFE_CHARS_REGEXP = /[<>\/\u2028\u2029]/g;
 
 // Mapping of unsafe HTML and invalid JavaScript line terminator chars to their
 // Unicode char counterparts which are safe to use in JavaScript strings.
-var ESCAPED_CHARS = {
+const ESCAPED_CHARS = {
     '<': '\\u003C',
     '>': '\\u003E',
     '/': '\\u002F',
@@ -277,8 +284,8 @@ module.exports = function serialize(obj, options) {
         options = {space: options};
     }
 
-    var functions = [];
-    var regexps = [];
+    const functions = [];
+    const regexps = [];
 
     // Returns placeholders for functions and regexps (identified by index)
     // which are later replaced by their string representation.
@@ -287,7 +294,7 @@ module.exports = function serialize(obj, options) {
             return value;
         }
 
-        var type = typeof value;
+        const type = typeof value;
 
         if (type === 'object') {
             if (isRegExp(value)) {
@@ -304,7 +311,7 @@ module.exports = function serialize(obj, options) {
         return value;
     }
 
-    var str;
+    let str;
 
     // Creates a JSON string representation of the value.
     // NOTE: Node 0.12 goes into slow mode with extra JSON.stringify() args.
@@ -332,13 +339,13 @@ module.exports = function serialize(obj, options) {
     // Replaces all occurrences of function and regexp placeholders in the JSON
     // string with their string representations. If the original value can not
     // be found, then `undefined` is used.
-    return str.replace(PLACE_HOLDER_REGEXP, function (match, type, valueIndex) {
+    return str.replace(PLACE_HOLDER_REGEXP, function(match, type, valueIndex) {
         if (type === 'R') {
             return regexps[valueIndex].toString();
         }
 
-        var fn = functions[valueIndex];
-        var serializedFn = fn.toString();
+        const fn = functions[valueIndex];
+        const serializedFn = fn.toString();
 
         if (IS_NATIVE_CODE_REGEXP.test(serializedFn)) {
             throw new TypeError('Serializing native function: ' + fn.name);
@@ -375,10 +382,10 @@ module.exports = function serialize(obj, options) {
  * @author Generoso Martello <generoso@martello.com>
  */
 
-"use strict";
+'use strict';
 
-var fileSaver = _dereq_('./FileSaver');
-var serialize = _dereq_('./Serializer');
+const fileSaver = _dereq_('./FileSaver');
+const serialize = _dereq_('./Serializer');
 
 /**
  * Create application bundle containing all components
@@ -394,48 +401,53 @@ var serialize = _dereq_('./Serializer');
  * This will speed-up resource loading and improve
  * user experience.
  *
+ * @return {string} bundle
  */
 function saveBundle() {
-    var bundleFileName = 'app.bundle.js';
-    var bundle_obj = zuix.bundle();
-    var header_summary = '\n/*';
-    header_summary += '\n * ZUIX Application Bundle';
-    header_summary += '\n * ';
-    header_summary += '\n * '+bundleFileName+' generated by *zuix-bundler*';
-    header_summary += '\n *   on '+new Date().toISOString();
-    header_summary += '\n * ';
-    header_summary += '\n * Resource list ('+bundle_obj.length+'):';
-    header_summary += '\n * ';
-    for(var i = 0; i < bundle_obj.length; i++) {
-        var b = bundle_obj[i];
-        var ctype = '';
-        if (b.view != null)
+    const bundleFileName = 'app.bundle.js';
+    const bundleObj = zuix.bundle();
+    let headerSummary = '\n/*';
+    headerSummary += '\n * ZUIX Application Bundle';
+    headerSummary += '\n * ';
+    headerSummary += '\n * '+bundleFileName+' generated by *zuix-bundler*';
+    headerSummary += '\n *   on '+new Date().toISOString();
+    headerSummary += '\n * ';
+    headerSummary += '\n * Resource list ('+bundleObj.length+'):';
+    headerSummary += '\n * ';
+    for (let i = 0; i < bundleObj.length; i++) {
+        const b = bundleObj[i];
+        let ctype = '';
+        if (b.view != null) {
             ctype += '[html] ';
-        if (b.css != null)
+        }
+        if (b.css != null) {
             ctype += '[css] ';
-        if (b.controller != null)
+        }
+        if (b.controller != null) {
             ctype += '[js] ';
-        var cpath = b.componentId;
-        if (b.using != null)
+        }
+        let cpath = b.componentId;
+        if (b.using != null) {
             cpath = b.using+' ('+cpath+')';
-        header_summary += '\n * - '+ctype;
-        header_summary += '\n *   '+cpath;
-        header_summary += '\n * ';
+        }
+        headerSummary += '\n * - '+ctype;
+        headerSummary += '\n *   '+cpath;
+        headerSummary += '\n * ';
     }
-    header_summary += '\n * ';
-    header_summary += '\n*/';
-    header_summary += '\n\n';
-    var bundle = header_summary + serialize(zuix.bundle());
+    headerSummary += '\n * ';
+    headerSummary += '\n*/';
+    headerSummary += '\n\n';
+    let bundle = headerSummary + serialize(zuix.bundle());
     // revert loaded status before exporting
     bundle = bundle.replace(/data-ui-loaded=\\"true\\"/g, 'data-ui-loaded=\\"false\\"');
     bundle = bundle.replace(/zuix-loaded=\\"true\\"/g, 'zuix-loaded=\\"false\\"');
     // save bundle
-    var blob = new Blob(['zuix.bundle(' + bundle + ');'], {type: 'text/plain;charset=utf-8'});
+    const blob = new Blob(['zuix.bundle(' + bundle + ');'], {type: 'text/plain;charset=utf-8'});
     fileSaver.saveAs(blob, bundleFileName);
     return bundle;
 }
 
-module.exports = function (root) {
+module.exports = function(root) {
     if (zuix == null) {
         alert('Error: ZuixBundler requires Zuix to be included first.');
         return;
