@@ -22,8 +22,8 @@
       }
     ],
     "description": {
-      "full": "This file is part of\n ZUIX, Javascript library for component-based development.\n       https://genielabs.github.io/zuix",
-      "summary": "This file is part of\n ZUIX, Javascript library for component-based development.\n       https://genielabs.github.io/zuix",
+      "full": "This file is part of\n zUIx, Javascript library for component-based development.\n       https://genielabs.github.io/zuix",
+      "summary": "This file is part of\n zUIx, Javascript library for component-based development.\n       https://genielabs.github.io/zuix",
       "body": ""
     },
     "isPrivate": false,

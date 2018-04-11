@@ -1,4 +1,4 @@
-/* ZUIX v0.4.9-32 18.04.10 22:58:36 */
+/* zUIx v0.4.9-33 18.04.12 01:31:52 */
 
 /** @typedef {Zuix} window.zuix */!function(e){if("object"==typeof exports)module.exports=e();else if("function"==typeof define&&define.amd)define(e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.zuix=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 /*
@@ -21,7 +21,7 @@
 /*
  *
  *  This file is part of
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -145,7 +145,7 @@ module.exports = function(callback) {
 /*
  *
  *  This file is part of
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -299,7 +299,7 @@ module.exports = function(ctx) {
 /*
  *
  *  This file is part of
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -420,7 +420,7 @@ module.exports = TaskQueue;
 /*
  *
  *  This file is part of
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -553,7 +553,7 @@ module.exports = {
 /*
  *
  *  This file is part of
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -1289,7 +1289,7 @@ z$.classExists = function(className) {
                         }
                     }
                 } catch (e) {
-                    if (e.name !== 'SecurityError') {
+                    if (e.name !== 'SecurityError' && e.name !== 'InvalidAccessError') {
                         throw e;
                     }
                 }
@@ -1579,7 +1579,7 @@ module.exports = z$;
 
 /**
  *
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -1625,7 +1625,7 @@ module.exports = z$;
 
 /*
  *
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -1679,7 +1679,7 @@ module.exports = function(root) {
 /*
  *
  *  This file is part of
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -2125,9 +2125,8 @@ ComponentContext.prototype.loadHtml = function(options, enableCaching) {
         } else {
             context.view(inlineElement.outerHTML);
         }
-        const html = context.view().innerHTML;
         if (util.isFunction(options.success)) {
-            (options.success).call(context, html);
+            (options.success).call(context, inlineElement.outerHTML);
         }
         if (util.isFunction(options.then)) {
             (options.then).call(context);
@@ -2243,6 +2242,17 @@ ComponentContext.prototype.modelToView = function() {
                             break;
                         default:
                             el.innerHTML = (!util.isNoU(boundData.innerHTML) ? boundData.innerHTML : boundData);
+                            if (boundData.attributes != null) {
+                                for (let i = 0; i < boundData.attributes.length; i++) {
+                                    const attr = boundData.attributes[i];
+                                    if (attr.specified && attr.name !== _optionAttributes.dataUiField) {
+                                        if (attr.value[0] === '+' && el.hasAttribute(attr.name)) {
+                                            attr.value = el.getAttribute(attr.name) + ' ' + attr.value.substring(1);
+                                        }
+                                        el.setAttribute(attr.name, attr.value);
+                                    }
+                                }
+                            }
                     }
                 }
             }
@@ -2275,7 +2285,7 @@ module.exports = ComponentContext;
 /*
  *
  *  This file is part of
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -2779,7 +2789,7 @@ function lazyElementCheck(element) {
 /*
  *
  *  This file is part of
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -3203,6 +3213,31 @@ ContextController.prototype.for = function(componentId) {
 module.exports = ContextController;
 
 },{"../helpers/ZxQuery":5}],11:[function(_dereq_,module,exports){
+/*
+ * Copyright 2015-2017 G-Labs. All Rights Reserved.
+ *         https://genielabs.github.io/zuix
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/*
+ *
+ *  This file is part of
+ *  zUIx, Javascript library for component-based development.
+ *        https://genielabs.github.io/zuix
+ *
+ * @author Generoso Martello <generoso@martello.com>
+ */
 
 const OptionAttributes = Object.freeze({
     dataBindModel:
@@ -3261,7 +3296,7 @@ module.exports = function(root) {
 
 /*
  *
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *        https://genielabs.github.io/zuix
  *
  * @author Generoso Martello <generoso@martello.com>
@@ -3370,7 +3405,7 @@ let _contextSeqNum = 0;
 let _enableHttpCaching = true;
 
 /**
- *  ZUIX, Javascript library for component-based development.
+ *  zUIx, Javascript library for component-based development.
  *
  * @class Zuix
  * @constructor
