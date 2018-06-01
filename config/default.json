@@ -1,0 +1,44 @@
+{
+  "zuix": {
+    "build": {
+      "input": "./source",
+      "output": "./docs",
+      "copy": [
+        "app/content/docs/examples",
+        "app/content/api/data",
+        "app/content/api/api_template.html",
+        "app/content/api/api_template.css",
+        "app/content/api/api_template.js",
+        "css",
+        "images",
+        "js",
+        ".nojekyll",
+        "manifest.json",
+        "manifest.webapp",
+        "humans.txt",
+        "favicon.ico",
+        "robots.txt"
+      ],
+      "ignore": [
+        "app",
+        "_inc"
+      ],
+      "compile": [
+        "html",
+        "less",
+        "css",
+        "js",
+        "md",
+        "svg"
+      ],
+      "less": true,
+      "eslint": true
+    },
+    "app": {
+      "title": "zUIx Web Starter application.",
+      "googleSiteId": "UA-123-456",
+      "resourcePath": "/app/",
+      "libraryPath": "https://genielabs.github.io/zkit/lib"
+    }
+  }
+}
