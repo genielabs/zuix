@@ -10,7 +10,7 @@ zuix.controller(function (cp) {
 
         // download the jsDoc data file and HTML-format it.
         zuix.$.ajax({
-            url: '.'+resourcePath+'content/api/data/'+apiName+'.json?'+Date.now(),
+            url: resourcePath+'content/api/data/'+apiName+'.json?'+Date.now(),
             success: function(json) {
                 cp.view().html('');
                 const dox = JSON.parse(json);
