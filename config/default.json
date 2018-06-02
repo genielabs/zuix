@@ -2,7 +2,7 @@
   "zuix": {
     "build": {
       "input": "./source",
-      "output": "./docs",
+      "output": "../docs",
       "copy": [
         "app/content/docs/examples",
         "app/content/api/data",

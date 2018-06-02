@@ -13,7 +13,7 @@ This website is based on [zUIx Web Starter](https://github.com/genemars/zuix-web
 4. `npm run build` to manually build the files
 
 website source files are located in the `./source` folder and are
-generated in the `./docs` folder.
+generated in the `../docs` parent folder.
 This setting can be changed by modifying the `./config/default.json` file.
 
 
