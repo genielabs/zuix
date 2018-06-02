@@ -2,7 +2,8 @@
     var api_loader_options = {
         html: false,
         markdown: true,
-        prism: true
+        prism: true,
+        lazyLoad: true
     };
 </script>
 
@@ -37,49 +38,49 @@
 
 
 <!-- Overlay FAB TOC Menu -->
-<div data-ui-load="kit/components/menu_overlay" data-ui-scroller="page-api" data-ui-context="menu-api">
-    <ul data-ui-field="items">
-        <li>
+<div data-ui-load="@lib/components/menu_overlay" data-ui-context="menu-api" data-o-scroller="page-api">
+    <div data-ui-field="items">
+        <div class="toc-item">
             <a href="#/api#ZUIX_API--Zuix" title="Jump to 'Zuix class'">
                 <span>Zuix class</span>
                 <span class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary">
                     <i class="material-icons">code</i>
                 </span>
             </a>
-        </li>
-        <li>
+        </div>
+        <div class="toc-item">
             <a href="#/api#ZUIX_API--ComponentContext" title="Jump to 'ComponentContext'">
                 <span>ComponentContext class</span>
                 <span class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary">
                     <i class="material-icons">code</i>
                 </span>
             </a>
-        </li>
-        <li>
+        </div>
+        <div class="toc-item">
             <a href="#/api#ZUIX_API--ContextController" title="Jump to 'ContextController'">
                 <span>ContextController class</span>
                 <span class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary">
                     <i class="material-icons">code</i>
                 </span>
             </a>
-        </li>
-        <li>
+        </div>
+        <div class="toc-item">
             <a href="#/api#ZUIX_API--ZxQuery" title="Jump to 'ZxQuery'">
                 <span>ZxQuery class</span>
                 <span class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary">
                     <i class="material-icons">code</i>
                 </span>
             </a>
-        </li>
+        </div>
         <!--
-        <li>
+        <div class="toc-item">
             <a href="#/api#ZUIX_API--Localizer" title="Jump to 'Localizer'">
                 <span>ZLocalizer</span>
                 <span class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--primary">
                     <i class="material-icons">code</i>
                 </span>
             </a>
-        </li>
+        </div>
         -->
-    </ul>
+    </div>
 </div>
