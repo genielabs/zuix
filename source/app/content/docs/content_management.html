@@ -144,7 +144,7 @@ var my_loading_options = {
 
 ###### Priority
 
-With the `data-ui-priority` attribute we can change the order which contents or components are loaded.
+With the `data-ui-priority` attribute we can change in which order components have to be loaded.
 Its value is indeed a number indicating the loading sequence order and that can also have negative values.
 The default value is zero and items with minor priority will get loaded first.
 
@@ -167,8 +167,8 @@ if the element become visible.
 When the element visibility depends on a scrollable container
 (eg. on the `BODY` tag or a `DIV` with *CSS* `overflow` set to `scroll`)
 we can set the attribute `data-ui-lazyload="scroll"` on the
-scrollable container. This way lazy-loadable element will
-be automatically loaded once become visible.
+scrollable container. This way lazy-loadable elements will
+be automatically loaded once they scroll into the view.
 
 <small><strong>EXAMPLE - </strong> Use of lazy loading option</small>
 <pre data-line="1,2,6"><code class="language-html">
@@ -204,7 +204,7 @@ the method `zuix.componentize([<container>])` must be called.
 ##### Styling content
 
 When including a content, after loading the `.html` file,
-*ZUIX* will also try to load a `.css` style
+*zUIx* will also try to load a `.css` style
 file with the same location/basename, unless the `css: false`
 field is present in the `data-ui-options` object.
 
