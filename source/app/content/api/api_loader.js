@@ -65,7 +65,10 @@ zuix.controller(function (cp) {
                     markdown: cp.options().markdown,
                     prism: cp.options().prism,
                     ready: function (ctx) {
-                        cp.view().append(ctx.view());
+                        const view = zuix.$(ctx.view());
+                        view.addClass('animated')
+                            .addClass('fadeIn');
+                        cp.view().append(view.get());
                     }
                 });
 

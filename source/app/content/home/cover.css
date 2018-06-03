@@ -37,3 +37,13 @@ h3 {
     padding-left: 0;
     padding-right: 0;
 }
+
+.pager {
+    width: 180px;
+    height: 80px;
+}
+
+.pager-item {
+    width: 120px;
+    height: 80px;
+}

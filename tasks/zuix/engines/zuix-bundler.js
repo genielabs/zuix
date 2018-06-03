@@ -48,7 +48,7 @@ const zuixConfig = config.get('zuix');
 const jsdom = require('jsdom');
 const {JSDOM} = jsdom;
 
-const LIBRARY_PATH_DEFAULT = '//genielabs.github.io/zkit/lib';
+const LIBRARY_PATH_DEFAULT = 'https://genielabs.github.io/zkit/lib';
 
 const zuixBundle = {
     viewList: [],
@@ -84,9 +84,6 @@ function createBundle(sourceFolder, data) {
                 }
                 if (dom.window.document.querySelectorAll('[data-ui-view="'+path+'"]').length > 0)  {
                     return;
-                }
-                if (path.startsWith('@lib/')) {
-                    path = LIBRARY_PATH_DEFAULT+path.substring(4);
                 }
                 let content;
                 if (hasJsFile) {
@@ -154,6 +151,21 @@ function isBundled(list, path) {
 
 function fetchResource(type, path, sourceFolder, reportError) {
     let content = null;
+    let isLibraryPath = false;
+    if (path.startsWith('@lib/')) {
+        // resolve components library path
+        if (zuixConfig.app.libraryPath != null) {
+            if (zuixConfig.app.libraryPath.indexOf('://') > 0 || zuixConfig.app.libraryPath.startsWith('//')) {
+                path = zuixConfig.app.libraryPath + path.substring(4);
+            } else {
+                path = sourceFolder + '/' + zuixConfig.app.libraryPath + path.substring(4);
+            }
+        } else {
+            path = LIBRARY_PATH_DEFAULT + path.substring(4);
+        }
+        isLibraryPath = true;
+    }
+    // add file type extension
     path = path + '.' + type;
     const error = '   ^#^R^W[%s]^:';
     if (path.indexOf('://') > 0 || path.startsWith('//')) {
@@ -172,7 +184,7 @@ function fetchResource(type, path, sourceFolder, reportError) {
                 .br();
         }
     } else {
-        const f = sourceFolder + '/' + zuixConfig.app.resourcePath + '/' + path;
+        const f = isLibraryPath ? path : sourceFolder + '/' + zuixConfig.app.resourcePath + '/' + path;
         tlog.overwrite('   ^C%s^: reading "%s"', tlog.busyCursor(), path);
         try {
             content = fs.readFileSync(f).toString();

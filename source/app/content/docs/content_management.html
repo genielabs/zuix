@@ -37,10 +37,11 @@ where the `index.html` is the main page that will include the other files.
 <a id="Getting_Started--Content_Loading"></a>
 ##### Loading content
 
-To include a content, we just add a `div` (or any other tag supposed to be a container tag)
+To include a content, we add a `div` (or any other tag supposed to be a container tag)
 setting the `data-ui-include` attribute with the path of the content that we want to be loaded.
 This can be either a path relative to the file requesting the content inclusion or an absolute
-path pointing to a different server.
+path pointing to a different server, in which case [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+must be enabled on the server end.
 
 <small><strong>EXAMPLE - </strong> **HTML** file `index.html`</small>
 <pre data-line="9,11,13"><code class="language-html">
@@ -61,7 +62,7 @@ path pointing to a different server.
 </html>
 </code></pre>
 
-The `data-ui-include` attribute shown at lines 9-11-13, will instruct *ZUIX* to load the specified content
+The `data-ui-include` attribute, shown at lines 9-11-13, will make *zUIx* to load the specified content
 into each `div` element.
 
 Notice that the value of the `data-ui-include` attribute it is the path of the file to include
@@ -69,7 +70,7 @@ Notice that the value of the `data-ui-include` attribute it is the path of the f
 
 The following example shows how a `div` will looks like after the content `content/docs/examples/links` is included into it.
 
-<small><strong>EXAMPLE</strong> - **HTML** file [content/docs/examples/links.html](https://genielabs.github.io/zuix/content/docs/examples/links.html)</small>
+<small><strong>EXAMPLE</strong> - **HTML** file [app/content/docs/examples/links.html](https://genielabs.github.io/zuix/app/content/docs/examples/links.html)</small>
 <pre data-line="1"><code class="language-html">
     <!-- examples/links --->
     <div layout="row center-spread">
@@ -79,7 +80,7 @@ The following example shows how a `div` will looks like after the content `conte
     </div>
 </code></pre>
 
-Container element including the above content
+Container element including the above content in the HTML page
 
 <pre data-line="1"><code class="language-html">
     <!-- include common links -->
@@ -103,7 +104,7 @@ Container element including the above content
 We can also include a content that is located on a different server by specifying the absolute URL:
 
 <pre><code class="language-html">
-    <div data-ui-include="https://genielabs.github.io/zuix/content/docs/examples/links"></div>
+    <div data-ui-include="https://genielabs.github.io/zuix/app/content/docs/examples/links"></div>
 </code></pre>
 
 <small><strong>RESULT</strong></small>
@@ -210,7 +211,7 @@ field is present in the `data-ui-options` object.
 If the style file is found, all style definitions contained in it,
 will be applied to the container where the content has been loaded.
 
-<small><strong>EXAMPLE - </strong> **HTML** file [content/docs/examples/links.html](https://genielabs.github.io/zuix/content/docs/examples/links.html)</small>
+<small><strong>EXAMPLE - </strong> **HTML** file [content/docs/examples/links.html](https://genielabs.github.io/zuix/app/content/docs/examples/links.html)</small>
 <pre><code class="language-html">
 <!-- examples/links --->
 <div layout="row center-spread">
@@ -220,7 +221,7 @@ will be applied to the container where the content has been loaded.
 </div>
 </code></pre>
 
-<small><strong>EXAMPLE - </strong> **CSS** file [content/docs/examples/links.css](https://genielabs.github.io/zuix/content/docs/examples/links.css)</small>
+<small><strong>EXAMPLE - </strong> **CSS** file [content/docs/examples/links.css](https://genielabs.github.io/zuix/app/content/docs/examples/links.css)</small>
 <pre data-line="1,9"><code class="language-css">
 div[layout] {
     padding: 16px;

@@ -1,6 +1,7 @@
 h3 {
     font-weight:600;
-    margin-top: 48px;
+    margin-top: 56px;
+    margin-bottom: 32px;
 }
 h3 code {
     font-weight:400;
@@ -23,4 +24,8 @@ h6 {
 }
 li {
     list-style: square;
+}
+
+[data-ui-load="content/api/api_loader"] {
+    min-height: 50vh;
 }
