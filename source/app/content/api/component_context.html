@@ -23,13 +23,13 @@ by using the `zuix.context(...)` method, when loading a component from HTML.
      data-ui-context="my-context-id">
     <!-- ... -->
 </div>
-<script>
+&lt;script&gt;
 // Get the component context by using the assigned id
 const ctx = zuix.context('my-context-id');
 // OR by referencing its HTML element container
 const componentDiv = zuix.field('my-field-id');
 const ctx = zuix.context(componentDiv);
-</script>
+&lt;/script&gt;
 ```
 
 <i class="material-icons mdl-typography--font-bold">arrow_right</i>

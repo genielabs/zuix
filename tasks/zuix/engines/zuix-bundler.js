@@ -265,6 +265,7 @@ module.exports = function(options, template, data, cb) {
     hasErrors = false;
     // zUIx bundle
     tlog.br().info('^w%s^:', data.file);
+    let postProcessed = false;
     // Default static-site processing
     tlog.info(' ^r*^: static-site content');
     let html = swigTemplate(data)._result.contents;
@@ -272,70 +273,83 @@ module.exports = function(options, template, data, cb) {
     if (isStaticSite) {
         data.content = html;
     }
-    // Generate inline zUIx bundle
-    tlog.overwrite(' ^r*^: zuix bundle');
-    generateApp(options.source, data);
-    if (Object.keys(stats).length > 0) {
-        if (!hasErrors) {
-            tlog.overwrite(' ^G\u2713^: zuix bundle');
-        }
-        // output stats
-        for (const key in stats) {
-            const s = stats[key];
-            const ok = '^+^g';
-            const ko = '^w';
-            tlog.info('   ^w[^:%s^:%s^:%s^:^w]^: %s',
-                s.view ? ok + 'v' : ko + '-',
-                s.css ? ok + 's' : ko + '-',
-                s.controller ? ok + 'c' : ko + '-',
-                '^:' + key
-            );
-        }
-    } else {
-        // no zuix data processed ([data-ui-*] attributes)
-        tlog.overwrite();
-    }
-    // Default static-site processing
-    tlog.info(' ^r*^: static-site content');
-    html = swigTemplate(data)._result.contents;
-    if (html != data.content || isStaticSite) {
-        data.content = html;
-        tlog.overwrite(' ^G\u2713^: static-site content');
-    } else {
-        // no template data processed
-        tlog.overwrite();
-    }
-
-    // run ESlint
-    if (data.file.endsWith('.js')) {
-        tlog.info(' ^r*^: lint');
-        const issues = linter.verify(data.content, lintConfig, data.file);
-        issues.forEach(function (m) {
-            if (m.fatal || m.severity > 1) {
-                tlog.error('   ^RError^: %s ^R(^Y%s^w:^Y%s^R)', m.message, m.line, m.column);
-            } else {
-                tlog.warn('   ^YWarning^: %s ^R(^Y%s^w:^Y%s^R)', m.message, m.line, m.column);
+    if (zuixConfig.build.bundle !== false) {
+        // Generate inline zUIx bundle
+        tlog.overwrite(' ^r*^: zuix bundle');
+        generateApp(options.source, data);
+        if (Object.keys(stats).length > 0) {
+            if (!hasErrors) {
+                tlog.overwrite(' ^G\u2713^: zuix bundle');
             }
-        });
-        if (issues.length === 0) {
-            tlog.overwrite(' ^G\u2713^: lint');
+            // output stats
+            for (const key in stats) {
+                const s = stats[key];
+                const ok = '^+^g';
+                const ko = '^w';
+                tlog.info('   ^w[^:%s^:%s^:%s^:^w]^: %s',
+                    s.view ? ok + 'v' : ko + '-',
+                    s.css ? ok + 's' : ko + '-',
+                    s.controller ? ok + 'c' : ko + '-',
+                    '^:' + key
+                );
+            }
+            // Re-run static-site processing
+            html = swigTemplate(data)._result.contents;
+            isStaticSite = isStaticSite || html != data.content;
+            tlog.info();
+            postProcessed = true;
+        } else {
+            // no zuix data processed ([data-ui-*] attributes)
+            tlog.overwrite();
+        }
+    }
+    if (isStaticSite) {
+        data.content = html;
+        tlog.overwrite(' ^G\u2713^: static-site content').br();
+        postProcessed = true;
+    }
+
+    if (zuixConfig.build.eslint) {
+        // run ESlint
+        if (data.file.endsWith('.js')) {
+            tlog.info(' ^r*^: lint');
+            const issues = linter.verify(data.content, lintConfig, data.file);
+            issues.forEach(function (m) {
+                if (m.fatal || m.severity > 1) {
+                    tlog.error('   ^RError^: %s ^R(^Y%s^w:^Y%s^R)', m.message, m.line, m.column);
+                } else {
+                    tlog.warn('   ^YWarning^: %s ^R(^Y%s^w:^Y%s^R)', m.message, m.line, m.column);
+                }
+            });
+            if (issues.length === 0) {
+                tlog.overwrite(' ^G\u2713^: lint');
+            }
+            tlog.info();
+            postProcessed = true;
         }
     }
 
-    // run LESS
-    if (data.file.endsWith('.less')) {
-        tlog.info(' ^r*^: less');
-        less.render(data.content, lessConfig, function(error, output) {
-            const baseName = data.dest.substring(0, data.dest.length - 5);
-            fs.writeFileSync(baseName+'.css', output.css);
-            // TODO: source map generation disabled
-            //fs.writeFileSync(baseName+'.css.map', output.map);
-            tlog.overwrite(' ^G\u2713^: less');
-        });
+    if (zuixConfig.build.less) {
+        // run LESS
+        if (data.file.endsWith('.less')) {
+            tlog.info(' ^r*^: less');
+            less.render(data.content, lessConfig, function (error, output) {
+                const baseName = data.dest.substring(0, data.dest.length - 5);
+                fs.writeFileSync(baseName + '.css', output.css);
+                // TODO: source map generation disabled
+                //fs.writeFileSync(baseName+'.css.map', output.map);
+                tlog.overwrite(' ^G\u2713^: less');
+            });
+            tlog.info();
+            postProcessed = true;
+        }
     }
 
     cb(null, data.content);
-    tlog.info(' ^G\u2713^: done');
+    if (!postProcessed) {
+        tlog.info();
+    }
+    tlog.overwrite(' ^G\u2713^: done');
 };
 
 
@@ -345,8 +359,6 @@ const Promise = require('es6-promise').Promise;
 const swig = require('swig-templates');
 const isMarkdown = require(process.cwd()+'/node_modules/static-site/lib/utils/is-markdown');
 const markdownTag = require(process.cwd()+'/node_modules/static-site/lib/utils/markdown-tag');
-//const MarkdownIt = require('markdown-it');
-//const hljs = require('highlight.js');
 const extras = require('swig-extras');
 
 /*
@@ -378,7 +390,7 @@ extras.useTag(swig, 'switch');
 extras.useTag(swig, 'case');
 
 function swigTemplate(page) {
-    let template = isMarkdown(page.file) ? markdown.render(page.content) : page.content;
+    let template = isMarkdown(page.file) ? render(page.content) : page.content;
 
     if (page.template) {
         const templatePath = path.join(this.sourcePath, page.template);

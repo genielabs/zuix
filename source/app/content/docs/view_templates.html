@@ -6,7 +6,7 @@ where some elements in it are bound to fields of a *data model* and that
 so it dynamically changes the shown values accordingly to it.
 
 The `data-ui-field` attribute, placed on elements of a view,
-is used to bind their values to the respective fields in the model.
+is used to bind their values to the respective fields in the data model.
 
 <small><strong>EXAMPLE -</strong> **HTML** template file `templates/mdl_card.html`</small>
 <pre data-line="5,6,8,13"><code class="language-html">
@@ -34,7 +34,7 @@ is used to bind their values to the respective fields in the model.
 </div>
 
 <p>&nbsp;</p>
-To apply the template above with different data, we use the following code:
+To apply the template above with a different data model, we use the following code:
 
 <small><strong>EXAMPLE - HTML</strong></small>
 <pre><code class="language-html">
@@ -250,7 +250,7 @@ var a_random_contact = {
                 "1": { name: 'Jane Doe', image: '{{app.resourcePath}}content/docs/examples/images/avatar_01.png'},
                 "2": { name: 'Mikey M.', image: '{{app.resourcePath}}content/docs/examples/images/avatar_03.png'}
             };
-            // example model view adapter
+            // example bind-model view adapter
             var chip_adapter = function(element, field) {
                 const id = this.attr('data-id');
                 const value = chip_items[id][field];
