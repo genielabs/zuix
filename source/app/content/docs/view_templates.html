@@ -39,13 +39,13 @@ To apply the template above with a different data model, we use the following co
 <small><strong>EXAMPLE - HTML</strong></small>
 <pre><code class="language-html">
 <div data-ui-include="templates/mdl_card">
-    <img data-ui-field="image" src="{{app.resourcePath}}content/docs/examples/images/card_cover_2.jpg">
     <h1 data-ui-field="title">Down the rabbit hole</h1>
-    <div data-ui-field="text">
+    <img data-ui-field="image" src="{{app.resourcePath}}content/docs/examples/images/card_cover_2.jpg">
+    <p data-ui-field="text">
         Luckily for Alice, the little magic bottle had now had its full effect, and she grew no larger:
         still it was very uncomfortable, and, as there seemed to be no sort of chance of her ever getting
         out of the room again, no wonder she felt unhappy.
-    </div>
+    </p>
     <a data-ui-field="link_read" href="/#/docs">Read More</a>
 </div>
 </code></pre>
@@ -54,13 +54,13 @@ To apply the template above with a different data model, we use the following co
 <small><strong>RESULT</strong></small>
 <div self="size-x1" layout="row center-center">
 <div data-ui-include="templates/mdl_card" self="size-1of2 sm-full center">
-<img data-ui-field="image" src="{{app.resourcePath}}content/docs/examples/images/card_cover_2.jpg" width="100%">
 <h1 data-ui-field="title">Down the rabbit hole</h1>
-<div data-ui-field="text">
+<img data-ui-field="image" src="{{app.resourcePath}}content/docs/examples/images/card_cover_2.jpg" width="100%">
+<p data-ui-field="text">
 Luckily for Alice, the little magic bottle had now had its full effect, and she grew no larger:
 still it was very uncomfortable, and, as there seemed to be no sort of chance of her ever getting
 out of the room again, no wonder she felt unhappy.
-</div>
+</p>
 <a data-ui-field="link_read" href="/#/docs">Read More</a>
 </div>
 </div>
@@ -103,7 +103,7 @@ Inclusion of the above view in the same page
 
 <small><strong>RESULT</strong></small>
 <div class="content-padding">
-    <div data-ui-include="inline/common/contact_chip"></div>
+    <div data-ui-include="inline/common/contact_chip" data-ui-options="main.options.component_no_css"></div>
 </div>
 
 
@@ -269,7 +269,7 @@ var a_random_contact = {
 <!-- END: Inline View - Example Data Binding -->
 
 <small><strong>RESULT</strong></small>
-<div data-ui-include="inline/chip_example_result"></div>
+<div data-ui-include="inline/chip_example_result" data-ui-options="main.options.component_no_css"></div>
 
 ###### Binding Adapters
 

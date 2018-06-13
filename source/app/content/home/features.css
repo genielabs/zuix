@@ -1,16 +1,31 @@
-.opaqueBlocK {
-    background-color: rgba(27, 106, 185, 0.9);
+. {
     font-size: 90%;
-    margin-top: 16px;
     margin-bottom: 16px;
     overflow: hidden;
 }
 p {
-    margin-bottom: 28px;
     font-weight: 400;
+}
+h6 {
+    line-height: 140%;
+    color: #2E7D32;
+    font-weight: 800;
 }
 ul li {
     list-style: disc;
+}
+pre {
+    font-size:80%;
+    border: solid 1px rgba(0,255,50,0.5);
+    background: rgba(255,255,255,0.95);
+    border-radius: 8px;
+}
+.opaqueBlocK {
+    background: rgba(230, 255, 230, 0.95);
+    margin-top: 12px;
+}
+.example-box {
+    padding: 16px;
 }
 
 .features-box {
@@ -72,4 +87,43 @@ ul li {
     width: 100%;
     font-size: 100%;
     line-height: 180%;
+}
+[data-ui-include="content/lorem_ipsum"] {
+    margin-top: 48px;
+    padding: 16px;
+}
+
+.size-w460 {
+    max-width: 460px;
+}
+
+.template-example {
+    max-width: 460px;
+}
+.template-example h1 {
+    font-size: 160%;
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.template-example img {
+    max-width: 400px;
+    max-height: 220px;
+}
+.template-example p {
+    font-size: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+em.caption {
+    color: #1B5E20;
+    line-height: 200%;
+    font-weight: 500;
+    padding: 4px;
+}
+
+.start-button {
+    margin-top: 48px;
+    margin-bottom: 96px;
 }

@@ -1,113 +1,215 @@
-<div layout="column center-center" class="opaqueBlocK animated bounceInUp mdl-shadow--8dp">
-    <div self="size-xlarge center-center" layout="rows top-justify">
-        <div self="size-1of2 -sm-full">
+<div layout="column center-center" class="opaqueBlocK mdl-color-text--black animated bounceInUp mdl-shadow--8dp">
 
-            <div class="features-box">
-                <div class="title" layout="row center-left">
-                    <i class="material-icons">dashboard</i>
-                    <h2 self="size-x1">Content Manager</h2>
-                </div>
-                <div class="text">
-                    <p>
-                        Simplifies site structuring
-                        and management, with <strong>content
-                        inclusion</strong> feature, content and style
-                        files can be split and conveniently arranged.
-                    </p>
-                    <p>
-                        Optimizes speed with <strong>lazy-loading</strong> feature,
-                        content will be loaded only when it actually
-                        comes into the user's screen view.
-                    </p>
-                    <p>
-                        Can load content from different sites
-                        with just one HTML tag,
-                        making of <strong>reusability</strong> a native feature.
-                    </p>
-                </div>
+    <div self="size-xlarge center-center" layout="rows center-justify">
+        <div self="size-1of2 sm-full" class="example-box -animated -fadeInLeft">
+            <div -class="animated zoomIn">
+                <h6>Reusability by design</h6>
+                <p>
+                    With <strong>zUIx</strong> you can include content
+                    and load components also if located on different servers.
+                </p>
+<em class="caption">Loading content from local server</em>
+```html
+<div data-ui-include="content/lorem_ipsum"></div>
+```
             </div>
-
         </div>
-        <div self="size-1of2 -sm-full">
-
-            <div class="features-box">
-                <div class="title" layout="row center-left">
-                    <i class="material-icons">settings_ethernet</i>
-                    <h2>Template Engine</h2>
-                </div>
-                <div class="text">
-                    <p>
-                        Turns any HTML snippet into a template.
-                        Template <strong>preview is immediate</strong> and
-                        truly matching, NO custom tags
-                        or <em>mustaches</em> needed.
-                    </p>
-                    <p>
-                        Maps data model fields to view elements either automatically or
-                        by using custom <strong>binding-adapters</strong>, with
-                        full control over model-view transformation process.
-                    </p>
-                    <p>
-                        Prevents style attributes redundancy hell with
-                        <strong>Scoped CSS</strong> files.
-                    </p>
-                </div>
+        <div self="size-1of2 sm-full" layout="row center-center" class="example-box -animated -fadeInRight">
+            <div data-ui-include="content/lorem_ipsum" -class="animated zoomIn"></div>
+            <!--
+            <div data-ui-load="@lib/components/social_sharing"
+                 layout="rows center-center">
+                <a data-ui-field="url" href="http://zuix.it">zUIx.js</a>
+                <p data-ui-field="description">JavaScript library to support you in creating amazing component-based websites and applications.</p>
             </div>
-
+            -->
         </div>
     </div>
-    <div self="size-xlarge center-center" layout="rows top-justify">
-        <div self="size-x1 sm-full">
 
-            <div class="features-box">
-                <div class="title" layout="row center-left">
-                    <i class="material-icons">extension</i>
-                    <h2>Component Manager</h2>
-                </div>
-                <div class="text">
-                    <p>
-                        Promotes the implementation of
-                        <strong>agnostic controller logic</strong>
-                        for creating components that can stick to any
-                        UI-framework and easily upgrade at any time.
-                    </p>
-                    <p>
-                        Enables running of multiple controller
-                        on the same UI view with <strong>components
-                        overlapping</strong> feature.
-                    </p>
-                    <p>
-                        Introduces a new way of app theming with
-                        instant <strong>view switching</strong>, that allow
-                        replacing of the component's view template
-                        at any time.
-                    </p>
-                </div>
-            </div>
+    <div self="size-xlarge center-center" layout="rows center-justify" class="animated fadeInUp">
+        <div self="md-full" class="example-box">
+<em class="caption">Loading content from a shared library</em>
+```html
+<div data-ui-include="@lib/templates/spinkit/spinner_cubes"></div>
+```
+        </div>
+        <div self="size-x1 center-center" -class="example-box">
+
+            <div data-ui-include="@lib/templates/spinkit/spinner_cubes"></div>
 
         </div>
-        <div self="size-x1 sm-full">
-
-            <div class="features-box">
-                <div class="title" layout="row center-left">
-                    <i class="material-icons">playlist_add_check</i>
-                    <h2>Other features</h2>
-                </div>
-                <div class="text">
-                    <strong>ZUIX</strong> is a lightweight library,
-                    though still giving a full feature set.
-                    <ul>
-                        <li>Events, Behaviors and Hooks</li>
-                        <li>Components and fields caching</li>
-                        <li>Automatic events unbinding</li>
-                        <li>Integrated resources loader</li>
-                        <li>Integrated jQuery-alike DOM helper</li>
-                        <li>Integrated app-bundler and localization engine</li>
-                    </ul>
-                </div>
-            </div>
-
+        <div self="size-full" class="example-box">
+            <p>
+                The special <code>@lib</code> keyword is a configurable, relative
+                or absolute, URL path that can be used as a shortcut to load components
+                from a shared location. By default it points to the
+                <a href="https://genielabs.github.io/zkit">zKit</a> website that is a
+                collections of sample components made with <strong>zUIx</strong>.
+            </p>
         </div>
-
     </div>
+<!--
 </div>
+<div layout="column center-center" class="opaqueBlocK mdl-color-text--black animated bounceInUp mdl-shadow--8dp">
+-->
+    <div self="size-xlarge center-center" layout="rows center-center" class="animated fadeIn">
+        <div self="size-full left" class="example-box">
+            <h6>Transform and reshape</h6>
+            <p>
+                Keep <code>HTML</code> content code simple and clean and then transform it by
+                applying <strong>templates</strong> or loading <strong>components</strong> on it.
+                <br>
+                With automatic fields mapping (data-binding) or JavaScript,
+                templates and components can literally transform a minimal
+                set of <code>HTML</code> elements into a rich and interactive content.
+            </p>
+        </div>
+        <div self="md-full" class="example-box">
+<em class="caption">Applying a <a href="https://getmdl.io/components/index.html">MDL</a> template from a remote server</em>
+```html
+<div data-ui-include="https://genielabs.github.io/zuix/app/templates/mdl_card">
+    <h1 data-ui-field="title">Still got the goods</h1>
+    <img data-ui-field="image" src="images/example_picture.jpg">
+    <p data-ui-field="text">
+        Fifty years after their debut album, The Rock Band
+        prove they've still got the goods.
+    </p>
+    <a data-ui-field="link_read" href="javascript:alert('Clicked!')">Read More</a>
+</div>
+```
+        </div>
+
+    </div>
+    <div self="size-xlarge center-center" layout="column center-center">
+
+        <div class="example-box" data-ui-field="cover-example-template-apply">
+            <p>
+                This is how the HTML snippet above looks like without the
+                <code>mdl_card</code> template.
+            </p>
+        </div>
+        <div class="example-box" style="min-height:55vh" layout="column center-center">
+
+            <div data-ui-include="templates/mdl_card" class="size-w460" data-ui-lazyload="true">
+                <div class="template-example mdl-color--white content-padding">
+                    <h1 data-ui-field="title">Still got the goods</h1>
+                    <div align="center">
+                        <img data-ui-field="image" src="images/example_picture.jpg" class="size-w460">
+                    </div>
+                    <p data-ui-field="text">
+                        Fifty years after their debut album, The Rock Band
+                        prove they've still got the goods.
+                    </p>
+                    <a data-ui-field="link_read" href="javascript:alert('Clicked!')">Read More</a>
+                </div>
+            </div>
+
+            <!-- TODO: add combo do select a couple of different templates and show Hot-Swapping feature -->
+
+        </div>
+        <div class="example-box" data-ui-field="cover-example-template-apply">
+            <p>
+                Click the button below to apply the template <code>mdl_card</code>.
+            </p>
+            <p align="center"><a onclick="cover_example_apply_template()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Apply Template</a></p>
+            <script>
+                function cover_example_apply_template() {
+                    zuix.field('cover-example-template-apply').animateCss('fadeOut', function () {
+                        this.visibility('hidden');
+                    });
+                    zuix.componentize();
+                }
+            </script>
+        </div>
+        <div self="size-full left" class="example-box">
+            <p>
+                Using this pattern, you can focus on templates and components and progressively reshape your website/webapp and boost your creativity.
+            </p>
+        </div>
+    </div>
+
+    <div self="size-xlarge center-center" layout="rows top-center" class="animated fadeIn">
+        <div self="size-full left" class="example-box">
+            <h6>Optimize speed and performance</h6>
+            <p>
+                Either you're writing a <em>Progressive Web App</em> (PWA) or a simple website,
+                <strong>lazy loading</strong> is a built-in feature that can boost up
+                site speed by loading content and components only when they come
+                visible in the screen viewport.
+            </p>
+        </div>
+
+        <div align="center"><a href="https://codepen.io/genielabs/pen/weJjBL" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Example on CodePen</a></div>
+
+    </div>
+
+    <div self="size-xlarge center-center" layout="rows top-center" class="animated fadeIn">
+        <div self="size-full left" class="example-box">
+            <h6>More features</h6>
+            <p>
+                Just to name some, <strong>controllers overlapping</strong> and <strong>hot view swapping</strong>
+                are unique zUIx features.
+                The first one allows loading of multiple controllers on the same view element.
+                The second one allow to dynamically replace a view with a different (or updated) template at any time.
+            </p>
+            <p>
+                <strong>zUIx</strong> is a lightweight library (<strong>13kB</strong>),
+                though still offering a full feature set.
+                <ul>
+                    <li>Events, Behaviors and Hooks</li>
+                    <li>Components and fields caching</li>
+                    <li>Automatic events unbinding</li>
+                    <li>Integrated resources loader</li>
+                    <li>Integrated jQuery-alike DOM helper</li>
+                    <li>Integrated app-bundler</li>
+                </ul>
+            </p>
+        </div>
+        <!-- TODO: add view_pager example with also loads gesture_helper -->
+    </div>
+<!--
+    <div self="size-xlarge center-center" layout="rows top-center" class="animated fadeIn">
+        <div self="size-full left" class="example-box">
+            <h6>zUIx Web Starter</h6>
+            <p>
+                ...
+            </p>
+        </div>
+    </div>
+-->
+
+
+    <div class="start-button" align="center">
+        <a href="#/start" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Get Started</a>
+    </div>
+
+
+</div>
+
+
+
+
+<!--
+
+
+###### What can I do with just `zuix` ?
+
+- <i class="material-icons">arrow_right</i> Create web components and templates
+- <i class="material-icons">arrow_right</i> Load and reuse components and templates from across websites
+- <i class="material-icons">arrow_right</i> Query the DOM with a lite jQuery-like helper class (`zuix.$`)
+O <i class="material-icons">arrow_right</i> Gain better performance with field caching and automatic disposal of allocated resources and event handlers
+O <i class="material-icons">arrow_right</i> Generate the application bundle using just the web browser (no PM required)
+O <i class="material-icons">arrow_right</i> Create optimized and faaast Single Page Applications (SPA) / Progressive Web Applications
+
+###### What can I do with the `zuix-web-starter` ?
+
+O <i class="material-icons">arrow_right</i> Take advantage of using building and packaging tools
+O <i class="material-icons">arrow_right</i> Generate zUIx components bundle automatically
+O <i class="material-icons">arrow_right</i> Use Static-Site engine commands for creating static websites and blogs
+O <i class="material-icons">arrow_right</i> Boost up site loading with automatic generation of PWA scripts
+O <i class="material-icons">arrow_right</i> Use LESS CSS style files
+O <i class="material-icons">arrow_right</i> Use integrated web server
+O <i class="material-icons">arrow_right</i> Use automatic build scripts with ESLint check and error reporting, suitable for CI tools.
+
+
+-->
