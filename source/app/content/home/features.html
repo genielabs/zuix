@@ -2,20 +2,22 @@
 
     <div self="size-xlarge center-center" layout="rows center-justify">
         <div self="size-1of2 sm-full" class="example-box -animated -fadeInLeft">
-            <div -class="animated zoomIn">
+            <div>
                 <h6>Reusability by design</h6>
                 <p>
                     With <strong>zUIx</strong> you can include content
                     and load components also if located on different servers.
                 </p>
 <em class="caption">Loading content from local server</em>
+
 ```html
 <div data-ui-include="content/lorem_ipsum"></div>
 ```
+
             </div>
         </div>
         <div self="size-1of2 sm-full" layout="row center-center" class="example-box -animated -fadeInRight">
-            <div data-ui-include="content/lorem_ipsum" -class="animated zoomIn"></div>
+            <div data-ui-include="content/lorem_ipsum"></div>
             <!--
             <div data-ui-load="@lib/components/social_sharing"
                  layout="rows center-center">
@@ -29,11 +31,13 @@
     <div self="size-xlarge center-center" layout="rows center-justify" class="animated fadeInUp">
         <div self="md-full" class="example-box">
 <em class="caption">Loading content from a shared library</em>
+
 ```html
 <div data-ui-include="@lib/templates/spinkit/spinner_cubes"></div>
 ```
+
         </div>
-        <div self="size-x1 center-center" -class="example-box">
+        <div self="size-x1 center-center">
 
             <div data-ui-include="@lib/templates/spinkit/spinner_cubes"></div>
 
@@ -66,6 +70,7 @@
         </div>
         <div self="md-full" class="example-box">
 <em class="caption">Applying a <a href="https://getmdl.io/components/index.html">MDL</a> template from a remote server</em>
+
 ```html
 <div data-ui-include="https://genielabs.github.io/zuix/app/templates/mdl_card">
     <h1 data-ui-field="title">Still got the goods</h1>
@@ -77,6 +82,7 @@
     <a data-ui-field="link_read" href="javascript:alert('Clicked!')">Read More</a>
 </div>
 ```
+
         </div>
 
     </div>
