@@ -64,7 +64,7 @@
                 applying <strong>templates</strong> or loading <strong>components</strong> on it.
                 <br>
                 With automatic fields mapping (data-binding) or JavaScript,
-                templates and components can literally transform a minimal
+                templates and components can smoothly transform a minimal
                 set of <code>HTML</code> elements into a rich and interactive content.
             </p>
         </div>
@@ -90,13 +90,14 @@
 
         <div class="example-box" data-ui-field="cover-example-template-apply">
             <p>
-                This is how the HTML snippet above looks like without the
-                <code>mdl_card</code> template.
+                This is how the HTML snippet above looks like before the
+                <code>mdl_card</code> template is applied.
             </p>
         </div>
         <div class="example-box" style="min-height:55vh" layout="column center-center">
 
-            <div data-ui-include="templates/mdl_card" data-ui-priority="100" class="size-w460" data-ui-lazyload="true">
+            <div data-ui-include="templates/mdl_card" class="size-w460" data-ui-lazyload="true"
+            data-ui-field="test">
                 <div class="template-example mdl-color--white content-padding">
                     <h1 data-ui-field="title">Still got the goods</h1>
                     <div align="center">
@@ -129,7 +130,9 @@
         </div>
         <div self="size-full left" class="example-box">
             <p>
-                Using this pattern, you can focus on templates and components and progressively reshape your website/webapp and boost your creativity.
+                Using this pattern, you can focus on templates and components
+                and progressively reshape your website/webapp and increase both
+                your creativity and productivity.
             </p>
         </div>
     </div>
@@ -143,11 +146,54 @@
                 site speed by loading content and components only when they come
                 visible in the screen viewport.
             </p>
+
+            <p>
+                The following code loads the <code>view_pager</code> component
+                (from <a href="https://genielabs.github.io/zkit">zKit</a>) and
+                adds 30 random pictures using the example
+                <code>random_image_item</code> component.
+            </p>
+
+```html
+<div data-ui-load="@lib/controllers/view_pager"
+     data-o-slide="true"
+     data-o-paging="true"
+     data-ui-lazyload="auto">
+    <!-- Add 30 'random_image_item' -->
+    {% raw %}{% set list = Array(30) %}
+    {% for x in list %}
+    <div data-ui-load="content/home/examples/view_pager/random_image_item"
+         data-ui-lazyload="true"></div>
+    {% endfor %}{% endraw %}
+</div>
+```
+            <p>The result is the image strip shown below. Fast swipe horizontally over it to actually see the lazy-loading in action.</p>
+
         </div>
 
+        <!--
         <div align="center"><a href="https://codepen.io/genielabs/pen/weJjBL" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Example on CodePen</a></div>
+        -->
 
     </div>
+
+    <div style="width: 100%">
+        <div data-ui-load="@lib/controllers/view_pager"
+             data-ui-context="view_pager_example"
+             data-o-slide="true"
+             data-o-paging="true"
+             data-ui-lazyload="auto"
+             class="view-pager-example">
+            <!-- Add 30 'random_image_item' -->
+            {% set list = Array(30) %}
+            {% for x in list %}
+            <div data-ui-load="content/home/examples/view_pager/random_image_item"
+                 data-ui-lazyload="true" class="lazy-image"></div>
+            {% endfor %}
+        </div>
+    </div>
+
+
 
     <div self="size-xlarge center-center" layout="rows top-center" class="animated fadeIn">
         <div self="size-full left" class="example-box">
