@@ -128,7 +128,7 @@
                 }
             </script>
         </div>
-        <div self="size-full left" class="example-box">
+        <div self="size-x1 left" class="example-box">
             <p>
                 Using this pattern, you can focus on templates and components
                 and progressively reshape your website/webapp and increase both
@@ -137,8 +137,8 @@
         </div>
     </div>
 
-    <div self="size-xlarge center-center" layout="rows top-center" class="animated fadeIn">
-        <div self="size-full left" class="example-box">
+    <div self="size-xlarge center-center" layout="column top-stretch" class="animated fadeIn">
+        <div self="top-stretch" class="example-box">
             <h6>Optimize speed and performance</h6>
             <p>
                 Either you're writing a <em>Progressive Web App</em> (PWA) or a simple website,
@@ -153,6 +153,9 @@
                 adds 30 random pictures using the example
                 <code>random_image_item</code> component.
             </p>
+        </div>
+        <div self="md-full" class="example-box">
+            <em class="caption">ViewPager with lazy-loaded items</em>
 
 ```html
 <div data-ui-load="@lib/controllers/view_pager"
@@ -167,7 +170,7 @@
     {% endfor %}{% endraw %}
 </div>
 ```
-            <p>The result is the image strip shown below. Fast swipe horizontally over it to actually see the lazy-loading in action.</p>
+            <p>The result of this snippet is the image strip shown below.</p>
 
         </div>
 
@@ -195,8 +198,14 @@
 
 
 
-    <div self="size-xlarge center-center" layout="rows top-center" class="animated fadeIn">
-        <div self="size-full left" class="example-box">
+    <div self="size-xlarge center-center" layout="column top-center" class="animated fadeIn">
+        <p class="example-box">
+            Drag or fast swipe over it <em class="material-icons mdl-typography--font-bold mdl-color-text--green">fast_rewind</em>
+            horizontally <em class="material-icons mdl-typography--font-bold mdl-color-text--green">fast_forward</em>
+            to actually see the lazy-loading in action.
+        </p>
+
+        <div self="left" class="example-box">
             <h6>More features</h6>
             <p>
                 Just to name some, <strong>controllers overlapping</strong> and <strong>hot view swapping</strong>
