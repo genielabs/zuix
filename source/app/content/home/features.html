@@ -1,7 +1,7 @@
 <div layout="column center-center" class="opaqueBlocK mdl-color-text--black animated bounceInUp mdl-shadow--8dp">
 
     <div self="size-xlarge center-center" layout="rows center-justify">
-        <div self="size-1of2 sm-full" class="example-box -animated -fadeInLeft">
+        <div self="size-1of2 sm-full" class="example-box">
             <div>
                 <h6>Reusability by design</h6>
                 <p>
@@ -16,7 +16,7 @@
 
             </div>
         </div>
-        <div self="size-1of2 sm-full" layout="row center-center" class="example-box -animated -fadeInRight">
+        <div self="size-1of2 sm-full" layout="row center-center" class="example-box">
             <div data-ui-include="content/lorem_ipsum"></div>
             <!--
             <div data-ui-load="@lib/components/social_sharing"
@@ -30,7 +30,33 @@
 
     <div self="size-xlarge center-center" layout="rows center-justify" class="animated fadeInUp">
         <div self="md-full" class="example-box">
-<em class="caption">Loading content from a shared library</em>
+            <h6>App-level polymorphism</h6>
+            <p>
+                The special <code>@lib</code> keyword is a relative
+                or absolute URL path that can be used as a shortcut to load components
+                from a configurable shared location.
+            </p>
+            <p>
+                Switch easily from development to production
+                or apply different UI frameworks and themes seamlessly.
+            </p>
+        </div>
+        <div self="md-full" class="example-box">
+
+            <em class="caption">Changing the <code>@lib</code> base path</em>
+
+```javascript
+// using Material Design theme...
+zuix.store("config", {
+    "libraryPath": "https://myapp.site/lib/mdl"
+});
+// ...or to use Bootstrap theme
+zuix.store("config", {
+    "libraryPath": "https://myapp.site/lib/bootstrap"
+});
+```
+
+            <em class="caption">Loading content from <code>@lib</code></em>
 
 ```html
 <div data-ui-include="@lib/templates/spinkit/spinner_cubes"></div>
@@ -44,10 +70,8 @@
         </div>
         <div self="size-full" class="example-box">
             <p>
-                The special <code>@lib</code> keyword is a configurable, relative
-                or absolute, URL path that can be used as a shortcut to load components
-                from a shared location. By default it points to the
-                <a href="https://genielabs.github.io/zkit">zKit</a> website that is a
+                By default <code>@lib</code> will point to
+                <a href="https://genielabs.github.io/zkit">zKit</a>, a
                 collections of sample components made with <strong>zUIx</strong>.
             </p>
         </div>
@@ -234,8 +258,9 @@
                 though still offering a full feature set:
             </p>
             <ul>
+                <li>Content modules and Templates with CSS scoping</li>
+                <li>Components with fields caching</li>
                 <li>Events, Behaviors and Hooks</li>
-                <li>Components and fields caching</li>
                 <li>Automatic events unbinding</li>
                 <li>Integrated resources loader</li>
                 <li>Integrated jQuery-alike DOM helper</li>
