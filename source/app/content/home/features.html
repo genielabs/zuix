@@ -1,12 +1,12 @@
-<div layout="column center-center" class="opaqueBlocK mdl-color-text--black animated bounceInUp mdl-shadow--8dp">
+<div layout="column center-center" class="opaqueBlocK mdl-color-text--black animated bounceInUp mdl-shadow--16dp">
 
-    <div self="size-xlarge center-center" layout="rows center-justify">
+    <div self="size-xlarge center-center" layout="rows top-justify">
         <div self="size-1of2 sm-full" class="example-box">
             <div>
                 <h6>Reusability by design</h6>
                 <p>
-                    With <strong>zUIx</strong> you can include content
-                    and load components also if located on different servers.
+                    Include content and load components
+                    also if located on different servers.
                 </p>
 <em class="caption">Loading content from local server</em>
 
@@ -16,7 +16,7 @@
 
             </div>
         </div>
-        <div self="size-1of2 sm-full" layout="row center-center" class="example-box">
+        <div self="size-1of2 sm-full center" layout="row center-center" class="example-box">
             <div data-ui-include="content/lorem_ipsum"></div>
             <!--
             <div data-ui-load="@lib/components/social_sharing"
@@ -27,55 +27,6 @@
             -->
         </div>
     </div>
-
-    <div self="size-xlarge center-center" layout="rows center-justify" class="animated fadeInUp">
-        <div self="md-full" class="example-box">
-            <h6>App-level polymorphism</h6>
-            <p>
-                The special <code>@lib</code> keyword is a relative
-                or absolute URL path that can be used as a shortcut to load components
-                from a configurable shared location.
-            </p>
-            <p>
-                Switch easily from development to production
-                or apply different UI frameworks and themes seamlessly.
-            </p>
-        </div>
-        <div self="md-full" class="example-box">
-
-            <em class="caption">Changing the <code>@lib</code> base path</em>
-
-```javascript
-// using Material Design theme...
-zuix.store("config", {
-    "libraryPath": "https://myapp.site/lib/mdl"
-});
-// ...or to use Bootstrap theme
-zuix.store("config", {
-    "libraryPath": "https://myapp.site/lib/bootstrap"
-});
-```
-
-            <em class="caption">Loading content from <code>@lib</code></em>
-
-```html
-<div data-ui-include="@lib/templates/spinkit/spinner_cubes"></div>
-```
-
-        </div>
-        <div self="size-x1 center-center">
-
-            <div data-ui-include="@lib/templates/spinkit/spinner_cubes"></div>
-
-        </div>
-        <div self="size-full" class="example-box">
-            <p>
-                By default <code>@lib</code> will point to
-                <a href="https://genielabs.github.io/zkit">zKit</a>, a
-                collections of sample components made with <strong>zUIx</strong>.
-            </p>
-        </div>
-    </div>
 <!--
 </div>
 <div layout="column center-center" class="opaqueBlocK mdl-color-text--black animated bounceInUp mdl-shadow--8dp">
@@ -84,7 +35,7 @@ zuix.store("config", {
         <div self="size-full left" class="example-box">
             <h6>Transform and reshape</h6>
             <p>
-                Keep <code>HTML</code> content code simple and clean and then transform it by
+                Keep <code>HTML</code> code concise and neat, then transform it by
                 applying <strong>templates</strong> or loading <strong>components</strong> over it.
                 <br>
                 With automatic fields mapping (data-binding) or with JavaScript,
@@ -229,19 +180,59 @@ zuix.store("config", {
             <em class="material-icons mdl-typography--font-bold mdl-color-text--green">fast_forward</em>
             to actually see the lazy-loading in action.
         </p>
-
-<!-- todo show media browser component example -->
-<!--
-        <div self="left" class="example-box">
-            <h6>Componentize</h6>
-            <p>
-                Creating components with zUIx is easy.
-            </p>
-        </div>
--->
-
     </div>
 
+    <div self="size-xlarge center-center" layout="rows center-center" class="animated fadeInUp">
+        <div self="md-full" class="example-box">
+            <h6>Theme switching</h6>
+            <p>
+                Switch themes or apply different UI frameworks seamlessly.
+            </p>
+            <p>
+                The special <code>@lib</code> keyword is a relative
+                or absolute URL path that can be used as a shortcut to load components
+                from a configurable shared location.
+            </p>
+
+            <em class="caption">Switching UI framework by changing <code>@lib</code> path</em>
+
+```javascript
+// using Material Design theme...
+zuix.store("config", {
+  "libraryPath": "https://myapp.site/lib/mdl"
+});
+// ...or to use Bootstrap theme
+zuix.store("config", {
+  "libraryPath": "https://myapp.site/lib/bootstrap"
+});
+```
+
+        </div>
+    </div>
+
+    <div self="size-xlarge center-center" layout="rows center-center" class="animated fadeInUp">
+        <div self="md-full" class="example-box">
+
+            <em class="caption">Loading content using <code>@lib</code> keyword</em>
+
+```html
+<div data-ui-include="@lib/templates/spinkit/spinner_cubes"></div>
+```
+
+        </div>
+        <div self="size-x1 center-center">
+
+            <div data-ui-include="@lib/templates/spinkit/spinner_cubes"></div>
+
+        </div>
+        <div self="size-1of2" class="example-box">
+            <p>
+                By default <code>@lib</code> will point to
+                <a href="https://genielabs.github.io/zkit">zKit</a>, a
+                collection of example components.
+            </p>
+        </div>
+    </div>
 
     <div self="size-xlarge center-center" layout="column top-center" class="animated fadeIn">
 
