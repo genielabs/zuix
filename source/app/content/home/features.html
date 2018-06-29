@@ -38,7 +38,7 @@
                 Keep <code>HTML</code> code concise and neat, then transform it by
                 applying <strong>templates</strong> or loading <strong>components</strong> over it.
                 <br>
-                With automatic fields mapping (data-binding) or with JavaScript,
+                With automatic fields mapping (data-binding)
                 templates and components can smoothly transform a minimal
                 set of <code>HTML</code> elements into a rich and interactive content.
             </p>
@@ -172,7 +172,20 @@
             {% endfor %}
         </div>
     </div>
-
+<!--
+    <div align="center"><a onclick="addImage()" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect">Add image</a></div>
+    <script>
+        function addImage() {
+            zuix.context('zuix-ctx-11', function(ctx) {
+                const v = ctx.view();
+                const image = zuix.createComponent('content/home/examples/view_pager/random_image_item', {lazyLoad: true});
+                image.container().classList.add('lazy-image');
+                v.appendChild(image.container());
+                ctx.refresh();
+            });
+        }
+    </script>
+-->
 
     <div self="size-xlarge center-center" layout="column top-center" class="animated fadeIn">
         <p class="example-box">

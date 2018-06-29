@@ -57,10 +57,15 @@
     <script src="js/showdown.min.js"></script>
 
     <!-- zUIx library  -->
-    <script src="js/zuix.min.js"></script>
+    <!-- latest release -->
+    <!--script src="js/zuix.min.js"></script-->
+    <!-- latest build -->
+    <script src="js/zuix/zuix.min.js"></script>
+    <!-- auto-generated config.js -->
     <script src="config.js"></script>
     <!-- app bundle (generated-in-browser) -->
     <!--script src="js/zuix-bundler.min.js"></script-->
+    <!-- in-browser zuix bundler -->
     <!--script src="app.bundle.js"></script-->
 
     <!-- App main includes -->
@@ -69,7 +74,22 @@
 </head>
 <body>
 
-<!-- TODO: rip-off inline styles, move them to index.css -->
+<!-- Loader Overlay, this should always be inline -->
+<div data-ui-field="splashScreen" layout="column stretch-stretch"
+     class="splash-screen">
+    <div layout="column bottom-center">
+        <h5 class="animated infinite pulse">zUIx</h5>
+        <!-- MDL Progress Bar with Indeterminate Progress -->
+        <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="max-width: 200px;"></div>
+        <div class="content-padding">
+            <small><em>the easy shift to component-based development</em></small>
+        </div>
+    </div>
+    <div layout="column bottom-center" class="content-padding animated bounce">
+        <strong><small>loading...</small></strong>
+        <span data-ui-field="loader-progress">app.bundle.js</span>
+    </div>
+</div>
 
 <!-- Main page layout (MDL) -->
 <div data-ui-field="main" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
@@ -227,23 +247,6 @@
 <div data-ui-field="loaderMessage-c">
     <div class="mdl-color--black mdl-color-text--white mdl-shadow--8dp"
          data-ui-field="loaderMessage"></div>
-</div>
-
-<!-- Loader Overlay, this should always be inline -->
-<div data-ui-field="splashScreen" layout="column stretch-stretch"
-     class="splash-screen">
-    <div layout="column bottom-center">
-        <h5 class="animated infinite pulse">zUIx</h5>
-        <!-- MDL Progress Bar with Indeterminate Progress -->
-        <div class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="max-width: 200px;"></div>
-        <div class="content-padding">
-            <small><em>the easy shift to component-based development</em></small>
-        </div>
-    </div>
-    <div layout="column bottom-center" class="content-padding animated bounce">
-        <strong><small>loading...</small></strong>
-        <span data-ui-field="loader-progress">app.bundle.js</span>
-    </div>
 </div>
 
 <!-- zUIx Hack Box widget -->

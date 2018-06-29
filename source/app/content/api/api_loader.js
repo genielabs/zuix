@@ -27,8 +27,9 @@ zuix.controller(function (cp) {
                 zuix.$.each(dox, function() {
 
                     const skipItem = (this.isPrivate || (this.ctx != null && (this.ctx.name !== apiName && this.ctx.cons !== apiName)) || this.tags == null || this.tags.length === 0);
-                    if (skipItem)
+                    if (skipItem) {
                         return true;
+                    }
 
                     if (this.isConstructor === true) {
                         apiDocs.constructor = addConstructor(this);

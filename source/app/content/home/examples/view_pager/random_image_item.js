@@ -6,6 +6,6 @@ zuix.controller(function(cp) {
             })
             .hide()
             //.attr('src', 'http://lorempixel.com/420/280/?random&ts='+(new Date().getTime()));
-            .attr('src', 'https://picsum.photos/352/288?random&ts='+(new Date().getTime()));
+            .attr('src', 'https://picsum.photos/352/288/?random&ts='+(new Date().getTime()));
     };
 });
