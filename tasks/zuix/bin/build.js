@@ -53,16 +53,37 @@ const prettyUrl = zuixConfig.get('build.prettyUrl');
 const bundle = zuixConfig.get('build.bundle');
 const less = zuixConfig.get('build.less');
 const esLint = zuixConfig.get('build.esLint');
+const workBox = require('workbox-build');
+
+// Build helpers list
+const helperList = [];
+const zuixHelpersPath = 'tasks/zuix/helpers/';
+fs.readdirSync(zuixHelpersPath).forEach(file => {
+    if (file.endsWith('.js')) {
+        helperList.push(zuixHelpersPath + file);
+    }
+});
+const customHelpersPath = sourceFolder+'/_helpers/';
+if (fs.existsSync(customHelpersPath)) {
+    fs.readdirSync(customHelpersPath).forEach(file => {
+        if (file.endsWith('.js')) {
+            helperList.push(customHelpersPath + file);
+        }
+    });
+}
+
 tlog.br('     ^Ginput^ %s', sourceFolder)
     .br('    ^Goutput^ %s', buildFolder)
     .br('      ^Gcopy^ %s', copyFiles)
     .br('    ^Gignore^ %s', ignoreFiles)
     .br('   ^Gcompile^ %s', compileFiles)
     .br(' ^GprettyUrl^ %s', prettyUrl)
+    .br('   ^Ghelpers^ %s', JSON.stringify(helperList))
     .br('    ^Gbundle^ %s', JSON.stringify(bundle))
     .br('      ^Gless^ %s', less)
     .br('    ^GesLint^ %s', esLint)
     .br();
+
 if (!fs.existsSync(sourceFolder)) {
     tlog.error('   "%s" does not exist', sourceFolder);
     process.exitCode = -1;
@@ -102,7 +123,7 @@ staticSite({
     ignore: ignoreFiles.concat(copyFiles),
     files: compileFiles,
     prettyUrl: prettyUrl,
-    helpers: ['tasks/zuix/helpers/zuix-context.js'],
+    helpers: helperList,
     templateEngine: 'tasks/zuix/engines/zuix-bundler.js'
 }, function(err, stats) {
     tlog.term.defaultColor('\n\n');
@@ -123,13 +144,41 @@ staticSite({
         tlog.stats().warn,
         plural('warning', tlog.stats().warn),
     ));
-    process.exitCode = tlog.stats().error;
+
+    // TODO: run work box
+    // NOTE: This should be run *AFTER* all your assets are built
+    const buildSW = () => {
+        // This will return a Promise
+        return workBox.generateSW({
+            globDirectory: buildFolder,
+            globPatterns: [
+                '**\/*.{html,json,js,css}',
+            ],
+            swDest: path.join(buildFolder, 'service-worker.js'),
+        });
+    };
+    buildSW().then(function () {
+        process.exitCode = tlog.stats().error;
+    });
 });
 
 function copyAppConfig() {
-    let cfg = 'zuix.store("config", ';
-    cfg += JSON.stringify(config.get('zuix.app'), null, 4);
+    let cfg = `/* eslint-disable quotes */
+(function() {
+    zuix.store("config", `;
+    cfg += JSON.stringify(config.get('zuix.app'), null, 8);
     cfg += ');\n';
+    // WorkBox / Service Worker
+    // TODO: fix service-worker path
+    cfg += `
+    // Check that service workers are registered
+    if ('serviceWorker' in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./service-worker.js');
+        });
+    }
+})();\n`;
     fs.writeFileSync(buildFolder+'/config.js', cfg);
 }
 
