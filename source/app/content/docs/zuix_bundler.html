@@ -1,15 +1,23 @@
 <a id="Getting_Started--Zuix_Bundler"></a>
-#### App Bundler <i class="material-icons mdl-color-text--grey-500">folder</i>
+#### App bundling <i class="material-icons mdl-color-text--grey-500">folder</i>
 
-When your website or application is ready for production it can then be bundled,
-so that all of its components and resources will be crunched into a single file
+Bundling is the process of collecting all resources used in a page and then compiling
+them into a single and optimized file. There are actually two way of doing this:
+
+- **In-Browser** bundler:
+this method does not requires any build tool nor plugins, it just works in the browser as-is.
+
+- **Web-Starter** bundler:
+is the [zuix-web-starter](https://github.com/genemars/zuix-web-starter) bare template,
+with a bunch of extra features and enhancements. It requires *Node.js* to be installed.
+
+This documentation will only cover the in-browser bundling method.
+
+##### In-Browser bundling
+
+So, when your website or application is ready for production it can be then bundled,
+All of its components and resources will be crunched into a single file
 and loaded from memory rather than from network/localhost.
-
-This can be done directly in the browser using the `zuix-bundler` script.
-This script extends the `zuix` object with the `saveBundle` method.
-
-
-##### Usage
 
 Include the **zuix-bundler** extension script in your app right after the main *zuix*
 script inclusion:
@@ -79,7 +87,8 @@ zuix.using('component', 'kit/extensions/animate_css', function(res, componentCon
 
 If the `zuix.using` method is called on a resource that was already loaded, it will
 just ignore the request.
-This is useful since it can be used to create self-contained components that
+
+This is useful since it can be used to create **self-contained components** that
 can be loaded without having to worry about the dependencies.
 
 
