@@ -34,9 +34,8 @@ module.exports = function (site, cb) {
         page.app = zuixConfig.app;
         // Adjust {{root} to relative path
         page.root = page.root.substring(3);
-        if (page.root.length > 0) {
+        if (page.root.length > 0)
             page.root += '/';
-        }
         return page;
     });
     cb(null, site);

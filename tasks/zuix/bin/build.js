@@ -80,6 +80,7 @@ tlog.br('     ^Ginput^ %s', sourceFolder)
     .br(' ^GprettyUrl^ %s', prettyUrl)
     .br('   ^Ghelpers^ %s', JSON.stringify(helperList))
     .br('    ^Gbundle^ %s', JSON.stringify(bundle))
+    .br('    ^Gminify^ %s', zuixConfig.build.minify != null && zuixConfig.build.minify !== false && zuixConfig.build.minify.disable !== true)
     .br('      ^Gless^ %s', less)
     .br('    ^GesLint^ %s', esLint)
     .br();
@@ -108,7 +109,7 @@ tlog.overwrite('   | "%s" -> "%s"', 'zuix-dist', 'js');
 // - last zUIx release
 copyFolder(util.format('%s/node_modules/zuix-dist/js', process.cwd()), util.format('%s/js', buildFolder));
 // - last zUIx build (if 'dist' folder is found in parent folder)
-//copyFolder(util.format('%s/../dist/js', process.cwd()), util.format('%s/js/zuix', buildFolder));
+copyFolder(util.format('%s/../dist/js', process.cwd()), util.format('%s/js/zuix', buildFolder));
 // - auto-generated config.js
 copyAppConfig();
 tlog.overwrite(' ^G\u2713^: done').br();
