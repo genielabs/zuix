@@ -1,9 +1,9 @@
 .image {
     width:324px;
     height: 260px;
-    animation-duration: 0.35s;
-    animation-delay: 0s;
     margin: 8px;
+    animation-duration: 0.2s;
+    animation-delay: 0s;
 }
 .image-wrapper {
     border-radius: 12px;
@@ -22,8 +22,6 @@
     position: absolute;
     width:340px;
     height: 276px;
-    background: rgba(255,255,255,0.5);
-    -webkit-box-shadow: 6px 10px 32px -13px rgba(0,0,0,0.75);
-    -moz-box-shadow: 6px 10px 32px -13px rgba(0,0,0,0.75);
-    box-shadow: 6px 10px 32px -13px rgba(0,0,0,0.75);
+    background: #fff;
+    opacity: 0.5;
 }
