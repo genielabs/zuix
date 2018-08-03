@@ -1,7 +1,7 @@
 <a id="Getting_Started--Zuix_Bundler"></a>
 #### App bundling <i class="material-icons mdl-color-text--grey-500">folder</i>
 
-Bundling is the process of collecting all resources used in a page and then compiling them into a single and optimized file.
+Bundling is the process of collecting all resources used in a page and then compiling them into a single, optimized file.
 This will drastically reduce the number of network requests the browser will have to do to complete the page loading
 and that will so load the page faster.
 
@@ -24,14 +24,14 @@ All of its components and resources will be crunched into a single file and load
 
 ###### Step by step guide
 
-Include the **zuix-bundler** extension script in your app right after the main *zuix* script inclusion:
+Include the **zuix-bundler** extension script in your page right after the main *zuix* script inclusion:
 
 ```html
 <script src="js/zuix.min.js"></script>
 <script src="https://genielabs.github.io/zuix/js/zuix-bundler.min.js"></script>
 ```
 
-After adding this script you can reload the page and generate the application bundle by typing in the **developer console** of the browser the command
+After adding this script you can reload the page and generate the application bundle by typing in the **browser console** the command
 
 ```javascript
 zuix.saveBundle()
@@ -39,21 +39,21 @@ zuix.saveBundle()
 
 This will create and save the **app.bundle.js** file to the *Downloads* folder.
 
-Copy the generated file to your website/app root and include it right after the main *zuix* script inclusion.
+Copy the generated file to your website root and include it right after the main *zuix* script inclusion.
 
 ```html
 <script src="js/zuix.min.js"></script>
 <script src="app.bundle.js"></script>
 ```
 
-Remove the `zuix-bundler` script inclusion from your app after the bundle is created.
+Remove the `zuix-bundler` script inclusion from the page after the bundle is created.
 
 
 ###### Remarks
 
 When using *lazy-loading* only components loaded so far will be included in the bundle (incremental bundling).
 
-To force inclusion of all components/resources used in the app, issue the following commands in the console:
+To force inclusion of all components/resources used in the page, issue the following commands in the console:
 
 ```javascript
 // disable lazy-loading
@@ -64,7 +64,8 @@ zuix.componentize()
 zuix.saveBundle()
 ```
 
-Also external JavaScript libraries and CSS files can be included in the app bundle. In order to achieve this, remove the `<script src="..."></script>` or `<link rel="stylesheet">` and use the method `zuix.using(...)` instead to load the script/css.
+Also external JavaScript libraries and CSS files can be included in the page bundle. In order to achieve this,
+remove the `<script src="..."></script>` or `<link rel="stylesheet">` and use the method `zuix.using(...)` instead to load the script/css.
 
 ```javascript
 // Loading a .css style
