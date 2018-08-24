@@ -4,7 +4,7 @@
   "homepage": "https://genielabs.github.io/zuix",
   "private": true,
   "scripts": {
-    "info": "echo 'ZUIX Web, presentation and documentation site.'",
+    "info": "echo 'zUIx Web, presentation and documentation site.'",
     "start": "http-server --gzip --cors ../docs",
     "watch": "node tasks/zuix/bin/watch",
     "build": "node tasks/zuix/bin/build"
