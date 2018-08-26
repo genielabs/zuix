@@ -1,11 +1,11 @@
 ### zUIx web, presentation and documentation site.
 
-http://genielabs.github.io/zuix
+http://zuixjs.github.io/zuix
 
 
 #### Development
 
-This website is based on [zUIx Web Starter](https://github.com/genemars/zuix-web-starter).
+This website is based on [zUIx Web Starter](https://github.com/zuixjs/zuix-web-starter).
 
 1. `npm install` to install development dependencies
 2. `npm start` to start local web server

@@ -1,7 +1,7 @@
 {
   "name": "zuix-website",
   "version": "1.0.0",
-  "homepage": "https://genielabs.github.io/zuix",
+  "homepage": "https://zuixjs.github.io/zuix",
   "private": true,
   "scripts": {
     "info": "echo 'zUIx Web, presentation and documentation site.'",
@@ -11,7 +11,7 @@
   },
   "author": "G-Labs",
   "license": "Apache 2.0",
-  "repository": "https://github.com/genielabs/zuix/tree/gh-pages",
+  "repository": "https://github.com/zuixjs/zuix/tree/gh-pages",
   "devDependencies": {
     "chokidar": "^2.0.4",
     "config": "^1.30.0",
